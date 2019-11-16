@@ -112,7 +112,7 @@ public class EuiNode {
 		if (attributes == null) {
 			attributes = new HashMap<String, Object>();
 		}
-		;
+		attributes.put(key, value);
 	}
 
 }

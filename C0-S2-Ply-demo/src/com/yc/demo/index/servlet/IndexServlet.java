@@ -36,9 +36,10 @@ public class IndexServlet extends HttpServlet {
 			String fpath = f.getPath().replace(rpath, "");
 			fpath = "/" + fpath.replaceAll("\\\\", "/");
 			String state = f.isFile() ? "open" : "closed";
-			EuiNode en = node.appendChild(new EuiNode(path + "/" + f.getName(), f.getName(), state));
+			id = path + "/" + f.getName();
+			EuiNode en = node.appendChild(new EuiNode( id, f.getName(), state));
 			if(f.isFile()) {
-				en.setAttribute("href", Config.PROPS.get("github"));
+				en.setAttribute("href", Config.PROPS.get("github") + "/WebContent" +id);
 			}
 		}
 		resp.setContentType("text/html; charset=utf-8");
