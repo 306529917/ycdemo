@@ -1,0 +1,2 @@
+1. 用 Servlet 替代 doXXX.jsp 页面
+2. 添加图书信息时, 使用 AJAX + Servlet 方式实现书名的验证, 验证系统中是否已经包含该图书 
