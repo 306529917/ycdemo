@@ -31,19 +31,24 @@ public class IndexServlet extends HttpServlet {
 		}
 		String diskpath = req.getServletContext().getRealPath(path);
 		EuiNode node = new EuiNode();
-		String rpath = req.getServletContext().getRealPath("/");
-		for (File f : new File(diskpath).listFiles()) {
-			String fpath = f.getPath().replace(rpath, "");
-			fpath = "/" + fpath.replaceAll("\\\\", "/");
-			String state = f.isFile() ? "open" : "closed";
-			id = path + "/" + f.getName();
-			EuiNode en = node.appendChild(new EuiNode( id, f.getName(), state));
-			if(f.isFile()) {
-				en.setAttribute("href", Config.PROPS.get("github") + "/WebContent" +id);
-			}
+		String rootpath = req.getServletContext().getRealPath("/");
+		for (File file : new File(diskpath).listFiles()) {
+			node.pushChild(createEuiNode(file, rootpath));
 		}
 		resp.setContentType("text/html; charset=utf-8");
 		resp.getWriter().append(gson.toJson(node.getChildren()));
+	}
+
+	public EuiNode createEuiNode(File file, String rootPath) {
+		String webpath = file.getPath().replace(rootPath, "");
+		webpath = "/" + webpath.replaceAll("\\\\", "/");
+		String state = file.isFile() ? "open" : "closed";
+		String id = webpath;
+		EuiNode en = new EuiNode(id, file.getName(), state);
+		if (file.isFile()) {
+			en.setAttribute("href", Config.PROPS.get("github") + "/WebContent" + id);
+		}
+		return en;
 	}
 
 }

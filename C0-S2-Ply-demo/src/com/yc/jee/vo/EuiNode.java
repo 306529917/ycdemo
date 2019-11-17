@@ -108,11 +108,12 @@ public class EuiNode {
 		return en;
 	}
 
-	public void setAttribute(String key, Object value) {
+	public EuiNode setAttribute(String key, Object value) {
 		if (attributes == null) {
 			attributes = new HashMap<String, Object>();
 		}
 		attributes.put(key, value);
+		return this;
 	}
 
 }
