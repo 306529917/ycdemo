@@ -34,11 +34,11 @@ function test(){
 </script>
 </head>
 <body>
-	<!-- <button onclick="test()">tyets</button> -->
 	<div class="easyui-layout" fit="true">
 		<div data-options="region:'north'" style="height:50px"></div>
 		<div data-options="region:'south',split:true" style="height:50px;"></div>
 		<div data-options="region:'center'">
+			<iframe src="test.s" width="100%" height="100%" style="border: 0px"></iframe>
 		</div>
 		<div class="easyui-tree" style="width:300px;" data-options="
 				region:'west',
