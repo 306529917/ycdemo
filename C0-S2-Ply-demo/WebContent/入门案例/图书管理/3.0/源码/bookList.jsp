@@ -70,6 +70,7 @@ function del(bookid){
 			<th>出版时间</th>
 			<th>作者</th>
 			<th>数量</th>
+			<th>图片</th>
 			<th width="200px">操作</th>
 		</tr>
 		<%
@@ -86,6 +87,7 @@ function del(bookid){
 			<td><%=m.get("pressdate")%></td>
 			<td><%=m.get("bookauthor")%></td>
 			<td><%=m.get("bookcount")%></td>
+			<td align="center"><img src="<%=m.get("bookimage")%>" height="80px"></td>
 			<td align="center">
 				<input type="submit" value="修 改" onclick="location.href='bookEdit.jsp?bookid=<%=m.get("bookid")%>'">
 				<input type="submit" value="删 除" onclick="del(<%=m.get("bookid")%>)">

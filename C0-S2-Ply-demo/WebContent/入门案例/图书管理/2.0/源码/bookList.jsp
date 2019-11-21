@@ -19,6 +19,9 @@ input[type="submit"]{
 th{
 	line-height: 30px;
 }
+tr:hover { 
+	background-color:#ddd;
+}
 </style>
 <script type="text/javascript">
 function del(bookid){
