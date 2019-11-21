@@ -42,12 +42,14 @@ form, h1 {
 		if(bookid!=null){
 			String sql = "select * from books where bookid=?";
 			Map<String, Object> m = DBHelper.selectOne(sql, bookid);
+			// 将查出的图书数据（map集合），放入页面上下文对象属性中，可以使用 EL表达式（${...}） 输出图书信息
 			pageContext.setAttribute("book", m);
 		}
 	%>
 	<form method="post" action="dosave.jsp">
 		<input type="hidden" name="bookid" value="${param.bookid}">
 		<label>书名:</label>
+			<!-- 如果页面上下文中有 book 对象，则输出book的值，否则输出请求参数的值（表单回填） -->
 			<input name="bookname" value="${empty book ? param.bookname : book.bookname}"><br>
 		<label>出版社:</label>
 			<input name="bookpress"	value="${empty book ? param.bookpress : book.bookpress}"><br>
