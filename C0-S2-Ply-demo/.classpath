@@ -13,5 +13,11 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/javamail-1.4.5/dsn.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/javamail-1.4.5/imap.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/javamail-1.4.5/mailapi.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/javamail-1.4.5/pop3.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/javamail-1.4.5/smartupload.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/javamail-1.4.5/smtp.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
