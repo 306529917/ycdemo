@@ -27,7 +27,7 @@ import java.util.Properties;
 
 public class DBHelper {
 	private static String driver="com.mysql.jdbc.Driver";
-	private static String url="jdbc:mysql://127.0.0.1/test";
+	private static String url="jdbc:mysql://127.0.0.1/C0-S2-Ply-demo";
 	private static String user="root";
 	/**
 	 * 	设置几个常用的默认密码，获取连接时会依次尝试连接，然后返回连接正确的连接
@@ -92,7 +92,7 @@ public class DBHelper {
 	
 	public static void init(String driver, String url, String user, String password) {
 		// 如果传入参数为空，则使用静态变量的原值
-		DBHelper.driver = driver == null ? DBHelper.driver : url;
+		DBHelper.driver = driver == null ? DBHelper.driver : driver;
 		DBHelper.url = url == null ? DBHelper.url : url;
 		DBHelper.user = user == null ? DBHelper.user : user;
 		DBHelper.password = password == null ? DBHelper.password : password.split(";");
