@@ -76,7 +76,7 @@ function loadImg(){
 			<input name="bookcount"	value="${empty book ? param.bookcount : book.bookcount}" type="number"><br>
 		<label>图片:</label>
 			<!-- 图片不能回填，请求注意这里 EL 表达式的写法  -->
-			<img src="${book.bookimage}" id="img" onclick="file.click()" alt="请点击，选择图片文件">
+			<img src="${empty book.bookimage ? '../资料/images/noimg.png' : book.bookimage}" id="img" onclick="file.click()" alt="请点击，选择图片文件">
 			<!-- 隐藏文件上传控件，使用图片点击触发文件选择。当用户选择完图片，将图片显示出，这里哟啊监听 onchange 事件-->
 			<input id="file" name="file" type="file" style="display: none;" onchange="loadImg()"><br>
 			
