@@ -34,15 +34,20 @@ public class SqlSession implements InvocationHandler {
 	 * 		7、注意：selectAll 返回的是泛型集合，泛型类型请通过下面的 getGenericReturnType() 返回获取
 	 */
 	public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+		// 获取 sql 语句
 		String sql = getSql(method);
+		// 获取所有的参数名，并替换占位符 ？
 		List<String> paramNameList = new ArrayList<>();
 		sql = parseSql(sql,paramNameList);
+		// 根据参数名获取参数值
 		List<Object> paramValueList = getParamValue(args,paramNameList);
 		
 		Object ret;
 		if(isSelectMethod(method)) {
+			// 执行查询
 			ret = select(sql,paramValueList,method);
 		} else {
+			// 执行更新
 			ret = update(sql,paramValueList,method);
 		}
 		
