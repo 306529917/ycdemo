@@ -64,16 +64,16 @@ function loadImg(){
 	<form method="post" action="dosave.jsp" enctype="multipart/form-data">
 		<input type="hidden" name="bookid" value="${param.bookid}">
 		<label>书名:</label>
-			<!-- 如果页面上下文中有 book 对象，则输出book的值，否则输出请求参数的值（表单回填） -->
-			<input name="bookname" value="${empty book ? param.bookname : book.bookname}"><br>
+			<!-- 使用 EL 表达式输出图书信息 -->
+			<input name="bookname" value="${book.bookname}"><br>
 		<label>出版社:</label>
-			<input name="bookpress"	value="${empty book ? param.bookpress : book.bookpress}"><br>
+			<input name="bookpress"	value="${book.bookpress}"><br>
 		<label>出版时间:</label>
-			<input name="pressdate"	value="${empty book ? param.pressdate : book.pressdate}" type="date"><br>
+			<input name="pressdate"	value="${book.pressdate}" type="date"><br>
 		<label>作者:</label>
-			<input name="bookauthor" value="${empty book ? param.bookauthor : book.bookauthor}"><br>
+			<input name="bookauthor" value="${book.bookauthor}"><br>
 		<label>数量:</label>
-			<input name="bookcount"	value="${empty book ? param.bookcount : book.bookcount}" type="number"><br>
+			<input name="bookcount"	value="${book.bookcount}" type="number"><br>
 		<label>图片:</label>
 			<!-- 图片不能回填，请求注意这里 EL 表达式的写法  -->
 			<img src="${empty book.bookimage ? '../资料/images/noimg.png' : book.bookimage}" id="img" onclick="file.click()" alt="请点击，选择图片文件">
