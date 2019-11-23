@@ -30,8 +30,8 @@ public class StudentMapperTest {
 		Assert.assertEquals(4, list.size());
 		
 		Student s = sm.selectBySn("1");
-		Assert.assertEquals("李逵", s.getName());
-		Assert.assertEquals(20, s.getAge());
+		Assert.assertEquals("武松", s.getName());
+		Assert.assertEquals(25, s.getAge());
 		
 		s.setName("宋江");
 		s.setAge(10);

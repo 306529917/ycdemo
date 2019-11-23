@@ -10,6 +10,8 @@ public class Student {
 	private int age;
 	private int grade;
 	
+	public Student() {}
+	
 	public Student(String sn, String name, int age, int grade) {
 		super();
 		this.sn = sn;
