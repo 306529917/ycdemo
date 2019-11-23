@@ -30,7 +30,7 @@ import org.apache.commons.beanutils.BeanUtils;
 public class DBHelper {
 	private static String driver="com.mysql.jdbc.Driver";
 	private static String url="jdbc:mysql://127.0.0.1/C0-S2-Ply-demo";
-	private static String user="root";
+	private static String user="demo";
 	/**
 	 * 	设置几个常用的默认密码，获取连接时会依次尝试连接，然后返回连接正确的连接
 	 *	解决在不同数据库环境（教室、办公室、笔记本。。。）不用改配置就能正常运行的问题
@@ -51,7 +51,7 @@ public class DBHelper {
 					p.getProperty("user"), 
 					p.getProperty("password"));
 		} catch (Exception e) {
-			throw new RuntimeException("数据库驱动加载失败！", e);
+			e.printStackTrace();
 		} finally {
 			IOUtils.close(in);
 		}
