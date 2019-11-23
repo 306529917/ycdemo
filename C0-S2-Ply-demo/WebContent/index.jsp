@@ -7,6 +7,8 @@
 <title>演示</title>
 </head>
 <body>
+<a href="http://47.106.66.89:1112/">
 <img width="100%"  src="_images/qidai.jpg">
+</a>
 </body>
 </html>
