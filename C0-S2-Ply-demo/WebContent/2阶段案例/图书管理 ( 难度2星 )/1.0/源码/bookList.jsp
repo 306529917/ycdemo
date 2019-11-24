@@ -29,10 +29,12 @@
 		<tr>
 			<td><%=m.get("bookid")%></td>
 			<td>
+				<!-- 注意：此处生成超链接，用于打开查看图书页面，地址?后面是请求参数的格式 -->
 				<a href="bookShow.jsp?bookid=<%=m.get("bookid")%>">
 					<%=m.get("bookname")%>
 				</a>
 			</td>
+			<!-- 获取图书字段信息，生成表格展示  -->
 			<td><%=m.get("bookpress")%></td>
 			<td><%=m.get("pressdate")%></td>
 			<td><%=m.get("bookauthor")%></td>
