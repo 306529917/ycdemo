@@ -42,7 +42,7 @@ public class SqlSession implements InvocationHandler {
 	public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 		// 获取 sql 语句
 		String sql = getSql(method);
-		// 获取所有的参数名，并替换占位符 ？
+		// 获取所有的参数名，并替换占位符 ?
 		List<String> paramNameList = new ArrayList<>();
 		sql = parseSql(sql, paramNameList);
 		// 根据参数名获取参数值
