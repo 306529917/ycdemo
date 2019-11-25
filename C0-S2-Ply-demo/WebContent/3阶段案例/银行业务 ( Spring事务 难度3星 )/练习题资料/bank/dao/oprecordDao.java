@@ -19,5 +19,4 @@ public class oprecordDao {
 		jdbcTemplate.update(sql, accountid, money);
 	}
 	
-
 }

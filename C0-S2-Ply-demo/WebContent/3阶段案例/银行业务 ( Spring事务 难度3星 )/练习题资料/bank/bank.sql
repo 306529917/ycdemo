@@ -21,7 +21,7 @@ SET FOREIGN_KEY_CHECKS=0;
 DROP TABLE IF EXISTS `account`;
 CREATE TABLE `account` (
   `accountid` int(11) NOT NULL AUTO_INCREMENT,
-  `balance` decimal(10,2) DEFAULT NULL,
+  `balance` decimal(10,4) DEFAULT NULL,
   PRIMARY KEY (`accountid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -36,8 +36,8 @@ DROP TABLE IF EXISTS `oprecord`;
 CREATE TABLE `oprecord` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `accountid` int(11) DEFAULT NULL,
-  `opmoney` decimal(10,2) DEFAULT NULL,
-  `charge` decimal(10,2) DEFAULT NULL,
+  `opmoney` decimal(10,4) DEFAULT NULL,
+  `charge` decimal(10,4) DEFAULT NULL,
   `optime` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_oprecord_accountid` (`accountid`),
