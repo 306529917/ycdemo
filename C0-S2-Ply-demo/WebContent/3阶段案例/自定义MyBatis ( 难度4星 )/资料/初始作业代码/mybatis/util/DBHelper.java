@@ -10,7 +10,6 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -30,7 +29,7 @@ import org.apache.commons.beanutils.BeanUtils;
 public class DBHelper {
 	private static String driver="com.mysql.jdbc.Driver";
 	private static String url="jdbc:mysql://127.0.0.1/C0-S2-Ply-demo";
-	private static String user="root";
+	private static String user="demo";
 	/**
 	 * 	设置几个常用的默认密码，获取连接时会依次尝试连接，然后返回连接正确的连接
 	 *	解决在不同数据库环境（教室、办公室、笔记本。。。）不用改配置就能正常运行的问题
@@ -51,9 +50,9 @@ public class DBHelper {
 					p.getProperty("user"), 
 					p.getProperty("password"));
 		} catch (Exception e) {
-			throw new RuntimeException("数据库驱动加载失败！", e);
+			e.printStackTrace();
 		} finally {
-			IOUtils.close(in);
+			close(in);
 		}
 	}
 
@@ -132,7 +131,7 @@ public class DBHelper {
 		} catch (SQLException e) {
 			throw new RuntimeException("数据库操作失败!", e);
 		} finally {
-			IOUtils.close(reader, br, conn);
+			close(reader, br, conn);
 		}
 	}
 	public static void executeByText(String sqltext) {
@@ -176,7 +175,7 @@ public class DBHelper {
 			// 异常转型
 			throw new RuntimeException("SQL执行错误！", e);
 		} finally {
-			IOUtils.close(conn);
+			close(conn);
 		}
 	}
 
@@ -243,7 +242,7 @@ public class DBHelper {
 			// 异常转型
 			throw new RuntimeException("SQL执行错误！", e);
 		} finally {
-			IOUtils.close(conn);
+			close(conn);
 		}		
 	}
 
@@ -298,7 +297,7 @@ public class DBHelper {
 			// 异常转型
 			throw new RuntimeException("SQL执行错误!", e);
 		} finally {
-			IOUtils.close(conn);
+			close(conn);
 		}
 	}
 
@@ -333,7 +332,7 @@ public class DBHelper {
 			// 异常转型
 			throw new RuntimeException("SQL执行错误！", e);
 		} finally {
-			IOUtils.close(conn);
+			close(conn);
 		}	
     }
 	
@@ -474,6 +473,19 @@ public class DBHelper {
 		}
 		return retList;
 	}
-	
+
+	/**
+	 * 关闭资源对象的工具方法
+	 */
+	private static void close(AutoCloseable...cArray) {
+		for (AutoCloseable c : cArray) {
+			if (c != null)
+				try {
+					c.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+		}
+	}
 
 }
