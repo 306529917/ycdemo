@@ -38,6 +38,7 @@ fieldset{
 			}
 		});
 		for (File f : files) {
+			if(f.isDirectory())continue;
 	%>
 	<fieldset>
 		<legend>
