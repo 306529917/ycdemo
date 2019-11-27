@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>制作横向菜单</title>
+<style type="text/css"> 
+div{/*隐藏层*/
+   	display:none;
+	}
+a {/*文字链接的背影样式*/
+	font-size:13px;
+	color: #ffffff;
+	text-decoration: none;
+	background-color:#669933;
+	width:100px;
+	line-height:25px;
+	text-align:center;
+	display: block;
+	border-right:1px solid #ffffff;
+	border-bottom:1px solid #ffffff;
+	 }
+a:hover {
+     /*鼠标在文字链接上时的文字背景样式*/
+	 font-size:13px;
+	 color: #ffffff;
+	 background-color:#ee9d01;
+	 width:100px;
+	 text-align:center;
+	 display: block;
+	 }
+ 
+</style>
+<script type="text/javascript"> 
+function show(d1){
+document.getElementById(d1).style.display='block';  //显示层
+}
+ 
+function hide(d1){
+document.getElementById(d1).style.display='none';  //隐藏层
+}
+</script>
+</head>
+<body>
+
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+    <td><a href="#"  onmousemove="show(1)" onmouseout="hide(1)">手机数码</a></td>
+    <td><a href="#" onmousemove="show(2)" onmouseout="hide(2)">淘宝集市</a></td>
+    <td><a href="#" onmousemove="show(3)" onmouseout="hide(3)">品牌商城</a></td>
+ </tr>
+  <tr>
+    <td>
+    <div  id="1" onmousemove="show(1)" onmouseout="hide(1)">
+    <a href="#">手机数码1</a>
+    <a href="#">手机数码2</a>
+    <a href="#">手机数码3</a>
+    </div>
+    </td>
+    <td>
+    <div  id="2"  onmousemove="show(2)" onmouseout="hide(2)">
+    <a href="#">淘宝集市1</a>
+    <a href="#">淘宝集市2</a>
+    <a href="#">淘宝集市3</a>
+    </div>
+    </td>
+    <td>
+    <div id="3" onmousemove="show(3)" onmouseout="hide(3)">
+    <a href="#">品牌商城1</a>
+    <a href="#">品牌商城2</a>
+    <a href="#">品牌商城3</a>
+    </div>
+    </td>
+  </tr>
+  </table>
+</body>
+</html>

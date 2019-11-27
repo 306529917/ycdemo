@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>聊天</title>
+<style type="text/css">
+.room {
+	width: 300px;
+	height: 400px;
+	margin: 10px auto;
+	background-color: #eee;
+	padding: 5px;
+	overflow:auto;
+	border: 1px solid #866464; 		/*设置边框样式*/
+	border-radius:3px; 				/*设置圆角边框*/
+}
+.divMsg{
+	margin: 10px;
+}
+.msg{
+	background-color: #ccc;
+	display: inline-block;
+	padding: 3px;
+	max-width: 200px;
+	text-align: left;
+	border-radius:3px;				/*设置圆角边框*/
+}
+</style>
+
+<script type="text/javascript">
+	// 模拟对话，你随便瞎编
+	var msgs = ["我请客","看电影，你有时间没","你又伤害了我","好啊","快快快","打字快点","你说","在哪里？","你很幽默","你太帅了！","继续","别岔开话题","老实交代","呵呵","你逗我？","速度发图","什么？","我没听错吧","你很有面子","不见不散"
+	            ,"<img src='图片资源/face1.jpg' width='150px'>"
+	            ,"<img src='图片资源/face2.jpg' width='150px'>"
+	            ,"<img src='图片资源/face3.jpg' width='150px'>"
+	            ,"<img src='图片资源/face4.jpg' width='150px'>"
+	            ,"<img src='图片资源/face5.jpg' width='150px'>"
+	            ,"<img src='图片资源/face6.jpg' width='150px'>"
+	            ,"<img src='图片资源/face7.jpg' width='150px'>"
+	            ,"<img src='图片资源/face8.jpg' width='150px'>"
+	            ,"<img src='图片资源/face9.jpg' width='150px'>"
+	            ,"<img src='图片资源/face10.jpg' width='150px'>"];
+	
+	/* 下面这两段就是从 “一堆废话，随便你瞎编” 中复制过来的 HTML 代码 */
+	
+	// 对方回复消息的 html 文本， 注意中间的 ？ 表示占位符，用于替换内容
+	var recvHtml = '<div class="divMsg">'+
+		'<img src="图片资源/?.jpg" height="30px" align="top">'+
+		'<label class="msg" style="margin-left:5px">?</label>'+
+		'</div>';
+	// 我方发送消息的 html 文本， 注意中间的 ？ 表示占位符，用于替换内容
+	var sendHtml = '<div class="divMsg" style="text-align: right;">'+
+		'<label class="msg">?</label>'+
+		'<img src="图片资源/?.jpg" height="30px" align="top" style="margin-left:5px">'+
+		'</div>';
+
+	// 随机从对话数组从提取对话
+	function randomMsg(){
+		var index = Math.floor(Math.random()*msgs.length);
+		return msgs[index];
+	}
+	
+	function send(){
+		// inputMsg 是发送消息的文本框
+		var msg = inputMsg.value;
+		if(msg){
+			// 替换文字和图片
+			var html = sendHtml.replace("?",msg).replace("?","face2");
+			// 向消息展示div（room）追加消息
+			room.innerHTML += html;
+			// 清空消息框，准备下次输入
+			inputMsg.value = "";
+			
+			// 模拟对话
+			html = recvHtml.replace("?","face1").replace("?",randomMsg());
+			// 向消息展示div（room）追加白富美回复的消息
+			room.innerHTML += html;
+			
+			// 将div滚动到最下，显示对话信息
+			room.scrollTop = room.scrollHeight;
+		} else {
+			alert("请输入要发送的消息！");
+		}
+		// 设置消息框获得焦点
+		inputMsg.focus();
+	}
+	
+	// 消息框按键事件
+	function enterSend(e){
+		// 当按下 回车键 时，并且消息框内有内容，则发送消息
+		if(e.keyCode == 13 && inputMsg.value){
+			send();
+		}
+	}
+</script>
+
+</head>
+<body>
+	<div class="room" style="height:auto;">
+	<b>白富美</b>
+	</div>
+	<div class="room" id="room">
+		<!-- 一堆废话，随便你瞎编： 开始 -->
+		<div class="divMsg">
+			<img src="图片资源/face1.jpg" height="30px" align="top">
+			<label class="msg">过来没有？</label>
+		</div>
+		<div class="divMsg" style="text-align: right;">
+			<label class="msg">还木有</label>
+			<img src="图片资源/face2.jpg" height="30px" align="top">
+		</div>
+		<div class="divMsg">
+			<img src="图片资源/face1.jpg" height="30px" align="top">
+			<label class="msg">就不能快点？
+				<img src="图片资源/timg.gif" width='150px'>
+			</label>
+		</div>
+		<div class="divMsg" style="text-align: right;">
+			<label class="msg">还有几行代码没写完，马上就好。。。</label>
+			<img src="图片资源/face2.jpg" height="30px" align="top">
+		</div>
+		<div class="divMsg">
+			<img src="图片资源/face1.jpg" height="30px" align="top">
+			<label class="msg">速度</label>
+		</div>
+		<!-- 一堆废话，随便你瞎编： 结束 -->
+	</div>
+	<div class="room" style="height:auto;text-align: center;">
+		<input style="height: 20px; width:220px" id="inputMsg" onkeypress="enterSend(event)">
+		<button onclick="send()" style="width:50px">发 送</button>
+	</div>
+</body>
+</html>

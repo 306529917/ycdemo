@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html style="background-color: #ddd" onmousemove="fashmove()" onkeydown="movefash()">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+img{
+	position: absolute;
+	width: 200px
+}
+#room{
+	background: url("图片资源/水波纹.jpg") round;
+	border-radius: 50px
+}
+</style>
+<script type="text/javascript">
+	function fashmove(){
+		// event 是事件对象
+		fash.style.left = event.clientX + "px";
+		fash.style.top = event.clientY + "px";
+	}
+	var a = innerWidth
+	function movefash(){
+		// 获取 鱼 和 鱼缸 的实际的坐标和大小对象
+		var fashX = parseInt( fash.offsetLeft);
+		var fashY = parseInt( fash.offsetTop);
+		var fashRight = fashX + parseInt( fash.offsetWidth);
+		var fashBottom = fashY + parseInt( fash.offsetHeight);
+		var roomX = parseInt( room.offsetLeft);
+		var roomY = parseInt( room.offsetTop);
+		var roomRight = roomX + parseInt( room.offsetWidth);
+		var roomBottom = roomY + parseInt( room.offsetHeight);
+		
+		var msg = "放我出去!";
+		if(event.keyCode == 37){
+			if(fashX - 10 > roomX){
+				fash.style.left = parseInt(fash.style.left) - 10 + "px";
+				var msg = "";
+			}
+		} else if(event.keyCode == 38){
+			if(fashY - 10 > roomY){
+				fash.style.top = parseInt(fash.style.top) - 10 + "px";
+				var msg = "";
+			}
+		} else if(event.keyCode == 39){
+			if(fashRight + 10 < roomRight){
+				fash.style.left = parseInt(fash.style.left) + 10 + "px";
+				var msg = "";
+			}
+		} else if(event.keyCode == 40){
+			if(fashBottom + 10 < roomBottom){
+				fash.style.top = parseInt(fash.style.top) + 10 + "px";
+				var msg = "";
+			}
+		}
+		msgh.innerText = msg;
+	}
+</script>
+</head>
+<body>
+	<div id="room" style="height: 500px;width: 800px;background-color: #fff;margin: auto" >
+		<img id="fash" src="图片资源/fash1.gif" style="left: 700px;top: 200px">
+	</div>
+	<div style="margin: auto;text-align: center; color: red;"><h1 id="msgh"></h1></div>
+</body>
+</html>

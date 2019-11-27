@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>表格编辑</title>
+<style type="text/css">
+table,tr,td,th{
+	border: 1px solid #999;
+	border-collapse: collapse;
+	padding: 5px;
+	table-layout: fixed; 		/* 列宽由表格宽度和列宽度设定。 */
+	word-wrap:break-word;		/* 在长单词或 URL 地址内部进行换行。 */
+}
+th{
+	background-color: #ddd;
+}
+button {
+	padding: 2px 13px
+}
+/*行编辑状态, 列表元素内的文本输入框样式*/
+input {
+	border: none;				/* 去除边框 */
+    height: 32px;  				/* 高度设置为表格行高一致, 这个是估值, 手动微调 */
+    width: 100%;
+    text-indent: 5px;			/* 文字缩进宽度 */
+    font-size: 16px;			/* 设置字体大小*/
+    background-color: aliceblue;/* 底色: 爱丽丝蓝 */
+}
+</style>
+<script type="text/javascript">
+// 定义表格操作列的内容
+var opTdHTML = '<button onclick="mod()">修改</button> ';
+	opTdHTML += '<button onclick="del()">删除</button> ';
+	opTdHTML += '<button onclick="add()">新增</button>';
+// 定义表格操作列，在点击“新增”或“修改”按钮后显示的内容	
+var edTdHTML = "<button onclick='saveEdit(this.parentNode.parentNode)'>保存</button> ";
+	edTdHTML += "<button onclick='cancelEdit(this.parentNode.parentNode)'>放弃</button>";
+
+// 设置页面加载完成之后的事件函数, 添加表格初始化数据
+window.onload=function(){
+	add([1,"李逵","Java,MySQL,JSP","6.5K"]);
+	add([2,"武松","Java,Oracle,SSM","7.5K"]);
+	add([3,"燕青","HTML,CSS,JS,PHOTOSHOP","5.5K"]);
+	add([4,"鲁达","Java全栈","12K"]);
+}	
+	
+// 新增行
+function add(initDataArray){
+	// 获取表格对象
+	var tbl = document.getElementById("tbl");
+	// 获取头行(表头)
+	var headTr = tbl.rows[0];
+	// 添加新行
+	var tr = tbl.insertRow();
+	// 根据表头的列数添加新行的 td 对象
+	for(var i=0; i<headTr.cells.length - 1; i++){
+		tr.insertCell();
+	}
+	// 最后添加一个操作列
+	var td = tr.insertCell();
+	// 设置字符居中
+	td.style.textAlign="center";
+	// 添加操作按钮
+	td.innerHTML = opTdHTML;
+	// 设置鼠标移入行时的事件处理函数, 用于实现鼠标跟随显示效果, inTrFn函数定义见 133 行
+	tr.onmouseenter = inTrFn;
+	// 让该行进入编辑状态
+	beginEdit(tr);
+	// 如果有传入的初始化参数，则直接将初始化参数填入表格
+	if(initDataArray){
+		// 结束编辑状态
+		saveEdit(tr);
+		// 将初始化数据写入当前新添加的行
+		for(var i=0; i< initDataArray.length; i++){
+			// 设置单元格的内容
+			tr.cells[i].innerText = initDataArray[i];
+		}		
+	}
+}
+//修改行数据
+function mod(){
+	// event.srcElement 获取当前点击的按钮对象
+	var tr = event.srcElement.parentNode.parentNode;
+	// 保存 tr 的原有内容, setAttribute 用于设置属性， 可以扩展自定义属性
+	tr.setAttribute("oldContect",tr.innerHTML);
+	// 开始编辑数据
+	beginEdit(tr);
+}
+//删除行数据
+function del(){
+	// event.srcElement 获取当前点击的按钮对象
+	var tr = event.srcElement.parentNode.parentNode;
+	if(confirm('请确认是否要删除该行?')){
+		// 使用 table 对象删除当前行
+		tr.parentNode.removeChild(tr);		
+	}
+}
+
+// 开始编辑
+function beginEdit(tr){
+	for(var i = 0 ; i < tr.cells.length ; i++ ){
+		// 最后一个是操作列
+		if(i == tr.cells.length - 1 ){
+			tr.cells[i].innerHTML = edTdHTML;
+		} else {
+			// 设置居中显示内容
+			tr.cells[i].style.textAlign = "center";
+			// 设置内边距
+			tr.cells[i].style.padding = "0px";
+			// 设置编辑文本框
+			tr.cells[i].innerHTML = "<input value='"+ tr.cells[i].innerText +"'>"
+		}
+	}
+	
+}
+
+// 保存编辑后的内容
+function saveEdit(tr){
+	for(var i = 0 ; i < tr.cells.length ; i++ ){
+		// 最后一个是操作列
+		if(i == tr.cells.length - 1 ){
+			tr.cells[i].innerHTML = opTdHTML;
+		} else {
+			// 设置居左显示内容
+			tr.cells[i].style.textAlign = "left";
+			// 设置内边距
+			tr.cells[i].style.padding = "5px";
+			// 将编辑后内容, 写入表格
+			tr.cells[i].innerText = tr.cells[i].firstChild.value;
+		}
+	}
+}
+
+// 放弃保存编辑后的内容
+function cancelEdit(tr){
+	if(tr.getAttribute("oldContect")){
+		// 将事先保存的当前行原来的内容还原
+		tr.innerHTML = tr.getAttribute("oldContect");
+		// 移除属性
+		tr.removeAttribute("oldContect");
+	} else {
+		// 如果没有原有内容，说明是新增的行，取消保存就要删除改行
+		tr.parentNode.removeChild(tr);
+	}
+}
+
+// 鼠标移入, 当前行显示灰色, 其他行恢复无色
+function inTrFn(){
+	// 获取当前鼠标所在行
+	var tr = event.srcElement;
+	// 获取表格所有行
+	var trs = tr.parentNode.rows;
+	for(var i = 1 ; i < trs.length; i++){
+		if(trs[i] == tr){
+			// 当前行显示灰色
+			trs[i].style.backgroundColor = "#eee";
+		} else {
+			// 其他行恢复无色
+			trs[i].style.backgroundColor = "";
+		}
+	}
+}
+
+
+</script>
+</head>
+<body>
+	<table id="tbl" style="width: 100%">
+		<tr style="height: 40px">
+			<th style="width: 50px">编号</th>
+			<th style="width: 100px">姓名</th>
+			<th style="width: 300px">技术能力</th>
+			<th style="width: 50px">期望薪资</th>
+			<th style="width: 180px">操作</th>
+		</tr>
+	</table>
+</body>
+</html>

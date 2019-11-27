@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+fieldset {
+	padding:5px;
+	text-align: center;
+	line-height: 40px
+}
+
+body div *{
+	margin: 10px
+}
+
+img{
+	border: 1px solid blue; 
+	margin: auto;
+	height: 200px;
+	border-radius: 15px
+}
+
+</style>
+<script type="text/javascript">
+function loadImg(){
+	var fr = new FileReader();
+	fr.onload = function(e){
+		var img = document.getElementById("img");
+		img.src = e.target.result;
+	}
+	var file = document.getElementById("file");
+	fr.readAsDataURL(file.files[0]);
+}
+
+function loadImg1(){
+	var file = document.getElementById("file1");
+	var multiImgDiv = document.getElementById("multiImgDiv");
+	for(var i=0; i<file.files.length ; i++){
+		var fr = new FileReader();
+		fr.onload = function(e){
+			var img = document.createElement("img");
+			img.src = e.target.result;
+			multiImgDiv.appendChild(img);
+		}
+		fr.readAsDataURL(file.files[i]);
+	}
+}
+</script>
+</head>
+<body>
+	<fieldset>
+		<legend>上传单张图片预览</legend>
+		<div>
+			<img alt="请选择图片" id="img" src="图片资源/添加图片.jpg"> 
+		</div>
+		<input type="file" id="file" style="width: 300px" onchange="loadImg()">
+	</fieldset>
+	
+	<fieldset>
+		<legend>上传多张图片预览</legend>
+		<div id="multiImgDiv">
+		</div>
+		<input type="file" id="file1" style="width: 300px" onchange="loadImg1()" 
+				multiple="multiple">
+	</fieldset>
+</body>
+</html>

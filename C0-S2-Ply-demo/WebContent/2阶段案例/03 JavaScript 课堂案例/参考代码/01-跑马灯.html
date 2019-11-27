@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<div id="dtxt"></div>
+
+<script type="text/javascript">
+
+	var txt = "由于链接众多，错误之处在所难免，希望各位用户指正。由此带来的一切后果，本人概不负责。";
+
+	// 将字符串转成 字符数组
+	var txtarr = [];
+	for(var i=0 ; i< txt.length; i++){
+		txtarr.push(txt.charAt(i));
+	}
+	
+	
+	function run() {
+		
+		var txt1 = txt.substr(0,1);
+		var txt2 = txt.substring(1);
+		txt = txt2 + txt1;
+		
+		dtxt.innerHTML = txt;
+		
+		// 设置下次运行的时间
+		setTimeout("run()", 220);
+	}
+	
+	// 跑马等数组实现版本
+	function run() {
+		// 使用数组实现
+		var arr = new Array(); // 创建长度为0的数组
+		var arr = new Array(10); // 创建长度为10的数组
+		var arr = []; // 创建长度为0的数组
+		var arr = [1,2,3,4]; // 创建指定内容数组
+		
+		// js没有数组越界
+		arr[4]  === undefined
+		arr[4] = "12";  // 设置数组元素
+		
+		// js中的数组相当于 java 的 list
+		
+		// 
+		var arrstr = arr.join(":");
+		
+		//alert(arrstr);
+		//alert(arr.shift());  // 弹出第一个元素
+		//alert(arr.push("a"));  // 追加一个元素
+		//alert(arr);
+		
+		var txt1 = txtarr.shift();
+		txtarr.push(txt1);
+		txt = txtarr.join("");  // 将数组元素连接成字符串
+		
+		dtxt.innerHTML = txt;
+		
+		// 设置下次运行的时间
+		setTimeout("run()", 220);
+	}
+	
+	run();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<fieldset>
+	<legend><h3>跳动的字符</h3></legend>
+	<div id="dtxt1"></div>
+</fieldset>
+<fieldset>
+	<legend><h3>来回走动的字符</h3></legend>
+	<div id="dtxt3"></div>
+</fieldset>
+<fieldset>
+	<legend><h3>波浪跳动的字符</h3></legend>
+	<div id="dtxt2"></div>
+</fieldset>
+
+<script type="text/javascript">
+	var txt = "JavaScript是运行在浏览器上的程序";
+	
+	// 定义当前跳动字符的索引
+	var index1 = 0;
+	function run1() {
+		var txt0 = txt.substring(0, index1);
+		var txt1 = txt.charAt(index1);
+		var txt2 = txt.substring(index1 + 1);
+		txt1 = txt1.bold().fontcolor("Red").big().big().big().big().big();  // 粗体  红色   大号字体
+		txt3 = txt0 + txt1 + txt2;
+		dtxt1.innerHTML = txt3;
+		index1 ++;
+		
+		if( index1 >= txt.length){
+			index1 = 0;
+		}
+		
+		// 设置下次运行的时间
+		setTimeout("run1()", 200);
+		
+	}
+	run1()
+	
+	/**
+		来回走动的字符
+	*/
+	// 定义当前跳动字符的索引
+	var index3 = 0;
+	// 定义方向
+	var order = 1;
+	function run3() {
+		
+		var txt0 = txt.substring(0, index3);
+		var txt1 = txt.charAt(index3);
+		var txt2 = txt.substring(index3 + 1);
+		txt1 = txt1.bold().fontcolor("Red").big().big().big().big().big();  // 粗体  红色   大号字体
+		txt3 = txt0 + txt1 + txt2;
+
+		dtxt3.innerHTML = txt3;
+		index3 += order;
+		
+		if( index3 >= txt.length){
+			order = -1;
+		} else if( index3 <= 0){
+			order = 1;
+		}
+		
+		// 设置下次运行的时间
+		setTimeout("run3()", 200);
+		
+	}
+	run3()
+	
+	
+	/**
+		类似波浪, 有间隔的字符跳动
+	*/
+	// 两个跳动字符之间的间距
+	var width = 5;
+	// 定义当前跳动的最右边的字符的索引
+	var index2 = 0
+	function run2() {
+		// 下一个跳动的字符索引
+		var nextIndex = index2;
+		// 记录所有跳动的字符的数组
+		var charIndex = [];
+		
+		do{
+			// 记录每个跳动字符的索引位置
+			charIndex.push(nextIndex);
+			// 追加到数组中
+			nextIndex -= width;
+		} while( nextIndex >= 0 );
+		
+		var txt3 = txt;
+		// 循环修改跳动的字符
+		for(var i = 0; i < charIndex.length ; i++){
+			var txt0 = txt3.substring(0, charIndex[i]);
+			var txt1 = txt3.charAt(charIndex[i]);
+			var txt2 = txt3.substring(charIndex[i] + 1);
+			txt1 = txt1.bold().fontcolor("Red").big().big().big().big().big();  // 粗体  红色   大号字体
+			txt3 = txt0 + txt1 + txt2;
+		}
+		dtxt2.innerHTML = txt3;
+
+		index2 ++;
+		
+		// 索引重置, 索引位置   比较  字符串长度 + 间距
+		if(index2 == txt.length + width){
+			index2 = txt.length;
+		}
+			
+		// 设置下次运行的时间
+		setTimeout("run2()", 200);
+		
+	}
+	
+	run2();
+	
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>表单操作</title>
+<style type="text/css">
+fieldset{
+	text-align: center;
+	margin: 10px;
+	padding: 20px
+}
+legend{
+	font: 20px 微软雅黑;
+	color: #999
+}
+</style>
+</head>
+<body>
+	<form action="form1.html">
+		<fieldset>
+			<legend>下拉框联动 ( 省市联动 )</legend>
+			<script type="text/javascript" src="JS脚本/省市.js"></script>
+			<script type="text/javascript">
+				// 省市列表
+			    function changeCity(){
+			    	// 重置选项
+			    	selCity.innerHTML = "<option>--选择城市--</option>";
+			    	// 如果选中是的具体的省(非第一项), 则更新城市下拉框
+			        if(selProvince.selectedIndex > 0){
+			        	// 根据省的下标, 获取城市数组
+			        	var cityArr = citys[ selProvince.selectedIndex - 1 ];
+			        	// 循环添加城市
+			        	for(var i=0; i<cityArr.length; i++){
+			        		// Option 是选项对象, select 对象的 add 方法用于添加选项
+			        		selCity.add(new Option(cityArr[i],cityArr[i],null));
+			        	}
+			        }
+			   	}
+			</script>
+			<select id="selProvince" onchange="changeCity()" style="width:200px">
+				<option>--选择省份--</option>
+				<script>
+					for(var i=0; i<provinces.length; i++){
+						document.write("<option >"+provinces[i]+"</option>");
+					}
+				</script>
+			</select>
+			<select id="selCity" style="width:200px">
+				<option>--选择城市--</option>
+			</select>
+		</fieldset>
+		
+		
+		<fieldset>
+			<legend>多选框选择</legend>
+			爱好:
+			<input type="checkbox" id="l0"><label for="l0">全选</label>
+			<input type="checkbox" name="like" id="l1"><label for="l1">篮球</label>
+			<input type="checkbox" name="like" id="l2"><label for="l2">看书</label>
+			<input type="checkbox" name="like" id="l3"><label for="l3">电影</label>
+			<input type="checkbox" name="like" id="l4"><label for="l4">跑步</label>
+			<input type="checkbox" name="like" id="l5"><label for="l5">瑜伽</label>
+			<input type="checkbox" name="like" id="l6"><label for="l6">唱歌</label>
+			<input type="checkbox" name="like" id="l7"><label for="l7">跳舞</label>
+			<script type="text/javascript">
+				// 获取所有爱好多选框 ( 数组 )
+				var cbxLikes = document.getElementsByName("like");
+				// 获取全选多选框
+				var cbxAll = document.getElementById("l0");
+				
+				cbxAll.onclick = function(){
+					for(var i=0; i<cbxLikes.length; i++){
+						cbxLikes[i].checked = cbxAll.checked;
+					}
+				};
+
+				for(var i=0; i<cbxLikes.length; i++){
+					cbxLikes[i].onclick = function(){
+						var selectedCount = 0;
+						for(var i=0; i<cbxLikes.length; i++){
+							selectedCount += cbxLikes[i].checked ? 1 : 0;
+						}
+						cbxAll.checked = cbxLikes.length == selectedCount;
+					};
+				}
+
+			</script>
+		</fieldset>
+		
+		<fieldset>
+			<legend>滑块控制图片大小</legend>
+			<input type="range" value="0" style="width:100%;max-width: 500px"
+				onmousemove="img.style.height = 100 + parseInt( value * 4 ) + 'px'; ">
+			<br>
+			<img id="img" src="图片资源/face1.jpg" height="100px">
+		</fieldset>
+		
+		
+		
+	</form>
+</body>
+</html>

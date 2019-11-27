@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>美女时钟</title>
+<style type="text/css">
+div {
+	margin: 5px
+}
+label {
+	position: relative;
+	display:inline-block;	/* 必须加，否则高版本浏览器label倾斜失效 */
+	text-align:center;
+	left: -362px;
+	top: -170px;
+	color: white;
+	font-size: 30px;
+	font-family: 微软雅黑;
+	transform:rotate(20deg);
+	/* -webkit-transform:rotate(20deg);
+	-moz-transform:rotate(20deg);
+	-o-transform:rotate(20deg); */
+}
+</style>
+<script type="text/javascript">
+	// 设置 3 个美女时钟 对象，保存在数组中， 对象中保存美女图片地址、时钟的位置、旋转角度、字体大小
+	var girls = [
+		{img:"图片资源/girltime.png", top:-170, left:-362, rotate:20, fontSize:30},
+		{img:"图片资源/girltime.jpg", top:-300, left:-300, rotate:38, fontSize:20},
+		{img:"图片资源/girltime1.jpg", top:-188, left:-452, rotate:-7, fontSize:22},
+	];
+	
+	// 更改美女时钟
+	function changeGirl(){
+		// 只有3个美女，用取余，保证每个下拉选项都有美女时钟
+		var girl = girls[year.selectedIndex % girls.length];
+		if(girl){
+			// 更改图片
+			img.src = girl.img;
+			// 设置显示时间的位置和旋转角度
+			d.style.left = girl.left + "px";
+			d.style.top = girl.top + "px";
+			d.style.fontSize = girl.fontSize + "px";
+			d.style.rotate = "rotate(" + girl.rotate + "deg)";
+			d.style["-webkit-transform"] = "rotate(" + girl.rotate + "deg)";
+			d.style["-moz-transform"] = "rotate(" + girl.rotate + "deg)";
+			d.style["-o-transform"] = "rotate(" + girl.rotate + "deg)";
+		}
+	}
+
+	function buildOptions(minValue, maxValue){
+		var ret = "<option></option>";
+		for(var i=minValue; i<=maxValue; i++){
+			ret += "<option>"+i+"</option>";
+		}
+		return ret;
+	}
+	function getSelectValue(id){
+		var select = document.getElementById(id);
+		var value = select.options[select.selectedIndex].innerText;
+		return parseInt(value);
+	}
+	
+	// 保存用户设定的时间与系统时间的差值，即：偏移的时间量
+	var offsetTime;
+	function resetTime(){
+		var date = new Date();
+		// 获取当前系统时间的时间戳
+		var time1 = date.getTime();
+		
+		// 获取用户设置的时间字段值
+		var year = getSelectValue("year");
+		var month = getSelectValue("month");
+		var day = getSelectValue("day");
+		var hour = getSelectValue("hour");
+		var minute = getSelectValue("minute");
+		// 设置时间字段值
+		if( ! isNaN(year) ) date.setFullYear(year);
+		if( ! isNaN(month) ) date.setMonth(month-1);
+		if( ! isNaN(day) ) date.setDate(day);
+		if( ! isNaN(hour) ) date.setHours(hour);
+		if( ! isNaN(minute) ) date.setMinutes(minute);
+		// 获取用户设定的时间戳
+		var time2 = date.getTime();
+		
+		// 计算差值
+		offsetTime = time2 - time1;
+	}
+</script>
+</head>
+<body>
+	<h1>美女时钟</h1>
+	<div> <!-- 当改变年份时，切换美女时钟 -->
+		年：	<select id="year" onchange="changeGirl()">
+				<script>document.write(buildOptions(2000, 2019))</script>
+			</select>&nbsp;&nbsp;
+		月：	<select id="month">
+				<script>document.write(buildOptions(1,12))</script>
+			</select>&nbsp;&nbsp;
+		日：	<select id="day">
+				<script>document.write(buildOptions(1,31))</script>
+			</select>&nbsp;&nbsp;
+		时：	<select id="hour">
+				<script>document.write(buildOptions(0,23))</script>
+			</select>&nbsp;&nbsp;
+		分：	<select id="minute">
+				<script>document.write(buildOptions(0,59))</script>
+			</select>&nbsp;&nbsp;&nbsp;&nbsp;
+		<button onclick="resetTime()">设置时间</button>
+	</div>
+	<div style="width: 640px; text-align: center">
+		<h3 id="now">当前设定的时间：</h3>
+	</div>
+	<div>
+		<img id="img" src="图片资源/girltime.png" width="630px">
+		<label id="d">星期一<br>19:30:43</label>
+	</div>
+</body>
+<script>
+	var weeks = ["天","一","二","三","四","五","六"];
+	function run(){
+		var date = new Date();
+		
+		// 如果用户设置了时间，则在系统时间上加上偏移的时间量
+		if(offsetTime){
+			date.setTime(date.getTime() + offsetTime);
+		}
+		var txt = "星期"+weeks[date.getDay()]+"<br>";
+		txt += fmtTimeField(date.getHours()) + ":";
+		txt += fmtTimeField(date.getMinutes()) + ":";
+		txt += fmtTimeField(date.getSeconds());
+		d.innerHTML = txt;
+		
+		// 更新图片上显示的时间
+		var txt = date.getFullYear() + "年";
+		txt += (date.getMonth()+1) + "月";
+		txt += date.getDate() + "日 ";
+		txt += "星期"+weeks[date.getDay()]+" ";
+		txt += date.getHours() + "时";
+		txt += date.getMinutes() + "分";
+		txt += date.getSeconds() + "秒";
+		now.innerHTML = txt;
+		
+		setTimeout(run,1000);
+	}
+	
+	function fmtTimeField(timeField){
+		return (timeField > 9 ? "" : "0") + timeField;
+	}
+	
+	run();
+</script>
+</html>
