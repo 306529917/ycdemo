@@ -194,7 +194,7 @@ public class Exercise1 {
 		double x = 1;
 		double y = x;
 		int count = 1;
-		for (int i = 1; i <= 2; i++) {
+		for (int i = 1; i <= 50; i++) {
 			if (count % 2 == 0) {
 				sum -= x / y;
 			} else {
