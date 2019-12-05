@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h3>介绍</h3>
+<dl>
+	<dt>用 @RequestMapping 来处理生产和消费对象
+	<dd>可以使用 @RequestMapping 注解的 produces 和 consumes 这两个元素来缩小请求映射类型的范围。
+	<dd>为了能用请求的媒体类型来产生对象, 你要用到 @RequestMapping 的 produces 元素再结合着 @ResponseBody 注解。
+	<dd>你也可以利用 @RequestMapping 的 comsumes 元素再结合着 @RequestBody 注解用请求的媒体类型来消费对象。
+</dl>
+<h3>参考资料</h3>
+<ul>
+	<li><a href="https://blog.csdn.net/shinebar/article/details/54408020">Http请求中Content-Type讲解以及在Spring MVC注解中produce和consumes配置详解</a>
+	<li><a href="https://www.iteye.com/blog/yxjajl-2410047">RequestMapping注解中consumes与produces的区别</a>
+	<li><a href="https://blog.csdn.net/bingguang1993/article/details/82253639">RequestMapping中produces属性作用</a>
+	<li><a href="https://www.cnblogs.com/1315925303zxz/p/7404299.html">SpringMVC注解@RequestMapping之produces属性导致的406错误</a>
+</ul>
+
+</body>
+</html>
