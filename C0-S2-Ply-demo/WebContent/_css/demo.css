@@ -1,0 +1,22 @@
+@charset "UTF-8";
+
+a {
+	text-decoration: none;
+	font-size: 0.9em;
+}
+
+a:link { /*默认状态*/
+	color: black;
+}
+
+a:visited { /*浏览过的*/
+	color: #888;
+}
+
+a:hover { /*悬浮状态*/
+	color: #555;
+}
+
+a:active { /*激活过的*/
+	color: red;
+}
