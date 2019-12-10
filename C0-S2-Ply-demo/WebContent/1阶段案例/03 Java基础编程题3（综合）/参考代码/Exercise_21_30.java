@@ -1,5 +1,3 @@
-package com.yc.java.exercise;
-
 import java.util.Scanner;
 
 public class Exercise_21_30 {
@@ -7,8 +5,7 @@ public class Exercise_21_30 {
 	private static Scanner scanner = new Scanner(System.in);
 
 	/**
-	 * 题目：求1+2!+3!+...+20!的和 
-	1.程序分析：此程序只是把累加变成了累乘。 
+	 * 题目：求1+2!+3!+...+20!的和 1.程序分析：此程序只是把累加变成了累乘。
 	 */
 	public static void exer21() {
 		long n, s = 0, t = 1;
@@ -20,9 +17,7 @@ public class Exercise_21_30 {
 	}
 
 	/**
-	 * 【程序22】 
-	题目：利用递归方法求5!。 
-	1.程序分析：递归公式：fn=fn_1*4! 
+	 * 【程序22】 题目：利用递归方法求5!。 1.程序分析：递归公式：fn=fn_1*4!
 	 */
 	public static void exer22() {
 		int x = 5;
@@ -38,12 +33,9 @@ public class Exercise_21_30 {
 	}
 
 	/**
-	 * 【程序23】 
-	题目：有5个人坐在一起，问第五个人多少岁？他说比第4个人大2岁。问第4个人岁数，
-	他说比第3个人大2岁。问第三个人，又说比第2人大两岁。问第2个人，说比第一个人
-	大两岁。最后问第一个人，他说是10岁。请问第五个人多大？ 
-	1.程序分析：利用递归的方法，递归分为回推和递推两个阶段。要想知道第五个人岁数，
-	需知道第四人的岁数，依次类推，推到第一人（10岁），再往回推。
+	 * 【程序23】 题目：有5个人坐在一起，问第五个人多少岁？他说比第4个人大2岁。问第4个人岁数，
+	 * 他说比第3个人大2岁。问第三个人，又说比第2人大两岁。问第2个人，说比第一个人 大两岁。最后问第一个人，他说是10岁。请问第五个人多大？
+	 * 1.程序分析：利用递归的方法，递归分为回推和递推两个阶段。要想知道第五个人岁数， 需知道第四人的岁数，依次类推，推到第一人（10岁），再往回推。
 	 */
 	public static void exer23() {
 		System.out.println(age(5));
@@ -59,8 +51,7 @@ public class Exercise_21_30 {
 	}
 
 	/**
-	 * 【程序24】 
-	题目：给一个不多于5位的正整数，要求：一、求它是几位数，二、逆序打印出各位数字。 
+	 * 【程序24】 题目：给一个不多于5位的正整数，要求：一、求它是几位数，二、逆序打印出各位数字。
 	 */
 	public static void exer24() {
 		int a = 345; // 要判断的数
@@ -76,8 +67,7 @@ public class Exercise_21_30 {
 	}
 
 	/**
-	 * 【程序25】 
-	题目：一个5位数，判断它是不是回文数。即12321是回文数，个位与万位相同，十位与千位相同。
+	 * 【程序25】 题目：一个5位数，判断它是不是回文数。即12321是回文数，个位与万位相同，十位与千位相同。
 	 */
 	public static void exer25() {
 		int a = 12391;
@@ -96,8 +86,68 @@ public class Exercise_21_30 {
 	 * 【程序26】 
 	题目：请输入星期几的第一个字母来判断一下是星期几，如果第一个字母一样，则继续 判断第二个字母。 
 	1.程序分析：用情况语句比较好，如果第一个字母一样，则判断用情况语句或if语句判断第二个字母。
+		monday      星期一 
+		tuesday     星期二 
+		wednesday   星期三 
+		thursday    星期四 
+		friday      星期五 
+		saturday    星期六 
+		sunday      星期日
 	 */
 	public static void exer26() {
+		// 定义星期字符二维数组
+		char[][] weeks = { { 'm', 'o', 'n', 'd', 'a', 'y' }, { 't', 'u', 'e', 's', 'd', 'a', 'y' },
+				{ 'w', 'e', 'd', 'n', 'e', 's', 'd', 'a', 'y' }, { 't', 'h', 'u', 's', 'd', 'a', 'y' },
+				{ 'f', 'r', 'i', 'd', 'a', 'y' }, { 's', 'a', 't', 'u', 'r', 'd', 'a', 'y' },
+				{ 's', 'u', 'n', 'd', 'a', 'y' } };
+
+		String str = null;
+		//  如果输入 bye 则退出
+		wh: while ("bye".equals(str) == false) {
+			System.out.print("请输入星期单词（可以不完整输入）：");
+			str = scanner.next();
+			if (str.isEmpty()) {
+				System.out.println("请求输入字符串！");
+				continue;
+			}
+			// 将字符串转成 字符数组
+			char[] chars = str.toCharArray();
+			// 遍历每个字符
+			/**
+			 *  统计当前字符在 星期数组当前位置出现的次数：
+			 *  1、如果次数为0，则输入不正确
+			 *  2、如果次数为1，则就是是该星期
+			 *  3、如果次数大于1，则继续判断
+			 */
+			int maxCount = 0; // 统计字母匹配次数
+			int maxIndex = 0; // 记录匹配的星期下标
+			for (int i = 0; i < weeks.length; i++) {
+				int count = 0;
+				for (int j = 0; j < chars.length; j++) {
+					if (weeks[i].length > j && chars[j] == weeks[i][j]) {
+						count++;
+					} else {
+						break;
+					}
+				}
+				if(count == 0 ) {
+					// 不是该星期
+					continue;
+				} else if (count == maxCount) {
+					System.out.println("无法判断，请重新输入！");
+					continue wh;
+				} else if (count > maxCount) {
+					// 记录该星期，继续判断
+					maxCount = count;
+					maxIndex = i;
+				}
+			}
+			if (maxCount == 0) {
+				System.out.println("您输入的星期单词错误！");
+			} else {
+				System.out.println("您输入的应该是：" + new String(weeks[maxIndex]));
+			}
+		}
 
 	}
 
@@ -105,14 +155,26 @@ public class Exercise_21_30 {
 	 * 题目：求100之内的素数
 	 */
 	public static void exer27() {
+		for (int i = 2; i <= 100; i++) {
+			if (isPrime(i)) {
+				System.out.println(i + "是素数");
+			}
+		}
+	}
 
+	public static boolean isPrime(int num) {
+		int limit = (int) Math.sqrt(num);
+		for (int i = 2; i <= limit; i++) {
+			if (num % i == 0) {
+				return false;
+			}
+		}
+		return false;
 	}
 
 	/**
-	 * 【程序28】 
-	题目：对10个数进行排序 
-	1.程序分析：可以利用选择法，即从后9个比较过程中，选择一个最小的与第一个元素交换，
-	下次类推，即用第二个元素与后8个进行比较，并进行交换。
+	 * 【程序28】 题目：对10个数进行排序 1.程序分析：可以利用选择法，即从后9个比较过程中，选择一个最小的与第一个元素交换，
+	 * 下次类推，即用第二个元素与后8个进行比较，并进行交换。
 	 */
 	public static void exer28() {
 		int[] arr = { 3, 2, 6, 1, 8, 3, 2, 9, 11, 55 };
@@ -132,9 +194,7 @@ public class Exercise_21_30 {
 	}
 
 	/**
-	 * 【程序29】 
-	题目：求一个3*3矩阵对角线元素之和 
-	1.程序分析：利用双重for循环控制输入二维数组，再将a[i][i]累加后输出。 
+	 * 【程序29】 题目：求一个3*3矩阵对角线元素之和 1.程序分析：利用双重for循环控制输入二维数组，再将a[i][i]累加后输出。
 	 */
 	public static void exer29() {
 		int[][] nums = { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } };
@@ -151,10 +211,8 @@ public class Exercise_21_30 {
 	}
 
 	/**
-	 * 【程序30】 
-	题目：有一个已经排好序的数组。现输入一个数，要求按原来的规律将它插入数组中。 
-	1. 程序分析：首先判断此数是否大于最后一个数，然后再考虑插入中间的数的情况，
-	插入后此元素之后的数，依次后移一个位置。 
+	 * 【程序30】 题目：有一个已经排好序的数组。现输入一个数，要求按原来的规律将它插入数组中。 1.
+	 * 程序分析：首先判断此数是否大于最后一个数，然后再考虑插入中间的数的情况， 插入后此元素之后的数，依次后移一个位置。
 	 */
 	public static void exer30() {
 		int[] arr = { 3, 5, 7, 9, 11, 13, 14, 16, 66, 88 }; // 原始数组
@@ -179,6 +237,7 @@ public class Exercise_21_30 {
 	}
 
 	public static void main(String[] args) {
+		exer26();
 	}
 
 }

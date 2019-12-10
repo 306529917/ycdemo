@@ -1,5 +1,3 @@
-package com.yc.java.exercise;
-
 import java.util.Scanner;
 
 public class Exercise_11_20 {
