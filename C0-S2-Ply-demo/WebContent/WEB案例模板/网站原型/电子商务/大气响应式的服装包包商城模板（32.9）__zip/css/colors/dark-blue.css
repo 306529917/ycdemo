@@ -1,0 +1,89 @@
+
+blockquote:before,
+a:hover,
+a:focus,
+a:active,
+.site-title a:hover,
+.site-title a:focus,
+.site-title a:active,
+.header-v1 .main-navigation li > a:hover,
+.header-v1 .main-navigation li.current-menu-item > a,
+.header-v1 .main-navigation li.current-page-item > a,
+.header-v1 .main-navigation li:hover > a,
+.header-v1 .main-navigation ul ul li a:hover,
+.entry-meta a:hover,
+.entry-meta a:focus,
+.entry-meta a:active,
+.entry-title a:hover,
+.entry-title a:focus,
+.entry-title a:active,
+.widget .tagcloud a:hover,
+.sidebar  ul li a:hover,
+.sidebar  ul li a:focus,
+.sidebar  ul li a:active,
+.list-check li:before,
+.main-navigation li > a:hover, .main-navigation li.current-menu-item > a, .main-navigation li.current-page-item > a, .main-navigation li:hover > a,
+.main-navigation li li > a:hover, .main-navigation li li.current-menu-item > a, .main-navigation li li.current-page-item > a, .main-navigation li li:hover > a,.filter-row-box.product-view > a.active, .filter-row-box.product-view > a:hover,
+#breadcrumb li a,
+#tophead .user-account-popup .user-acc-footer a,.user-account-popup .user-acc-header h3,.error404 h2 span,.section-features .features-icon i  {
+color: #1b67cc;
+}
+
+input[type="button"],
+input[type="reset"],
+input[type="submit"],
+button,
+.custom-button,
+.custom-button:visited,
+a.button,
+.custom-button.custom-primary-button,
+.custom-button.custom-primary-button:visited,
+.custom-button.custom-secondary-button:hover,
+.pagination .nav-links .current,
+.pagination .nav-links a:hover,
+.pagination .nav-links a:active,
+.pagination .nav-links a:focus,
+.sidebar .widget-title:after,
+a.scrollup,
+a.scrollup:visited,
+.section-featured-slider .cycle-pager .cycle-pager-active,
+.section-featured-slider .cycle-prev:hover,
+.section-featured-slider .cycle-next:hover,
+.custom-button:hover,
+a.button:hover,
+button:focus,
+a.button:hover,
+button:focus,
+a.button:focus,h3.contact-title,
+.custom-button:focus,
+.custom-button:active,
+.custom-button.custom-primary-button:hover,
+.custom-button.custom-primary-button:active,
+.custom-button.custom-primary-button:focus,
+.section-carousel-enabled .slick-prev.slick-arrow:hover,
+.section-carousel-enabled .slick-next.slick-arrow:hover,
+.custom-button.custom-gray:hover,
+.faq-section .accordionjs .acc_section.acc_active > .acc_head, .faq-section .accordionjs .acc_section > .acc_head:hover,
+.pagination.filter-row-box .nav-links .current, .pagination.filter-row-box .nav-links a:hover, .pagination.filter-row-box .nav-links a:active,pagination.filter-row-box .nav-links a:focus,
+#tabs .tabs li.active a,
+#tabs .tabs li a:hover,
+.main-cat-list .widget-category h3,.ad-wrapper .ad-header,#slider-range .ui-slider-handle {
+background: #1b67cc;
+}
+::-moz-selection,
+::selection {
+background-color: #1b67cc;
+}
+.pagination .nav-links .current,
+.pagination .nav-links a:hover,
+.pagination .nav-links a:active,
+.pagination .nav-links a:focus,
+.widget .tagcloud a:hover,
+.main-navigation ul ul.sub-menu,
+.main-navigation ul li.has-mega-menu .flat-mega-memu,.pagination.filter-row-box .nav-links .current, .pagination.filter-row-box .nav-links a:hover, .pagination.filter-row-box .nav-links a:active, .pagination.filter-row-box .nav-links a:focus,
+.filter-row-box.product-view > a.active, .filter-row-box.product-view > a:hover,#tabs .tabs li.active a,#tabs .tabs li a:hover
+{
+border-color: #1b67cc;
+}
+
+

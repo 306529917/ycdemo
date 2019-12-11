@@ -1,0 +1,58 @@
+
+// standard colors
+$white		    : #fff !default;
+$black			: #000 !default;
+$nocolor		: transparent !default;
+$light-gray		: #ccc !default; 
+
+//## Font for body text, headings
+$font-family-base:          "Yantramanav", sans-serif !default;
+
+
+$font-size-home: 18px !default;
+
+// color for default theme
+$bg-color       :  #3b38c1 !default
+$theme-color    :  #fcb600 !default; /* main color which will be used for all main block styles... */
+$theme-color-second  	: #3b38c1 !default;
+$text-color:	#555 !default;
+
+$border-color	: 	rgba(255, 255, 255, 0.1) !default;
+$border-color-second : #ebebeb !default;
+
+
+$color-link        : #000 !default;
+$color-link-hover   : $theme-color !default;       
+
+
+$nav-color: 		 #fff !default;
+
+
+$text-transform:    uppercase !default;
+ // button color
+ $primary-color:       #fff  !default;
+ $primary-bg:          $theme-color    !default;
+ $primary-border:      $theme-color  !default;
+
+ $default-color:       #fff  !default;
+ $default-bg:          $theme-color-second !default;
+ $default-border:      $theme-color-second !default;
+
+// cart
+$cart-color:          #000 !default;
+$cart-text:           #fff !default;
+
+// top-bar
+$topbar-color-icon:  #fff !default;
+$topbar-color:		 #ccc !default;
+
+// header
+$header-color-icon: #fff !default;
+
+
+// footer
+$bg-footer       :  #2f2d9c !default;
+
+// feature
+$feature-heading-size  : 24px !default;
+
