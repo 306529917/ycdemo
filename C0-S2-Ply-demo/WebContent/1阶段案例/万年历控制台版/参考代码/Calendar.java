@@ -1,84 +1,84 @@
 package com.yc.java.d1204;
 
-// Eclipse ×Ô¶¯µ¼ÈëµÄÀà
+// Eclipse è‡ªåŠ¨å¯¼å…¥çš„ç±»
 import java.util.Scanner;
 
 /**
- * ÈÎÒâ¸øÒ»¸öÄêÔÂ£¬ÇëÊä³ö¸ÃÔÂµÄËùÓÐÈÕÆÚ£¬°´ÈÕÀú¸ñÊ½Êä³ö
+ * ä»»æ„ç»™ä¸€ä¸ªå¹´æœˆï¼Œè¯·è¾“å‡ºè¯¥æœˆçš„æ‰€æœ‰æ—¥æœŸï¼ŒæŒ‰æ—¥åŽ†æ ¼å¼è¾“å‡º
  * 
- * 1¡¢ÀàÓë¶ÔÏó£¬Ê¹ÓÃ java api£¨Ó¦ÓÃ³ÌÐò½Ó¿Ú£©
- * 		Scanner Àà£¬ÓÃÓÚÆÁÄ»Â¼Èë 
- * 2¡¢¶¨Òåº¯Êý »ò ·½·¨£¬°ïÖúÎÒÃÇ¼ò»¯±à³Ì
+ * 1ã€ç±»ä¸Žå¯¹è±¡ï¼Œä½¿ç”¨ java apiï¼ˆåº”ç”¨ç¨‹åºæŽ¥å£ï¼‰
+ * 		Scanner ç±»ï¼Œç”¨äºŽå±å¹•å½•å…¥ 
+ * 2ã€å®šä¹‰å‡½æ•° æˆ– æ–¹æ³•ï¼Œå¸®åŠ©æˆ‘ä»¬ç®€åŒ–ç¼–ç¨‹
  * 
  */
 public class Calendar {
 
 	public static void main(String[] args) {
 
-		// 1¡¢ ´ÓÆÁÄ»Â¼ÈëÎÒÏÔÊ¾µÄÄêÔÂ
-		Scanner scanner = new Scanner(System.in); // ´´½¨¶ÔÏó
+		// 1ã€ ä»Žå±å¹•å½•å…¥æˆ‘æ˜¾ç¤ºçš„å¹´æœˆ
+		Scanner scanner = new Scanner(System.in); // åˆ›å»ºå¯¹è±¡
 
 		while (true) {
-			// ¿ì½Ý¼ü syso£¨alt + /£©
-			System.out.println("ÇëÊäÈëÄê·Ý£º");
-			int year = scanner.nextInt(); // ³ÌÐò»áÍ£ÏÂÀ´£¬µÈ´ýÓÃ»§µÄÊäÈë
+			// å¿«æ·é”® sysoï¼ˆalt + /ï¼‰
+			System.out.println("è¯·è¾“å…¥å¹´ä»½ï¼š");
+			int year = scanner.nextInt(); // ç¨‹åºä¼šåœä¸‹æ¥ï¼Œç­‰å¾…ç”¨æˆ·çš„è¾“å…¥
 
-			// ÊäÈë 0 ÔòÍË³ö
+			// è¾“å…¥ 0 åˆ™é€€å‡º
 			if (year == 0) {
-				System.out.println("ÔÙ¼û£¡");
+				System.out.println("å†è§ï¼");
 				break;
 			}
 			
-			System.out.println("ÇëÊäÈëÔÂ·Ý£º");
+			System.out.println("è¯·è¾“å…¥æœˆä»½ï¼š");
 			int month = scanner.nextInt();
 			
-			// ÊäÈë 0 ÔòÍË³ö
+			// è¾“å…¥ 0 åˆ™é€€å‡º
 			if (month == 0) {
-				System.out.println("ÔÙ¼û£¡");
+				System.out.println("å†è§ï¼");
 				break;
 			}
 			
-			// 2¡¢ ¸ù¾ÝÊäÈëµÄÄêÔÂ£¬ÏÔÊ¾Õâ¸öÔÂÃ¿Ò»Ìì£¬²»¿¼ÂÇ1ºÅÐÇÆÚ¼¸
+			// 2ã€ æ ¹æ®è¾“å…¥çš„å¹´æœˆï¼Œæ˜¾ç¤ºè¿™ä¸ªæœˆæ¯ä¸€å¤©ï¼Œä¸è€ƒè™‘1å·æ˜ŸæœŸå‡ 
 			int days = getDays(year, month);
 
-			// 3¡¢ ¼ÆËã1ºÅÊÇÐÇÆÚ¼¸ 1900.1.1 ÐÇÆÚÒ»
-			// Í³¼ÆÌìÊý 2019.3.1 ==> 1900.1.1 ~ 2019.2.28
+			// 3ã€ è®¡ç®—1å·æ˜¯æ˜ŸæœŸå‡  1900.1.1 æ˜ŸæœŸä¸€
+			// ç»Ÿè®¡å¤©æ•° 2019.3.1 ==> 1900.1.1 ~ 2019.2.28
 			int allDays = 0;
-			// Çó¹ýÈ¥µÄËùÓÐÍêÕûÄê·ÝµÄÌìÊý
+			// æ±‚è¿‡åŽ»çš„æ‰€æœ‰å®Œæ•´å¹´ä»½çš„å¤©æ•°
 			for (int i = 1900; i < year; i++) {
-				// i ±íÊ¾µÄÊÇµ±Ç°µÄÄê·Ý
+				// i è¡¨ç¤ºçš„æ˜¯å½“å‰çš„å¹´ä»½
 				boolean isleap = isLeap(i);
 				allDays += isleap ? 366 : 365;
 			}
-			// Çó¸ÃÄê¸ÃÔÂ¹ýÈ¥µÄÌìÊý
+			// æ±‚è¯¥å¹´è¯¥æœˆè¿‡åŽ»çš„å¤©æ•°
 			for (int i = 1; i < month; i++) {
-				// i ±íÊ¾µÄÊÇµ±Ç°µÄÔÂ·Ý
-				// Duplicate local variable days ÖØ¸´µÄ¶¨Òå±äÁ¿ days
-				allDays += getDays(year, i); // ½«º¯ÊýµÄ·µ»ØÖµÖ±½Ó¼Óµ½ allDays
+				// i è¡¨ç¤ºçš„æ˜¯å½“å‰çš„æœˆä»½
+				// Duplicate local variable days é‡å¤çš„å®šä¹‰å˜é‡ days
+				allDays += getDays(year, i); // å°†å‡½æ•°çš„è¿”å›žå€¼ç›´æŽ¥åŠ åˆ° allDays
 			}
-			// ÉÏÔÂ×îºóÒ»ÌìÊÇÐÇÆÚ¼¸
+			// ä¸Šæœˆæœ€åŽä¸€å¤©æ˜¯æ˜ŸæœŸå‡ 
 			int lastDayWeek = allDays % 7;
 
-			System.out.println("====================="+year + "Äê" + month + "ÔÂ=====================");
-			// Êä³öÐÇÆÚÊý
-			System.out.println("ÈÕ\tÒ»\t¶þ\tÈý\tËÄ\tÎå\tÁù");
+			System.out.println("====================="+year + "å¹´" + month + "æœˆ=====================");
+			// è¾“å‡ºæ˜ŸæœŸæ•°
+			System.out.println("æ—¥\tä¸€\täºŒ\tä¸‰\tå››\täº”\tå…­");
 
-			// Êä³ö1ºÅÇ°µÄ¿Õ¸ñ£¬ÖÜÈÕÔÚÇ°
+			// è¾“å‡º1å·å‰çš„ç©ºæ ¼ï¼Œå‘¨æ—¥åœ¨å‰
 			for (int i = 0; i < (lastDayWeek + 1) % 7; i++) {
 				System.out.print("\t");
 			}
 
-			// 4¡¢¸ù¾Ý1ºÅÐÇÆÚÊý£¬ÐÞÕýÈÕÀúµÄÊä³ö½á¹û
+			// 4ã€æ ¹æ®1å·æ˜ŸæœŸæ•°ï¼Œä¿®æ­£æ—¥åŽ†çš„è¾“å‡ºç»“æžœ
 			for (int i = 1; i <= days; i++) {
-				// ¼ÆËãÐÇÆÚÊý£¬×¢ÒâÕâÊÇÖÜÈÕÔÚÇ°µÄËã·¨
+				// è®¡ç®—æ˜ŸæœŸæ•°ï¼Œæ³¨æ„è¿™æ˜¯å‘¨æ—¥åœ¨å‰çš„ç®—æ³•
 				int week = (lastDayWeek + i + 1) % 7;
-				// ·êÖÜÁùÈÕ£¬¸øÈÕÆÚ¼ÓÉÏÐ¡À¨ºÅ
+				// é€¢å‘¨å…­æ—¥ï¼Œç»™æ—¥æœŸåŠ ä¸Šå°æ‹¬å·
 				if (week == 1 || week == 0) {
 					System.out.print("(" + i + ")\t");
 				} else {
 					System.out.print(i + "\t");
 				}
-				// Èç¹û ³ý 7 Óà 0 ÄÇÃ´¾Í»»ÐÐ
+				// å¦‚æžœ é™¤ 7 ä½™ 0 é‚£ä¹ˆå°±æ¢è¡Œ
 				if (week == 0) {
 					System.out.println();
 				}
@@ -87,35 +87,35 @@ public class Calendar {
 
 		}
 		/**
-		 * ×÷Òµ£º 
-		 * 1¡¢Èç¹ûÓÃ»§ÊäÈë 0 Äê »ò 0ÔÂ£¬¾ÍÍË³öÔËÐÐ 	* 
-		 * 2¡¢ÇëÊµÏÖÊ¹ÖÜÈÕÏÔÊ¾ÔÚÈÕÀúµÄµÚÒ»ÁÐ 		***
-		 * 3¡¢Çë½«ÖÜÁùºÍÖÜÈÕµÄÈÕÆÚ£¬Á½±ß¼ÓÉÏÀ¨ºÅ 	**
+		 * ä½œä¸šï¼š 
+		 * 1ã€å¦‚æžœç”¨æˆ·è¾“å…¥ 0 å¹´ æˆ– 0æœˆï¼Œå°±é€€å‡ºè¿è¡Œ 	* 
+		 * 2ã€è¯·å®žçŽ°ä½¿å‘¨æ—¥æ˜¾ç¤ºåœ¨æ—¥åŽ†çš„ç¬¬ä¸€åˆ— 		***
+		 * 3ã€è¯·å°†å‘¨å…­å’Œå‘¨æ—¥çš„æ—¥æœŸï¼Œä¸¤è¾¹åŠ ä¸Šæ‹¬å· 	**
 		 */
 
 	}
 
-	// º¯ÊýµÄ¶¨ÒåÓï·¨ ×÷ÓÃÓò ¾²Ì¬¹Ø¼ü×Ö ·µ»ØÖµ º¯ÊýÃû( ²ÎÊýÁÐ±í ) { º¯ÊýÌå }
-	// ÅÐ¶ÏÈòÄêµÄº¯Êý
+	// å‡½æ•°çš„å®šä¹‰è¯­æ³• ä½œç”¨åŸŸ é™æ€å…³é”®å­— è¿”å›žå€¼ å‡½æ•°å( å‚æ•°åˆ—è¡¨ ) { å‡½æ•°ä½“ }
+	// åˆ¤æ–­é—°å¹´çš„å‡½æ•°
 	public static boolean isLeap(int year) {
 		boolean isLeap = year % 400 == 0 || year % 4 == 0 && year % 100 != 0;
 		return isLeap;
 	}
 
 	/**
-	 * Çë¶¨Òå¼ÆËãÖ¸¶¨ÄêÔÂµÄÌìÊýµÄº¯Êý
+	 * è¯·å®šä¹‰è®¡ç®—æŒ‡å®šå¹´æœˆçš„å¤©æ•°çš„å‡½æ•°
 	 * 
 	 * @param year
-	 *            Äê·Ý
+	 *            å¹´ä»½
 	 * @param month
-	 *            ÔÂ·Ý
-	 * @return ¸ÃÔÂÌìÊý
+	 *            æœˆä»½
+	 * @return è¯¥æœˆå¤©æ•°
 	 */
 	public static int getDays(int year, int month) {
-		// ÅÐ¶ÏÈòÄê
-		// && ÓëÔËËã·û ÓÅÏÈ¼¶ Òª¸ßÓÚ || »òÔËËã·û
+		// åˆ¤æ–­é—°å¹´
+		// && ä¸Žè¿ç®—ç¬¦ ä¼˜å…ˆçº§ è¦é«˜äºŽ || æˆ–è¿ç®—ç¬¦
 		boolean isLeap = isLeap(year);
-		// ¶¨Òå±£´æÌìÊýµÄ±äÁ¿ days
+		// å®šä¹‰ä¿å­˜å¤©æ•°çš„å˜é‡ days
 		int days;
 		switch (month) {
 		case 1:

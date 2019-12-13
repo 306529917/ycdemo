@@ -3,22 +3,22 @@ package com.yc.java.d1208;
 import java.util.Scanner;
 
 /**
- * Îå×ÓÆå
+ * äº”å­æ£‹
  * @author Administrator
  *
  */
 public class Wuzi {
 
-	// ¶¨Òå³£Á¿
-	public static final char BLACK = '@';	// ºÚ×Ó
-	public static final char WHITE = 'O';	// °××Ó
-	public static final int SIZE = 15;		// ÆåÅÌ´óĞ¡
+	// å®šä¹‰å¸¸é‡
+	public static final char BLACK = '@';	// é»‘å­
+	public static final char WHITE = 'O';	// ç™½å­
+	public static final int SIZE = 15;		// æ£‹ç›˜å¤§å°
 
 	public static void main(String[] args) {
 
-		// ¶¨ÒåÆåÅÌ
+		// å®šä¹‰æ£‹ç›˜
 		char[][] qipan = new char[SIZE][SIZE];
-		// ³õÊ¼»¯ÆåÅÌ£¬¿Õ¸ñ´¦ÏÔÊ¾ + ºÅ
+		// åˆå§‹åŒ–æ£‹ç›˜ï¼Œç©ºæ ¼å¤„æ˜¾ç¤º + å·
 		for (int i = 0; i < qipan.length; i++) {
 			for (int j = 0; j < qipan[i].length; j++) {
 				qipan[i][j] = '+';
@@ -26,69 +26,58 @@ public class Wuzi {
 		}
 
 		Scanner s = new Scanner(System.in);
-		// ºÚÏÈÏÂ×Ó
+		// é»‘å…ˆä¸‹å­
 		char color = BLACK;
-		// ¿ªÊ¼ÓÎÏ·
+		// å¼€å§‹æ¸¸æˆ
 		while (true) {
-			// ´òÓ¡ÆåÅÌ
+			// æ‰“å°æ£‹ç›˜
 			printQipan(qipan);
 
-			// ÓÃ»§ÊäÈëÆå×Ó×ø±ê
+			// ç”¨æˆ·è¾“å…¥æ£‹å­åæ ‡
 			int i = 0;
 			while (i < 1 || i > 15) {
-				System.out.print("ÇëÊäÈëÆå×ÓµÄºá×ø±ê£º");
+				System.out.print("è¯·è¾“å…¥æ£‹å­çš„æ¨ªåæ ‡ï¼š");
 				i = s.nextInt();
 			}
 			int j = 0;
 			while (j < 1 || j > 15) {
-				System.out.print("ÇëÊäÈëÆå×ÓµÄ×İ×ø±ê£º");
+				System.out.print("è¯·è¾“å…¥æ£‹å­çš„çºµåæ ‡ï¼š");
 				j = s.nextInt();
 			}
 
 			System.out.println();
 
-			// ×ó±ß¼õÒ»£¬ÓÃ»§ÊäÈëµÄÊÇ 1~15£¬ Êı×éÏÂ±êÊÇ 0~14
+			// åæ ‡å‡ä¸€ï¼Œç”¨æˆ·è¾“å…¥çš„æ˜¯ 1~15ï¼Œ æ•°ç»„ä¸‹æ ‡æ˜¯ 0~14
 			j--;
 			i--;
 			if (qipan[j][i] != '+') {
-				System.out.println("Äú²»ÄÜÔÚÕâÀïÏÂ×Ó£¡");
+				System.out.println("æ‚¨ä¸èƒ½åœ¨è¿™é‡Œä¸‹å­ï¼");
 			} else {
-				// ÏÂ×Ó
+				// ä¸‹å­
 				qipan[j][i] = color;
 
-				// ºáÏòÅĞ¶Ï -
+				// æ¨ªå‘åˆ¤æ–­ -
 				if (checkHeng(qipan, color, i, j)
-						// ×İÏòÅĞ¶Ï |
+						// çºµå‘åˆ¤æ–­ |
 						|| checkZong(qipan, color, i, j)
-						// Ğ±ÏòÅĞ¶Ï \
+						// æ–œå‘åˆ¤æ–­ \
 						|| checkXie1(qipan, color, i, j)
-						// Ğ±ÏòÅĞ¶Ï /
+						// æ–œå‘åˆ¤æ–­ /
 						|| checkXie2(qipan, color, i, j)) {
 					break;
 				}
 
-				// ½»»»Æå×ÓÑÕÉ«
+				// äº¤æ¢æ£‹å­é¢œè‰²
 				color = color == BLACK ? WHITE : BLACK;
 			}
 		}
 
-		// ÖÕ¾ÖÇ°×îºóÔÙ´òÓ¡Ò»´ÎÆåÅÌ
+		// ç»ˆå±€å‰æœ€åå†æ‰“å°ä¸€æ¬¡æ£‹ç›˜
 		printQipan(qipan);
-
-		/**
-		 * ×÷Òµ£º
-		 * 	1¡¢ÅĞ¶ÏÓÃ»§µÄÊäÈë£¨1~15£©£¬Èç¹ûÓÃ»§ÊäÈë²»ÕıÈ·£¬ÔòÌáÊ¾ÓÃ»§ÔÙ´ÎÊäÈë   ***
-		 * 	2¡¢Âä×ÓÎŞ»Ú£¬ÏÂ¹ıÆåµÄÎ»ÖÃ²»ÄÜÔÙ´ÎÏÂ×Ó£¬±ØĞëÌáÊ¾ÓÃ»§			  ***
-		 * 	3¡¢Ê¤¸ºÅĞ¶Ï  *****
-		 * 		1¡¢ÏÈÅĞ¶ÏºáÏòµÄÎå×ÓÊÇ·ñ³ÉÁ¢
-		 * 		2¡¢ÔÙÅĞ¶Ï×İÏòµÄÎå×ÓÊÇ·ñ³ÉÁ¢
-		 * 		3¡¢×îºó¿¼ÂÇÈçºÎÅĞ¶ÏĞ±ÏòµÄÎå×Ó
-		 *  
-		 */
 	}
 
 	/**
-	 * ´òÓ¡ÆåÅÌ
+	 * æ‰“å°æ£‹ç›˜
 	 * @param qipan
 	 */
 	public static void printQipan(char[][] qipan) {
@@ -105,7 +94,7 @@ public class Wuzi {
 	}
 
 	/**
-	 * ´òÓ¡ºá×ø±ê
+	 * æ‰“å°æ¨ªåæ ‡
 	 */
 	public static void printXPos() {
 		System.out.print("  ");
@@ -117,38 +106,38 @@ public class Wuzi {
 	}
 
 	/**
-	 * ´òÓ¡×İ×ø±ê
+	 * æ‰“å°çºµåæ ‡
 	 */
 	public static void printYPos(int y) {
 		System.out.print(y < 10 ? y + " " : y);
 	}
 
 	/**
-	 * ÅĞ¶ÏºáÏòÎå×ÓÊÇ·ñ³ÉÁ¢
-	 * @param qipan  ÆåÅÌ
-	 * @param color	 Æå×ÓÑÕÉ«
-	 * @param i		ºá×ø±ê
-	 * @param j		×İ×ø±ê
+	 * åˆ¤æ–­æ¨ªå‘äº”å­æ˜¯å¦æˆç«‹
+	 * @param qipan  æ£‹ç›˜
+	 * @param color	 æ£‹å­é¢œè‰²
+	 * @param i		æ¨ªåæ ‡
+	 * @param j		çºµåæ ‡
 	 */
 	public static boolean checkHeng(char[][] qipan, char color, int i, int j) {
 
-		// ¶¨Òå½øĞĞÔËËã x y
+		// å®šä¹‰è¿›è¡Œè¿ç®— x y
 		int x = i, y = j;
-		// ÅĞ¶ÏºáÏò£¨×ó£©
+		// åˆ¤æ–­æ¨ªå‘ï¼ˆå·¦ï¼‰
 		int num = 1;
 		while (x > 0 && qipan[y][--x] == color) {
 			num++;
 		}
-		// »Ö¸´ x y µÄÖµ
+		// æ¢å¤ x y çš„å€¼
 		x = i;
 		y = j;
-		// ÅĞ¶ÏºáÏò£¨ÓÒ£©
+		// åˆ¤æ–­æ¨ªå‘ï¼ˆå³ï¼‰
 		while (x < 14 && qipan[y][++x] == color) {
 			num++;
 		}
 
 		if (num >= 5) {
-			System.out.println(color + "Ó®ÁË£¡");
+			System.out.println(color + "èµ¢äº†ï¼");
 			return true;
 		} else {
 			return false;
@@ -156,7 +145,7 @@ public class Wuzi {
 	}
 
 	/**
-	 * ÅĞ¶Ï×İÏòÎå×ÓÊÇ·ñ³ÉÁ¢
+	 * åˆ¤æ–­çºµå‘äº”å­æ˜¯å¦æˆç«‹
 	 * @param qipan
 	 * @param color
 	 * @param i
@@ -165,25 +154,25 @@ public class Wuzi {
 	 */
 	public static boolean checkZong(char[][] qipan, char color, int i, int j) {
 		/**
-		 * ÅĞ¶Ï×İÏò
+		 * åˆ¤æ–­çºµå‘
 		 */
 		int x = i;
 		int y = j;
-		// ÅĞ¶Ï×İÏò£¨ÉÏ£©
+		// åˆ¤æ–­çºµå‘ï¼ˆä¸Šï¼‰
 		int num = 1;
 		while (y > 0 && qipan[--y][x] == color) {
 			num++;
 		}
-		// »Ö¸´ x y µÄÖµ
+		// æ¢å¤ x y çš„å€¼
 		x = i;
 		y = j;
-		// ÅĞ¶Ï×İÏò£¨ÏÂ£©
+		// åˆ¤æ–­çºµå‘ï¼ˆä¸‹ï¼‰
 		while (y < 14 && qipan[++y][x] == color) {
 			num++;
 		}
 
 		if (num >= 5) {
-			System.out.println(color + "Ó®ÁË£¡");
+			System.out.println(color + "èµ¢äº†ï¼");
 			return true;
 		} else {
 			return false;
@@ -191,7 +180,7 @@ public class Wuzi {
 	}
 
 	/**
-	 * ÅĞ¶ÏĞ±Ïò£¨ \ £©Îå×ÓÊÇ·ñ³ÉÁ¢
+	 * åˆ¤æ–­æ–œå‘ï¼ˆ \ ï¼‰äº”å­æ˜¯å¦æˆç«‹
 	 * @param qipan
 	 * @param color
 	 * @param i
@@ -200,25 +189,25 @@ public class Wuzi {
 	 */
 	public static boolean checkXie1(char[][] qipan, char color, int i, int j) {
 		/**
-		 * ÅĞ¶ÏĞ±Ïò
+		 * åˆ¤æ–­æ–œå‘
 		 */
 		int x = i;
 		int y = j;
-		// ÅĞ¶ÏĞ±Ïò£¨×óÉÏ£©
+		// åˆ¤æ–­æ–œå‘ï¼ˆå·¦ä¸Šï¼‰
 		int num = 1;
 		while (y > 0 && x > 0 && qipan[--y][--x] == color) {
 			num++;
 		}
-		// »Ö¸´ x y µÄÖµ
+		// æ¢å¤ x y çš„å€¼
 		x = i;
 		y = j;
-		// ÅĞ¶ÏĞ±Ïò£¨ÓÒÏÂ£©
+		// åˆ¤æ–­æ–œå‘ï¼ˆå³ä¸‹ï¼‰
 		while (y < 14 && x < 14 && qipan[++y][++x] == color) {
 			num++;
 		}
 
 		if (num >= 5) {
-			System.out.println(color + "Ó®ÁË£¡");
+			System.out.println(color + "èµ¢äº†ï¼");
 			return true;
 		} else {
 			return false;
@@ -226,7 +215,7 @@ public class Wuzi {
 	}
 
 	/**
-	 * ÅĞ¶ÏĞ±Ïò£¨ / £©Îå×ÓÊÇ·ñ³ÉÁ¢
+	 * åˆ¤æ–­æ–œå‘ï¼ˆ / ï¼‰äº”å­æ˜¯å¦æˆç«‹
 	 * @param qipan
 	 * @param color
 	 * @param i
@@ -235,25 +224,25 @@ public class Wuzi {
 	 */
 	public static boolean checkXie2(char[][] qipan, char color, int i, int j) {
 		/**
-		 * ÅĞ¶ÏĞ±Ïò
+		 * åˆ¤æ–­æ–œå‘
 		 */
 		int x = i;
 		int y = j;
-		// ÅĞ¶ÏĞ±Ïò£¨ÓÒÉÏ£©
+		// åˆ¤æ–­æ–œå‘ï¼ˆå³ä¸Šï¼‰
 		int num = 1;
 		while (y > 0 && x < 14 && qipan[--y][++x] == color) {
 			num++;
 		}
-		// »Ö¸´ x y µÄÖµ
+		// æ¢å¤ x y çš„å€¼
 		x = i;
 		y = j;
-		// ÅĞ¶ÏĞ±Ïò£¨×óÏÂ£©
+		// åˆ¤æ–­æ–œå‘ï¼ˆå·¦ä¸‹ï¼‰
 		while (y < 14 && x > 0 && qipan[++y][--x] == color) {
 			num++;
 		}
 
 		if (num >= 5) {
-			System.out.println(color + "Ó®ÁË£¡");
+			System.out.println(color + "èµ¢äº†ï¼");
 			return true;
 		} else {
 			return false;
