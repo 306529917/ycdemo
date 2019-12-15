@@ -165,9 +165,9 @@ public class DBHelper {
 			// 获取连接
 			conn = getConnection();
 			PreparedStatement ps = conn.prepareStatement(sql);
-			System.out.println(sql);
+			//System.out.println(sql);
 			for (int i = 1; i <= param.length; i++) {
-				System.out.println("参数"+i+" : " + param[i-1]);
+				//System.out.println("参数"+i+" : " + param[i-1]);
 				ps.setObject(i, param[i - 1]);
 			}
 			return ps.executeUpdate();

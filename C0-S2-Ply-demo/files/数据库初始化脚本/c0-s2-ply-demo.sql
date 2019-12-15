@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50018
 File Encoding         : 65001
 
-Date: 2019-11-23 17:12:27
+Date: 2019-12-15 15:17:58
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -44,6 +44,31 @@ INSERT INTO `books` VALUES ('8', '水浒传', '贵州出版社', '1977-04-04', '
 INSERT INTO `books` VALUES ('9', '红楼梦', '上海出版社', '1966-04-11', '曹雪芹', '8', '../资料/images/红楼梦.jpg');
 INSERT INTO `books` VALUES ('10', '三国演义', '宇宙无敌出版社', '2001-09-09', '罗贯中', '13', '../资料/images/三国演义.jpg');
 INSERT INTO `books` VALUES ('14', 'qwe', 'qwe', '2019-11-15', 'qwe', '1', 'upload/08.jpg');
+
+-- ----------------------------
+-- Table structure for lottery
+-- ----------------------------
+DROP TABLE IF EXISTS `lottery`;
+CREATE TABLE `lottery` (
+  `id` int(11) NOT NULL auto_increment,
+  `opendate` varchar(16) default NULL COMMENT '开奖时间',
+  `num` varchar(10) default NULL COMMENT '期号',
+  `redone` varchar(2) default NULL,
+  `redtwo` varchar(2) default NULL,
+  `redthree` varchar(2) default NULL,
+  `redfour` varchar(2) default NULL,
+  `redfive` varchar(2) default NULL,
+  `redsix` varchar(2) default NULL,
+  `blue` varchar(2) default NULL,
+  `sale` varchar(20) default NULL COMMENT '销售金额',
+  `firstprize` varchar(4) default NULL COMMENT '一等奖',
+  `secondeprize` varchar(4) default NULL COMMENT '二等奖',
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of lottery
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for student
