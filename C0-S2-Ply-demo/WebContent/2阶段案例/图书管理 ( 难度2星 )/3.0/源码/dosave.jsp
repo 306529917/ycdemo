@@ -11,7 +11,7 @@
 	su.setAllowedFilesList("jpg,png,gif,bmp");	// 设置允许上传的文件类型（后缀名）
 	su.setMaxFileSize(1024 * 1024 * 5);			// 设置允许上传单个文件大小的最大值 5M
 	su.setTotalMaxFileSize(1024 * 1024 * 50);	// 设置允许上传总的文件大小的最大值 5M
-	su.setCharset("utf-8");						// 设置字符集
+	//su.setCharset("utf-8");						// 设置字符集
 	su.upload();								// 上传文件	
 	
 	String bookimage = null;
