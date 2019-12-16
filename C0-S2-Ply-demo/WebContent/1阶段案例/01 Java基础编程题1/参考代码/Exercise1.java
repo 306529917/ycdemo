@@ -17,11 +17,14 @@ public class Exercise1 {
 		int max;
 		if (a > b) {
 			max = a;
-		} else if (b > c) {
-			max = b;
 		} else {
+			max = b;
+		}
+		
+		if (max < c) {
 			max = c;
 		}
+		
 		System.out.println("最大值:" + max);
 
 		// 解法二：条件运算符（三元表达式）判断
