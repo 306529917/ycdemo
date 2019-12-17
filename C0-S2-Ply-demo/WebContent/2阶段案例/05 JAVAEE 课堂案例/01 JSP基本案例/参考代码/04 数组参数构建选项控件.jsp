@@ -15,7 +15,7 @@ span {
 <body>
 <h3>请选择你的爱好</h3>
 <!-- 注意 form 的 action 属性，表单提交的页面还是当前页面，并且必须以 post 方式提交 -->
-<form action="02 动态生成表单控件.jsp" method="post">
+<form action="" method="post">
 <!-- 表单中相同name的元素，在表单提交时会在服务器端构建成字符串数组，我们称之为数组型请求参数 -->
 <span><input type="checkbox" name="like" value="篮球" checked="checked">篮球</span>
 <span><input type="checkbox" name="like" value="电影" checked="checked">电影</span>
@@ -28,9 +28,9 @@ span {
 <span><input type="checkbox" name="like" value="围棋">围棋</span>
 <span><input type="checkbox" name="like" value="书法">书法</span>
 <hr>
-<input type="submit" value="生成下拉列表" formaction="02 动态生成表单控件.jsp?type=1">
-<input type="submit" value="生成单选框" formaction="02 动态生成表单控件.jsp?type=2">
-<input type="submit" value="生成多选框" formaction="02 动态生成表单控件.jsp?type=3">
+<input type="submit" value="生成下拉列表" formaction="?type=1">
+<input type="submit" value="生成单选框" formaction="?type=2">
+<input type="submit" value="生成多选框" formaction="?type=3">
 
 
 <%
