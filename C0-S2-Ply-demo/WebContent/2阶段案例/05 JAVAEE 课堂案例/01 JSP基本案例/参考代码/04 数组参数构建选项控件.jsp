@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>02 动态生成表单控件</title>
+<title>04 数组参数构建选项控件</title>
 <style type="text/css">
 span {
 	display: inline-block;
