@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Company {
 
-	// 
+	// 存放产品的集合
 	private List<Object> list = new ArrayList<>();
 
 	public void product() {
