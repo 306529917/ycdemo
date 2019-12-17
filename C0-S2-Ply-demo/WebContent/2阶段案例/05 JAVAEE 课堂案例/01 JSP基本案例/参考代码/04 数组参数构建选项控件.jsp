@@ -62,7 +62,7 @@ span {
 	<%} %>
 	
 	<% if("3".equals(type)){ %>
-		<h3>动态生成单选框</h3>
+		<h3>动态生成文本框</h3>
 		<%for(String like : likes ) {%>
 			<span><input value="<%=like%>" style="width:100px"></span>
 		<%} %>
