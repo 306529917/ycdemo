@@ -6,6 +6,7 @@
 <head>
 <meta charset="utf-8">
 <title>案例演示</title>
+<link href='<%=application.getContextPath()%>/_css/demo.css' rel='stylesheet' type='text/css'>
 <style type="text/css">
 li {
 	margin: 5px

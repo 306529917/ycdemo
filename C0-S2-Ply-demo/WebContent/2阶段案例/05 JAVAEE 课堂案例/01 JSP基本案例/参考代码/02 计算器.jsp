@@ -42,29 +42,31 @@ input[type=button], input[type=submit] {
 </head>
 <body>
 	<%
-		String num = request.getParameter("num");
-		String[] nums = num.split("[-/\\+\\*]");
-		String op = num.replaceAll("[\\d\\.]", "");
 		double result = 0;
-		if (nums.length == 2 && op.length() == 1) {
-			float f1 = Float.parseFloat(nums[0]);
-			float f2 = Float.parseFloat(nums[1]);
-			switch (op) {
-			case "%":
-				result = f1 % f2;
-				break;
-			case "*":
-				result = f1 * f2;
-				break;
-			case "/":
-				result = f1 / f2;
-				break;
-			case "+":
-				result = f1 + f2;
-				break;
-			case "-":
-				result = f1 - f2;
-				break;
+		String num = request.getParameter("num");
+		if (num != null) {
+			String[] nums = num.split("[-/\\+\\*]");
+			String op = num.replaceAll("[\\d\\.]", "");
+			if (nums.length == 2 && op.length() == 1) {
+				float f1 = Float.parseFloat(nums[0]);
+				float f2 = Float.parseFloat(nums[1]);
+				switch (op) {
+				case "%":
+					result = f1 % f2;
+					break;
+				case "*":
+					result = f1 * f2;
+					break;
+				case "/":
+					result = f1 / f2;
+					break;
+				case "+":
+					result = f1 + f2;
+					break;
+				case "-":
+					result = f1 - f2;
+					break;
+				}
 			}
 		}
 		// 数字格式化对象
