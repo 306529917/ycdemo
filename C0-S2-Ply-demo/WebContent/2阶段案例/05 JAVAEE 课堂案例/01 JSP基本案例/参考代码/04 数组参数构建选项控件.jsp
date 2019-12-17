@@ -27,12 +27,14 @@ span {
 <span><input type="checkbox" name="like" value="乒乓球">乒乓球</span>
 <span><input type="checkbox" name="like" value="围棋">围棋</span>
 <span><input type="checkbox" name="like" value="书法">书法</span>
-<hr>
-<div>根据勾选的选项动态生成指定的控件</div>
+<p>根据勾选的选项动态生成指定的控件</p>
 <input type="submit" value="生成下拉列表" formaction="?type=1">
 <input type="submit" value="生成单选框" formaction="?type=2">
-<input type="submit" value="生成多选框" formaction="?type=3">
-
+<input type="submit" value="生成文本框" formaction="?type=3">
+<hr>
+<p>扩展练习：请参考源代码实现动态生成多选框</p>
+<input type="submit" value="生成多选框" formaction="?type=4">
+<input type="submit" value="生成密码框" formaction="?type=5">
 
 <%
 	String type = request.getParameter("type");
@@ -42,6 +44,7 @@ span {
 	String[] likes = request.getParameterValues("like");
 		
 %>
+	<hr>
 	<% if("1".equals(type)){ %>
 		<h3>动态生成下拉列表</h3>
 		<select style="width: 150px">
@@ -61,7 +64,7 @@ span {
 	<% if("3".equals(type)){ %>
 		<h3>动态生成单选框</h3>
 		<%for(String like : likes ) {%>
-			<span><input value="<%=like%>" type="radio"><%=like %></span>
+			<span><input value="<%=like%>" style="width:100px"></span>
 		<%} %>
 	<%} %>
 <%} %>
