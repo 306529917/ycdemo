@@ -28,6 +28,7 @@ span {
 <span><input type="checkbox" name="like" value="围棋">围棋</span>
 <span><input type="checkbox" name="like" value="书法">书法</span>
 <hr>
+<div>根据勾选的选项动态生成指定的控件</div>
 <input type="submit" value="生成下拉列表" formaction="?type=1">
 <input type="submit" value="生成单选框" formaction="?type=2">
 <input type="submit" value="生成多选框" formaction="?type=3">
