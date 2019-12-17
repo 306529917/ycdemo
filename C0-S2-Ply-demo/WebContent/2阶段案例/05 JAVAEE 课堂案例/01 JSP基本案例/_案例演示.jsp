@@ -5,17 +5,18 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Insert title here</title>
+<title>案例演示</title>
 </head>
 <body>
 	<h3>案例演示</h3>
 	<ul>
 	<%
-		String path = request.getServletPath() + "参考代码";
+		String dir = "参考代码";
+		String path = request.getServletPath() + "/" + dir;
 		String realPath = application.getRealPath(path);
 		for (File f : new File(realPath).listFiles()) {
 	%>
-	<li><a href="参考代码/<%=f.getName()%>"><%=f.getName()%></a>
+	<li><a href="<%=dir%>/<%=f.getName()%>"><%=f.getName()%></a>
 	<%
 		}
 	%>
