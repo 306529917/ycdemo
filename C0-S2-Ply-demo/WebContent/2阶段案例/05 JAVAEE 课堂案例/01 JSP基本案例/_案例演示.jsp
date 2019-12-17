@@ -6,20 +6,24 @@
 <head>
 <meta charset="utf-8">
 <title>案例演示</title>
+<style type="text/css">
+li {
+	margin: 5px
+}
+</style>
 </head>
 <body>
 	<h3>案例演示</h3>
 	<ul>
-	<%
-		String dir = "参考代码";
-		String path = request.getServletPath() + "/" + dir;
-		String realPath = application.getRealPath(path);
-		for (File f : new File(realPath).listFiles()) {
-	%>
-	<li><a href="<%=dir%>/<%=f.getName()%>"><%=f.getName()%></a>
-	<%
-		}
-	%>
+		<%
+			String dir = "参考代码";
+			String realPath = new File(application.getRealPath(request.getServletPath())).getParent() + "/" + dir;
+			System.out.println(realPath);
+			for (File f : new File(realPath).listFiles()) {
+		%>
+		<li><a href="<%=dir%>/<%=f.getName()%>"><%=f.getName()%></a> <%
+ 	}
+ %>
 	</ul>
 </body>
 </html>
