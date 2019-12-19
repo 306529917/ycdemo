@@ -55,13 +55,19 @@ public class ATM {
 			case 0:
 				System.exit(0);
 			case 1:
-				deposit();
+				balance();
 				break;
 			case 2:
-				withdraw();
+				deposit();
 				break;
 			case 3:
+				withdraw();
+				break;
+			case 4:
 				transfer();
+				break;
+			case 5:
+				details();
 				break;
 			default:
 				System.out.println("输入错误，请求重新输入！");
@@ -70,22 +76,50 @@ public class ATM {
 
 	}
 
+	/**
+	 * 注册
+	 */
 	private void register() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
+	/**
+	 * 余额
+	 */
+	private void balance() {
+		// TODO Auto-generated method stub
+
+	}
+
+	/**
+	 * 转账
+	 */
 	private void transfer() {
 		// TODO Auto-generated method stub
 
 	}
 
+	/**
+	 * 存款
+	 */
 	private void deposit() {
 		// TODO Auto-generated method stub
 
 	}
 
+	/**
+	 * 取款
+	 */
 	private void withdraw() {
+		// TODO Auto-generated method stub
+
+	}
+
+	/**
+	 * 查询明细
+	 */
+	private void details() {
 		// TODO Auto-generated method stub
 
 	}

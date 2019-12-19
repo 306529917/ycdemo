@@ -3,7 +3,6 @@
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/WebContent/1阶段案例/02 OOP编程/01 封装/参考代码"/>
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/WebContent/3阶段案例/01 网络与多线程/03 ATM系统/题目__zip"/>
         <property name="context-root" value="C0-S2-Ply-demo"/>
         <property name="java-output-path" value="/C0-S2-Ply-demo/build/classes"/>
     </wb-module>
