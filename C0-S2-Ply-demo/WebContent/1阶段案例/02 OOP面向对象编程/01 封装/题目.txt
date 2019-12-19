@@ -1,0 +1,44 @@
+1、实现一个具有以下特性的Car类。一辆汽车有一定的燃油效率
+(测量单位可以是英里/千米)并且油箱中有一定的油量。
+效率在构造函数中确定，初始油量为0.提供一个drive()
+方法模拟汽车行驶一定的距离并减少油箱油量。
+再提供一个返回当前油量的getGas方法和一个用于加油的
+addGas方法。用法示例如下:
+Car myHybrid=new Car(49);
+myHybrid.addGas(20);
+myHybrid.drive(100);
+System.out.println(myHybrid.getGas());
+
+
+
+2、实现一个SodaCan类，它有getSurfaceArea()和getVolume()
+方法.在构造函数中，提供圆柱的高和半径.
+
+
+
+3、编写一个程序，提示用户输入一个以米为单位的度量值，
+然后将其换算为英里数、英尺数和英寸数。使用下面的类:
+public class Converter{
+	 //@param aConversionFactor 换算为目标单位时所使用的乘法因子
+		public Converter(double aConversionFactor){…}
+	 //@param  fromMeasurement 度量值
+	 //@return 换算为目标单位的输入值
+	 public double convertTo(double fromMeasurement){…}
+}
+构造3个与下例类似的实例:
+   final double MILE_TO_KM=1.609;  // Java常量定义
+   Converter milesToMeters=new Converter(1000*MILE_TO_KM);
+
+
+
+4、编写一个包含名为Calculator类的程序。
+定义两个整型属性以及对该两个变量的setter和getter，
+编写用于对两个属性执行加、减、乘、除运算方法。
+在main方法里创建该类的对象并访问这些方法。
+
+
+
+5、编写一个名为Box的类，含整型的height,width,length，
+volume四个属性，要求在构造方法中将其初始化，
+并定义一个计算体积的calcVolume方法和一个输出
+体积的print方法，在main方法中进行调用。
