@@ -19,9 +19,9 @@ System.out.println(myHybrid.getGas());
 3、编写一个程序，提示用户输入一个以米为单位的度量值，
 然后将其换算为英里数、英尺数和英寸数。使用下面的类:
 public class Converter{
-	 //@param aConversionFactor 换算为目标单位时所使用的乘法因子
-		public Converter(double aConversionFactor){…}
-	 //@param  fromMeasurement 度量值
+	 //@param aConversionFactor 换算为目标单位时所使用的换算因子
+	 public Converter(double aConversionFactor){…}
+	 //@param  fromMeasurement 度量值（单位：米）
 	 //@return 换算为目标单位的输入值
 	 public double convertTo(double fromMeasurement){…}
 }
