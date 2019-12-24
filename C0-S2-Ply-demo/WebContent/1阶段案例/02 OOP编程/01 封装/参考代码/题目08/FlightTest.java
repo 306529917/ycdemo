@@ -1,4 +1,12 @@
-
+/**
+8、写以下类：
+	飞机：	型号，最大座位数，最大航程。
+	航班：	航班号，航空公司名称，航空公司代号，航班日期，出发地，目的地，起飞时间，
+      		到达时间，里程，使用飞机，剩余座位，全价，折扣率。
+			方法：setPlane(Plane  p);
+	客户：	姓名，身份证号，帐户余额。
+			方法：order(Flight  f);
+ */
 public class FlightTest {
 	
 	public static void main(String[] args) {
