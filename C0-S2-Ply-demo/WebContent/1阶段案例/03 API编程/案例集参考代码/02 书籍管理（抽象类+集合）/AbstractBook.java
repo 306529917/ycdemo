@@ -7,6 +7,10 @@ public abstract class AbstractBook {
 	public double price;//价格
 	public String id;//编号
 
+	/**
+	 * 构造方法，通过传入的屏幕录入对象，在创建对象的时候输入图书信息
+	 * @param input
+	 */
 	public AbstractBook(Scanner input) {
 		System.out.println("请输入书名：");
 		setName(input.next());
@@ -20,6 +24,14 @@ public abstract class AbstractBook {
 		setId(input.next());
 	}
 
+	/**
+	 * 构造方法，用于直接创建图书对象
+	 * @param name
+	 * @param author
+	 * @param publishingHouse
+	 * @param price
+	 * @param id
+	 */
 	public AbstractBook(String name, String author, String publishingHouse, double price, String id) {
 		super();
 		this.name = name;
