@@ -47,13 +47,14 @@
 
 	<h3>题目03</h3>
 	<p>
-		1、<span style="font-family: 宋体;">实现如下类之间的继承关系，并编写</span><span
+		<span style="font-family: 宋体;">实现如下类之间的继承关系，并编写</span><span
 			style="font-family: 'Times New Roman';">Music</span><span
 			style="font-family: 宋体;">类来测试这些类。</span>
 	</p>
 	<p>
 		<% WebHelper.buildHtmlByFiles("<img src='$images/${name}'/><br>", "$images", "03-.+", pageContext); %>
 	</p>
+
 
 
 
