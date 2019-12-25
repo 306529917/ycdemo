@@ -1,7 +1,14 @@
+<%@page import="java.io.IOException"%>
 <%@page import="com.yc.jee.util.WebHelper"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%!
+public void imgs(String prefix, PageContext pageContext)throws IOException{
+	WebHelper.buildHtmlByFiles("<img src='$images/${name}'/><br>", "$images", prefix + "-.+", pageContext);
+}
+
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -52,9 +59,16 @@
 			style="font-family: 宋体;">类来测试这些类。</span>
 	</p>
 	<p>
-		<% WebHelper.buildHtmlByFiles("<img src='$images/${name}'/><br>", "$images", "03-.+", pageContext); %>
+		<% imgs("03", pageContext); %>
 	</p>
 
+	<h3>题目03</h3>
+	<p>
+		创建如下三个类：（People类中的三个方法分别输出一些信息，ChinaPeople和AmericanPeople类重写父类的三个方法）。
+	</p>
+	<p>
+		<% imgs("04", pageContext); %>
+	</p>
 
 
 
