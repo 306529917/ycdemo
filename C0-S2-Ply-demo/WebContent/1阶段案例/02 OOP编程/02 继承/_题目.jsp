@@ -203,7 +203,7 @@
 
 判断某个点是否在矩形内部的方法isInside(double x,double y)。如在矩形内，返回true, 否则，返回false。
 
- 提示：点在矩形类是指满足条件：x>=startX&&x<=(startX+width)&&y<startY&&y>=(startY-height)
+ 提示：点在矩形类是指满足条件：x>=startX&&x<=(startX+width)&&y&lt;startY&&y>=(startY-height)
 
 （3）编写PlainRect类的测试程序创建一个左上角坐标为（10，10），长为20，宽为10的矩形对象；计算并打印输出矩形的面积和周长；判断点(25.5，13)是否在矩形内，并打印输出相关信息。
 </pre>
