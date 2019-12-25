@@ -92,8 +92,8 @@
 			imgs("05", pageContext);
 		%>
 	</p>
-	
-		<hr>
+
+	<hr>
 	<h3>题目06</h3>
 	<pre>
 按要求编写一个Java应用程序：
@@ -109,12 +109,12 @@
 			imgs("06", pageContext);
 		%>
 	</p>
-	
-	
+
+
 	<hr>
 	<h3>题目07</h3>
 	<p>
-编写一个Java应用程序，设计一个汽车类Vehicle，包含的属性有车轮个数wheels和车重weight。小车类Car是Vehicle的子类，其中包含的属性有载人数loader。卡车类Truck是Car类的子类，其中包含的属性有载重量payload。每个类都有构造方法和输出相关数据的方法。最后，写一个测试类来测试这些类的功能。
+		编写一个Java应用程序，设计一个汽车类Vehicle，包含的属性有车轮个数wheels和车重weight。小车类Car是Vehicle的子类，其中包含的属性有载人数loader。卡车类Truck是Car类的子类，其中包含的属性有载重量payload。每个类都有构造方法和输出相关数据的方法。最后，写一个测试类来测试这些类的功能。
 	</p>
 	<p>
 		<%
@@ -123,14 +123,93 @@
 	</p>
 
 
-<hr>
+	<hr>
 	<h3>题目08</h3>
 	<p>
-编写一个Shape类，具有属性：周长和面积；定义其子类三角形和矩形，分别具有求周长的方法。定义主类E，在其main方法中创建三角形和矩形类的对象，并赋给Shape类的对象a、b，使用对象a、b来测试其特性。
+		编写一个Shape类，具有属性：周长和面积；定义其子类三角形和矩形，分别具有求周长的方法。定义主类E，在其main方法中创建三角形和矩形类的对象，并赋给Shape类的对象a、b，使用对象a、b来测试其特性。
 	</p>
 	<p>
 		<%
 			imgs("08", pageContext);
+		%>
+	</p>
+
+
+	<hr>
+	<h3>题目09</h3>
+	<pre>
+实现一个名为Person的类和它的子类Employee，Employee有两个子类Faculty和Staff。具体要求如下：
+
+（1）Person类中的属性有：姓名name（String类型），地址address（String类型），电话号码telphone（String类型）和电子邮件地址email（String类型）；
+
+（2）Employee类中的属性有：办公室office（String类型），工资wage（double类型），受雇日期hiredate（String类型）；
+
+（3）Faculty类中的属性有：学位degree（String类型），级别level（String类型）；
+
+（4）Staff类中的属性有：职务称号duty（String类型）。	</pre>
+	<p>
+		<%
+			imgs("09", pageContext);
+		%>
+	</p>
+
+
+	<hr>
+	<h3>题目10</h3>
+	<p>
+编写一个Car类，具有String类型的属性品牌，具有功能drive；定义其子类Aodi和Benchi，具有属性：价格、型号；具有功能：变速；定义主类E，在其main方法中分别创建Aodi和Benchi的对象并测试对象的特性。
+	</p>
+	<p>
+		<%
+			imgs("10", pageContext);
+		%>
+	</p>
+	
+	
+	<hr>
+	<h3>题目11</h3>
+	<pre>
+按要求编写一个Java应用程序：
+
+（1）编写一个矩形类Rect，包含：
+
+两个属性：矩形的宽width；矩形的高height。
+
+两个构造方法：
+
+1．一个带有两个参数的构造方法，用于将width和height属性初化；
+
+2．一个不带参数的构造方法，将矩形初始化为宽和高都为10。
+
+两个方法：
+
+求矩形面积的方法area()
+
+求矩形周长的方法perimeter()
+
+（2）通过继承Rect类编写一个具有确定位置的矩形类PlainRect，其确定位置用
+
+矩形的左上角坐标来标识，包含：
+
+添加两个属性：矩形左上角坐标startX和startY。
+
+两个构造方法：
+
+带4个参数的构造方法，用于对startX、startY、width和height属性初始化；
+
+不带参数的构造方法，将矩形初始化为左上角坐标、长和宽都为0的矩形；
+
+添加一个方法：
+
+判断某个点是否在矩形内部的方法isInside(double x,double y)。如在矩形内，返回true, 否则，返回false。
+
+ 提示：点在矩形类是指满足条件：x>=startX&&x<=(startX+width)&&y<startY&&y>=(startY-height)
+
+（3）编写PlainRect类的测试程序创建一个左上角坐标为（10，10），长为20，宽为10的矩形对象；计算并打印输出矩形的面积和周长；判断点(25.5，13)是否在矩形内，并打印输出相关信息。
+</pre>
+	<p>
+		<%
+			imgs("11", pageContext);
 		%>
 	</p>
 </body>
