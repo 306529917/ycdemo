@@ -1,3 +1,7 @@
+<%@page import="com.yc.jee.util.WebHelper"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,7 +25,7 @@
 </pre>
 
 
-	<h3>题目01</h3>
+	<h3>题目02</h3>
 	<pre>
 已知有动物类：
 	动物属性:毛的颜色（颜色可以任意指定）,腿的个数（数量不可改变）
@@ -48,8 +52,7 @@
 			style="font-family: 宋体;">类来测试这些类。</span>
 	</p>
 	<p>
-		<span style="font-family: 宋体;"><img src="_images/03-1.png"
-			alt="" /><img src="_images/03-2.png" alt="" /></span>
+		<% WebHelper.buildHtmlByFiles("<img src='$images/${name}'/><br>", "$images", "03-.+", pageContext); %>
 	</p>
 
 
