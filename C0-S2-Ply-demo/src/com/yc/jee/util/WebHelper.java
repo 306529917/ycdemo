@@ -40,17 +40,9 @@ public class WebHelper {
 	 * @param page
 	 * @throws IOException
 	 */
-	public static void buildHtmlByFiles(String jspcode, String path, String regex, PageContext page)
+	public static int buildHtmlByFiles(String jspcode, String path, String regex, PageContext page)
 			throws IOException {
-		File dir;
-		if (path.startsWith("/")) {
-			path = page.getServletContext().getRealPath(path);
-			dir = new File(path);
-		} else {
-			HttpServletRequest req = (HttpServletRequest) page.getRequest();
-			File pFile = new File(req.getServletContext().getRealPath(req.getServletPath())).getParentFile();
-			dir = new File(pFile, path);
-		}
+		File dir = getRealFile(path, (HttpServletRequest) page.getRequest());
 		File[] files = dir.listFiles(new FileFilter() {
 			@Override
 			public boolean accept(File pathname) {
@@ -59,11 +51,24 @@ public class WebHelper {
 		});
 		Arrays.sort(files);
 		if (files != null && files.length > 0) {
-			for(File f : files) {
+			for (File f : files) {
 				page.getOut().print(StringUtils.replaceByEL(jspcode, "\\$\\{.+\\}", f));
 			}
+			return files.length;
 		}
+		return 0;
+	}
 
+	public static File getRealFile(String webpath, HttpServletRequest req) {
+		File file;
+		if (webpath.startsWith("/")) {
+			webpath = req.getServletContext().getRealPath(webpath);
+			file = new File(webpath);
+		} else {
+			File pFile = new File(req.getServletContext().getRealPath(req.getServletPath())).getParentFile();
+			file = new File(pFile, webpath);
+		}
+		return file;
 	}
 
 }
