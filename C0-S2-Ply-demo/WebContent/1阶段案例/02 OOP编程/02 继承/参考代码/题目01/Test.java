@@ -1,15 +1,29 @@
 
 public class Test {
-
 	public static void main(String[] args) {
-		//  新建对象
-		Employee normal = new Employee("武松", "清河", "123456", 1000, 2);
-		Manager manager = new Manager("宋江", "郓城", "000000", 10000, 10);
-		//  传入职位，Manager类型的对象没有add()方法，所以自动搜寻其父类，调用add()方法
-		normal.add();
-		manager.add();
+		Cat cat = new Cat();
+		Dog dog = new Dog();
+		Parrot parrot = new Parrot();
+		Octopus octopus = new Octopus();
 
-		System.out.println("员工"+normal.getName()+"的工资:" + normal.getWage());
-		System.out.println("经理"+manager.getName()+"的工资:" + manager.getWage());
+		cat.setColor('黄');
+		System.out.println("猫有" + cat.getNumber() + "只腿");
+		cat.eat();
+		cat.catchmouse();
+
+		cat.setColor('黑');
+		System.out.println("狗有" + dog.getNumber() + "只腿");
+		dog.eat();
+		dog.lookhome();
+
+		parrot.setColor('红');
+		System.out.println("鹦鹉有" + parrot.getNumber() + "只腿");
+		parrot.eat();
+		parrot.talk();
+		
+		octopus.setColor('灰');
+		System.out.println("章鱼有" + octopus.getNumber() + "只腿");
+		octopus.eat();
+		octopus.swimming();
 	}
 }

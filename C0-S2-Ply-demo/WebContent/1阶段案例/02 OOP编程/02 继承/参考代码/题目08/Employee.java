@@ -15,7 +15,7 @@ public class Employee extends Person {
 	/**
 	 * 加工资 
 	 */
-	public double add() {//  判断职位
+	public double add() {
 		wage = wage * 1.1;
 		return wage;
 	}
