@@ -40,8 +40,7 @@ public class WebHelper {
 	 * @param page
 	 * @throws IOException
 	 */
-	public static int buildHtmlByFiles(String jspcode, String path, String regex, PageContext page)
-			throws IOException {
+	public static int buildHtmlByFiles(String jspcode, String path, String regex, PageContext page) throws IOException {
 		File dir = getRealFile(path, (HttpServletRequest) page.getRequest());
 		File[] files = dir.listFiles(new FileFilter() {
 			@Override
@@ -49,8 +48,8 @@ public class WebHelper {
 				return pathname.getName().matches(regex);
 			}
 		});
-		Arrays.sort(files);
 		if (files != null && files.length > 0) {
+			Arrays.sort(files);
 			for (File f : files) {
 				page.getOut().print(StringUtils.replaceByEL(jspcode, "\\$\\{.+\\}", f));
 			}
