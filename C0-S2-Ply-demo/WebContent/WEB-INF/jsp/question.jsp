@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<%@page import="java.util.Arrays"%>
+<%@page import="java.io.FileFilter"%>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -12,11 +14,21 @@ h3 {
 <body>
 	<%
 		File dir = WebHelper.getRealFile(QUESTION_DIR, request);
-		File[] dirs = dir.listFiles();
-		int index = 1;
+		// 获取所有目录（题目）
+		File[] dirs = dir.listFiles(new FileFilter() {
+			public boolean accept(File f) {
+				return f.isDirectory();
+			}
+		});
+		Arrays.sort(dirs);
+		// 对题目目录重新命名，必须在本机调试才可以使用
+		if ("127.0.0.1".equals(request.getLocalAddr())) {
+			for (int i = dirs.length; i > 0; i--) {
+				String name = "题目" + (i < 10 ? "0" : "") + i;
+				System.out.println(IOUtils.rename(dirs[i - 1], name));
+			}
+		}
 		for (File d : dirs) {
-			if (d.isFile())
-				continue;
 	%>
 	<fieldset>
 		<legend>
@@ -43,9 +55,7 @@ h3 {
 		</p>
 		<p>
 			<%
-				String indexName = (index < 10 ? "0" : "") + index;
-					imgs(d, pageContext);
-					index++;
+				imgs(d, pageContext);
 			%>
 		</p>
 	</fieldset>
@@ -61,10 +71,11 @@ h3 {
 <%@page import="java.io.File"%>
 <%@page import="java.io.IOException"%>
 <%@page import="com.yc.jee.util.WebHelper"%>
-<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%!
-	private static final String QUESTION_DIR = "参考代码";
+<%!private static final String QUESTION_DIR = "参考代码";
+
 	public void imgs(File dir, PageContext pageContext) throws IOException {
 		String path = QUESTION_DIR + "/" + dir.getName() + "/截图";
 		int ret = WebHelper.buildHtmlByFiles("<img src='" + path + "/${name}'/><br>", path, ".+\\.png", pageContext);

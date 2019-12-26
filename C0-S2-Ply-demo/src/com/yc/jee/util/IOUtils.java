@@ -1,5 +1,7 @@
 package com.yc.jee.util;
 
+import java.io.File;
+
 public class IOUtils {
 
 	public static void close(AutoCloseable... cs) {
@@ -11,6 +13,19 @@ public class IOUtils {
 					e.printStackTrace();
 				}
 		}
+	}
+
+	public static boolean rename(File file, String newname) {
+		if(file.getName().equals(newname)) {
+			return true;
+		}
+		File newfile = new File(file.getParentFile(), newname);
+		if (newfile.exists() == false) {
+			return file.renameTo(newfile);
+		} else {
+			return false;
+		}
+		// TODO 未完待续，如果减少目录，会出现问题
 	}
 
 }
