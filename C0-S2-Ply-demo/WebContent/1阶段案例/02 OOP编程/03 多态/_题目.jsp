@@ -62,13 +62,25 @@ Circle(double radius) 有参构造方法。以形参表中的参数初始化半�
 	</p>
 	
 	<hr>
-	<h3>题目03</h3>
+	<h3>题目04</h3>
 	<pre>
 定义图形类Shape，该类中有获得面积的方法getArea()；定义长方形类Rect，该类是Shape的子类，类中有矩形长和宽的变量double a,double b，设置长和宽的方法setWidth()、setHeight(),使用getArea()求矩形面积
 	</pre>
 	<p>
 		<%
-			imgs("03", pageContext);
+			imgs("04", pageContext);
+		%>
+	</p>
+	
+	
+		<hr>
+	<h3>题目05</h3>
+	<pre>
+编写Java应用程序，定义Animal类，此类中有动物的属性：名称 name,腿的数量legs，统计动物的数量 count;方法：设置动物腿数量的方法 void setLegs(),获得腿数量的方法 getLegs(),设置动物名称的方法 setKind(),获得动物名称的方法 getKind(),获得动物数量的方法 getCount()。定义Fish类，是Animal类的子类，统计鱼的数量 count,获得鱼数量的方法 getCount()。定义Tiger类，是Animal类的子类，统计老虎的数量 count,获得老虎数量的方法 getCount()。定义SouthEastTiger类，是Tiger类的子类，统计老虎的数量 count,获得老虎数量的方法 getCount()。
+	</pre>
+	<p>
+		<%
+			imgs("05", pageContext);
 		%>
 	</p>
 </body>
