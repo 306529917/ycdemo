@@ -1,10 +1,9 @@
 <%@page import="java.io.IOException"%>
-<%@page import="com.yc.jee.util.WebHelper"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%!public void imgs(String prefix, PageContext pageContext) throws IOException {
-		WebHelper.buildHtmlByFiles("<img src='$images/${name}'/><br>", "$images", prefix + "-.+", pageContext);
+	com.yc.jee.util.WebHelper.buildHtmlByFiles("<img src='$images/${name}'/><br>", "$images", prefix + "-.+", pageContext);
 	}%>
 <!DOCTYPE html>
 <html>
