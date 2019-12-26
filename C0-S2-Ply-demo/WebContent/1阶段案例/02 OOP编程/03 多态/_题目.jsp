@@ -60,5 +60,16 @@ Circle(double radius) 有参构造方法。以形参表中的参数初始化半�
 			imgs("03", pageContext);
 		%>
 	</p>
+	
+	<hr>
+	<h3>题目03</h3>
+	<pre>
+定义图形类Shape，该类中有获得面积的方法getArea()；定义长方形类Rect，该类是Shape的子类，类中有矩形长和宽的变量double a,double b，设置长和宽的方法setWidth()、setHeight(),使用getArea()求矩形面积
+	</pre>
+	<p>
+		<%
+			imgs("03", pageContext);
+		%>
+	</p>
 </body>
 </html>
