@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<%@page import="java.io.InputStreamReader"%>
+<%@page import="java.io.FileInputStream"%>
 <%@page import="java.util.Arrays"%>
 <%@page import="java.io.FileFilter"%>
 <html>
@@ -25,7 +27,7 @@ h3 {
 		if ("127.0.0.1".equals(request.getLocalAddr())) {
 			for (int i = dirs.length; i > 0; i--) {
 				String name = "题目" + (i < 10 ? "0" : "") + i;
-				System.out.println(IOUtils.rename(dirs[i - 1], name));
+				IOUtils.rename(dirs[i - 1], name);
 			}
 		}
 		for (File d : dirs) {
@@ -38,11 +40,13 @@ h3 {
 			<%
 				File desc = new File(d, "题目.html");
 					if (desc.exists()) {
-						FileReader fr = null;
+						FileInputStream fis = null;
+						InputStreamReader isr = null;
 						BufferedReader br = null;
 						try {
-							fr = new FileReader(desc);
-							br = new BufferedReader(fr);
+							fis = new FileInputStream(desc);
+							isr = new InputStreamReader(fis,"GBK");
+							br = new BufferedReader(isr);
 							String line;
 							while ((line = br.readLine()) != null) {
 								out.println(line);
