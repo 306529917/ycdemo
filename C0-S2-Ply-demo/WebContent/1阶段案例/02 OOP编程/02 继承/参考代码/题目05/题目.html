@@ -1,3 +1,45 @@
-	<p>
-编写Java应用程序，定义Animal类，此类中有动物的属性：名称 name,腿的数量legs，统计动物的数量 count;方法：设置动物腿数量的方法 void setLegs(),获得腿数量的方法 getLegs(),设置动物名称的方法 setKind(),获得动物名称的方法 getKind(),获得动物数量的方法 getCount()。定义Fish类，是Animal类的子类，统计鱼的数量 count,获得鱼数量的方法 getCount()。定义Tiger类，是Animal类的子类，统计老虎的数量 count,获得老虎数量的方法 getCount()。定义SouthEastTiger类，是Tiger类的子类，统计老虎的数量 count,获得老虎数量的方法 getCount()。
-	</p>
+<pre>
+按要求编写一个Java应用程序：
+
+（1）编写一个矩形类Rect，包含：
+
+	两个属性：矩形的宽width；矩形的高height。
+	
+	两个构造方法：
+	
+	1．一个带有两个参数的构造方法，用于将width和height属性初化；
+	
+	2．一个不带参数的构造方法，将矩形初始化为宽和高都为10。
+	
+	两个方法：
+	
+	求矩形面积的方法area()
+	
+	求矩形周长的方法perimeter()
+
+（2）通过继承Rect类编写一个具有确定位置的矩形类PlainRect，其确定位置用
+
+	矩形的左上角坐标来标识，包含：
+	
+	添加两个属性：矩形左上角坐标startX和startY。
+	
+	两个构造方法：
+	
+	带4个参数的构造方法，用于对startX、startY、width和height属性初始化；
+	
+	不带参数的构造方法，将矩形初始化为左上角坐标、长和宽都为0的矩形；
+	
+	添加一个方法：
+	
+	判断某个点是否在矩形内部的方法isInside(double x,double y)。如在矩形内，返回true, 否则，返回false。
+	
+	 提示：点在矩形类是指满足条件：x>=startX && x<=(startX+width) && y&lt;startY && y>=(startY-height)
+
+（3）编写PlainRect类的测试程序，完成以下测试：
+
+	1、创建一个左上角坐标为（10，10），长为20，宽为10的矩形对象；
+	
+	2、计算并打印输出矩形的面积和周长；
+	
+	3、判断点(25.5，13)是否在矩形内，并打印输出相关信息。
+</pre>

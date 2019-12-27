@@ -15,17 +15,29 @@ public class IOUtils {
 		}
 	}
 
-	public static boolean rename(File file, String newname) {
-		if(file.getName().equals(newname)) {
+	public static boolean rename(File file, String prefix, int index, int length) {
+		String newname = prefix + buildSN(index, length);
+		if (file.getName().equals(newname)) {
 			return true;
 		}
 		File newfile = new File(file.getParentFile(), newname);
-		if (newfile.exists() == false) {
-			return file.renameTo(newfile);
+		if (newfile.exists()) {
+			if (rename(newfile, prefix, index + 1, length)) {
+				return rename(file, prefix, index, length);
+			} else {
+				return false;
+			}
 		} else {
-			return false;
+			return file.renameTo(newfile);
 		}
-		// TODO 未完待续，如果减少目录，会出现问题
+	}
+
+	private static String buildSN(int index, int length) {
+		String numstr = "" + index;
+		while (numstr.length() < length) {
+			numstr = "0" + numstr;
+		}
+		return numstr;
 	}
 
 }

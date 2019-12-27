@@ -11,6 +11,10 @@
 h3 {
 	margin: 0px auto
 }
+.imgf{
+	display: inline-block;
+	vertical-align: top;
+}
 </style>
 </head>
 <body>
@@ -18,18 +22,20 @@ h3 {
 		File dir = WebHelper.getRealFile(QUESTION_DIR, request);
 		// 获取所有目录（题目）
 		File[] dirs = dir.listFiles(new FileFilter() {
+			int index = 1;
 			public boolean accept(File f) {
-				return f.isDirectory();
+				/**
+					对题目目录重新命名，必须在本机调试才可以使用
+					注意：要刷新多次，才能整理完目錄
+				*/
+				if(f.isDirectory()){
+					IOUtils.rename(f, "题目", index++, 2);
+					return true;
+				} else {
+					return false;
+				}
 			}
 		});
-		Arrays.sort(dirs);
-		// 对题目目录重新命名，必须在本机调试才可以使用
-		if ("127.0.0.1".equals(request.getLocalAddr())) {
-			for (int i = dirs.length; i > 0; i--) {
-				String name = "题目" + (i < 10 ? "0" : "") + i;
-				IOUtils.rename(dirs[i - 1], name);
-			}
-		}
 		for (File d : dirs) {
 	%>
 	<fieldset>
@@ -45,7 +51,7 @@ h3 {
 						BufferedReader br = null;
 						try {
 							fis = new FileInputStream(desc);
-							isr = new InputStreamReader(fis,"GBK");
+							isr = new InputStreamReader(fis, "GBK");
 							br = new BufferedReader(isr);
 							String line;
 							while ((line = br.readLine()) != null) {
@@ -82,7 +88,11 @@ h3 {
 
 	public void imgs(File dir, PageContext pageContext) throws IOException {
 		String path = QUESTION_DIR + "/" + dir.getName() + "/截图";
-		int ret = WebHelper.buildHtmlByFiles("<img src='" + path + "/${name}'/><br>", path, ".+\\.png", pageContext);
+		String html = "<fieldset class='imgf'>\n" +
+				"	<legend>${name}</legend>\n" +
+				"	<img src='" + path + "/${name}'>\n" +
+				"</fieldset>";
+		int ret = WebHelper.buildHtmlByFiles(html, path, ".+\\.(png|gif|jpg|bmp)", pageContext);
 		if (ret == 0) {
 			pageContext.getOut().println("没有案例截图");
 		}
