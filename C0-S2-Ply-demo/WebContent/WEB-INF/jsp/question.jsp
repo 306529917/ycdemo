@@ -88,7 +88,7 @@ h3 {
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%!private static final String QUESTION_DIR = "参考代码";
+<%!private static final String QUESTION_DIR = "解题参考";
 
 	public void imgs(File dir, PageContext pageContext) throws IOException {
 		String path = QUESTION_DIR + "/" + dir.getName() + "/截图";
