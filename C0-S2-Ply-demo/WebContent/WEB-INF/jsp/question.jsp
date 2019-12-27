@@ -55,7 +55,7 @@ h3 {
 						BufferedReader br = null;
 						try {
 							fis = new FileInputStream(desc);
-							isr = new InputStreamReader(fis, "GBK");
+							isr = new InputStreamReader(fis, "UTF-8");
 							br = new BufferedReader(isr);
 							String line;
 							while ((line = br.readLine()) != null) {
