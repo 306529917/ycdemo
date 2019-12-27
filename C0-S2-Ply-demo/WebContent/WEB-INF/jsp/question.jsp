@@ -36,6 +36,7 @@ h3 {
 				}
 			}
 		});
+		Arrays.sort(dirs);
 		for (File d : dirs) {
 	%>
 	<fieldset>
