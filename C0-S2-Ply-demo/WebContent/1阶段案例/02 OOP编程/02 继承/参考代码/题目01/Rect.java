@@ -2,10 +2,16 @@ public class Rect extends Shape {
 	private double width;
 	private double height;
 
+	// 无参数的构造方法
+	public Rect() {
+	}
+
+	// 有参数的构造方法
 	Rect(double a, double b) {
 		this.width = a;
 		this.height = b;
 	}
+
 
 	public double getWidth() {
 		return width;
