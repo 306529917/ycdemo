@@ -11,7 +11,8 @@
 h3 {
 	margin: 0px auto
 }
-.imgf{
+
+.imgf {
 	display: inline-block;
 	vertical-align: top;
 }
@@ -28,8 +29,10 @@ h3 {
 					对题目目录重新命名，必须在本机调试才可以使用
 					注意：要刷新多次，才能整理完目錄
 				*/
-				if(f.isDirectory()){
-					IOUtils.rename(f, "题目", index++, 2);
+				if (f.isDirectory()) {
+					if ("127.0.0.1".equals(request.getLocalAddr())) {
+						IOUtils.rename(f, "题目", index++, 2);
+					}
 					return true;
 				} else {
 					return false;
@@ -89,10 +92,8 @@ h3 {
 
 	public void imgs(File dir, PageContext pageContext) throws IOException {
 		String path = QUESTION_DIR + "/" + dir.getName() + "/截图";
-		String html = "<fieldset class='imgf'>\n" +
-				"	<legend>${name}</legend>\n" +
-				"	<img src='" + path + "/${name}'>\n" +
-				"</fieldset>";
+		String html = "<fieldset class='imgf'>\n" + "	<legend>${name}</legend>\n" + "	<img src='" + path
+				+ "/${name}'>\n" + "</fieldset>";
 		int ret = WebHelper.buildHtmlByFiles(html, path, ".+\\.(png|gif|jpg|bmp)", pageContext);
 		if (ret == 0) {
 			pageContext.getOut().println("没有案例截图");
