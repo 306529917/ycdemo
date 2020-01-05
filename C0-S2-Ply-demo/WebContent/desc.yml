@@ -1,0 +1,17 @@
+# 构建案例树时，判断是否是要打包下载的目录
+# zip: 布尔
+# zipEx: 数组
+# 构建案例树时，判断源代码存放目录的目录名
+# src: 布尔
+srcEx: [.+代码.+,.+源码.+,.+源代码.+,.+资料.+]
+
+# 要隐藏的文件名
+hidden: [/META-INF,/WEB-INF,/project_desc,/index\.jsp,/_.+,\$.+,.*/desc.yml,\..+]
+
+# 使用GitHub样式展示代码的文件名后缀
+githubStyle: [jsp,html,sql,css,java,txt,js,xml,yml,properties]
+   
+# 文件名转换规则, 替换 _ 开头的文件名，去掉后缀显示
+fileMapper: 
+  _index\.jsp: 案例演示
+  _(.+)\.\w+: $1
