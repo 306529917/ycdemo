@@ -12,8 +12,19 @@ zipEx:
 srcEx: [.+代码.+, .+源码.+, .+源代码.+, .+资料.+]
 
 # 要隐藏的文件名，路径匹配，使用 / 作为分隔符:
-# \$.+ $号开头的文件     .*/desc.yml 描述文件      .*/\..+ .号开头的文件     /_.+ 根目录下以 _ 开头的文件
-hidden: [ /META-INF, /WEB-INF, /project_desc, /index\.jsp, /_.+, \$.+, .*/desc.yml, .*/\..+]
+hidden: 
+   - /META-INF
+   - /WEB-INF
+   - /project_desc
+   - /index\.jsp
+   # 根目录下所有以 _ 开头的文件
+   - /_.+
+   # 所有以 $ 号开头的文件
+   - \$.+
+   # 所有的描述文件
+   - .*/desc.yml
+   # 所有以 . 号开头的文件
+   - .*/\..+]
 
 # 使用GitHub样式展示代码的文件名后缀
 githubStyle: [jsp,html,sql,css,java,txt,js,xml,yml,properties]
