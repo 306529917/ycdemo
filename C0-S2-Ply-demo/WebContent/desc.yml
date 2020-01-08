@@ -29,7 +29,7 @@ hidden:
    - .*/\..+
 
 # 使用GitHub样式展示代码的文件名后缀
-githubStyle: [jsp,html,sql,css,java,txt,js,xml,yml,properties]
+githubStyle: [jsp,html,sql,css,java,txt,js,xml,yml,bat,properties]
    
 # 文件名转换规则, 替换 _ 开头的文件名，去掉后缀显示
 fileMapper: 
