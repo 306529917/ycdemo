@@ -13,6 +13,7 @@ public class IndexAction {
 	private RestTemplate restTemplate;
 
 	@RequestMapping("testUser")
+	//@HystrixCommand(fallbackMethod="wayHystirx")
 	public String testUser(){
 		// step 1
 		// String url = "http://127.0.0.1:8003/user/test";
@@ -29,4 +30,6 @@ public class IndexAction {
 		String url = "http://cloud-order/order/test";
 		return restTemplate.getForObject(url, String.class);
 	}
+	
+	
 }
