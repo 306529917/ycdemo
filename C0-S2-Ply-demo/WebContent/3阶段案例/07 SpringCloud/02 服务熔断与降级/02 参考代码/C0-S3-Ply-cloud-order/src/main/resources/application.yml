@@ -1,0 +1,12 @@
+# step 1
+server:
+  port: 8002
+
+# step 2
+spring:
+  application:
+    name: cloud-order
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8000/eureka

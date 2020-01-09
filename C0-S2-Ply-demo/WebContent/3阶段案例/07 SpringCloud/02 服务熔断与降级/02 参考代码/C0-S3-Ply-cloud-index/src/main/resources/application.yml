@@ -1,0 +1,13 @@
+# 用户接口端口为 8002，订单接口端口为8003
+# step 1
+server:
+  port: 8001
+
+# step 2
+spring:
+  application:
+    name: cloud-index
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8000/eureka
