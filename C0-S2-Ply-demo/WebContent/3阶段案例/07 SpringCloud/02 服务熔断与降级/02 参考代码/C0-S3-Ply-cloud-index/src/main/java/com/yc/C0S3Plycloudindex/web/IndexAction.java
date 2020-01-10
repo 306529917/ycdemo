@@ -8,9 +8,15 @@ import org.springframework.web.client.RestTemplate;
 
 @RestController
 public class IndexAction {
-	
+	// step 1
 	@Resource
 	private RestTemplate restTemplate;
+	
+	// step 4
+	@Resource
+	private IOrderAction orderAction;
+	@Resource
+	private IUserAction userAction;
 
 	@RequestMapping("testUser")
 	//@HystrixCommand(fallbackMethod="wayHystirx")
@@ -18,8 +24,9 @@ public class IndexAction {
 		// step 1
 		// String url = "http://127.0.0.1:8003/user/test";
 		// step 2
-		String url = "http://cloud-user/user/test";
-		return restTemplate.getForObject(url, String.class);
+		// String url = "http://cloud-user/user/test";
+		// return restTemplate.getForObject(url, String.class);
+		return userAction.testUser();
 	}
 	
 	@RequestMapping("testOrder")
@@ -27,8 +34,9 @@ public class IndexAction {
 		// step 1
 		// String url = "http://127.0.0.1:8002/order/test";
 		// step 2
-		String url = "http://cloud-order/order/test";
-		return restTemplate.getForObject(url, String.class);
+		// String url = "http://cloud-order/order/test";
+		// return restTemplate.getForObject(url, String.class);
+		return orderAction.testOrder();
 	}
 	
 	

@@ -13,8 +13,9 @@ import org.springframework.web.client.RestTemplate;
 //step 2
 @EnableEurekaClient
 //step 4
-@EnableCircuitBreaker
 @EnableFeignClients
+//step 5
+//@EnableCircuitBreaker
 public class C0S3PlyCloudIndexApplication {
 
 	public static void main(String[] args) {
