@@ -1,3 +1,4 @@
 **/build/
+**/target/
 **/bin/
 /C0-S2-Ply-demo/**/.gitignore
