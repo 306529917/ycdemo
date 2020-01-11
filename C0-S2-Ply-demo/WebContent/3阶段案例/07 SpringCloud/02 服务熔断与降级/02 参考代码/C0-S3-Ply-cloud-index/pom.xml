@@ -8,4 +8,21 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	<artifactId>C0-S3-Ply-cloud-index</artifactId>
+	<dependencies>
+		<!-- step 5 Hystrix服务熔断-->
+		<dependency>
+			<groupId>com.netflix.hystrix</groupId>
+			<artifactId>hystrix-javanica</artifactId>
+		</dependency>
+		<!-- step 7  hystrix 仪表盘 -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-hystrix-dashboard</artifactId>
+		</dependency>
+		<!-- step 7  hystrix 仪表盘 SpringBoot 2.0 可以不加该依赖
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency> -->
+	</dependencies>
 </project>

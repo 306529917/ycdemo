@@ -1,9 +1,9 @@
 # 用户接口端口为 8002，订单接口端口为8003
-# step 1
+# step 1 RestTemplate服务调用
 server:
-  port: 8001
+  port: 80
 
-# step 2
+# step 2 服务注册
 spring:
   application:
     name: cloud-index
@@ -11,3 +11,8 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://127.0.0.1:8000/eureka
+
+# step 6 Feign服务熔断
+feign:
+  hystrix:
+    enabled: true

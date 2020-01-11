@@ -1,4 +1,4 @@
-# step 2
+# step 2 服务注册
 server:
   port: 8000
 
