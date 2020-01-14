@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<%@page import="com.yc.jee.util.IOUtils"%>
 <%@page import="java.io.InputStreamReader"%>
 <%@page import="java.io.FileInputStream"%>
 <%@page import="java.util.Arrays"%>
@@ -79,7 +80,6 @@ h3 {
 </body>
 </html>
 
-<%@page import="com.yc.util.IOUtils"%>
 <%@page import="java.io.BufferedReader"%>
 <%@page import="java.io.FileReader"%>
 <%@page import="java.io.File"%>
