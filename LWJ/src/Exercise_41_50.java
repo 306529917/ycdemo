@@ -1,8 +1,8 @@
 import java.util.Scanner;
 
-public class H {
-	
-private static Scanner scanner = new Scanner(System.in);
+public class Exercise_41_50 {
+
+	private static Scanner scanner = new Scanner(System.in);
 
 	/**
 	 * 【程序41】 
@@ -11,9 +11,10 @@ private static Scanner scanner = new Scanner(System.in);
 	，拿走了一份，第三、第四、第五只猴子都是这样做的，问海滩上原来最少有多少个桃子？ 
 	 */
 	public static void exer41() {
-		public static void main(String[] args) {
-			for (int i = 1;; i++) {
-				int	peach = i;
+		for (int i = 1;; i++) {
+			int peach = i;
+			if ((peach - 1) % 5 == 0) {
+				peach = (peach - 1) / 5 * 4;
 				if ((peach - 1) % 5 == 0) {
 					peach = (peach - 1) / 5 * 4;
 					if ((peach - 1) % 5 == 0) {
@@ -21,11 +22,8 @@ private static Scanner scanner = new Scanner(System.in);
 						if ((peach - 1) % 5 == 0) {
 							peach = (peach - 1) / 5 * 4;
 							if ((peach - 1) % 5 == 0) {
-								peach = (peach - 1) / 5 * 4;
-								if ((peach - 1) % 5 == 0) {
-									System.out.println(i);
-									break;
-								}
+								System.out.println(i);
+								break;
 							}
 						}
 					}
@@ -40,12 +38,10 @@ private static Scanner scanner = new Scanner(System.in);
 	其中??代表的两位数,8*??的结果为两位数，9*??的结果为3位数。求??代表的两位数，及809*??后的结果。 
 	 */
 	public static void exer42() {
-		public static void main(String[] args) {
 			int a = 0;
 			int b = 8;
 			a = a+(b) / 2+(b - 1) * b / 2+(b - 1) * b * b / 2+(b - 1) * b * b * b / 2+(b - 1) * b * b * b * b / 2+(b - 1) * b * b * b * b * b / 2+(b - 1) * b * b * b * b * b * b / 2;
 			System.out.println(a);
-		}
 	}
 
 	/**
@@ -61,36 +57,35 @@ private static Scanner scanner = new Scanner(System.in);
 	题目：一个偶数总能表示为两个素数之和。
 	 */
 	public static void exer44() {
-		public static void main(String[] args) {
-	        int n =  ((int)(Math.random() * 1000 + 1) * 2);
-	        int a = 0;
-	        int b = 0;
-	        for (int i = 2; i < n; i++) {
-	            if (isPrime(i)) {
-	                a = i;
-	            }
-	            for (int j = 2; j < n; j++) {
-	                if (isPrime(j)) {
-	                    b = j;
-	                    if (n == (a + b)) {
-	                        System.out.println(n + "=" + a + "+" + b);
-	                        return;
-	                    }
-	                }
+		int n = ((int) (Math.random() * 1000 + 1) * 2);
+		int a = 0;
+		int b = 0;
+		for (int i = 2; i < n; i++) {
+			if (isPrime(i)) {
+				a = i;
+			}
+			for (int j = 2; j < n; j++) {
+				if (isPrime(j)) {
+					b = j;
+					if (n == (a + b)) {
+						System.out.println(n + "=" + a + "+" + b);
+						return;
+					}
+				}
 
-	            }
-	        }
-	    }
-	    public static boolean isPrime(int n) {
-	        for (int i = 2; i <= Math.sqrt(n); i++) {
-	            if (n == 2) {
-	                return true;
-	            } else if (n % i == 0) {
-	                return false;
-	            }
-	        }
-	        return true;
-	    }
+			}
+		}
+	}
+
+	public static boolean isPrime(int n) {
+		for (int i = 2; i <= Math.sqrt(n); i++) {
+			if (n == 2) {
+				return true;
+			} else if (n % i == 0) {
+				return false;
+			}
+		}
+		return false;
 	}
 
 	/**
@@ -98,20 +93,16 @@ private static Scanner scanner = new Scanner(System.in);
 	题目：判断一个素数能被几个9整除 
 	 */
 	public static void exer45() {
-		private static Scanner s;
-
-		public static void main(String[] args) {
-			s=new Scanner(System.in);
-			int i=s.nextInt(),num=0;
-			boolean x=true;
-			while(x) {
-				if(i%9==0) {
-					i=i/9;
-					num++;
-					x=true;
-				}else {
-					x=false;
-				}
+		Scanner s = new Scanner(System.in);
+		int i = s.nextInt(), num = 0;
+		boolean x = true;
+		while (x) {
+			if (i % 9 == 0) {
+				i = i / 9;
+				num++;
+				x = true;
+			} else {
+				x = false;
 			}
 			System.out.print(num);
 		}
@@ -139,23 +130,20 @@ private static Scanner scanner = new Scanner(System.in);
 	每位数字都加上5,然后用和除以10的余数代替该数字，再将第一位和第四位交换，第二位和第三位交换。 
 	 */
 	public static void exer48() {
-		private static Scanner s;
-		public static void main(String[] args) {
-			s=new Scanner(System.in);
-			int x=s.nextInt();
-			int a=x%10+5;
-			int b=((x-a)/10)%10+5;
-			int c=((x-a-b*10)/100)%10+5;
-			int d=((x-a-b*10-c*100)/1000)%10+5;
-			a=(a+b+c+d)%10;
-			b=(a+b+c+d)%10;
-			c=(a+b+c+d)%10;
-			d=(a+b+c+d)%10;
-			System.out.print(d+" ");
-			System.out.print(c+" ");
-			System.out.print(b+" ");
-			System.out.print(a+" ");
-		}
+		Scanner s= new Scanner(System.in);
+		int x = s.nextInt();
+		int a = x % 10 + 5;
+		int b = ((x - a) / 10) % 10 + 5;
+		int c = ((x - a - b * 10) / 100) % 10 + 5;
+		int d = ((x - a - b * 10 - c * 100) / 1000) % 10 + 5;
+		a = (a + b + c + d) % 10;
+		b = (a + b + c + d) % 10;
+		c = (a + b + c + d) % 10;
+		d = (a + b + c + d) % 10;
+		System.out.print(d + " ");
+		System.out.print(c + " ");
+		System.out.print(b + " ");
+		System.out.print(a + " ");
 	}
 
 	/**
@@ -176,4 +164,5 @@ private static Scanner scanner = new Scanner(System.in);
 
 	public static void main(String[] args) {
 	}
+
 }
