@@ -128,7 +128,30 @@ public class Exercise_31_40 {
 	题目：有n个整数，使其前面各数顺序向后移m个位置，最后m个数变成最前面的m个数 
 	 */
 	public static void exer36() {
+	private static int[] arrs;
+	private static int[] pIaces;
+	private static Scanner s;
+			s = new Scanner(System.in);
+			System.out.print("输入N:");
+			int n = s.nextInt();
+			System.out.print("输入M:");
+			int k = s.nextInt();
+			System.out.println("请依次输入要处理的数:");
+			arrs = new int[n + k];
+			for (int a = 0; a < n; a++) {
 
+				arrs[a] = s.nextInt();
+			}
+			System.out.print("这是已往后移了");
+			System.out.print(k);
+			System.out.print("位的数：");
+			pIaces = new int[n + k];
+			for (int j = 0; j < n; j++) {
+				pIaces[j] = arrs[(j + k) % n];
+				System.out.print(pIaces[j]);
+				System.out.print(" ");
+			}
+		}
 	}
 
 	/**
@@ -137,7 +160,36 @@ public class Exercise_31_40 {
 	问最后留下的是原来第几号的那位。 
 	 */
 	public static void exer37() {
-
+		public static Scanner s1;
+		int n, i, o, count = 0;
+		s1 = new Scanner(System.in);
+		int[] a = new int[10000];
+		n = s1.nextInt();
+		o = n;
+		for (i = 0; i < n; i++) {
+			a[i] = i + 1;
+		}
+		i = 0;
+		while (n > 1) {
+			if (a[i] != 0) {
+				count++;
+			}
+			if (count == 3) {
+				a[i] = 0;
+				count = 0;
+				n--;
+			}
+			i++;
+			if (i == o) {
+				i = 0;
+			}
+		}
+		for (i = 0; i < o; i++) {
+			if (a[i] != 0) {
+				System.out.print(a[i]);
+			}
+		}
+	}
 	}
 
 	/**
@@ -145,6 +197,11 @@ public class Exercise_31_40 {
 	题目：写一个函数，求一个字符串的长度，在main函数中输入字符串，并输出其长度。
 	 */
 	public static void exer38() {
+		public static Scanner s;
+		s = new Scanner(System.in);
+		String str = s.next();
+		int x = str.length();
+		System.out.print(x);
 	}
 
 	/**
@@ -152,10 +209,27 @@ public class Exercise_31_40 {
 	题目：编写一个函数，输入n为偶数时，调用函数求1/2+1/4+...+1/n,当输入n为奇数时，调用函数 
 	1/1+1/3+...+1/n(利用指针函数) 
 	 */
-	public static void exer39() {
-
-	}
-
+		private static Scanner s;
+		public static float jisuanjieguo(int z) {
+			float i = 0;
+			if (z % 2 == 0) {
+				for (int q = z; q >= 2; q--) {
+					i += (float) 1 / q;
+					q--;
+				}
+			} else {
+				for (int q = z; q >= 1; q--) {
+					i += (float) 1 / q;
+					q--;
+				}
+			}
+			return i;
+		}
+		public static void main(String[] args) {
+			s = new Scanner(System.in);
+			int g = s.nextInt();
+			System.out.print(jisuanjieguo(g));
+		}
 	/**
 	 * 【程序40】 
 	题目：字符串排序。 
