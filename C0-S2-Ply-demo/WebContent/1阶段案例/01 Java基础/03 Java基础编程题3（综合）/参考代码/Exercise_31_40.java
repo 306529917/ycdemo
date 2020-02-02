@@ -33,8 +33,8 @@ public class Exercise_31_40 {
 	 * 【程序33】 
 	题目：打印出杨辉三角形（要求打印出10行如下图） 
 	1.程序分析： 
-	        1 
-	       1 1 
+	       1 
+	      1 1 
 	     1 2 1 
 	    1 3 3 1 
 	   1 4 6 4 1 
@@ -133,17 +133,16 @@ public class Exercise_31_40 {
 	int[] pIaces;
 	private static Scanner s;s=new Scanner(System.in);System.out.print("输入N:");
 	int n = s.nextInt();System.out.print("输入M:");
-	int k = s.nextInt();System.out.println("请依次输入要处理的数:");arrs=new int[n+k];for(
-	int a = 0;a<n;a++)
-	{
+	int k = s.nextInt();System.out.println("请依次输入要处理的数:");arrs=new int[n+k];
+	for(int a = 0;a<n;a++){
 		arrs[a] = s.nextInt();
-	}System.out.print("这是已往后移了");
+	}
+	System.out.print("这是已往后移了");
 	System.out.print(k);
 	System.out.print("位的数：");
 	pIaces=new int[n+k];
-	for(int j = 0;j<n;j++)
-	{
-		pIaces[j] = arrs[(j + k) % n];
+	for(int j = 0;j<n;j++){
+		pIaces[j] = arrs[(j + k) % n];//处理
 		System.out.print(pIaces[j]);
 		System.out.print(" ");
 	}
@@ -191,7 +190,7 @@ public class Exercise_31_40 {
 
 	public static Scanner s;s=new Scanner(System.in);
 	String str = s.next();
-	int x = str.length();System.out.print(x);}
+	int x = str.length();System.out.print(x);}//str.length():计算str的长度 
 
 	/**
 	 * 【程序39】 
