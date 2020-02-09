@@ -19,14 +19,11 @@ hidden:
    - /WEB-INF
    - /project_desc
    - /index\.jsp
-   # 所有以 _ 开头的文件
-   - .*/_.+
-   # 所有以 $ 号开头的文件
-   - .*/\$.+
+   - /_.+
+   # 所有以 $ . 开头的文件
+   - .*/[$.].+
    # 所有的描述文件
    - .*/desc.yml
-   # 所有以 . 号开头的文件
-   - .*/\..+
 
 # 使用GitHub样式展示代码的文件名后缀
 githubStyle: [jsp,html,sql,css,java,txt,js,xml,yml,bat,properties]
