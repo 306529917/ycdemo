@@ -4,8 +4,6 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
     http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<bean id="accountBiz" class="com.yc.spring.bank.biz.impl.AccountBizImpl"/>
-
 	<bean id="record" class="com.yc.spring.bank.bean.Record" />
 
 	<!-- scope  
@@ -28,7 +26,7 @@
 	
 	<!-- 动态工厂方法 -->
 	<bean id="account3" class="com.yc.spring.bank.bean.Account"
-		factory-bean="accountBiz" factory-method="create" />
+		factory-method="getInstance" />
 		
 	<!-- 原型 + 工厂方法
 		原型： getBean 都会返回一个 新的对象 ，
@@ -36,6 +34,6 @@
 			如果有配置工厂方法，则每次调用工厂方法来返回对象
 	-->
 	<bean id="account4" class="com.yc.spring.bank.bean.Account"
-		factory-bean="accountBiz" factory-method="create1" scope="prototype" />
+		factory-method="getInstance1" scope="prototype" />
 		
 </beans>
