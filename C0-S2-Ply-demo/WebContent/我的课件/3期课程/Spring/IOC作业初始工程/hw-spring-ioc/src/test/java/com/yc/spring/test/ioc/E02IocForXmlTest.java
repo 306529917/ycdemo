@@ -47,6 +47,7 @@ public class E02IocForXmlTest {
 	 * 坑。。。
 	 * 提示：	参考工厂方法，通过编程实现，但是仅仅自己编程还不能实现，
 	 * 		还需要使用 bean 标签的一个属性。。。
+	 * 		改题目可以编写代码
 	 */
 	@Test
 	public void test4() {

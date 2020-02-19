@@ -57,10 +57,8 @@ public class E01IocForXmlTest {
 		Assert.assertEquals((Integer) 200, board.getParentid());
 		Assert.assertEquals("jsp", board.getBoardname());
 		
-		
 		Assert.assertEquals((Integer) 300, board.getParent().getBoardid());
 		Assert.assertEquals("java", board.getParent().getBoardname());
-		
 		
 		Assert.assertEquals(5, board.getTopicList().size());
 		Assert.assertEquals(null, board.getTopicList().get(0));

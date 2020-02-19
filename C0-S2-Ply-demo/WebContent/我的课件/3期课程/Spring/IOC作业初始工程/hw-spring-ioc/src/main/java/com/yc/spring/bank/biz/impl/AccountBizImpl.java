@@ -66,8 +66,14 @@ public class AccountBizImpl implements AccountBiz{
 		return Account.getInstance();
 	}
 
+	/**
+	 * 创建对象的计数器
+	 */
 	int count;
 	public Account create1() {
+		/**
+		 * 当创建对象的数量小于3时，每次都创建新对象，否则使用同一对象
+		 */
 		return count++ < 3 ? new Account() : Account.getInstance();
 	}
 
