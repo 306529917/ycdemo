@@ -8,24 +8,14 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Scope;
 
 import com.yc.spring.bank.bean.Account;
-import com.yc.spring.bank.biz.impl.AccountBizImpl;
 import com.yc.spring.bbs.bean.User;
 
 /**
  * 注解配置bean 类
  */
 @Configuration   // ->  <beans>
-//@ComponentScan("com.yc.spring")  // 配置spring扫描的包路径
+@ComponentScan("com.yc.spring")  // 配置spring扫描的包路径
 public class BeanConfig {
-	
-	/**
-	 * 创建 Account 对象的方法
-	 * @return
-	 */
-	@Bean("accountBiz")
-	public AccountBizImpl createAcountBiz() {
-		return new AccountBizImpl();
-	}
 	
 	@Bean("account")
 	@Primary
