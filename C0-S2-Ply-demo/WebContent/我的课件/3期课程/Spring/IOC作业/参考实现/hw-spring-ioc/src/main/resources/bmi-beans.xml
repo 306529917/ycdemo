@@ -8,8 +8,6 @@
     http://www.springframework.org/schema/context
      http://www.springframework.org/schema/context/spring-context.xsd">
 
-	<context:component-scan base-package="com.yc.spring.bmi"></context:component-scan>
-
 	<!-- autowire="byType" Spring 会自动的从容器中， 根据类型查找， 查找类的属性对象所对应的 bean -->
 	<bean class="com.yc.spring.bmi.Container" autowire="byType" init-method="measure">
 		<property name="list">

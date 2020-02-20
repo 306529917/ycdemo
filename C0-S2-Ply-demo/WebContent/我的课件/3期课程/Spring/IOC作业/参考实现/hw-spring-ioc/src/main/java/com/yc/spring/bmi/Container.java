@@ -3,11 +3,17 @@ package com.yc.spring.bmi;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 //测量的容器
+@Service("ctn")
 public class Container {
 	// 测量设备
+	@Autowired
 	private IMeasurable measurer; 
 	// 测量对象过滤器
+	@Autowired
 	private Filter filter;
 	// 存放测量对象的集合
 	private List<Object> list = new ArrayList<>();
