@@ -28,6 +28,7 @@ public class BmiBeanConfig {
 	@Bean
 	public Filter getFilter() {
 		BmiFilter f = new BmiFilter();
+		// 设置身高和体重的最大和最小值
 		f.setMinHeight(1);
 		f.setMaxHeight(2);
 		f.setMinWeight(30);
