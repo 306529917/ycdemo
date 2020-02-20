@@ -25,9 +25,9 @@ import com.yc.spring.bmi.Person;
  * ApplicationContext cxt = 
 			new AnnotationConfigApplicationContext(BmiBeanConfig.class);
  */
-//@ContextConfiguration(classes = BmiBeanConfig.class)
-// xml 配置方式请参考
-@ContextConfiguration("/bmi-beans.xml")
+@ContextConfiguration(classes = BmiBeanConfig.class)
+// xml 配置方式
+//@ContextConfiguration("/bmi-beans.xml")
 public class E04IocBmiTest {
 	
 	@Autowired
