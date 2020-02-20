@@ -1,4 +1,7 @@
 **/build/
 **/target/
 **/bin/
+**/*.mp4
+**/*.MP4
+**/*.Mp4
 /C0-S2-Ply-demo/**/.gitignore
