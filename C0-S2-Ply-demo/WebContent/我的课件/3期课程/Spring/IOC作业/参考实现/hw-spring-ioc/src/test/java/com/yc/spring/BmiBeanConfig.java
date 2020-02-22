@@ -30,14 +30,14 @@ public class BmiBeanConfig {
 		BmiFilter f = new BmiFilter();
 		// 设置身高和体重的最大和最小值
 		f.setMinHeight(1);
-		f.setMaxHeight(2);
+		f.setMaxHeight(3);
 		f.setMinWeight(30);
 		f.setMaxWeight(200);
 		return f;
 	}
 	
 	@Bean
-	@Primary
+	@Primary	//主Bean注解
 	public Container getContainer() throws Exception {
 		/**
 		 * 	ctn对象除了，没有检测对象，其他属性都已经完成自动注入
