@@ -7,60 +7,56 @@ import org.springframework.stereotype.Component;
  * @author Administrator
  *
  */
-@Component("account") // 组件 表示该类是spring管理的   bean   @Bean
 public class Account {
 
-	private Integer id; // 主键
+	private Integer accountid; // 主键
+	private Double balance; // 余额
 	private String name; // 姓名
-	private Double money; // 余额
-
-	public Integer getId() {
-		return id;
+	private String pwd; // 密码
+	
+	public Account() { }
+	
+	public Account(Integer accountid, Double balance) {
+		super();
+		this.accountid = accountid;
+		this.balance = balance;
 	}
-
-	public void setId(Integer id) {
-		this.id = id;
+	
+	public Account(Integer accountid, Double balance, String name, String pwd) {
+		super();
+		this.accountid = accountid;
+		this.balance = balance;
+		this.name = name;
+		this.pwd = pwd;
 	}
-
+	public Integer getAccountid() {
+		return accountid;
+	}
+	public void setAccountid(Integer accountid) {
+		this.accountid = accountid;
+	}
+	public Double getBalance() {
+		return balance;
+	}
+	public void setBalance(Double balance) {
+		this.balance = balance;
+	}
 	public String getName() {
 		return name;
 	}
-
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	public Double getMoney() {
-		return money;
+	public String getPwd() {
+		return pwd;
 	}
-
-	public void setMoney(Double money) {
-		this.money = money;
-	}
-
-	/**
-	 * 这是一个不完整的单例模式，少了私有的构造方法
-	 */
-	private static Account singleAccount;
-
-	public static Account getInstance() {
-		if (singleAccount == null) {
-			singleAccount = new Account();
-		}
-		return singleAccount;
-	}
-
-	/**
-	 * count 是创建对象的计数器
-	 */
-	private static int count;
-	public static Account getInstance1() {
-		return count++ < 3 ? new Account() : getInstance();
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
 	}
 
 	@Override
 	public String toString() {
-		return "Account [id=" + id + ", name=" + name + ", money=" + money + "]";
+		return "Account [accountid=" + accountid + ", balance=" + balance + ", name=" + name + ", pwd=" + pwd + "]";
 	}
-
+	
 }
