@@ -1,25 +1,30 @@
 package com.yc.spring.bank.bean;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 public class Record {
 	
 	private Integer id;
+	// 账号
 	private Integer accountId;
+	// 操作金额（存款、取款、转账、利息。。。）
 	private Double opmoney;
-	private Date opdate;
+	// 手续费（转账）
+	private Double charge;
+	// 操作时间
+	private Timestamp opdate;
 	
 	public Record() {
 	}
 
-	public Record(Integer accountId, Double opmoney, Date opdate) {
+	public Record(Integer accountId, Double opmoney, Timestamp opdate) {
 		super();
 		this.accountId = accountId;
 		this.opmoney = opmoney;
 		this.opdate = opdate;
 	}
 
-	public Record(Integer id, Integer accountId, Double opmoney, Date opdate) {
+	public Record(Integer id, Integer accountId, Double opmoney, Timestamp opdate) {
 		super();
 		this.id = id;
 		this.accountId = accountId;
@@ -44,16 +49,20 @@ public class Record {
 	public void setOpmoney(Double opmoney) {
 		this.opmoney = opmoney;
 	}
-	public Date getOpdate() {
+	public Timestamp getOpdate() {
 		return opdate;
 	}
-	public void setOpdate(Date opdate) {
+	public void setOpdate(Timestamp opdate) {
 		this.opdate = opdate;
 	}
 
-	@Override
-	public String toString() {
-		return "Record [id=" + id + ", accountId=" + accountId + ", opmoney=" + opmoney + ", opdate=" + opdate + "]";
+	public Double getCharge() {
+		return charge;
 	}
+
+	public void setCharge(Double charge) {
+		this.charge = charge;
+	}
+
 
 }

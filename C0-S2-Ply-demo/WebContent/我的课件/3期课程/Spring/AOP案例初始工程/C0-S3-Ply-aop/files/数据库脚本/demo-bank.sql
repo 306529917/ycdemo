@@ -39,6 +39,7 @@ CREATE TABLE `oprecord` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `accountid` int(11) DEFAULT NULL,
   `opmoney` decimal(10,2) DEFAULT NULL,
+  `charge` decimal(10,2) DEFAULT NULL,
   `optime` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_oprecord_accountid` (`accountid`),
