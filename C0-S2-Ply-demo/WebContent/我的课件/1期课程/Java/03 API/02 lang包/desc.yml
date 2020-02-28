@@ -1,5 +1,7 @@
 htmls:
   重写: true
+  java常用类库——lang包: https://blog.csdn.net/weixin_43915808/article/details/91474659
+  java.lang包下常用类及常用方法介绍: https://www.cnblogs.com/wang-zai/p/7813159.html
   String,StringBuffer与StringBuilder的区别: https://blog.csdn.net/u011702479/article/details/82262823
   equals方法和hashCode方法: https://www.jianshu.com/p/1e82b840f333
   关于equals和hashCode，看这一篇真的就够了: https://blog.csdn.net/CringKong/article/details/89429269
