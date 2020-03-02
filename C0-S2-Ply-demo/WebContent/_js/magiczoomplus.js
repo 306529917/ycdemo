@@ -3426,7 +3426,7 @@ window.MagicZoom = (function() {
         },
         textHoverZoomHint: {
             type: "string",
-            "default": "查看大图"
+            "default": "查看原图"
         },
         textClickZoomHint: {
             type: "string",
