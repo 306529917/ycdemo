@@ -24,29 +24,21 @@ h3 {
 		File dir = WebHelper.getRealFile(QUESTION_DIR, request);
 		// 获取所有目录（题目）
 		File[] dirs = dir.listFiles(new FileFilter() {
-			int index = 1;
 			public boolean accept(File f) {
-				/**
-					对题目目录重新命名，必须在本机调试才可以使用
-					注意：要刷新多次，才能整理完目錄
-				*/
-				if (f.isDirectory()) {
-					if ("127.0.0.1".equals(request.getLocalAddr())
-							&& f.getName().matches("题目\\d+")) {
-						IOUtils.rename(f, "题目", index++, 2);
-					}
-					return true;
-				} else {
-					return false;
-				}
+				return f.isDirectory();
 			}
 		});
 		Arrays.sort(dirs);
+		int index = 0;
 		for (File d : dirs) {
+			String name = "";
+			if(d.getName().matches("^.+[:：].+")){
+				name = "：" + d.getName().replaceAll("^.+[:：]", "");
+			}
 	%>
 	<fieldset>
 		<legend>
-			<h3><%=d.getName()%></h3>
+			<h3>题目<%=++index%><%=name%></h3>
 		</legend>
 		<p>
 			<%
