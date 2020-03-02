@@ -33,7 +33,7 @@ public class ExceptionHomework {
 	 * @param numbers	参数数组
 	 * @return
 	 */
-	public void max(char[] chars){
+	public char max(char[] chars){
 	}
 
 	/**
