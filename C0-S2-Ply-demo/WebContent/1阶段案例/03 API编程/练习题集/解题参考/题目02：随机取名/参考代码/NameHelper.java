@@ -2,6 +2,9 @@ package com.yc.api.d0229;
 
 import java.util.Random;
 
+/**
+ * 	取名助手类（静态工具类， 类似于 Arrays、Collections）
+ */
 public class NameHelper {
 
 	// 常用 100 个姓氏数组
