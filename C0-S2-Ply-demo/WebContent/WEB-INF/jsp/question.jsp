@@ -31,7 +31,8 @@ h3 {
 					注意：要刷新多次，才能整理完目錄
 				*/
 				if (f.isDirectory()) {
-					if ("127.0.0.1".equals(request.getLocalAddr())) {
+					if ("127.0.0.1".equals(request.getLocalAddr())
+							&& f.getName().matches("题目\\d+")) {
 						IOUtils.rename(f, "题目", index++, 2);
 					}
 					return true;
