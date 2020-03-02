@@ -38,7 +38,7 @@ h3 {
 	%>
 	<fieldset>
 		<legend>
-			<h3>题目<%=++index%><%=name%></h3>
+			<h3>题目 <%=++index%><%=name%></h3>
 		</legend>
 		<p>
 			<%
