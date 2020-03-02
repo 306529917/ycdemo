@@ -17,8 +17,11 @@
 	private static final String QUESTION_DIR = "解题参考";
 	public void imgs(File dir, PageContext pageContext) throws IOException {
 		String path = QUESTION_DIR + "/" + dir.getName() + "/截图";
-		String html = "<fieldset class='imgf'>\n" + "	<legend>${name}</legend>\n" + "	<img src='" + path
-				+ "/${name}'>\n" + "</fieldset>";
+		String html = "<fieldset class='imgf'>\n"
+				+ "	<legend>${name}</legend>\n"
+				+ " <a href='" + path + "/${name}' class='MagicZoom'>\n"
+				+ " <img src='" + path + "/${name}'/></a>\n"
+				+ " </fieldset>";
 		int ret = WebHelper.buildHtmlByFiles(html, path, ".+\\.(png|gif|jpg|bmp)", pageContext);
 		if (ret == 0) {
 			pageContext.getOut().println("没有案例截图");
@@ -29,6 +32,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="/demo/_css/magiczoomplus.css" rel="stylesheet" type="text/css" media="screen"/>
+<script src="/demo/_js/magiczoomplus.js"></script>
 <style type="text/css">
 h3 {
 	margin: 0px auto
@@ -37,7 +42,9 @@ h3 {
 .imgf {
 	display: inline-block;
 	vertical-align: top;
+	max-width: 200px;
 }
+
 </style>
 </head>
 <body>
@@ -100,5 +107,6 @@ h3 {
 	<%
 		}
 	%>
+
 </body>
 </html>
