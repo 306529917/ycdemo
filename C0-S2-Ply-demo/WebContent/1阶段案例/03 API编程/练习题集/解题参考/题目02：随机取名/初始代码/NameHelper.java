@@ -66,6 +66,7 @@ public class NameHelper {
 	 * @param xing		姓氏
 	 * @param isMan		是否是男性
 	 * @param number	名的字数, 1~3 个字, 超过3个抛出 NameException 异常
+	 * 					例如：赵建国：2，王勇：1
 	 * @return
 	 */
 	public static String createName(String xing, boolean isMan, byte number) {
