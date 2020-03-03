@@ -4,3 +4,4 @@ htmls:
   java.io百度百科: https://baike.baidu.com/item/java.io/5179754?fr=aladdin
   java.io包常用类详解: https://blog.csdn.net/lmb55/article/details/79511007
   Java源码解析——Java IO包: https://www.cnblogs.com/winterfells/p/8745297.html
+  File getAbsolutePath()和getPath()的区别: https://www.cnblogs.com/motong/articles/9852928.html
