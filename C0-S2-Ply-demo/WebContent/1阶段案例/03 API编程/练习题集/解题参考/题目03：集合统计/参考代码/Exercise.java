@@ -84,7 +84,7 @@ public class Exercise {
 	 *	随机生成1000个姓名， 存入TreeSet集合中， 统计出现次数最多的姓氏
 	 *	注意: 
 	 *		1, 该例要用到随机取名的类, 请童邪们先完成随机取名的作业
-	 *		2, 从第二个案例开始, 程序流程与第一个基本一致, 只有几个细节不一样, 大部分代码可以复用, 不需要重写
+	 *		2, 第二个例子的程序流程与前一个基本一致, 只有几个细节不一样, 大部分代码可以复用, 不需要重写
 	 */
 	public void countName() {
 		Set<String> set = new TreeSet<>();
@@ -127,8 +127,11 @@ public class Exercise {
 		System.out.printf("出现次数最多的是: %s, 共出现了 %s 次\n", countName, maxCount);
 	}
 	
+	/**
+	 * 	随机生成1000个日期(1900~现在)， 存入LinkedList集合中， 统计出现次数最多的年份
+	 */
 	public void countDate() {
-		Set<Date> set = new TreeSet<>();
+		List<Date> set = new LinkedList<>();
 		// 随机生成1000个姓名， 存入TreeSet集合中
 		while (set.size() < 1000) {
 			// 生成随机浮点数, 注意: 该随机值是 0~1 之间的小数
