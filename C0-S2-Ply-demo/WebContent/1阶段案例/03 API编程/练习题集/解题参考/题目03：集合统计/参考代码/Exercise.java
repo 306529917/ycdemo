@@ -131,9 +131,9 @@ public class Exercise {
 	 * 	随机生成1000个日期(1900~现在)， 存入LinkedList集合中， 统计出现次数最多的年份
 	 */
 	public void countDate() {
-		List<Date> set = new LinkedList<>();
+		List<Date> list = new LinkedList<>();
 		// 随机生成1000个姓名， 存入TreeSet集合中
-		while (set.size() < 1000) {
+		while (list.size() < 1000) {
 			// 生成随机浮点数, 注意: 该随机值是 0~1 之间的小数
 			double d = random.nextDouble();
 			// 创建当前时间对象
@@ -145,7 +145,7 @@ public class Exercise {
 			// 重新设置时间戳
 			date.setTime(time);
 			// 添加时间对象
-			set.add(date);
+			list.add(date);
 		}
 		
 		// 注意: 要统计的是年份, 所以 Map 中的键应该保存年份的数值, 而不是整个 Date 对象
@@ -154,7 +154,7 @@ public class Exercise {
 		// 定义日历对象, 用于获取时间 date 对象中的年份
 		Calendar cal = Calendar.getInstance();
 		
-		for (Date date : set) {
+		for (Date date : list) {
 			// 给日历对象 cal 重新设置日期值
 			cal.setTime(date);
 			// 获取日期中的年份
@@ -185,7 +185,7 @@ public class Exercise {
 		}
 		// 输出结果
 		System.out.println("\r\n================一道华丽的分割线=================");
-		System.out.println("共随机生成 " + set.size() + " 个日期");
+		System.out.println("共随机生成 " + list.size() + " 个日期");
 		System.out.printf("出现次数最多的是: %s 年, 共出现了 %s 次\n", countYear, maxCount);
 	}
 }
