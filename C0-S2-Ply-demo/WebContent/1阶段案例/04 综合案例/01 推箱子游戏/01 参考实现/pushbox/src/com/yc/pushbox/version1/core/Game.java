@@ -12,6 +12,15 @@ public class Game {
 		return map;
 	}
 
+	/**
+	 * 	重来一次
+	 * @return
+	 */
+	public static int[][] reset() {
+		isOver = false;
+		map = Maps.clone(mapOld);
+		return map;
+	}
 
 	public static int[][] getMap() {
 		return map;
