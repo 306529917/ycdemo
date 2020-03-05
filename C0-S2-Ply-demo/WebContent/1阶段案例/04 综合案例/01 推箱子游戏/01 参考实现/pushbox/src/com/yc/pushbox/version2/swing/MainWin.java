@@ -1,4 +1,4 @@
-package com.yc.pushbox.version1.swing;
+package com.yc.pushbox.version2.swing;
 
 import java.awt.GridLayout;
 import java.awt.Toolkit;
@@ -10,9 +10,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
-import com.yc.pushbox.version1.core.Game;
+import com.yc.pushbox.version2.core.Game;
 
 public class MainWin extends JFrame {
 
@@ -36,15 +35,13 @@ public class MainWin extends JFrame {
 
 	public MainWin() {
 		super("ÍÆÏä×Ó");
-		JPanel mapPanel = new JPanel();
-		mapPanel.setLayout(new GridLayout(map.length, map[0].length));
+		setLayout(new GridLayout(map.length, map[0].length));
 		for (int i = 0; i < map.length; i++) {
 			for (int j = 0; j < map[i].length; j++) {
 				labels[i][j] = new JLabel(IMGS[map[i][j]]);
-				mapPanel.add(labels[i][j]);
+				this.add(labels[i][j]);
 			}
 		}
-		add(mapPanel);
 		pack();
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		center();
