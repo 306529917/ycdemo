@@ -10,10 +10,10 @@ import com.yc.pushbox.version1.core.Maps;
  * 		2	空地
  * 		3	箱子
  * 		4	目的地, 也就是箱子要覆盖的格子 ( 小箭头 )
- * 		5	小人朝下, 初级版本中四个方法的小人统一用朝下表示
+ * 		5	小人朝上, 初级版本中没用 ( 看到是后脑勺 )
  * 		6	小人朝左, 初级版本中没用
  * 		7	小人朝右, 初级版本中没用
- * 		8	小人朝上, 初级版本中没用
+ * 		8	小人朝下, 初级版本中四个方法的小人统一用朝下表示
  * 		9	箱子压在目的地格子上之后, 箱子显示的新的状态值, 初级版本中没用
  */
 public class Game {
@@ -23,8 +23,11 @@ public class Game {
 	private static int[][] mapOld;
 	// 游戏结束标志，如没有则每次都需判断地图
 	private static boolean isOver;
+	// 记录移动的步数
+	private static int stepNumber = 0;
 
 	public static int[][] next() {
+		stepNumber = 0;
 		isOver = false;
 		map = Maps.next();
 		mapOld = Maps.clone(map);
@@ -36,6 +39,7 @@ public class Game {
 	 * @return
 	 */
 	public static int[][] reset() {
+		stepNumber = 0;
 		isOver = false;
 		map = Maps.clone(mapOld);
 		return map;
@@ -50,46 +54,62 @@ public class Game {
 	}
 
 	public static void up() {
-		moveMan(0, -1);
+		int[] xy = moveMan(0, -1);
+		map[xy[1]][xy[0]] = 8;
 	}
 
 	public static void down() {
-		moveMan(0, 1);
+		int[] xy = moveMan(0, 1);
+		map[xy[1]][xy[0]] = 5;
 	}
 
 	public static void left() {
-		moveMan(-1, 0);
+		int[] xy = moveMan(-1, 0);
+		map[xy[1]][xy[0]] = 6;
 	}
 
 	public static void right() {
-		moveMan(1, 0);
+		int[] xy = moveMan(1, 0);
+		map[xy[1]][xy[0]] = 7;
 	}
 
 	/**
 	 * 	移动小人
 	 * @param ox
 	 * @param oy
+	 * @return 返回小人的坐标
 	 */
-	private static void moveMan(int ox, int oy) {
-		if(isOver) {
-			return;
-		}
+	private static int[] moveMan(int ox, int oy) {
 		// 找到小人的坐标
 		int[] xy = findMan();
+		if (isOver) {
+			return xy;
+		}
 		int x = xy[0];
 		int y = xy[1];
 		// 计算前面格子的坐标
 		int tx = x + ox;
 		int ty = y + oy;
 		if (map[ty][tx] == 1) {
-			// 前面是地图边界，返回 
-			return;
-		} else if (map[ty][tx] == 3) {
+			// 前面是地图边界，返回
+			return xy;
+		} else if (map[ty][tx] == 3 || map[ty][tx] == 9) {
 			// 前面是箱子, 先推动箱子
-			moveItem(tx, ty, ox, oy);
+			xy = moveItem(tx, ty, ox, oy);
+			// 如果背箱子压住是目的地, 那么箱子颜色
+			if(mapOld[xy[1]][xy[0]] == 4) {
+				map[xy[1]][xy[0]] = 9;
+			} else {
+				map[xy[1]][xy[0]] = 3;
+			}
 		}
 		// 移动小人
-		moveItem(x, y, ox, oy);
+		int[] newxy = moveItem(x, y, ox, oy);
+		// 只有移动后才计算步数
+		if(newxy[0] != x || newxy[1] != y) {
+			stepNumber ++;
+		}
+		return newxy;
 	}
 
 	/**
@@ -98,8 +118,9 @@ public class Game {
 	 * @param y
 	 * @param ox
 	 * @param oy
+	 * @return 返回移动后的物体的坐标
 	 */
-	private static void moveItem(int x, int y, int ox, int oy) {
+	private static int[] moveItem(int x, int y, int ox, int oy) {
 		// 计算前面格子的坐标
 		int tx = x + ox;
 		int ty = y + oy;
@@ -108,7 +129,9 @@ public class Game {
 			map[ty][tx] = map[y][x];
 			// 恢复移动后的空格, 要从原始地图中获取原来的格子值
 			map[y][x] = mapOld[y][x] == 4 ? 4 : 2;
+			return new int[] { tx, ty };
 		}
+		return new int[] { x, y };
 	}
 
 	/**
@@ -134,7 +157,10 @@ public class Game {
 		for (int y = 0; y < map.length; y++) {
 			for (int x = 0; x < map[y].length; x++) {
 				// 元素地图是目的, 并且现在不是箱子, 那么说明游侠还未结束
-				if (mapOld[y][x] == 4 && map[y][x] != 3) {
+				/**
+				 * 	注意: 进阶版箱子压住目的地后, 变了颜色, 状态换成了9, 所以这里的判断也改成9了
+				 */
+				if (mapOld[y][x] == 4 && map[y][x] != 9) {
 					return false;
 				}
 			}
@@ -143,4 +169,8 @@ public class Game {
 		return true;
 	}
 
+	// 返回移动的步数
+	public static int getStepNumber() {
+		return stepNumber;
+	}
 }

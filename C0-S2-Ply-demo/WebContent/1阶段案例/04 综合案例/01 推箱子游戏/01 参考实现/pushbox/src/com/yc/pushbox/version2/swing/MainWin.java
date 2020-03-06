@@ -18,7 +18,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import com.yc.pushbox.version1.core.Game;
+import com.yc.pushbox.version2.core.Game;
 
 public class MainWin extends JFrame {
 
@@ -63,6 +63,11 @@ public class MainWin extends JFrame {
 		conPanel.setPreferredSize(new Dimension(100, 0));
 		// 设置流式布局
 		conPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+
+		// 添加显示步数的空间
+		JLabel stepLabel = new JLabel("第几步");
+		conPanel.add(stepLabel);
+
 		// 添加三个按钮, 第二个参数是 lambda 表达式
 		conPanel.add(buildBtn("重来一次", (ActionEvent e) -> {
 			map = Game.reset();
@@ -79,7 +84,7 @@ public class MainWin extends JFrame {
 			MainWin.this.dispose();
 		}));
 		add(conPanel, BorderLayout.EAST);
-		
+
 		// 窗体适应控件大小
 		pack();
 		// 关闭窗口退出程序
@@ -88,13 +93,17 @@ public class MainWin extends JFrame {
 		center();
 		// 打开窗口
 		setVisible(true);
-		
+
 		/**
 		 * 	添加键盘事件监听器( 当按下上下左右时触发的事件 )
 		 */
 		this.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
+				// 只处理4个方向键
+				if (e.getKeyCode() < KeyEvent.VK_LEFT && e.getKeyCode() > KeyEvent.VK_DOWN) {
+					return;
+				}
 				if (e.getKeyCode() == KeyEvent.VK_UP) {
 					Game.up();
 				} else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
@@ -104,9 +113,10 @@ public class MainWin extends JFrame {
 				} else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 					Game.right();
 				}
+				stepLabel.setText("第" + Game.getStepNumber() + "步");
 				refresh();
 				if (Game.isOver()) {
-					JOptionPane.showMessageDialog(null, "英雄住手！胜负已决！");
+					JOptionPane.showMessageDialog(null, "厉害！本关您一共移动了" + Game.getStepNumber() + "步");
 					map = Game.next();
 					refresh();
 				}
