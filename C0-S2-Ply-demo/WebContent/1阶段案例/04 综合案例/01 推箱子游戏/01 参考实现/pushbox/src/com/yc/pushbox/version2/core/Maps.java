@@ -2,8 +2,10 @@ package com.yc.pushbox.version2.core;
 
 public class Maps {
 	
+	// 当前的关数
 	private static int index = 0;
-	
+		
+	// 地图数组, 是三维数组, 内部的二维数组是游戏地图, 现在只有三关
 	private static int[][][] maps = {
 		{ 
 			{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, 
@@ -44,11 +46,18 @@ public class Maps {
 		}
 	};
 
+	/**
+	 * 	获取下一关地图
+	 * @return
+	 */
 	public static int[][] next() {
-		return clone(maps[index++ % maps.length]);
+		// 只有三关, 但是 index 会不断增加, 所以用了取余来循环获取关数
+		int i = index++ % maps.length;
+		return clone(maps[i]);
 	}
 	
 	/**
+		数组克隆的特殊性: 请参考 https://blog.csdn.net/diyinqian/article/details/83279457
 		一维数组：深克隆；（重新分配空间，并将元素复制过去）
 		二维数组：浅克隆。（只传递引用）
 	 */
