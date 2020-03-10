@@ -96,8 +96,8 @@ public class Game {
 		} else if (map[ty][tx] == 3 || map[ty][tx] == 9) {
 			// 前面是箱子, 先推动箱子
 			xy = moveItem(tx, ty, ox, oy);
-			// 如果背箱子压住是目的地, 那么箱子颜色
-			if(mapOld[xy[1]][xy[0]] == 4) {
+			// 如果背箱子压住是目的地, 那么箱子颜色变成9
+			if(mapOld[xy[1]][xy[0]] == 4 || mapOld[xy[1]][xy[0]] == 9) {
 				map[xy[1]][xy[0]] = 9;
 			} else {
 				map[xy[1]][xy[0]] = 3;
@@ -128,7 +128,7 @@ public class Game {
 			// 如果前面是空格和目的地, 则移动物体
 			map[ty][tx] = map[y][x];
 			// 恢复移动后的空格, 要从原始地图中获取原来的格子值
-			map[y][x] = mapOld[y][x] == 4 ? 4 : 2;
+			map[y][x] = mapOld[y][x] == 4 || mapOld[y][x] == 9 ? 4 : 2;
 			return new int[] { tx, ty };
 		}
 		return new int[] { x, y };
@@ -156,16 +156,13 @@ public class Game {
 	public static boolean isOver() {
 		for (int y = 0; y < map.length; y++) {
 			for (int x = 0; x < map[y].length; x++) {
-				// 元素地图是目的, 并且现在不是箱子, 那么说明游侠还未结束
-				/**
-				 * 	注意: 进阶版箱子压住目的地后, 变了颜色, 状态换成了9, 所以这里的判断也改成9了
-				 */
-				if (mapOld[y][x] == 4 && map[y][x] != 9) {
+				// 地图上有3号箱子就表示还没结束了
+				if (map[y][x] == 3) {
 					return false;
 				}
 			}
 		}
-		// 地图上的目的地( 4 ),都被箱子覆盖了, 就结束了
+		// 地图上没有3号箱子就结束了
 		return true;
 	}
 
