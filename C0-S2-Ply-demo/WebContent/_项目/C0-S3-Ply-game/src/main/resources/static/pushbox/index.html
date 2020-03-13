@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script type="text/javascript" src="js/map.js"></script>
+<script type="text/javascript" src="js/game.js"></script>
+<style type="text/css">
+</style>
+<script type="text/javascript">
+	function keydown(e) {
+		if ( e.keyCode < 37 || e.keyCode > 40 ){
+			return;
+		}
+		e.keyCode==37 && game.left() 	||
+		e.keyCode==38 && game.up() 		||
+		e.keyCode==39 && game.right() 	||
+		e.keyCode==40 && game.down();
+		bindMap();
+		if(game.youWin()){
+			alert("你赢了, 共用了"+game.getStepNumber()+"步");
+			map = game.next();
+			bindMap();
+		}
+	}
+</script>
+</head>
+<body onkeydown="keydown(event)">
+	<div id="main">
+		<div id="map">
+			<div v-for="row in map" style="height: 30px">
+				<img v-for="col in row" v-bind:src="'imgs/'+col.value+'.gif'">
+			</div>
+		</div>
+		<div id="ctl">
+		
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		var game = new Game();
+		var map = game.next();
+		var mapo = [];
+		bindMap();
+		var mapv = new Vue({
+			el : '#map',
+			data : {
+				map : mapo
+			}
+		})
+		function bindMap() {
+			for (var y = 0; y < map.length; y++) {
+				mapo[y] || mapo.push([]);
+				for (var x = 0; x < map[y].length; x++) {
+					if( ! mapo[y][x]){
+						mapo[y][x] = {};
+					}
+					mapo[y][x].value = map[y][x];
+				}
+			}
+		}
+	</script>
+</body>
+</html>
