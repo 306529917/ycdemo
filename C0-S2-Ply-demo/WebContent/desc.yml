@@ -33,3 +33,6 @@ githubStyle: [jsp,html,sql,css,java,txt,js,xml,yml,bat,properties]
 fileMapper: 
   _index\.jsp: 案例演示
   _(.+)\.\w+: $1
+  
+# pathMappingFinal  路径映射
+# htmlsFinal        收藏网址
