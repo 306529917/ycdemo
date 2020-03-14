@@ -20,31 +20,60 @@
 		<maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
 	</properties>
 
-	<dependencies>
-		<!-- thymeleaf 启动器依赖 -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-thymeleaf</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-devtools</artifactId>
-			<scope>runtime</scope>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-		
-	</dependencies>
+	<profiles>
+		<profile>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<id>swing</id>
+			<build>
+				<resources>
+					<resource>
+						<directory>src/main/java</directory>
+						<filtering>true</filtering>
+						<excludes>
+							<exclude>*.GIF</exclude>
+							<exclude>*.map</exclude>
+						</excludes>
+					</resource>
+				</resources>
+			</build>
+		</profile>
+		<profile>
+			<!-- <activation>
+				<activeByDefault>true</activeByDefault>
+			</activation> -->
+			<id>web</id>
+			<dependencies>
+				<!-- thymeleaf 启动器依赖 -->
+				<dependency>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-thymeleaf</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-devtools</artifactId>
+					<optional>true</optional>
+				</dependency>
+				<dependency>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-web</artifactId>
+				</dependency>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
+			</dependencies>
+
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.springframework.boot</groupId>
+						<artifactId>spring-boot-maven-plugin</artifactId>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+	</profiles>
+
+
+
 </project>

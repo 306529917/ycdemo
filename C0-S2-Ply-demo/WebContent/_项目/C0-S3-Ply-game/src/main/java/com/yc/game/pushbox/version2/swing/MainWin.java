@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.InputStream;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -18,7 +19,9 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import com.yc.game.pushbox.imgs.ImgLoader;
 import com.yc.game.pushbox.version2.core.Game;
+import com.yc.game.util.IOUtils;
 
 public class MainWin extends JFrame {
 
@@ -32,7 +35,8 @@ public class MainWin extends JFrame {
 
 	static {
 		for (int i = 0; i < IMGS.length; i++) {
-			IMGS[i] = new ImageIcon(MainWin.class.getResource("/com/yc/game/pushbox/imgs/" + i + ".gif"));
+			InputStream in = ImgLoader.class.getResourceAsStream( i + ".gif");
+			IMGS[i] = new ImageIcon(IOUtils.toByteArray(in));
 		}
 	}
 

@@ -1,6 +1,9 @@
 package com.yc.game;
 
-import org.springframework.boot.SpringApplication;
+/**
+ * 编译 java 版本时请注释掉
+ */
+/*import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
@@ -10,4 +13,4 @@ public class GameApplication {
 		SpringApplication.run(GameApplication.class, args);
 	}
 
-}
+}*/
