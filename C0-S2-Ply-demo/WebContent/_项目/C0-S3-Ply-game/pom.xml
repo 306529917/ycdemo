@@ -32,6 +32,11 @@
 						<directory>src/main/java</directory>
 						<filtering>true</filtering>
 						<excludes>
+							<exclude>*.jpg</exclude>
+							<exclude>*.JPG</exclude>
+							<exclude>*.PNG</exclude>
+							<exclude>*.png</exclude>
+							<exclude>*.gif</exclude>
 							<exclude>*.GIF</exclude>
 							<exclude>*.map</exclude>
 						</excludes>
