@@ -18,17 +18,17 @@ public class Imgs {
 	private static final HashMap<String, Icon> POINT_IMG_MAP = new HashMap<String, Icon>();
 
 	static {
-		POINT_IMG_MAP.put(WuziGame.POINT_UP, icon("hover_up.png"));
-		POINT_IMG_MAP.put(WuziGame.POINT_UP_LEFT, icon("hover_up_left.png"));
-		POINT_IMG_MAP.put(WuziGame.POINT_UP_RIGHT, icon("hover_up_right.png"));
-		POINT_IMG_MAP.put(WuziGame.POINT_DOWN, icon("hover_down.png"));
-		POINT_IMG_MAP.put(WuziGame.POINT_DOWN_LEFT, icon("hover_down_left.png"));
-		POINT_IMG_MAP.put(WuziGame.POINT_DOWN_RIGHT, icon("hover_down_right.png"));
-		POINT_IMG_MAP.put(WuziGame.POINT_LEFT, icon("hover_left.png"));
-		POINT_IMG_MAP.put(WuziGame.POINT_RIGHT, icon("hover_right.png"));
-		POINT_IMG_MAP.put(WuziGame.POINT_BLACK, icon("black_last.png"));
-		POINT_IMG_MAP.put(WuziGame.POINT_WHITE, icon("white_last.png"));
-		POINT_IMG_MAP.put(WuziGame.POINT_CENTER, icon("hover.png"));
+		POINT_IMG_MAP.put(WuziGameImpl.POINT_UP, icon("hover_up.png"));
+		POINT_IMG_MAP.put(WuziGameImpl.POINT_UP_LEFT, icon("hover_up_left.png"));
+		POINT_IMG_MAP.put(WuziGameImpl.POINT_UP_RIGHT, icon("hover_up_right.png"));
+		POINT_IMG_MAP.put(WuziGameImpl.POINT_DOWN, icon("hover_down.png"));
+		POINT_IMG_MAP.put(WuziGameImpl.POINT_DOWN_LEFT, icon("hover_down_left.png"));
+		POINT_IMG_MAP.put(WuziGameImpl.POINT_DOWN_RIGHT, icon("hover_down_right.png"));
+		POINT_IMG_MAP.put(WuziGameImpl.POINT_LEFT, icon("hover_left.png"));
+		POINT_IMG_MAP.put(WuziGameImpl.POINT_RIGHT, icon("hover_right.png"));
+		POINT_IMG_MAP.put(WuziGameImpl.POINT_BLACK, icon("black_last.png"));
+		POINT_IMG_MAP.put(WuziGameImpl.POINT_WHITE, icon("white_last.png"));
+		POINT_IMG_MAP.put(WuziGameImpl.POINT_CENTER, icon("hover.png"));
 	}
 
 	/**

@@ -5,3 +5,4 @@
 **/*.MP4
 **/*.Mp4
 /C0-S2-Ply-demo/**/.gitignore
+!/C0-S2-Ply-demo/WebContent/_项目/C0-S3-Ply-game/target/*.jar
