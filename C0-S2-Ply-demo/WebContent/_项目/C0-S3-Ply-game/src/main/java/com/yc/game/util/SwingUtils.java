@@ -5,6 +5,11 @@ import java.awt.Toolkit;
 
 import javax.swing.ImageIcon;
 
+/**
+ * Swing 工具类
+ * @author 廖彦
+ *
+ */
 public class SwingUtils {
 	/**
 	 * 控件居中

@@ -4,6 +4,11 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+/**
+ * IO操作工具类
+ * @author 廖彦
+ *
+ */
 public class IOUtils {
 
 	/**
