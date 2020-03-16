@@ -1,7 +1,10 @@
-package com.yc.game.util;
+package com.yc.game.common.util;
 
 import java.awt.Component;
 import java.awt.Toolkit;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 
@@ -31,5 +34,34 @@ public class SwingUtils {
 	 */
 	public static ImageIcon getImageIcon(Class<?> cls, String path) {
 		return new ImageIcon(IOUtils.toByteArray(cls.getResourceAsStream(path)));
+	}
+
+	/**
+	 * 使用路径迭代器创建图片
+	 * @param cls
+	 * @param it
+	 * @return
+	 */
+	public static ImageIcon[] buildImageIcons(Class<?> cls, Iterator<String> it) {
+		List<ImageIcon> list = new ArrayList<>();
+		while (it.hasNext()) {
+			String path = it.next();
+			list.add(getImageIcon(cls, path));
+		}
+		return list.toArray(new ImageIcon[list.size()]);
+	}
+
+	/**
+	 * 使用路径数组创建图片数组
+	 * @param cls
+	 * @param paths
+	 * @return
+	 */
+	public static ImageIcon[] buildImageIcons(Class<?> cls, String... paths) {
+		List<ImageIcon> list = new ArrayList<>();
+		for (String path : paths) {
+			list.add(getImageIcon(cls, path));
+		}
+		return list.toArray(new ImageIcon[list.size()]);
 	}
 }

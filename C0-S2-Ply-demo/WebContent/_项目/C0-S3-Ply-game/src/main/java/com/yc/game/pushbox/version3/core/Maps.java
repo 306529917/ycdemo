@@ -6,7 +6,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-import com.yc.game.util.IOUtils;
+import com.yc.game.common.util.IOUtils;
 
 public class Maps {
 

@@ -19,10 +19,10 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import com.yc.game.common.util.IOUtils;
 import com.yc.game.pushbox.base.PushBoxGame;
 import com.yc.game.pushbox.imgs.Imgs;
 import com.yc.game.pushbox.version2.core.PushBoxGameImpl2;
-import com.yc.game.util.IOUtils;
 
 /**
  * 版本2的界面加入的按钮

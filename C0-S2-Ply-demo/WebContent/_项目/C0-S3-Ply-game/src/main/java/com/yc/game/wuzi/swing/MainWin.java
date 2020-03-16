@@ -14,7 +14,8 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import com.yc.game.util.SwingUtils;
+import com.yc.game.common.swing.BoardLabel;
+import com.yc.game.common.util.SwingUtils;
 import com.yc.game.wuzi.base.WuziGame;
 import com.yc.game.wuzi.core.Imgs;
 
@@ -39,7 +40,7 @@ public class MainWin extends JFrame {
 	// 棋盘面板
 	private JPanel boardPanel;
 	// 图片控件二维数组
-	private MyLabel[][] labels = new MyLabel[WuziGame.SIZE][WuziGame.SIZE];
+	private BoardLabel[][] labels = new BoardLabel[WuziGame.SIZE][WuziGame.SIZE];
 
 	/**
 	 * 开始游戏
@@ -138,8 +139,6 @@ public class MainWin extends JFrame {
 		};
 		// 设置网格布局
 		boardPanel.setLayout(new GridLayout(WuziGame.SIZE, WuziGame.SIZE));
-		// 设置首选大小
-		boardPanel.setPreferredSize(new Dimension(getBoardSize(), getBoardSize()));
 		// 添加棋盘面板
 		panel.add(boardPanel);
 		// 将面板)放入窗体
@@ -164,7 +163,7 @@ public class MainWin extends JFrame {
 			// 鼠标移动事件
 			public void mouseEntered(MouseEvent e) {
 				refreshBoard();
-				MyLabel ml = (MyLabel) e.getSource();
+				BoardLabel ml = (BoardLabel) e.getSource();
 				String pointName = game.getPointerName(ml.getBoardX(), ml.getBoardY());
 				Icon icon = Imgs.getPointIcon(pointName);
 				ml.setIcon(icon);
@@ -175,7 +174,7 @@ public class MainWin extends JFrame {
 				if (game.getWuzi() != null) {
 					return;
 				}
-				MyLabel ml = (MyLabel) e.getSource();
+				BoardLabel ml = (BoardLabel) e.getSource();
 				game.down(ml.getBoardX(), ml.getBoardY());
 				refreshBoard();
 				if (game.getWuzi() != null) {
@@ -188,7 +187,7 @@ public class MainWin extends JFrame {
 		for (int y = 0; y < WuziGame.SIZE; y++) {
 			for (int x = 0; x < WuziGame.SIZE; x++) {
 				// MyLabel 是 JLabel 的子类, 添加了棋盘坐标熟悉, 方便定位对应的棋子坐标
-				labels[y][x] = new MyLabel(Imgs.SPACE, x, y);
+				labels[y][x] = new BoardLabel(Imgs.SPACE, x, y);
 				// 添加鼠标事件
 				labels[y][x].addMouseListener(ma);
 				// 将Label控件添加到面板中
@@ -204,7 +203,7 @@ public class MainWin extends JFrame {
 		for (int y = 0; y < WuziGame.SIZE; y++) {
 			for (int x = 0; x < WuziGame.SIZE; x++) {
 				// 获取当前棋盘坐标的颜色: 黑 1 , 白 2, 空 0
-				int color = game.getColorByXY(x, y);
+				int color = game.getBoard()[y][x];
 				// 获取演示对应图片
 				Icon icon = Imgs.CHESS[color];
 				// 重新设置label的图片

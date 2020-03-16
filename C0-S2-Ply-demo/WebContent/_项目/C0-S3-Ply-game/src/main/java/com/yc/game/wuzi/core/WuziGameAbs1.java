@@ -78,8 +78,8 @@ public abstract class WuziGameAbs1 implements WuziGame{
 		}
 	}
 
-	public int getColorByXY(int x, int y) {
-		return board[y][x];
+	public int[][] getBoard() {
+		return board;
 	}
 
 }

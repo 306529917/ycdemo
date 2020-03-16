@@ -1,4 +1,4 @@
-package com.yc.game.util;
+package com.yc.game.common.util;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -46,5 +46,5 @@ public class IOUtils {
 		}
 		return baos.toByteArray();
 	}
-
+	
 }

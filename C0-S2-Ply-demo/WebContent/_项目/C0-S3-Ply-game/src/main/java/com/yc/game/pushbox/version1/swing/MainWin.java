@@ -14,8 +14,8 @@ import javax.swing.JOptionPane;
 
 import com.yc.game.pushbox.imgs.Imgs;
 import com.yc.game.pushbox.version1.core.PushBoxGameImpl1;
+import com.yc.game.common.util.IOUtils;
 import com.yc.game.pushbox.base.PushBoxGame;
-import com.yc.game.util.IOUtils;
 
 public class MainWin extends JFrame {
 

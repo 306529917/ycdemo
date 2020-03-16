@@ -1,4 +1,4 @@
-package com.yc.game.wuzi.swing;
+package com.yc.game.common.swing;
 
 import javax.swing.Icon;
 import javax.swing.JLabel;
@@ -9,7 +9,7 @@ import javax.swing.JLabel;
  * @author 廖彦
  *
  */
-public class MyLabel extends JLabel{
+public class BoardLabel extends JLabel{
 
 	private static final long serialVersionUID = 1L;
 	
@@ -30,7 +30,7 @@ public class MyLabel extends JLabel{
 	 * @param x
 	 * @param y
 	 */
-	public MyLabel(Icon image, int x, int y) {
+	public BoardLabel(Icon image, int x, int y) {
 		super(image);
 		this.x = x;
 		this.y = y;

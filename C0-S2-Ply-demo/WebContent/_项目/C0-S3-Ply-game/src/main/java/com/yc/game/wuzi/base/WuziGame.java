@@ -80,6 +80,6 @@ public interface WuziGame {
 	 * @param y
 	 * @return
 	 */
-	public int getColorByXY(int x, int y);
+	public int[][] getBoard();
 
 }

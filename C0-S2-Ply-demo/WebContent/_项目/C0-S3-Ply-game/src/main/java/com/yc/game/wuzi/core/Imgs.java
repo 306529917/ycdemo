@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 import javax.swing.Icon;
 
-import com.yc.game.util.SwingUtils;
+import com.yc.game.common.util.SwingUtils;
 
 public class Imgs {
 
