@@ -19,6 +19,7 @@ import com.yc.game.wuzi.core.Imgs;
 import com.yc.game.wuzi.core.WuziGame;
 
 import java.awt.Dimension;
+import java.awt.EventQueue;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -40,6 +41,26 @@ public class MainWin extends JFrame {
 	// 图片控件二维数组
 	private MyLabel[][] labels = new MyLabel[WuziGame.SIZE][WuziGame.SIZE];
 
+	/**
+	 * 开始游戏
+	 * @param game
+	 */
+	public static void start(WuziGame game) {
+		/**
+		 * 这是自动生成的代码, 用于启动窗口
+		 */
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					MainWin frame = new MainWin(game);
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+	
 	/**
 	 * 构建窗体
 	 */
