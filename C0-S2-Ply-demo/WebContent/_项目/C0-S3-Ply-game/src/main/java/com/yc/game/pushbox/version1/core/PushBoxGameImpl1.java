@@ -1,5 +1,7 @@
 package com.yc.game.pushbox.version1.core;
 
+import com.yc.game.pushbox.base.PushBoxGame;
+
 /**
  * 	地图规则
  * 	1, 使用 int 型二维数组表示地图
@@ -14,52 +16,49 @@ package com.yc.game.pushbox.version1.core;
  * 		8	小人朝上, 初级版本中没用
  * 		9	箱子压在目的地格子上之后, 箱子显示的新的状态值, 初级版本中没用
  */
-public class Game {
+public class PushBoxGameImpl1 implements PushBoxGame{
 	// 地图
-	private static int[][] map;
+	protected int[][] map;
 	// 原始地图，用于恢复移动后的地板和判断游戏结束
-	private static int[][] mapOld;
+	protected int[][] mapOld;
 	// 游戏结束标志，如没有则每次都需判断地图
-	private static boolean isOver;
+	protected boolean isOver;
+	
+	public PushBoxGameImpl1() {
+		// 创建对象之后立即进入第一关开始游戏
+		next();
+	}
 
-	public static int[][] next() {
+	public int[][] next() {
 		isOver = false;
 		map = Maps.next();
 		mapOld = Maps.clone(map);
 		return map;
 	}
 
-	/**
-	 * 	重来一次
-	 * @return
-	 */
-	public static int[][] reset() {
+	public int[][] reset() {
 		isOver = false;
 		map = Maps.clone(mapOld);
 		return map;
 	}
 
-	/**
-	 * 	返回当前地图
-	 * @return
-	 */
-	public static int[][] getMap() {
+	public int[][] getMap() {
 		return map;
 	}
 
-	public static void up() {
+	public void up() {
 		moveMan(0, -1);
 	}
 
-	public static void down() {
+	public void down() {
 		moveMan(0, 1);
 	}
 
-	public static void left() {
+	public void left() {
 		moveMan(-1, 0);
 	}
 
-	public static void right() {
+	public void right() {
 		moveMan(1, 0);
 	}
 
@@ -68,7 +67,7 @@ public class Game {
 	 * @param ox
 	 * @param oy
 	 */
-	private static void moveMan(int ox, int oy) {
+	private void moveMan(int ox, int oy) {
 		if(isOver) {
 			return;
 		}
@@ -97,7 +96,7 @@ public class Game {
 	 * @param ox
 	 * @param oy
 	 */
-	private static void moveItem(int x, int y, int ox, int oy) {
+	private void moveItem(int x, int y, int ox, int oy) {
 		// 计算前面格子的坐标
 		int tx = x + ox;
 		int ty = y + oy;
@@ -113,7 +112,7 @@ public class Game {
 	 * 	找小人的位置, 地图中为 5,6,7,8的格子
 	 * @return
 	 */
-	private static int[] findMan() {
+	private int[] findMan() {
 		for (int y = 0; y < map.length; y++) {
 			for (int x = 0; x < map[y].length; x++) {
 				if (map[y][x] == 5 || map[y][x] == 6 || map[y][x] == 7 || map[y][x] == 8) {
@@ -124,11 +123,8 @@ public class Game {
 		return null;
 	}
 
-	/**
-	 * 	判断游戏是否结束, 就是地图上所得目的的格子( 值为4) 全部被箱子替换了, 这要用原始地图来判断
-	 * @return
-	 */
-	public static boolean isOver() {
+	public boolean isOver() {
+		// 判断游戏介绍要用原始地图来判断
 		for (int y = 0; y < map.length; y++) {
 			for (int x = 0; x < map[y].length; x++) {
 				// 元素地图是目的, 并且现在不是箱子, 那么说明游侠还未结束

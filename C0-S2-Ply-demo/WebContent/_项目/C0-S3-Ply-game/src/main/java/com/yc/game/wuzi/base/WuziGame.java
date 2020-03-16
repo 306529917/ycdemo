@@ -1,4 +1,4 @@
-package com.yc.game.wuzi.core;
+package com.yc.game.wuzi.base;
 
 /**
  * 五子连珠游戏

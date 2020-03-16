@@ -19,43 +19,47 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import com.yc.game.pushbox.imgs.ImgLoader;
-import com.yc.game.pushbox.version2.core.Game;
+import com.yc.game.pushbox.base.PushBoxGame;
+import com.yc.game.pushbox.imgs.Imgs;
+import com.yc.game.pushbox.version2.core.PushBoxGameImpl2;
 import com.yc.game.util.IOUtils;
 
+/**
+ * 版本2的界面加入的按钮
+ * @author 廖彦
+ */
 public class MainWin extends JFrame {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-	private int map[][] = Game.next();
-	private JLabel[][] labels = new JLabel[map.length][map[0].length];
+	private JLabel[][] labels;
+	private PushBoxGame game;
 	private static final Icon[] IMGS = new Icon[10];
 
 	static {
 		for (int i = 0; i < IMGS.length; i++) {
-			InputStream in = ImgLoader.class.getResourceAsStream( i + ".gif");
+			InputStream in = Imgs.class.getResourceAsStream(i + ".gif");
 			IMGS[i] = new ImageIcon(IOUtils.toByteArray(in));
 		}
 	}
 
 	public static void main(String[] args) {
-		new MainWin();
+		new MainWin(new PushBoxGameImpl2());
 	}
 
-	public MainWin() {
+	public MainWin(PushBoxGame game) {
 		super("推箱子");
+		this.game = game;
+		labels = new JLabel[game.getMap().length][game.getMap()[0].length];
 		// 由于右边要添加按钮,所以窗体布局改为边界布局
 		setLayout(new BorderLayout());
 		// 创建放置地图的面板
 		JPanel mapPanel = new JPanel();
 		// 面板设置网格布局
-		mapPanel.setLayout(new GridLayout(map.length, map[0].length));
+		mapPanel.setLayout(new GridLayout(game.getMap().length, game.getMap()[0].length));
 		// 生成地图界面
-		for (int i = 0; i < map.length; i++) {
-			for (int j = 0; j < map[i].length; j++) {
-				labels[i][j] = new JLabel(IMGS[map[i][j]]);
+		for (int i = 0; i < game.getMap().length; i++) {
+			for (int j = 0; j < game.getMap()[i].length; j++) {
+				labels[i][j] = new JLabel(IMGS[game.getMap()[i][j]]);
 				mapPanel.add(labels[i][j]);
 			}
 		}
@@ -74,12 +78,12 @@ public class MainWin extends JFrame {
 
 		// 添加三个按钮, 第二个参数是 lambda 表达式
 		conPanel.add(buildBtn("重来一次", (ActionEvent e) -> {
-			map = Game.reset();
+			game.reset();
 			// 刷新地图控件
 			refresh();
 		}));
 		conPanel.add(buildBtn("下一关", (ActionEvent e) -> {
-			map = Game.next();
+			game.next();
 			// 刷新地图控件
 			refresh();
 		}));
@@ -109,19 +113,20 @@ public class MainWin extends JFrame {
 					return;
 				}
 				if (e.getKeyCode() == KeyEvent.VK_UP) {
-					Game.up();
+					game.up();
 				} else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-					Game.down();
+					game.down();
 				} else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-					Game.left();
+					game.left();
 				} else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-					Game.right();
+					game.right();
 				}
-				stepLabel.setText("第" + Game.getStepNumber() + "步");
+				PushBoxGameImpl2 g2 = (PushBoxGameImpl2) game;
+				stepLabel.setText("第" + g2.getStepNumber() + "步");
 				refresh();
-				if (Game.isOver()) {
-					JOptionPane.showMessageDialog(null, "厉害！本关您一共移动了" + Game.getStepNumber() + "步");
-					map = Game.next();
+				if (game.isOver()) {
+					JOptionPane.showMessageDialog(null, "厉害！本关您一共移动了" + g2.getStepNumber() + "步");
+					game.next();
 					refresh();
 				}
 			}
@@ -132,9 +137,9 @@ public class MainWin extends JFrame {
 	 * 	刷新地图
 	 */
 	public void refresh() {
-		for (int i = 0; i < map.length; i++) {
-			for (int j = 0; j < map[i].length; j++) {
-				labels[i][j].setIcon(IMGS[map[i][j]]);
+		for (int i = 0; i < game.getMap().length; i++) {
+			for (int j = 0; j < game.getMap()[i].length; j++) {
+				labels[i][j].setIcon(IMGS[game.getMap()[i][j]]);
 			}
 		}
 	}

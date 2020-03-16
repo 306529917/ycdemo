@@ -1,5 +1,7 @@
 package com.yc.game.wuzi.core;
 
+import com.yc.game.wuzi.base.WuziGame;
+
 /**
  * 五子连珠游戏抽象类，完成了除 down 方法以外的方法，<br>
  * 因为 down 方法最复杂，实现方式也最丰富，所以留给子类实现

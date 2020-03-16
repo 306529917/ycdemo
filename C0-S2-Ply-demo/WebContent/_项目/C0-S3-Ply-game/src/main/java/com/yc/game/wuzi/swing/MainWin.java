@@ -15,8 +15,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import com.yc.game.util.SwingUtils;
+import com.yc.game.wuzi.base.WuziGame;
 import com.yc.game.wuzi.core.Imgs;
-import com.yc.game.wuzi.core.WuziGame;
 
 import java.awt.Dimension;
 import java.awt.EventQueue;
