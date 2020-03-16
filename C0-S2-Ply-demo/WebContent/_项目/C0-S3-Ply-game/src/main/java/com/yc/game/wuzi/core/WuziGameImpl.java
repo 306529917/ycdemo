@@ -55,18 +55,22 @@ public class WuziGameImpl extends WuziGameAbs1{
 	 * @return
 	 */
 	private int[][] count(int x, int y, int color, int ox, int oy) {
+		// 定义保存五子连珠的棋子的集合
 		ArrayList<int[]> list = new ArrayList<int[]>();
+		// 添加当前的棋子
 		list.add(new int[] { x, y });
 		// 统计正方向的棋子数
 		for (int nx = x + ox, ny = y + oy; equals(nx, ny, color); nx += ox, ny += oy) {
 			list.add(new int[] { nx, ny });
 		}
+		// 方向反转
 		ox *= -1;
 		oy *= -1;
 		// 统计反方向的棋子数
 		for (int nx = x + ox, ny = y + oy; equals(nx, ny, color); nx += ox, ny += oy) {
 			list.add(new int[] { nx, ny });
 		}
+		// 集合转数组
 		return list.toArray(new int[list.size()][]);
 	}
 
