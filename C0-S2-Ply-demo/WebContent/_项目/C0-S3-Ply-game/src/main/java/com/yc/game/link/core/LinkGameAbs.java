@@ -1,6 +1,5 @@
 package com.yc.game.link.core;
 
-import com.yc.game.common.util.LangUtils;
 import com.yc.game.link.base.LinkGame;
 
 /**
@@ -13,7 +12,7 @@ public abstract class LinkGameAbs implements LinkGame {
 	/**
 	 * 棋盘二维数组
 	 */
-	protected Integer[][] board;
+	protected int[][] board;
 
 	/**
 	 * 定义棋盘大小: width 宽度, height 高度
@@ -38,16 +37,16 @@ public abstract class LinkGameAbs implements LinkGame {
 		this.width = width;
 		this.height = height;
 		this.imgCount = imgCount;
-		board = new Integer[height][width];
+		board = new int[height][width];
 
 		begin();
 	}
 
 	@Override
-	public Integer[][] getBoard() {
-		Integer[][] displayBoard = new Integer[height - 2][width - 2];
+	public int[][] getBoard() {
+		int[][] displayBoard = new int[height - 2][width - 2];
 		for (int y = 1; y < height - 1; y++) {
-			System.arraycopy(board[y], 1, displayBoard[y-1], 0, width - 2);
+			System.arraycopy(board[y], 1, displayBoard[y - 1], 0, width - 2);
 		}
 		return displayBoard;
 	}
@@ -55,16 +54,14 @@ public abstract class LinkGameAbs implements LinkGame {
 	@Override
 	public boolean isOver() {
 		// 判断棋盘中是否都是 0 了
-		boolean[] ret = { true };
-		LangUtils.each(board, (Integer cell, int[] pos) -> {
-			if (cell != 0) {
-				ret[0] = false;
-				return false;
-			} else {
-				return true;
+		for (int y = 0; y < board.length; y++) {
+			for (int x = 0; x < board[y].length; x++) {
+				if (board[y][x] != 0) {
+					return false;
+				}
 			}
-		});
-		return ret[0];
+		}
+		return true;
 	}
 
 	/**

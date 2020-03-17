@@ -3,17 +3,18 @@ package com.yc.game.wuzi.core;
 import java.util.HashMap;
 
 import javax.swing.Icon;
+import javax.swing.ImageIcon;
 
 import com.yc.game.common.util.SwingUtils;
 
 public class Imgs {
 
-	public static final Icon SPACE = icon("space.png");
-	public static final Icon BLACK = icon("black.png");
-	public static final Icon WHITE = icon("white.png");
-	public static final Icon BOARD = icon("chessboard.png");
+	public static final ImageIcon SPACE = icon("space.png");
+	public static final ImageIcon BLACK = icon("black.png");
+	public static final ImageIcon WHITE = icon("white.png");
+	public static final ImageIcon BOARD = icon("chessboard.png");
 
-	public static final Icon[] CHESS = { SPACE, BLACK, WHITE };
+	public static final ImageIcon[] CHESS = { SPACE, BLACK, WHITE };
 
 	private static final HashMap<String, Icon> POINT_IMG_MAP = new HashMap<String, Icon>();
 
@@ -40,7 +41,7 @@ public class Imgs {
 		return POINT_IMG_MAP.get(pointName);
 	}
 
-	private static Icon icon(String path) {
+	private static ImageIcon icon(String path) {
 		return SwingUtils.getImageIcon(Imgs.class, "imgs/" + path);
 	}
 

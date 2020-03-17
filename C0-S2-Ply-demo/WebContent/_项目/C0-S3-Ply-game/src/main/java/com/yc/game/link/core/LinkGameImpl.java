@@ -10,12 +10,6 @@ public class LinkGameImpl extends LinkGameAbs {
 
 	@Override
 	public void begin() {
-		// 由于棋盘是Integer类型,所以初始值要赋值 0
-		LangUtils.each(board, (Integer i, int[] pos) -> {
-			board[pos[0]][pos[1]] = 0;
-			return true;
-		});
-
 		int value = 0;
 		int index = 0;
 		int imgIndex = 0;
@@ -23,7 +17,7 @@ public class LinkGameImpl extends LinkGameAbs {
 		for (int y = 1; y < height - 1; y++) {
 			for (int x = 1; x < width - 1; x++) {
 				if (index++ % 2 == 0) {
-					value = imgIndex++ % (imgCount-1) + 1 ;
+					value = imgIndex++ % (imgCount - 1) + 1;
 				}
 				board[y][x] = value;
 			}
@@ -62,26 +56,25 @@ public class LinkGameImpl extends LinkGameAbs {
 	 * @return
 	 */
 	private boolean link2(int x1, int y1, int x2, int y2) {
-		boolean[] ret = { false };
-		LangUtils.each(board, (Integer cell, int[] pos) -> {
-			if (cell == 0) {
-				// 将坐标1复制到棋盘上任意的一个空白点处
-				board[pos[0]][pos[1]] = board[y1][x1];
-				// 测试 直线连 + 1个拐点连
-				boolean test0 = link0(x1, y1, pos[1], pos[0]);
-				boolean test1 = link1(pos[1], pos[0], x2, y2);
-				// 恢复空白点的值
-				board[pos[0]][pos[1]] = 0;
-				if (test0 == false || test1 == false) {
-					return true;
-				} else {
-					ret[0] = true;
-					return false;
+
+		for (int y = 0; y < board.length; y++) {
+			for (int x = 0; x < board[y].length; x++) {
+				int cell = board[y][x];
+				if (cell == 0) {
+					// 将坐标1复制到棋盘上任意的一个空白点处
+					board[y][x] = board[y1][x1];
+					// 测试 直线连 + 1个拐点连
+					boolean test0 = link0(x1, y1, x, y);
+					boolean test1 = link1(x, y, x2, y2);
+					// 恢复空白点的值
+					board[y][x] = 0;
+					if (test0 && test1) {
+						return true;
+					}
 				}
 			}
-			return true;
-		});
-		return ret[0];
+		}
+		return false;
 	}
 
 	/**
@@ -125,14 +118,14 @@ public class LinkGameImpl extends LinkGameAbs {
 			if (Math.abs(y1 - y2) == 1) {
 				return true;
 			}
-			LangUtils.eachIn(y1, y2, (Integer ny, int[] pos) -> {
+			LangUtils.eachIn(y1, y2, (ny, pos) -> {
 				return board[ny][x1] == 0 ? true : (ret[0] = false);
 			});
 		} else if (y1 == y2) {
 			if (Math.abs(x1 - x2) == 1) {
 				return true;
 			}
-			LangUtils.eachIn(x1, x2, (Integer nx, int[] pos) -> {
+			LangUtils.eachIn(x1, x2, (nx, pos) -> {
 				return board[y1][nx] == 0 ? true : (ret[0] = false);
 			});
 		} else {

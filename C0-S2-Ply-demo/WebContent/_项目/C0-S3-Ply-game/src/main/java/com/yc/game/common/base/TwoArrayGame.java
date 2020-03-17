@@ -8,10 +8,13 @@ import java.util.Arrays;
  *
  */
 public interface TwoArrayGame extends Game {
-	Integer[][] getBoard();
+	int[][] getBoard();
 
+	/**
+	 * 打印棋盘, 用于实现控制台版本五子棋和调试
+	 */
 	default void print() {
-		Integer[][] array = getBoard();
+		int[][] array = getBoard();
 		for (int y = 0; y < array.length; y++) {
 			System.out.println(Arrays.toString(array[y]));
 		}

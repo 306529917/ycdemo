@@ -1,10 +1,12 @@
 package com.yc.game.wuzi.base;
 
+import com.yc.game.common.base.TwoArrayGame;
+
 /**
  * 五子连珠游戏
  * @author 廖彦
  */
-public interface WuziGame {
+public interface WuziGame extends TwoArrayGame{
 
 	public static final String POINT_UP_LEFT = "左上";
 	public static final String POINT_UP_RIGHT = "右上";
@@ -28,11 +30,6 @@ public interface WuziGame {
 	public static final int SIZE = 15;
 
 	/**
-	 * 重新开始
-	 */
-	public void restart();
-
-	/**
 	 * 下子
 	 * @param x
 	 * @param y
@@ -51,12 +48,7 @@ public interface WuziGame {
 	 * 返回赢家的颜色，如果没有胜负结果则返回 0 
 	 * @return
 	 */
-	public int getWinner();
-
-	/**
-	 * 打印棋盘, 用于实现控制台版本五子棋和调试
-	 */
-	public void print();
+	public Object getWinner();
 
 	/**
 	 * 获取当前棋子颜色( 轮谁下 )
@@ -73,13 +65,5 @@ public interface WuziGame {
 	 * @param y
 	 */
 	public String getPointerName(int x, int y);
-
-	/**
-	 * 返回 x，y 处的棋子的颜色
-	 * @param x
-	 * @param y
-	 * @return
-	 */
-	public int[][] getBoard();
 
 }

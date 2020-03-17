@@ -8,7 +8,7 @@ import com.yc.game.wuzi.base.WuziGame;
  * @author 廖彦
  *
  */
-public abstract class WuziGameAbs1 implements WuziGame{
+public abstract class WuziGameAbs1 implements WuziGame {
 
 	// 棋盘
 	protected int[][] board;
@@ -21,10 +21,10 @@ public abstract class WuziGameAbs1 implements WuziGame{
 	 * 初始化游戏
 	 */
 	public WuziGameAbs1() {
-		restart();
+		begin();
 	}
 
-	public void restart() {
+	public void begin() {
 		board = new int[SIZE][SIZE];
 		color = BLACK;
 		wuzi = null;
@@ -34,18 +34,9 @@ public abstract class WuziGameAbs1 implements WuziGame{
 		return wuzi;
 	}
 
-	public int getWinner() {
+	public Object getWinner() {
 		// 如果五子连珠未成功，则返回 null， 否则取出五子连珠中的其中一子的颜色
 		return wuzi == null ? SPACE : board[wuzi[0][1]][wuzi[0][0]];
-	}
-
-	public void print() {
-		for (int i = 0; i < board.length; i++) {
-			for (int j = 0; j < board[i].length; j++) {
-				System.out.print(board[i][j] + " ");
-			}
-			System.out.println();
-		}
 	}
 
 	public int getColor() {

@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * @author 廖彦
  *
  */
-public class WuziGameImpl extends WuziGameAbs1{
+public class WuziGameImpl extends WuziGameAbs1 {
 
 	// 定义四个方向的 x , y 的变化趋势
 	protected static final int[][] DIRECTION = { { 1, 0 }, { 0, 1 }, { -1, -1 }, { 1, -1 } };
@@ -85,6 +85,11 @@ public class WuziGameImpl extends WuziGameAbs1{
 	 */
 	private boolean equals(int x, int y, int color) {
 		return y < board.length && y > 0 && x < board[0].length && x > 0 && board[y][x] == color;
+	}
+
+	@Override
+	public boolean isOver() {
+		return wuzi != null;
 	}
 
 }

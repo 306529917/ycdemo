@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.plaf.BorderUIResource;
 
 import com.yc.game.common.base.TwoArrayGame;
 import com.yc.game.common.util.SwingUtils;
@@ -84,16 +85,16 @@ public class BoardWin extends JFrame {
 	 * 构建控制面板上的按钮
 	 */
 	protected void buildButton(JPanel panel) {
-		panel.add(buildBtn("重新开始", (e) -> {
-			System.out.println(game);
+		panel.add(createButton("重新开始", (e) -> {
 			game.begin();
 			refresh();
 		}));
-		panel.add(buildBtn("不玩了", (e) -> BoardWin.this.dispose()));
+		panel.add(createButton("不玩了", (e) -> BoardWin.this.dispose()));
 	}
-	
+
 	protected void refresh() {
 		boardPanel.refresh();
+		repaint();
 	}
 
 	/**
@@ -101,7 +102,7 @@ public class BoardWin extends JFrame {
 	 * @param string
 	 * @return
 	 */
-	protected JButton buildBtn(String name, ActionListener al) {
+	protected JButton createButton(String name, ActionListener al) {
 		JButton ret = new JButton(name);
 		ret.setPreferredSize(new Dimension(100, 30));
 		ret.addActionListener(al);
@@ -113,21 +114,46 @@ public class BoardWin extends JFrame {
 	 * @param cellIcons 
 	 * @param game 
 	 */
-	private void buildBoard(ImageIcon[] cellIcons) {
+	protected void buildBoard(ImageIcon[] cellIcons) {
 		// 创建放置棋盘面板的面板
 		JPanel panel = new JPanel();
 		// 设置流式布局
 		panel.setLayout(new FlowLayout(FlowLayout.CENTER));
+		panel.setBorder(BorderUIResource.getEtchedBorderUIResource());
 		// 创建棋盘面板
-		boardPanel = createBoardPanel();
-		if(boardPanel== null)new BoardPanel(game, cellIcons);
+		boardPanel = customCreateBoard(game, cellIcons);
+		if (boardPanel == null) {
+			boardPanel = new BoardPanel(game, cellIcons);
+		}
+		for (int y = 0; y < boardPanel.getLabels().length; y++) {
+			for (int x = 0; x < boardPanel.getLabels()[y].length; x++) {
+				BoardLabel c = boardPanel.getLabels()[y][x];
+				initBoardLabel(c, x, y);
+			}
+		}
 		// 添加棋盘面板
 		panel.add(boardPanel);
 		// 将面板)放入窗体
 		add(panel, BorderLayout.CENTER);
 	}
-	
-	protected BoardPanel createBoardPanel() {
+
+	/**
+	 * 初始化图片控件
+	 * @param c
+	 * @param x
+	 * @param y
+	 */
+	protected void initBoardLabel(BoardLabel bl, int x, int y) {
+
+	}
+
+	/**
+	 * 定义模版
+	 * @param game2
+	 * @param cellIcons
+	 * @return
+	 */
+	protected BoardPanel customCreateBoard(TwoArrayGame game, ImageIcon[] cellIcons) {
 		return null;
 	}
 
