@@ -52,7 +52,12 @@ public abstract class LinkGameAbs implements LinkGame {
 		// 判断棋盘中是否都是 0 了
 		boolean[] ret = { true };
 		LangUtils.each(board, (Integer cell, int[] pos) -> {
-			return cell != 0 && (ret[0] = false);
+			if (cell != 0) {
+				ret[0] = false;
+				return false;
+			} else {
+				return true;
+			}
 		});
 		return ret[0];
 	}

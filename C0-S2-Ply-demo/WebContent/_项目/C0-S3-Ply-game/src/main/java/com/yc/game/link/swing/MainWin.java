@@ -4,7 +4,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
-import javax.swing.border.Border;
+import javax.swing.JOptionPane;
 import javax.swing.plaf.BorderUIResource;
 
 import com.yc.game.common.swing.BoardLabel;
@@ -49,6 +49,11 @@ public class MainWin extends BoardWin {
 					point1 = null;
 				}
 				refresh();
+				if(game.isOver()) {
+					JOptionPane.showMessageDialog(null, "腻害！你赢了！！！");
+					game.begin();
+					refresh();
+				}
 			}
 		};
 		LangUtils.each(boardPanel.getLabels(), (BoardLabel c, int[] pos) -> {
