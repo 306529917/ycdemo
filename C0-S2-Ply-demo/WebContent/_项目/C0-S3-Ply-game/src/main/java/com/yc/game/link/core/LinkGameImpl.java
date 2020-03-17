@@ -11,17 +11,19 @@ public class LinkGameImpl extends LinkGameAbs {
 	@Override
 	public void begin() {
 		// 由于棋盘是Integer类型,所以初始值要赋值 0
-		LangUtils.each(board, (Integer i, int[]pos)->{
+		LangUtils.each(board, (Integer i, int[] pos) -> {
 			board[pos[0]][pos[1]] = 0;
 			return true;
 		});
-		
+
 		int value = 0;
 		int index = 0;
+		int imgIndex = 0;
+		// 成对的放置图片
 		for (int y = 1; y < height - 1; y++) {
 			for (int x = 1; x < width - 1; x++) {
 				if (index++ % 2 == 0) {
-					value = (int) (1 + Math.random() * (imgCount - 1));
+					value = imgIndex++ % (imgCount-1) + 1 ;
 				}
 				board[y][x] = value;
 			}

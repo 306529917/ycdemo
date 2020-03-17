@@ -111,7 +111,7 @@ public class SwingUtils {
 
 			@Override
 			public boolean hasNext() {
-				return index < end;
+				return index <= end;
 			}
 
 			@Override

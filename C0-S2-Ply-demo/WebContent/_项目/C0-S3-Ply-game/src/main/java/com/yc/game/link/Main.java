@@ -9,10 +9,11 @@ import com.yc.game.link.swing.MainWin;
 public class Main {
 
 	public static void main(String[] args) {
-		ImageIcon[] cellIcons = SwingUtils.buildImageIcons(Main.class, 
-				SwingUtils.iterator("core/imgs/%s.jpg", 0, 15),100,100);
+		String path = "/com/yc/game/common/imgs/cartoon/girl/%s.jpg";
+		ImageIcon[] cellIcons = SwingUtils.buildImageIcons(SwingUtils.class, 
+				SwingUtils.iterator(path, 0, 20),100,100);
 
-		new MainWin(new LinkGameImpl(10, 6, cellIcons.length), cellIcons);
+		new MainWin(new LinkGameImpl(12, 7, cellIcons.length), cellIcons);
 
 	}
 

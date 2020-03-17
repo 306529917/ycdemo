@@ -5,7 +5,6 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -77,17 +76,17 @@ public class MainWin extends JFrame {
 		conPanel.add(stepLabel);
 
 		// 添加三个按钮, 第二个参数是 lambda 表达式
-		conPanel.add(buildBtn("重来一次", (ActionEvent e) -> {
+		conPanel.add(buildBtn("重来一次", (e) -> {
 			game.reset();
 			// 刷新地图控件
 			refresh();
 		}));
-		conPanel.add(buildBtn("下一关", (ActionEvent e) -> {
+		conPanel.add(buildBtn("下一关", (e) -> {
 			game.next();
 			// 刷新地图控件
 			refresh();
 		}));
-		conPanel.add(buildBtn("退出", (ActionEvent e) -> {
+		conPanel.add(buildBtn("退出", (e) -> {
 			// 关闭窗口
 			MainWin.this.dispose();
 		}));

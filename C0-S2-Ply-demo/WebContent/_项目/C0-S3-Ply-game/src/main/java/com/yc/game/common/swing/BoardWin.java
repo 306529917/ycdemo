@@ -85,6 +85,7 @@ public class BoardWin extends JFrame {
 	 */
 	protected void buildButton(JPanel panel) {
 		panel.add(buildBtn("重新开始", (e) -> {
+			System.out.println(game);
 			game.begin();
 			refresh();
 		}));

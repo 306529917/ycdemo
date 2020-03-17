@@ -98,4 +98,12 @@ public class BoardPanel extends JPanel {
 		return labels;
 	}
 
+	public void setCellIcons(ImageIcon[] cellIcons) {
+		this.cellIcons = cellIcons;
+	}
+
+	public ImageIcon[] getCellIcons() {
+		return cellIcons;
+	}
+
 }
