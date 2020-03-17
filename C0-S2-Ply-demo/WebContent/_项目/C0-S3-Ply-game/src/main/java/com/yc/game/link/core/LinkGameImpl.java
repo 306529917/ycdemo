@@ -11,7 +11,7 @@ public class LinkGameImpl extends LinkGameAbs {
 	@Override
 	public void begin() {
 		int value = 0;
-		int index = 0;
+		int index = (int) (Math.random() * imgCount);
 		int imgIndex = 0;
 		// 成对的放置图片
 		for (int y = 1; y < height - 1; y++) {
