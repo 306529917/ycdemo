@@ -1,6 +1,7 @@
 package com.yc.game.common.util;
 
 import java.awt.Component;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -43,10 +44,31 @@ public class SwingUtils {
 	 * @return
 	 */
 	public static ImageIcon[] buildImageIcons(Class<?> cls, Iterator<String> it) {
+		return buildImageIcons(cls, it, 0, 0);
+	}
+
+	public static ImageIcon[] buildImageIcons(Class<?> cls, Iterator<String> it, double rate) {
 		List<ImageIcon> list = new ArrayList<>();
 		while (it.hasNext()) {
 			String path = it.next();
-			list.add(getImageIcon(cls, path));
+			ImageIcon icon = getImageIcon(cls, path);
+			if (rate > 0) {
+				icon = change(icon, rate);
+			}
+			list.add(icon);
+		}
+		return list.toArray(new ImageIcon[list.size()]);
+	}
+
+	public static ImageIcon[] buildImageIcons(Class<?> cls, Iterator<String> it, int width, int height) {
+		List<ImageIcon> list = new ArrayList<>();
+		while (it.hasNext()) {
+			String path = it.next();
+			ImageIcon icon = getImageIcon(cls, path);
+			if (width > 0 && height > 0) {
+				icon = change(icon, width, height);
+			}
+			list.add(icon);
 		}
 		return list.toArray(new ImageIcon[list.size()]);
 	}
@@ -63,5 +85,39 @@ public class SwingUtils {
 			list.add(getImageIcon(cls, path));
 		}
 		return list.toArray(new ImageIcon[list.size()]);
+	}
+
+	/**
+	 * i 为放缩的倍数
+	 * @param image
+	 * @param i
+	 * @return
+	 */
+	public static ImageIcon change(ImageIcon image, double i) {
+		int width = (int) (image.getIconWidth() * i);
+		int height = (int) (image.getIconHeight() * i);
+		return change(image, width, height);
+	}
+
+	public static ImageIcon change(ImageIcon image, int width, int height) {
+		Image img = image.getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT);// 第三个值可以去查api是图片转化的方式
+		image.setImage(img);
+		return image;
+	}
+
+	public static Iterator<String> iterator(String mask, int begin, int end) {
+		return new Iterator<String>() {
+			private int index = begin;
+
+			@Override
+			public boolean hasNext() {
+				return index < end;
+			}
+
+			@Override
+			public String next() {
+				return String.format(mask, index++);
+			}
+		};
 	}
 }
