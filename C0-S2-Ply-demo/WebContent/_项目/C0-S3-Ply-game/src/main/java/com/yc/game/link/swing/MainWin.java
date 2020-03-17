@@ -50,7 +50,7 @@ public class MainWin extends BoardWin {
 				} else {
 					// 点击并第二张图片, 判断是否连接成功
 					game.link(bl.getBoardX() + 1, bl.getBoardY() + 1, point1.getBoardX() + 1, point1.getBoardY() + 1);
-					point1.setBorder(null);
+					point1.setBorder(BorderUIResource.getEtchedBorderUIResource());
 					point1 = null;
 				}
 				refresh();

@@ -7,6 +7,7 @@ import java.awt.Image;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
+import javax.swing.plaf.BorderUIResource;
 
 import com.yc.game.common.base.TwoArrayGame;
 import com.yc.game.common.util.LangUtils;
@@ -66,6 +67,7 @@ public class BoardPanel extends JPanel {
 		}
 		// 设置网格布局
 		boardPanel.setLayout(new GridLayout(game.getBoard().length, game.getBoard()[0].length));
+		boardPanel.setBorder(BorderUIResource.getEtchedBorderUIResource());
 		// 添加棋盘面板
 		add(boardPanel);
 		// 初始化棋盘图片控件

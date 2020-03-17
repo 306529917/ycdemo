@@ -119,11 +119,16 @@ public class BoardWin extends JFrame {
 		// 设置流式布局
 		panel.setLayout(new FlowLayout(FlowLayout.CENTER));
 		// 创建棋盘面板
-		boardPanel = new BoardPanel(game, cellIcons);
+		boardPanel = createBoardPanel();
+		if(boardPanel== null)new BoardPanel(game, cellIcons);
 		// 添加棋盘面板
 		panel.add(boardPanel);
 		// 将面板)放入窗体
 		add(panel, BorderLayout.CENTER);
+	}
+	
+	protected BoardPanel createBoardPanel() {
+		return null;
 	}
 
 }
