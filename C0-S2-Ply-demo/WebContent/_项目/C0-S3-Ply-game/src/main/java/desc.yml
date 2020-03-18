@@ -9,3 +9,6 @@ hidden:
    - .*/[$.].+
    # 所有的描述文件
    - .*/desc.yml
+
+zipEx: 
+   - .+imgs[^/.]*
