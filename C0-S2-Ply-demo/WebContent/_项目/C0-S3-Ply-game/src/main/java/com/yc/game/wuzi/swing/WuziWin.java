@@ -19,7 +19,7 @@ import com.yc.game.wuzi.core.Imgs;
  * @author 廖彦
  *
  */
-public class MainWin extends BoardWin {
+public class WuziWin extends BoardWin {
 
 	// 不解释
 	private static final long serialVersionUID = 1L;
@@ -29,7 +29,7 @@ public class MainWin extends BoardWin {
 	/**
 	 * 构建窗体
 	 */
-	public MainWin(WuziGame game) {
+	public WuziWin(WuziGame game) {
 		super("开森五子棋", game, Imgs.CHESS);
 		this.game = game;
 	}

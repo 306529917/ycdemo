@@ -1,19 +1,19 @@
-package com.yc.game.link;
+package com.yc.game.clean;
 
 import javax.swing.ImageIcon;
 
+import com.yc.game.clean.core.CleanGameImpl;
+import com.yc.game.clean.swing.CleanGameWin;
 import com.yc.game.common.util.SwingUtils;
-import com.yc.game.link.core.LinkGameImpl;
-import com.yc.game.link.swing.MainWin;
 
-public class Main {
+public class LinkGameMain {
 
 	public static void main(String[] args) {
 		String path = "/com/yc/game/common/imgs/cartoon/girl/%s.jpg";
 		ImageIcon[] cellIcons = SwingUtils.buildImageIcons(SwingUtils.class, 
-				SwingUtils.iterator(path, 0, 20),100,100);
+				SwingUtils.iterator(path, 0, 3),100,100);
 
-		new MainWin(new LinkGameImpl(12, 7, cellIcons.length), cellIcons);
+		new CleanGameWin(new CleanGameImpl(3, 4, cellIcons.length), cellIcons);
 
 	}
 

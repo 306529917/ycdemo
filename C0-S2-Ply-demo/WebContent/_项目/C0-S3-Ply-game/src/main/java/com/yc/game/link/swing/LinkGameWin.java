@@ -15,7 +15,7 @@ import com.yc.game.common.swing.BoardWin;
 import com.yc.game.common.util.SwingUtils;
 import com.yc.game.link.base.LinkGame;
 
-public class MainWin extends BoardWin {
+public class LinkGameWin extends BoardWin {
 
 	private static final long serialVersionUID = 1L;
 	protected BoardLabel point1;
@@ -23,7 +23,7 @@ public class MainWin extends BoardWin {
 
 	MouseAdapter ma;
 
-	public MainWin(LinkGame game, ImageIcon[] cellIcons) {
+	public LinkGameWin(LinkGame game, ImageIcon[] cellIcons) {
 		super("连连看", game, cellIcons);
 		this.game = game;
 	}
