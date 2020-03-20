@@ -92,9 +92,11 @@ public class BoardWin extends JFrame {
 		panel.add(createButton("不玩了", (e) -> BoardWin.this.dispose()));
 	}
 
-	protected void refresh() {
-		boardPanel.refresh();
-		repaint();
+	public void refresh() {
+		//SwingUtils.call(() -> {
+			boardPanel.refresh();
+			repaint();
+		//});
 	}
 
 	/**

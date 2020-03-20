@@ -2,11 +2,18 @@ package com.yc.game.clean.swing;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.plaf.BorderUIResource;
 
 import com.yc.game.clean.base.CleanGame;
+import com.yc.game.clean.core.CleanGameImpl;
 import com.yc.game.common.swing.BoardLabel;
 import com.yc.game.common.swing.BoardWin;
 
@@ -64,4 +71,28 @@ public class CleanGameWin extends BoardWin {
 		bl.setBorder(BorderUIResource.getEtchedBorderUIResource());
 		bl.addMouseListener(ma);
 	}
+
+	@Override
+	protected void buildButton(JPanel panel) {
+		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+		Date date = new Date();
+		JLabel timeLabel = new JLabel(sdf.format(date));
+		panel.add(timeLabel);
+		Timer timer = new Timer();
+		timer.schedule(new TimerTask() {
+			@Override
+			public void run() {
+				date.setTime(date.getTime() + 1000);
+				timeLabel.setText(sdf.format(date));
+			}
+		}, 1000, 1000);
+		panel.add(createButton("test", (e) -> {
+			CleanGameImpl g = (CleanGameImpl) game;
+			g.down();
+			refresh();
+		}));
+
+		super.buildButton(panel);
+	}
+
 }

@@ -8,6 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.ImageIcon;
+import javax.swing.SwingUtilities;
 
 /**
  * Swing 工具类
@@ -119,5 +120,9 @@ public class SwingUtils {
 				return String.format(mask, index++);
 			}
 		};
+	}
+
+	public static void call(Runnable task) {
+		SwingUtilities.invokeLater(task);
 	}
 }
