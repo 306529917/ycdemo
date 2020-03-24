@@ -82,6 +82,42 @@ public class SystemPropertyWin {
 		
 		text = new Text(composite, SWT.BORDER);
 		text.setBounds(122, 59, 279, 23);
+		
+		Label lbld_1 = new Label(composite, SWT.NONE);
+		lbld_1.setText("例如:\"书房的计算机\"");
+		lbld_1.setBounds(122, 94, 234, 17);
+		
+		Label lbld_2 = new Label(composite, SWT.NONE);
+		lbld_2.setText("计算机全名:");
+		lbld_2.setBounds(20, 129, 85, 17);
+		
+		Label lbld_2_1 = new Label(composite, SWT.NONE);
+		lbld_2_1.setText("工作组:");
+		lbld_2_1.setBounds(20, 162, 85, 17);
+		
+		Label lbld_2_2 = new Label(composite, SWT.NONE);
+		lbld_2_2.setText("Home");
+		lbld_2_2.setBounds(122, 129, 85, 17);
+		
+		Label lbld_2_2_1 = new Label(composite, SWT.NONE);
+		lbld_2_2_1.setText("WorkGroup");
+		lbld_2_2_1.setBounds(122, 162, 85, 17);
+		
+		Label lbld_2_3 = new Label(composite, SWT.WRAP);
+		lbld_2_3.setText("若要使用向导将计算机加入域或工作组, 请单击\"网络 ID\"");
+		lbld_2_3.setBounds(20, 213, 268, 42);
+		
+		Button btnId = new Button(composite, SWT.NONE);
+		btnId.setText("网络 ID(N)...");
+		btnId.setBounds(321, 213, 80, 27);
+		
+		Label lbld_2_3_1 = new Label(composite, SWT.WRAP);
+		lbld_2_3_1.setText("若要使用向导将计算机加入域或工作组, 请单击\"网络 ID\"");
+		lbld_2_3_1.setBounds(20, 273, 268, 42);
+		
+		Button btnc = new Button(composite, SWT.NONE);
+		btnc.setText("更改(C)...");
+		btnc.setBounds(321, 273, 80, 27);
 
 		TabItem tbtmNewItem_1 = new TabItem(tabFolder, SWT.NONE);
 		tbtmNewItem_1.setText("硬件");
