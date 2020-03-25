@@ -16,6 +16,8 @@ import org.eclipse.swt.layout.RowData;
 import swing2swt.layout.FlowLayout;
 import org.eclipse.wb.swt.SWTResourceManager;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.swt.custom.CLabel;
+import org.eclipse.swt.custom.CTabFolder;
 
 public class SystemPropertyWin {
 
@@ -55,8 +57,8 @@ public class SystemPropertyWin {
 	 */
 	protected void createContents() {
 		shell = new Shell();
-		shell.setSize(447, 496);
-		shell.setText("SWT Application");
+		shell.setSize(447, 620);
+		shell.setText("系统属性");
 		shell.setLayout(new BorderLayout(0, 0));
 
 		TabFolder tabFolder = new TabFolder(shell, SWT.NONE);
@@ -70,7 +72,7 @@ public class SystemPropertyWin {
 
 		Label label = new Label(composite, SWT.NONE);
 		label.setImage(SWTResourceManager.getImage(SystemPropertyWin.class, "/com/yc/swt/imgs/计算机.png"));
-		label.setBounds(10, 10, 47, 42);
+		label.setBounds(20, 10, 47, 42);
 		
 		Label lblNewLabel = new Label(composite, SWT.NONE);
 		lblNewLabel.setBounds(78, 22, 304, 17);
@@ -112,7 +114,7 @@ public class SystemPropertyWin {
 		btnId.setBounds(321, 213, 80, 27);
 		
 		Label lbld_2_3_1 = new Label(composite, SWT.WRAP);
-		lbld_2_3_1.setText("若要使用向导将计算机加入域或工作组, 请单击\"网络 ID\"");
+		lbld_2_3_1.setText("要重命名这台计算机, 或者更改其他域或工作组, 请单击\"更改\"");
 		lbld_2_3_1.setBounds(20, 273, 268, 42);
 		
 		Button btnc = new Button(composite, SWT.NONE);
@@ -124,9 +126,102 @@ public class SystemPropertyWin {
 
 		Composite composite_1 = new Composite(tabFolder, SWT.NONE);
 		tbtmNewItem_1.setControl(composite_1);
+		
+		Label label_1 = new Label(composite_1, SWT.CENTER);
+		label_1.setBounds(20, 19, 61, 17);
+		label_1.setText("设备管理器");
+		
+		Label label_1_1 = new Label(composite_1, SWT.CENTER);
+		label_1_1.setText("设备安装设置");
+		label_1_1.setBounds(20, 176, 78, 17);
+		
+		Composite composite_3 = new Composite(composite_1, SWT.BORDER);
+		composite_3.setBounds(10, 27, 403, 128);
+		
+		Label label_2 = new Label(composite_3, SWT.NONE);
+		label_2.setImage(SWTResourceManager.getImage(SystemPropertyWin.class, "/com/yc/swt/imgs/设备管理.png"));
+		label_2.setBounds(10, 10, 61, 49);
+		
+		Button btnNewButton_3 = new Button(composite_3, SWT.NONE);
+		btnNewButton_3.setBounds(174, 87, 215, 27);
+		btnNewButton_3.setText("New Button");
+		
+		Label lblNewLabel_1 = new Label(composite_3, SWT.NONE);
+		lblNewLabel_1.setBounds(93, 10, 296, 59);
+		lblNewLabel_1.setText("New Label");
+		
+		Composite composite_3_1 = new Composite(composite_1, SWT.BORDER);
+		composite_3_1.setBounds(10, 184, 403, 128);
+		
+		Label label_2_1 = new Label(composite_3_1, SWT.NONE);
+		label_2_1.setImage(SWTResourceManager.getImage(SystemPropertyWin.class, "/com/yc/swt/imgs/设备管理.png"));
+		label_2_1.setBounds(10, 10, 61, 49);
+		
+		Button btnNewButton_3_1 = new Button(composite_3_1, SWT.NONE);
+		btnNewButton_3_1.setText("New Button");
+		btnNewButton_3_1.setBounds(174, 87, 215, 27);
+		
+		Label lblNewLabel_1_1 = new Label(composite_3_1, SWT.NONE);
+		lblNewLabel_1_1.setText("New Label");
+		lblNewLabel_1_1.setBounds(93, 10, 296, 59);
 
 		TabItem tabItem = new TabItem(tabFolder, SWT.NONE);
 		tabItem.setText("高级");
+		
+		Composite composite_4 = new Composite(tabFolder, SWT.NONE);
+		tabItem.setControl(composite_4);
+		
+		Label label_3 = new Label(composite_4, SWT.NONE);
+		label_3.setAlignment(SWT.CENTER);
+		label_3.setBounds(16, 28, 32, 17);
+		label_3.setText("性能");
+		
+		Label label_3_1 = new Label(composite_4, SWT.NONE);
+		label_3_1.setText("用户配置文件");
+		label_3_1.setAlignment(SWT.CENTER);
+		label_3_1.setBounds(20, 173, 78, 17);
+		
+		Label label_3_1_1 = new Label(composite_4, SWT.NONE);
+		label_3_1_1.setText("启动和故障恢复");
+		label_3_1_1.setAlignment(SWT.CENTER);
+		label_3_1_1.setBounds(20, 320, 91, 17);
+		
+		Composite composite_3_1_1 = new Composite(composite_4, SWT.BORDER);
+		composite_3_1_1.setBounds(10, 36, 403, 128);
+		
+		Button btnNewButton_3_1_1 = new Button(composite_3_1_1, SWT.NONE);
+		btnNewButton_3_1_1.setText("New Button");
+		btnNewButton_3_1_1.setBounds(306, 87, 83, 27);
+		
+		Label lblNewLabel_1_1_1 = new Label(composite_3_1_1, SWT.NONE);
+		lblNewLabel_1_1_1.setText("New Label");
+		lblNewLabel_1_1_1.setBounds(10, 10, 379, 59);
+		
+		Label lblNewLabel_2 = new Label(composite_4, SWT.NONE);
+		lblNewLabel_2.setBounds(20, 10, 208, 17);
+		lblNewLabel_2.setText("New Label");
+		
+		Composite composite_3_1_1_1 = new Composite(composite_4, SWT.BORDER);
+		composite_3_1_1_1.setBounds(10, 181, 403, 128);
+		
+		Button btnNewButton_3_1_1_1 = new Button(composite_3_1_1_1, SWT.NONE);
+		btnNewButton_3_1_1_1.setText("New Button");
+		btnNewButton_3_1_1_1.setBounds(306, 87, 83, 27);
+		
+		Label lblNewLabel_1_1_1_1 = new Label(composite_3_1_1_1, SWT.NONE);
+		lblNewLabel_1_1_1_1.setText("New Label");
+		lblNewLabel_1_1_1_1.setBounds(10, 10, 379, 59);
+		
+		Composite composite_3_1_1_1_1 = new Composite(composite_4, SWT.BORDER);
+		composite_3_1_1_1_1.setBounds(10, 327, 403, 128);
+		
+		Button btnNewButton_3_1_1_1_1 = new Button(composite_3_1_1_1_1, SWT.NONE);
+		btnNewButton_3_1_1_1_1.setText("New Button");
+		btnNewButton_3_1_1_1_1.setBounds(306, 87, 83, 27);
+		
+		Label lblNewLabel_1_1_1_1_1 = new Label(composite_3_1_1_1_1, SWT.NONE);
+		lblNewLabel_1_1_1_1_1.setText("New Label");
+		lblNewLabel_1_1_1_1_1.setBounds(10, 10, 379, 59);
 
 		Composite composite_2 = new Composite(shell, SWT.NONE);
 		composite_2.setLayoutData(BorderLayout.SOUTH);
