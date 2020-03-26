@@ -1,6 +1,7 @@
 package com.yc.swt;
 
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.layout.FormLayout;
 import org.eclipse.swt.layout.GridLayout;
@@ -17,6 +18,8 @@ import org.eclipse.wb.swt.SWTResourceManager;
 import com.yc.game.common.util.SwtLabelPaintListner;
 import org.eclipse.swt.layout.FormData;
 import org.eclipse.swt.layout.FormAttachment;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
 
 public class RegisterWin {
 
@@ -37,6 +40,9 @@ public class RegisterWin {
 	private Button button_1;
 	private Button button_2;
 	private Button button_3;
+	private Combo combo;
+	private Combo combo_1;
+	private Combo combo_2;
 	private Label lblNewLabel;
 	private Button button_4;
 	private Composite composite_2;
@@ -137,6 +143,20 @@ public class RegisterWin {
 		text_4.setLayoutData(gd_text_4);
 		
 		button_4 = new Button(shell, SWT.NONE);
+		button_4.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				FileDialog filedlg=new FileDialog(shell,SWT.OPEN);
+				//设置文件对话框的标题
+				filedlg.setText("文件选择");
+				//设置初始路径
+				filedlg.setFilterPath("SystemRoot");
+				filedlg.setFilterExtensions(new String[] {"jpg","png","gif","bmp"});
+				//打开文件对话框，返回选中文件的绝对路径
+				String selected=filedlg.open();
+				System.out.println("您选中的文件路径为："+selected);
+			}
+		});
 		button_4.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
 		button_4.setText("选择照片");
 		
