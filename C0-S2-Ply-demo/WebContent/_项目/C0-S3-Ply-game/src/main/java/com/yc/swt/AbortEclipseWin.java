@@ -135,7 +135,7 @@ public class AbortEclipseWin {
 		try {
 			String line = null;
 			while ((line = br.readLine()) != null) {
-				// 将读入的文字追加到文本框中
+				// 将读入的文字追加到文本框中, \r\n 是换行符
 				text.setText(text.getText() + line + "\r\n");
 			}
 		} finally {
