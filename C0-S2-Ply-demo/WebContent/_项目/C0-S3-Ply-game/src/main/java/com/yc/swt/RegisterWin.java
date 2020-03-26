@@ -20,6 +20,7 @@ import org.eclipse.swt.layout.FormData;
 import org.eclipse.swt.layout.FormAttachment;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.graphics.Image;
 
 public class RegisterWin {
 
@@ -149,12 +150,11 @@ public class RegisterWin {
 				FileDialog filedlg=new FileDialog(shell,SWT.OPEN);
 				//设置文件对话框的标题
 				filedlg.setText("文件选择");
-				//设置初始路径
-				filedlg.setFilterPath("SystemRoot");
-				filedlg.setFilterExtensions(new String[] {"jpg","png","gif","bmp"});
+				filedlg.setFilterExtensions(new String[] {"*.jpg","*.png","*.gif","*.bmp"});
 				//打开文件对话框，返回选中文件的绝对路径
 				String selected=filedlg.open();
-				System.out.println("您选中的文件路径为："+selected);
+				Image img = new Image(shell.getDisplay(),selected);
+				lblNewLabel.setImage(img);
 			}
 		});
 		button_4.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
