@@ -65,9 +65,63 @@ public class SystemPropertyWin {
 
 		TabFolder tabFolder = new TabFolder(shell, SWT.NONE);
 		tabFolder.setLayoutData(BorderLayout.NORTH);
-
-		TabItem tbtmNewItem = new TabItem(tabFolder, SWT.NONE);
-		tbtmNewItem.setText("计算机名");
+		
+		TabItem tabItem_1 = new TabItem(tabFolder, SWT.NONE);
+		tabItem_1.setText("计算机名");
+		
+				Composite composite = new Composite(tabFolder, SWT.NONE);
+				tabItem_1.setControl(composite);
+				
+						Label label = new Label(composite, SWT.NONE);
+						label.setImage(SWTResourceManager.getImage(SystemPropertyWin.class, "/com/yc/swt/imgs/计算机.png"));
+						label.setBounds(20, 10, 47, 42);
+						
+						Label lblNewLabel = new Label(composite, SWT.NONE);
+						lblNewLabel.setBounds(78, 22, 304, 17);
+						lblNewLabel.setText("Windows 使用以下信息在网络中标识这台计算机");
+						
+						Label lbld = new Label(composite, SWT.NONE);
+						lbld.setBounds(20, 62, 85, 17);
+						lbld.setText("计算机描述(D):");
+						
+						text = new Text(composite, SWT.BORDER);
+						text.setBounds(122, 59, 279, 23);
+						
+						Label lbld_1 = new Label(composite, SWT.NONE);
+						lbld_1.setText("例如:\"书房的计算机\"");
+						lbld_1.setBounds(122, 94, 234, 17);
+						
+						Label lbld_2 = new Label(composite, SWT.NONE);
+						lbld_2.setText("计算机全名:");
+						lbld_2.setBounds(20, 129, 85, 17);
+						
+						Label lbld_2_1 = new Label(composite, SWT.NONE);
+						lbld_2_1.setText("工作组:");
+						lbld_2_1.setBounds(20, 162, 85, 17);
+						
+						Label lbld_2_2 = new Label(composite, SWT.NONE);
+						lbld_2_2.setText("Home");
+						lbld_2_2.setBounds(122, 129, 85, 17);
+						
+						Label lbld_2_2_1 = new Label(composite, SWT.NONE);
+						lbld_2_2_1.setText("WorkGroup");
+						lbld_2_2_1.setBounds(122, 162, 85, 17);
+						
+						Label lbld_2_3 = new Label(composite, SWT.WRAP);
+						lbld_2_3.setText("若要使用向导将计算机加入域或工作组, 请单击\"网络 ID\"");
+						lbld_2_3.setBounds(20, 213, 268, 42);
+						
+						Button btnId = new Button(composite, SWT.NONE);
+						btnId.setText("网络 ID(N)...");
+						btnId.setBounds(321, 213, 80, 27);
+						
+						Label lbld_2_3_1 = new Label(composite, SWT.WRAP);
+						lbld_2_3_1.setText("要重命名这台计算机, 或者更改其他域或工作组, 请单击\"更改\"");
+						lbld_2_3_1.setBounds(20, 273, 268, 42);
+						
+						Button btnc = new Button(composite, SWT.NONE);
+						btnc.setText("更改(C)...");
+						btnc.setBounds(321, 273, 80, 27);
 										
 												TabItem tbtmNewItem_1 = new TabItem(tabFolder, SWT.NONE);
 												tbtmNewItem_1.setText("硬件");
@@ -126,7 +180,7 @@ public class SystemPropertyWin {
 										
 										Label label_3 = new Label(composite_4, SWT.NONE);
 										label_3.setAlignment(SWT.CENTER);
-										label_3.setBounds(16, 28, 32, 17);
+										label_3.setBounds(24, 31, 32, 17);
 										label_3.setText("性能");
 										
 										Label label_3_1 = new Label(composite_4, SWT.NONE);
@@ -137,7 +191,7 @@ public class SystemPropertyWin {
 										Label label_3_1_1 = new Label(composite_4, SWT.NONE);
 										label_3_1_1.setText("启动和故障恢复");
 										label_3_1_1.setAlignment(SWT.CENTER);
-										label_3_1_1.setBounds(20, 315, 91, 17);
+										label_3_1_1.setBounds(20, 319, 91, 17);
 										
 										Composite composite_3_1_1 = new Composite(composite_4, SWT.BORDER);
 										composite_3_1_1.setBounds(16, 40, 403, 128);
@@ -148,7 +202,7 @@ public class SystemPropertyWin {
 										
 										Label lblNewLabel_1_1_1 = new Label(composite_3_1_1, SWT.NONE);
 										lblNewLabel_1_1_1.setText("視覺效果,處理器計劃,內存使用,以及虛擬內存");
-										lblNewLabel_1_1_1.setBounds(0, 0, 379, 59);
+										lblNewLabel_1_1_1.setBounds(10, 10, 379, 59);
 										
 										Label lblNewLabel_2 = new Label(composite_4, SWT.NONE);
 										lblNewLabel_2.setBounds(23, 10, 208, 17);
@@ -175,63 +229,6 @@ public class SystemPropertyWin {
 										Label lblNewLabel_1_1_1_1_1 = new Label(composite_3_1_1_1_1, SWT.NONE);
 										lblNewLabel_1_1_1_1_1.setText("系統啟動,系統故障和調試信息");
 										lblNewLabel_1_1_1_1_1.setBounds(10, 10, 379, 59);
-								
-								TabItem tabItem_1 = new TabItem(tabFolder, SWT.NONE);
-								tabItem_1.setText("New Item");
-								
-										Composite composite = new Composite(tabFolder, SWT.NONE);
-										tabItem_1.setControl(composite);
-										
-												Label label = new Label(composite, SWT.NONE);
-												label.setImage(SWTResourceManager.getImage(SystemPropertyWin.class, "/com/yc/swt/imgs/计算机.png"));
-												label.setBounds(20, 10, 47, 42);
-												
-												Label lblNewLabel = new Label(composite, SWT.NONE);
-												lblNewLabel.setBounds(78, 22, 304, 17);
-												lblNewLabel.setText("Windows 使用以下信息在网络中标识这台计算机");
-												
-												Label lbld = new Label(composite, SWT.NONE);
-												lbld.setBounds(20, 62, 85, 17);
-												lbld.setText("计算机描述(D):");
-												
-												text = new Text(composite, SWT.BORDER);
-												text.setBounds(122, 59, 279, 23);
-												
-												Label lbld_1 = new Label(composite, SWT.NONE);
-												lbld_1.setText("例如:\"书房的计算机\"");
-												lbld_1.setBounds(122, 94, 234, 17);
-												
-												Label lbld_2 = new Label(composite, SWT.NONE);
-												lbld_2.setText("计算机全名:");
-												lbld_2.setBounds(20, 129, 85, 17);
-												
-												Label lbld_2_1 = new Label(composite, SWT.NONE);
-												lbld_2_1.setText("工作组:");
-												lbld_2_1.setBounds(20, 162, 85, 17);
-												
-												Label lbld_2_2 = new Label(composite, SWT.NONE);
-												lbld_2_2.setText("Home");
-												lbld_2_2.setBounds(122, 129, 85, 17);
-												
-												Label lbld_2_2_1 = new Label(composite, SWT.NONE);
-												lbld_2_2_1.setText("WorkGroup");
-												lbld_2_2_1.setBounds(122, 162, 85, 17);
-												
-												Label lbld_2_3 = new Label(composite, SWT.WRAP);
-												lbld_2_3.setText("若要使用向导将计算机加入域或工作组, 请单击\"网络 ID\"");
-												lbld_2_3.setBounds(20, 213, 268, 42);
-												
-												Button btnId = new Button(composite, SWT.NONE);
-												btnId.setText("网络 ID(N)...");
-												btnId.setBounds(321, 213, 80, 27);
-												
-												Label lbld_2_3_1 = new Label(composite, SWT.WRAP);
-												lbld_2_3_1.setText("要重命名这台计算机, 或者更改其他域或工作组, 请单击\"更改\"");
-												lbld_2_3_1.setBounds(20, 273, 268, 42);
-												
-												Button btnc = new Button(composite, SWT.NONE);
-												btnc.setText("更改(C)...");
-												btnc.setBounds(321, 273, 80, 27);
 
 		Composite composite_2 = new Composite(shell, SWT.NONE);
 		composite_2.setLayoutData(BorderLayout.SOUTH);
