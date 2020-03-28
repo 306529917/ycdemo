@@ -180,7 +180,7 @@ public class SystemPropertyWin {
 										
 										Label label_3 = new Label(composite_4, SWT.NONE);
 										label_3.setAlignment(SWT.CENTER);
-										label_3.setBounds(24, 31, 32, 17);
+										label_3.setBounds(21, 34, 32, 17);
 										label_3.setText("性能");
 										
 										Label label_3_1 = new Label(composite_4, SWT.NONE);
@@ -194,7 +194,7 @@ public class SystemPropertyWin {
 										label_3_1_1.setBounds(20, 319, 91, 17);
 										
 										Composite composite_3_1_1 = new Composite(composite_4, SWT.BORDER);
-										composite_3_1_1.setBounds(16, 40, 403, 128);
+										composite_3_1_1.setBounds(10, 43, 403, 128);
 										
 										Button btnNewButton_3_1_1 = new Button(composite_3_1_1, SWT.NONE);
 										btnNewButton_3_1_1.setText("設置(S)");
