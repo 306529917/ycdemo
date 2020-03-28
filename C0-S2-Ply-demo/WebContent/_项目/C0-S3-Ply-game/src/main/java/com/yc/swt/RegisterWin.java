@@ -15,7 +15,8 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.wb.swt.SWTResourceManager;
 
-import com.yc.game.common.util.SwtLabelPaintListner;
+import com.yc.swt.util.SwtLabelPaintListner;
+
 import org.eclipse.swt.layout.FormData;
 import org.eclipse.swt.layout.FormAttachment;
 import org.eclipse.swt.events.SelectionAdapter;

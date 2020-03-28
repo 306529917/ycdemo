@@ -1,4 +1,4 @@
-package com.yc.game.common.util;
+package com.yc.swt.util;
 
 import org.eclipse.swt.events.PaintEvent;
 import org.eclipse.swt.events.PaintListener;
