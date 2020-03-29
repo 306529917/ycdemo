@@ -24,12 +24,15 @@ import org.eclipse.swt.layout.FormAttachment;
 
 public class AbortEclipseWin {
 
+	// 图片的集合
 	private static List<Image> imgList = new ArrayList<>();
 
+	// 静态块
 	static {
 		Image img = null;
 		for (int i = 1; i <= 18; i++) {
-			img = SWTResourceManager.getImage(AbortEclipseWin.class, "/com/yc/swt/imgs/eclipse/" + i + ".png");
+			img = SWTResourceManager.getImage(AbortEclipseWin.class, 
+					"/com/yc/swt/imgs/eclipse/" + i + ".png");
 			imgList.add(img);
 		}
 	}
@@ -82,7 +85,8 @@ public class AbortEclipseWin {
 
 		Label label = new Label(shlAbortEclipseIde, SWT.NONE);
 		label.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-		label.setImage(SWTResourceManager.getImage(AbortEclipseWin.class, "/com/yc/swt/imgs/eclipse/left.png"));
+		label.setImage(SWTResourceManager.getImage(AbortEclipseWin.class, 
+				"/com/yc/swt/imgs/eclipse/left.png"));
 
 		text = new Text(shlAbortEclipseIde, SWT.WRAP | SWT.V_SCROLL);
 		GridData gd_text = new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1);
@@ -106,7 +110,8 @@ public class AbortEclipseWin {
 		btnNewButton.setText("Information Details");
 
 		Label label_1 = new Label(composite_1, SWT.NONE);
-		label_1.setImage(SWTResourceManager.getImage(AbortEclipseWin.class, "/com/yc/swt/imgs/eclipse/help.png"));
+		label_1.setImage(SWTResourceManager.getImage(AbortEclipseWin.class, 
+				"/com/yc/swt/imgs/eclipse/help.png"));
 		FormData fd_label_1 = new FormData();
 		fd_label_1.bottom = new FormAttachment(100, -9);
 		fd_label_1.right = new FormAttachment(btnNewButton, -12);
