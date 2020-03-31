@@ -45,9 +45,9 @@
 			</build>
 		</profile>
 		<profile>
-			<!-- <activation>
+			<activation>
 				<activeByDefault>true</activeByDefault>
-			</activation> -->
+			</activation>
 			<id>web</id>
 			<dependencies>
 				<!-- thymeleaf 启动器依赖 -->

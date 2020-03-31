@@ -62,9 +62,15 @@ function Maps(){
 				[0,0,0,0,0,0,0,0,0,0]
 			]
 		];	
-	var index = 0;
+	// 关数
+	this.index = 0;
 	this.next = function (){
-		return maps [ index ++ % maps.length ];
+		return maps [ this.index ++ % maps.length ];
+	}
+	
+	this.next = async function(){
+		var ret = await axios.post("next?index="+ ++this.index).then(res=>{return res.data});
+		return ret;
 	}
 }
 

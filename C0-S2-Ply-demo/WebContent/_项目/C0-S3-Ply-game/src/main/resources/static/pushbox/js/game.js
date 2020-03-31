@@ -9,11 +9,14 @@ function Game() {
 	this.isOver = null;
 	// 记录移动的步数
 	this.stepNumber = 0;
+	// 关数
+	this.index;
 
-	this.next = function() {
+	this.next = async function() {
 		this.stepNumber = 0;
 		this.isOver = false;
-		this.map = this.maps.next();
+		this.map = await this.maps.next();
+		this.index = this.maps.index;
 		this.mapOld = clone(this.map);
 		return this.map;
 	}
@@ -34,7 +37,7 @@ function Game() {
 	this.getMap = function() {
 		return this.map;
 	}
-
+	
 	this.up = function() {
 		var xy = this.moveMan(0, -1);
 		this.map[xy[1]][xy[0]] = 8;

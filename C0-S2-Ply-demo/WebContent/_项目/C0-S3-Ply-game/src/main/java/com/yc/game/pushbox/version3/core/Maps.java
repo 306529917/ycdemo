@@ -14,11 +14,19 @@ public class Maps {
 	private static int index = 0;
 
 	public static int[][] next() {
-		// 获取资源流
-		InputStream in = Maps.class.getResourceAsStream("/com/yc/game/pushbox/maps/" + ++index + ".map");
-		if (in == null) {
+		int[][] ret = next(++index);
+		if(ret==null) {
 			index = 0;
 			return next();
+		} else {
+			return ret;
+		}
+	}
+	public static int[][] next(int index) {
+		// 获取资源流
+		InputStream in = Maps.class.getResourceAsStream("/com/yc/game/pushbox/maps/" + index + ".map");
+		if (in == null) {
+			return null;
 		}
 		// 字节流转字符流
 		InputStreamReader isr = new InputStreamReader(in);

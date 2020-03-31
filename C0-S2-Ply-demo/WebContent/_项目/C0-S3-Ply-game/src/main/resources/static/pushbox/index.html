@@ -2,14 +2,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>推箱子网页版</title>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script type="text/javascript" src="js/map.js"></script>
 <script type="text/javascript" src="js/game.js"></script>
 <style type="text/css">
 </style>
 <script type="text/javascript">
-	function keydown(e) {
+	async function keydown(e) {
 		if ( e.keyCode < 37 || e.keyCode > 40 ){
 			return;
 		}
@@ -20,42 +21,60 @@
 		bindMap();
 		if(game.youWin()){
 			alert("你赢了, 共用了"+game.getStepNumber()+"步");
-			map = game.next();
+			map = await game.next();
 			bindMap();
 		}
 	}
+	
+	function restart(){
+		map = game.reset();
+		bindMap();
+	}
+	async function next(){
+		map = await game.next();
+		bindMap();
+	}
 </script>
 </head>
-<body onkeydown="keydown(event)">
-	<div id="main">
-		<div id="map">
+<body onkeydown="keydown(event)" onload="load() ">
+	<div id="main" style="padding: 20px;">
+		<h1>推箱子网页版</h1>
+		<div id="map" style="float: left">
 			<div v-for="row in map" style="height: 30px">
 				<img v-for="col in row" v-bind:src="'imgs/'+col.value+'.gif'">
 			</div>
 		</div>
-		<div id="ctl">
-		
+		<div id="ctl" style="padding: 20px;float: left;text-align: center;">
+			<h2>{{'第'+game.index+'关'}}</h2>
+			<span>{{'第'+game.stepNumber+'步'}}</span><br><br>
+			<button style="width:100px" onclick="restart()">重新开始</button><br><br>
+			<button style="width:100px" onclick="next()">下  一  关</button>
 		</div>
 	</div>
 
 	<script type="text/javascript">
-		var game = new Game();
-		var map = game.next();
-		var mapo = [];
-		bindMap();
-		var mapv = new Vue({
-			el : '#map',
-			data : {
-				map : mapo
-			}
-		})
+		var game;
+		var map;
+		var mapo;
+		async function load(){
+			game = new Game();
+			map = await game.next();
+			mapo = [];
+			bindMap();
+			var mapv = new Vue({
+				el : '#main',
+				data : {
+					map : mapo,
+					game : game
+				}
+			})
+		}
+		// 同步界面
 		function bindMap() {
 			for (var y = 0; y < map.length; y++) {
 				mapo[y] || mapo.push([]);
 				for (var x = 0; x < map[y].length; x++) {
-					if( ! mapo[y][x]){
-						mapo[y][x] = {};
-					}
+					mapo[y][x] || ( mapo[y][x] = {} )==1;
 					mapo[y][x].value = map[y][x];
 				}
 			}
