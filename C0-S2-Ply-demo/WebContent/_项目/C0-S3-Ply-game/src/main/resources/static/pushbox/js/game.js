@@ -10,13 +10,12 @@ function Game() {
 	// 记录移动的步数
 	this.stepNumber = 0;
 	// 关数
-	this.index;
+	this.getIndex = ()=>{return this.maps.index};
 
 	this.next = async function() {
 		this.stepNumber = 0;
 		this.isOver = false;
 		this.map = await this.maps.next();
-		this.index = this.maps.index;
 		this.mapOld = clone(this.map);
 		return this.map;
 	}

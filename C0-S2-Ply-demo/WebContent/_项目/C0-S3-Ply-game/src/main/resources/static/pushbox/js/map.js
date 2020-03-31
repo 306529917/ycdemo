@@ -64,10 +64,11 @@ function Maps(){
 		];	
 	// 关数
 	this.index = 0;
+	// 本地地图
 	this.next = function (){
 		return maps [ this.index ++ % maps.length ];
 	}
-	
+	// 远程获取地图
 	this.next = async function(){
 		var ret = await axios.post("next?index="+ ++this.index).then(res=>{return res.data});
 		return ret;
