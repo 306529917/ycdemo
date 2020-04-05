@@ -54,7 +54,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 
     
   <div class="content">
-    <div><span><a href="user/login">[登录]</a><a class="link-regist" href="user/register">[免费注册]</a></span></div>
+    <div><span><a href="login.html">[登录]</a><a class="link-regist" href="register.html">[免费注册]</a></span></div>
   </div>
 </div>
   </div>
@@ -67,8 +67,8 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
   <div class="content">
     <ul class="topnav">
 <li id="wechat"><a class="link4" target="_blank" title="中华书局官方微信">微信<span><p><img src="sites/all/themes/dushu/images/qrcode_crbook.jpg"/></p></span></a></li>
-<li class="ddnewhead_cart"><a dd_name="购物车" name="购物车" href="cart"><i class="icon_card"></i>购物车<b id="cart_items_count"></b></a></li>
-<li id="myorder"><a class="link4" target="_blank" title="我的订单" href="#">我的订单</a></li>
+<li class="ddnewhead_cart"><a dd_name="购物车" name="购物车" href="cart.html"><i class="icon_card"></i>购物车<b id="cart_items_count"></b></a></li>
+<li id="myorder"><a class="link4" target="_blank" title="我的订单" href="user_order.html">我的订单</a></li>
 <li id="myaccount"><a class="link4" target="_blank" title="我的书屋" href="user/0">我的书屋</a></li>
 <li id="help-center"><a class="link4" target="_blank" title="帮助中心" href="node/10">帮助中心</a></li>
 
@@ -91,7 +91,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 
     
   <div class="content">
-    <form action="/user/register" method="post" id="search-block-form" accept-charset="UTF-8"><div><div class="container-inline">
+    <form action="/register.html" method="post" id="search-block-form" accept-charset="UTF-8"><div><div class="container-inline">
       <h2 class="element-invisible">搜索表单</h2>
     <div class="form-item form-type-textfield form-item-search-block-form">
   <label class="element-invisible" for="edit-search-block-form--2">搜索 </label>
@@ -149,7 +149,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
   <div class="breadcrumb" id="breadcrumb"> <h2 class="element-invisible">你在这里</h2><div class="breadcrumb"><a href="/">首页</a> » <a href="/user">用户帐户</a></div></div>
 <div id="content">
                 <a id="main-content"></a>
-	        <h2 class="element-invisible">主标签</h2><ul class="tabs primary"><li class="active"><a href="/user/register" class="active">创建新帐号<span class="element-invisible">（活动标签）</span></a></li>
+	        <h2 class="element-invisible">主标签</h2><ul class="tabs primary"><li class="active"><a href="/register.html" class="active">创建新帐号<span class="element-invisible">（活动标签）</span></a></li>
 <li><a href="/user">登录</a></li>
 <li><a href="/user/password">重设密码</a></li>
 </ul>	                            <div class="region region-content">
@@ -157,7 +157,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 
     
   <div class="content">
-    <form class="user-info-from-cookie" enctype="multipart/form-data" action="/user/register" method="post" id="user-register-form" accept-charset="UTF-8"><div><div id="edit-account" class="form-wrapper"><div class="form-item form-type-textfield form-item-name">
+    <form class="user-info-from-cookie" enctype="multipart/form-data" action="/register.html" method="post" id="user-register-form" accept-charset="UTF-8"><div><div id="edit-account" class="form-wrapper"><div class="form-item form-type-textfield form-item-name">
   <label for="edit-name">用户名 <span class="form-required" title="此项必填。">*</span></label>
  <input class="username form-text required" type="text" id="edit-name" name="name" value="" size="60" maxlength="60" />
 <div class="description">允许空格；除英文句号（.）、横线（-）、单引号（'）和下划线（_）外的标点符号不允许。</div>
