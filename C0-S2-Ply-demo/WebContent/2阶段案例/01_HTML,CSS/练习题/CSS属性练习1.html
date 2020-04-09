@@ -105,6 +105,15 @@ li>input{
 				a: function(index){
 					if(event.altKey){
 						event.srcElement.value = this.qlist[index].answer;
+						var a1 = event.srcElement.value;
+						var a2 = this.qlist[index].answer;
+						a1 = a1.replace(/\s+/g, '');
+						a2 = a2.replace(/\s+/g, '');
+						var arr = a1.split(":");
+						$("h1").css(arr[0],arr[1]);
+						a1 = a1.toLowerCase();
+						a2 = a2.toLowerCase();
+						this.qlist[index].visibility = a1 == a2 ? 'visible':'hidden';
 					}
 				}
 			}
