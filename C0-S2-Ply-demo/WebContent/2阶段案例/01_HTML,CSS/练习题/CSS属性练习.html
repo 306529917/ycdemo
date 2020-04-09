@@ -16,31 +16,43 @@ div {
 
 div:nth-child(1) {
 	float: left;
-	width: 45%
+	width: 35%
 }
 
 div:nth-child(2) {
 	float: right;
-	width: 50%
+	width: 60%
+}
+li{
+	padding: 2px
 }
 li>*:nth-child(2),li>*:nth-child(3){
-	float: right
+	float: right;
+}
+li>span{
+	width:60%
+}
+li>input{
+	width:30%
 }
 </style>
 </head>
 <body>
 	<div>
-		<h3>标题: CSS简介</h3>
-		<p><b>第 1 段:</b> 在Web早期样式和内容是不区分的，比如可以通过&lt;bold>标签来显示加粗字体。随着页面内容的丰富，浏览器性能的提高，内容和样式的耦合使得HTML文件难以理解和维护。CSS的出现正是为了将样式分离到独立的文件中。
-		<p><b>第 2 段:</b> 层叠样式表（Cascading Style Sheets，CSS），又称串样式列表、层次结构式样式表文件，一种用来为结构化文档（如HTML文档或XML应用）添加样式（字体、间距和颜色等）的计算机语言，由W3C定义和维护。
+		<h1>CSS简介</h1>
+		<p>在Web早期样式和内容是不区分的，比如可以通过&lt;bold>标签来显示加粗字体。随着页面内容的丰富，浏览器性能的提高，内容和样式的耦合使得HTML文件难以理解和维护。CSS的出现正是为了将样式分离到独立的文件中。
+		<p>层叠样式表（Cascading Style Sheets，CSS），又称串样式列表、层次结构式样式表文件，一种用来为结构化文档（如HTML文档或XML应用）添加样式（字体、间距和颜色等）的计算机语言，由W3C定义和维护。
 	</div>
 	<div id="lx">
-		<h3>请按照要求完成练习</h3>
+		<h2>请按照要求完成对左侧标题 (CSS简介) 的样式进行修改</h2>
 		<ol>
 			<li v-for="(q,index) in qlist">
 				<span>{{q.name}}</span>: 
-				<input v-on:change="answer(index)" v-bind:answer="q.answer" placeholder="输入样式值">
-				<span v-if="q.ok" class="ret">OK </span>
+				<img v-bind:style="q" src="OK.png" width="20px" >
+				<input v-bind:answer="q.answer" placeholder="输入样式值"
+					v-on:keypress="a(index)" 
+					v-on:change="answer(index)"
+					v-on:blur="answer(index)" >
 			</li>
 		</ol>
 	</div>
@@ -49,16 +61,34 @@ li>*:nth-child(2),li>*:nth-child(3){
 			el : '#lx',
 			data : {
 				qlist:[
-					{name:'设置标题的字体为"微软雅黑"',	answer:'test', ok:false},
-					{name:'设置标题的字体为"微软雅黑"',	answer:'test', ok:false},
-					{name:'设置标题的字体为"微软雅黑"',	answer:'test', ok:false},
+					{name:'将字体设置为红色,使用英文单词',answer:'color:red', visibility:'hidden'},
+					{name:'将字体设置为绿色,使用 #??? 格式',answer:'color:#0f0', visibility:'hidden'},
+					{name:'将字体设置为蓝色,使用 #????? 格式',answer:'color:#0000ff', visibility:'hidden'},
+					{name:'将字体设置为黄色(红+绿),使用 #rgb 函数',answer:'color:rgb(255,255,0)', visibility:'hidden'},
+					{name:'将字体设置为紫色(红+蓝)半透明,使用 #rgba 函数',answer:'color:rgb(255,0,255,0.5)', visibility:'hidden'},
+					{name:'将字体为"宋体"',	answer:'font-family:宋体', visibility:'hidden'},
+					{name:'将字体为"微软雅黑"',	answer:'font-family:微软雅黑', visibility:'hidden'},
+					{name:'将字体大小设置为20px',	answer:'font-size:20px', visibility:'hidden'},
 				],
 			},
 			methods:{
 				answer: function(index){
-					var a1 = event.srcElement.value;
-					var a2 = this.qlist[index].answer;
-					this.qlist[index].ok = a1 == a2;
+					if(event.srcElement.value){
+						var a1 = event.srcElement.value;
+						var a2 = this.qlist[index].answer;
+						a1 = a1.replace(/\s+/g, '');
+						a2 = a2.replace(/\s+/g, '');
+						var arr = a1.split(":");
+						$("h1").css(arr[0],arr[1]);
+						a1 = a1.toLowerCase();
+						a2 = a2.toLowerCase();
+						this.qlist[index].visibility = a1 == a2 ? 'visible':'hidden';
+					}
+				},
+				a: function(index){
+					if(event.key='q' && event.ctrlKey){
+						event.srcElement.value = this.qlist[index].answer;
+					}
 				}
 			}
 		})
