@@ -41,16 +41,30 @@ li>input{
 h1{
 	background-color: #eee
 }
+#d1{
+	width: 200px;
+	height: 200px;
+	background-color: #ddd
+}
+#d2{
+	width: 100px;
+	height: 100px;
+	background-color: blue
+}
+#d3{
+	width: 50px;
+	height: 50px;
+	background-color: #999
+}
 </style>
 </head>
 <body>
 	<div>
-		<h1>CSS简介</h1>
-		<p>在Web早期样式和内容是不区分的，比如可以通过&lt;bold>标签来显示加粗字体。随着页面内容的丰富，浏览器性能的提高，内容和样式的耦合使得HTML文件难以理解和维护。CSS的出现正是为了将样式分离到独立的文件中。
-		<p>层叠样式表（Cascading Style Sheets，CSS），又称串样式列表、层次结构式样式表文件，一种用来为结构化文档（如HTML文档或XML应用）添加样式（字体、间距和颜色等）的计算机语言，由W3C定义和维护。
+		<h1>DIV布局与定位</h1>
+		<div id="d1"><div id="d2"><div id="d3"></div></div></div>
 	</div>
 	<div id="lx">
-		<h2>请按照要求完成对左边的<font color="blue">标题 (CSS简介)</font>的样式进行修改</h2>
+		<h2>请按照要求完成对左边的<font color="blue">蓝色的DIV</font>的样式进行修改</h2>
 		<ol>
 			<li v-for="(q,index) in qlist">
 				<span>{{q.name}}</span>: 
