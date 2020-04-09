@@ -56,7 +56,9 @@ li>*:nth-child(2),li>*:nth-child(3){
 			},
 			methods:{
 				answer: function(index){
-					this.qlist[index].ok = event.srcElement.value == this.qlist[index].answer;
+					var a1 = event.srcElement.value;
+					var a2 = this.qlist[index].answer;
+					this.qlist[index].ok = a1 == a2;
 				}
 			}
 		})
