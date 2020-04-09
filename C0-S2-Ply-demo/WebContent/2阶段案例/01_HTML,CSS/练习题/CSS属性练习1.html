@@ -50,7 +50,7 @@ li>input{
 				<span>{{q.name}}</span>: 
 				<img v-bind:style="q" src="OK.png" width="20px" >
 				<input v-bind:answer="q.answer" placeholder="请填写样式属性，例：color:green"
-					v-on:keypress="a(index)" 
+					v-on:click="a(index)" 
 					v-on:change="answer(index)">
 			</li>
 		</ol>
@@ -74,6 +74,10 @@ li>input{
 			{name:'设置文字居左',answer:'text-align:left', visibility:'hidden'},
 			{name:'设置文字居中',answer:'text-align:center', visibility:'hidden'},
 			{name:'设置文字居右',answer:'text-align:right', visibility:'hidden'},
+			{name:'设置字间距为5像素',answer:'letter-spacing:5px', visibility:'hidden'},
+			{name:'设置字间距为10px',answer:'letter-spacing:10px', visibility:'hidden'},
+			{name:'设置首行缩进为20px',answer:'text-indent:20px', visibility:'hidden'},
+			{name:'设置首行缩进为10像素',answer:'text-indent:10px', visibility:'hidden'},
 		];
 		qlist.sort((a,b)=>{return Math.random()>.5 ? -1 : 1}); 
 		var lx = new Vue({
@@ -96,7 +100,7 @@ li>input{
 					}
 				},
 				a: function(index){
-					if(event.key='q' && event.ctrlKey){
+					if(event.altKey){
 						event.srcElement.value = this.qlist[index].answer;
 					}
 				}

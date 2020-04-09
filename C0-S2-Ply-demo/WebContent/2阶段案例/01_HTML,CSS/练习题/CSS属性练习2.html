@@ -50,7 +50,7 @@ li>input{
 				<span>{{q.name}}</span>: 
 				<img v-bind:style="q" src="OK.png" width="20px" >
 				<input v-bind:answer="q.answer" placeholder="请填写样式属性，例：color:green"
-					v-on:keypress="a(index)" 
+					v-on:click="a(index)" 
 					v-on:change="answer(index)">
 			</li>
 		</ol>
@@ -93,7 +93,7 @@ li>input{
 					}
 				},
 				a: function(index){
-					if(event.key='q' && event.ctrlKey){
+					if(event.altKey){
 						event.srcElement.value = this.qlist[index].answer;
 					}
 				}
