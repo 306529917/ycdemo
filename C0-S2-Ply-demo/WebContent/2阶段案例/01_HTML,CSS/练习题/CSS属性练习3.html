@@ -64,15 +64,16 @@ h1{
 所有HTML元素可以看作盒子，在CSS中，"box model"这一术语是用来设计和布局时使用。
 CSS盒模型本质上是一个盒子，封装周围的HTML元素，它包括：边距，边框，填充，和实际内容。
 盒模型允许我们在其它元素和周围元素边框之间的空间放置元素。
-下面的图片说明了盒子模型(Box Model)：<br><img src="box.jpg">
+下面的图片说明了盒子模型(Box Model)：
+<p style="text-align: center;"><img src="box.jpg"></p>
 		</div></div>
 	</div>
 	<div id="lx">
 		<h2>请按照要求完成对左边的<font color="green">绿色的DIV</font>的样式进行修改</h2>
-		<dl>
-			<dt>注意!
-			<dd>由于div宽度设置原因, 可能某些属性设置会看不出变化
-		</dl>
+		<fieldset style="background: #eee;border: 1px solid;">
+			<legend>注意!</legend>
+			由于div宽度或高度设置原因, 可能某些样式设置会看不出变化
+		</fieldset>
 		<ol>
 			<li v-for="(q,index) in qlist">
 				<span>{{q.name}}</span>: 
