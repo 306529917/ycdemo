@@ -47,32 +47,43 @@ h1{
 	background-color: #ddd;
 	overflow: auto;
 }
-#d2{
-	width: 90%;
-	height: 200px;
-	color: white;
+#dg{
+	width: 50px;
+	height: 50px;
 	background-color: green;
-	overflow: auto;
 }
-
+#db{
+	width: 60px;
+	height: 60px;
+	background-color: blue;
+}
+#dr{
+	width: 80px;
+	height: 40px;
+	background-color: red;
+}
+span[id]{
+	background: #aaa
+}
 </style>
 </head>
 <body>
 	<div>
-		<h1>盒子模型</h1>
-		<div id="d1"><div id="d2">
-所有HTML元素可以看作盒子，在CSS中，"box model"这一术语是用来设计和布局时使用。
-CSS盒模型本质上是一个盒子，封装周围的HTML元素，它包括：边距，边框，填充，和实际内容。
-盒模型允许我们在其它元素和周围元素边框之间的空间放置元素。
-下面的图片说明了盒子模型(Box Model)：
-<p style="text-align: center;"><img src="box.jpg"></p>
-		</div></div>
+		<h1>浮动与定位</h1>
+		<div id="d1">
+			<span id='s1'>我是SPAN, id='s1'</span>
+			<div id="dg"></div>
+			<span id='s2'>我是SPAN, id='s2'</span>
+			<div id="db"></div>
+			<span id='s3'>我是SPAN, id='s3'</span>
+			<div id="dr"></div>
+		</div>
 	</div>
 	<div id="lx">
-		<h2>请按照要求完成对左边的<font color="green">绿色的DIV</font>的样式进行修改</h2>
+		<h2>请按照要求完成对左边指定元素的样式进行修改</h2>
 		<fieldset style="background: #eee;border: 1px solid;">
 			<legend>注意!</legend>
-			由于div宽度或高度设置原因, 可能某些样式设置会看不出变化
+			由于div大小或位置设置原因, 可能某些样式设置会看不出效果
 		</fieldset>
 		<ol>
 			<li v-for="(q,index) in qlist">
@@ -86,32 +97,17 @@ CSS盒模型本质上是一个盒子，封装周围的HTML元素，它包括：�
 	</div>
 	<script type="text/javascript">
 		var qlist=[
-			{name:'设置宽度为80像素',answer:'width:80px', visibility:'hidden'},
-			{name:'设置高度为80像素',answer:'height:80px', visibility:'hidden'},
-			{name:'设置宽度为70%',answer:'width:70%', visibility:'hidden'},
-			{name:'设置高度为百分之50',answer:'height:50%', visibility:'hidden'},
-			{name:'设置宽度为120px',answer:'width:120px', visibility:'hidden'},
-			{name:'设置高度为120px',answer:'height:120px', visibility:'hidden'},
-			{name:'设置外距为20px',answer:'margin:20px', visibility:'hidden'},
-			{name:'设置上外边距为30px',answer:'margin-top:30px', visibility:'hidden'},
-			{name:'设置下外边距为30px',answer:'margin-bottom:30px', visibility:'hidden'},
-			{name:'设置内距为20px',answer:'padding:20px', visibility:'hidden'},
-			{name:'设置左内边距为30px',answer:'padding-left:30px', visibility:'hidden'},
-			{name:'设置右内边距为30px',answer:'padding-right:30px', visibility:'hidden'},
-			{name:'设置内距为5%',answer:'padding:5%', visibility:'hidden'},
-			{name:'设置上内边距为10%',answer:'padding-top:10%', visibility:'hidden'},
-			{name:'设置下内边距为10%',answer:'padding-bottom:10%', visibility:'hidden'},
-			{name:'设置外边距为百分之8',answer:'margin:8%', visibility:'hidden'},
-			{name:'设置左外边距为百分之10',answer:'margin-left:10%', visibility:'hidden'},
-			{name:'设置右外边距为百分之15',answer:'margin-right:15%', visibility:'hidden'},
+			{name:'设置绿色DIV浮动居左',answer:'float:left', visibility:'hidden', selector:'#dg'},
+			{name:'设置绿色DIV浮动居右',answer:'float:right', visibility:'hidden', selector:'#dg'},
+			{name:'设置蓝色DIV浮动居左',answer:'float:left', visibility:'hidden', selector:'#db'},
+			{name:'设置蓝色DIV浮动居右',answer:'float:right', visibility:'hidden', selector:'#db'},
+			{name:'设置SPAN(id="s1")浮动居左',answer:'float:left', visibility:'hidden', selector:'#s1'},
+			{name:'设置SPAN(id="s1")浮动居右',answer:'float:right', visibility:'hidden', selector:'#s1'},
+			{name:'设置SPAN(id="s2")浮动居左',answer:'float:left', visibility:'hidden', selector:'#s2'},
+			{name:'设置SPAN(id="s2")浮动居右',answer:'float:right', visibility:'hidden', selector:'#s2'},
+			
 		];
-		qlist.sort((a,b)=>{return Math.random()>.5 ? -1 : 1});
-		qlist.push({name:'同时设置内边距, 上为10%,左右为5%',answer:'padding:10% 5%', visibility:'hidden'});
-		qlist.push({name:'同时设置内边距, 上为20px,左右为40px,下为60px',answer:'padding:20px 40px 60px', visibility:'hidden'});
-		qlist.push({name:'同时设置内边距, 上下左右分别为: 20px,5%,5px,10%',answer:'padding:20px 10% 5% 5px', visibility:'hidden'});
-		qlist.push({name:'同时设置外边距, 上下左右分别为: 20px,10px',answer:'margin:20px 10px', visibility:'hidden'});
-		qlist.push({name:'同时设置外边距, 上为10px,左右为30px,下为50px',answer:'margin:10px 30px 50px', visibility:'hidden'});
-		qlist.push({name:'同时设置外边距, 上下左右分别为: 10px,10%,15px,5%',answer:'margin:10px 5% 10% 15px', visibility:'hidden'});
+		//qlist.sort((a,b)=>{return Math.random()>.5 ? -1 : 1});
 		
 		var lx = new Vue({
 			el : '#lx',
@@ -124,12 +120,15 @@ CSS盒模型本质上是一个盒子，封装周围的HTML元素，它包括：�
 						var a1 = event.srcElement.value;
 						var a2 = q.answer;
 						var arr = a1.split(":");
-						$("#d2").css(arr[0],arr[1]);
+						$(q.selector).css(arr[0],arr[1]);
 						a1 = a1.replace(/\s+/g, '');
 						a2 = a2.replace(/\s+/g, '');
 						a1 = a1.toLowerCase();
 						a2 = a2.toLowerCase();
 						q.visibility = a1 == a2 ? 'visible':'hidden';
+						if(a1 == a2 && q.msg){
+							alert(msg);
+						}
 					}
 				},
 				a: function(q){
