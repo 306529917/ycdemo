@@ -99,7 +99,12 @@ CSS盒模型本质上是一个盒子，封装周围的HTML元素，它包括：�
 			{name:'设置左外边距为百分之10',answer:'margin-left:10%', visibility:'hidden'},
 			{name:'设置右外边距为百分之10',answer:'margin-right:10%', visibility:'hidden'},
 		];
-		//qlist.sort((a,b)=>{return Math.random()>.5 ? -1 : 1}); 
+		qlist.sort((a,b)=>{return Math.random()>.5 ? -1 : 1});
+		qlist.push({name:'设置同时设置上下左右内边距分别10%和5%',answer:'padding:10% 5%', visibility:'hidden'});
+		qlist.push({name:'设置同时设置上内边距为20px, 左右内边距为40px, 下内边距为60px',answer:'padding:20px 40px 60px', visibility:'hidden'});
+		qlist.push({name:'设置同时设置上下左右外边距分别20px和10px',answer:'margin:20px 10px', visibility:'hidden'});
+		qlist.push({name:'设置同时设置上外边距为10px, 左右外边距为30px, 下内边距为50px',answer:'margin:10px 30px 50px', visibility:'hidden'});
+		
 		var lx = new Vue({
 			el : '#lx',
 			data : {
@@ -110,10 +115,10 @@ CSS盒模型本质上是一个盒子，封装周围的HTML元素，它包括：�
 					if(event.srcElement.value){
 						var a1 = event.srcElement.value;
 						var a2 = q.answer;
-						a1 = a1.replace(/\s+/g, '');
-						a2 = a2.replace(/\s+/g, '');
 						var arr = a1.split(":");
 						$("#d2").css(arr[0],arr[1]);
+						a1 = a1.replace(/\s+/g, '');
+						a2 = a2.replace(/\s+/g, '');
 						a1 = a1.toLowerCase();
 						a2 = a2.toLowerCase();
 						q.visibility = a1 == a2 ? 'visible':'hidden';
