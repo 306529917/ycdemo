@@ -100,10 +100,12 @@ CSS盒模型本质上是一个盒子，封装周围的HTML元素，它包括：�
 			{name:'设置右外边距为百分之10',answer:'margin-right:10%', visibility:'hidden'},
 		];
 		qlist.sort((a,b)=>{return Math.random()>.5 ? -1 : 1});
-		qlist.push({name:'设置同时设置上下左右内边距分别10%和5%',answer:'padding:10% 5%', visibility:'hidden'});
-		qlist.push({name:'设置同时设置上内边距为20px, 左右内边距为40px, 下内边距为60px',answer:'padding:20px 40px 60px', visibility:'hidden'});
-		qlist.push({name:'设置同时设置上下左右外边距分别20px和10px',answer:'margin:20px 10px', visibility:'hidden'});
-		qlist.push({name:'设置同时设置上外边距为10px, 左右外边距为30px, 下内边距为50px',answer:'margin:10px 30px 50px', visibility:'hidden'});
+		qlist.push({name:'同时设置上内边距为10%, 左右内边距为5%',answer:'padding:10% 5%', visibility:'hidden'});
+		qlist.push({name:'同时设置上内边距为20px, 左右内边距为40px, 下内边距为60px',answer:'padding:20px 40px 60px', visibility:'hidden'});
+		qlist.push({name:'同时设置上下左右内边距分别为: 20px, 5%, 5px, 10%',answer:'padding:20px 10% 5% 5px', visibility:'hidden'});
+		qlist.push({name:'同时设置上下左右外边距分别20px和10px',answer:'margin:20px 10px', visibility:'hidden'});
+		qlist.push({name:'同时设置上外边距为10px, 左右外边距为30px, 下内边距为50px',answer:'margin:10px 30px 50px', visibility:'hidden'});
+		qlist.push({name:'同时设置上下左右外边距分别为: 10px, 10%, 15px, 5%',answer:'margin:10px 5% 10% 15px', visibility:'hidden'});
 		
 		var lx = new Vue({
 			el : '#lx',
