@@ -56,7 +56,7 @@ h1{
 			<li v-for="(q,index) in qlist">
 				<span>{{q.name}}</span>: 
 				<img v-bind:style="q" src="OK.png" width="20px" >
-				<input v-bind:answer="q.answer" placeholder="请填写样式属性，例：color:green"
+				<input v-bind:answer="q.answer" placeholder="请填写样式，例：color:green"
 					v-on:click="a(q)" 
 					v-on:change="answer(q)">
 			</li>
