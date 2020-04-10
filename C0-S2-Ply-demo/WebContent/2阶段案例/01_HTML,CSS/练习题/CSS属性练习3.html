@@ -42,29 +42,32 @@ h1{
 	background-color: #eee
 }
 #d1{
-	width: 200px;
-	height: 200px;
-	background-color: #ddd
+	height: 300px;
+	background-color: #ddd;
+	overflow: auto;
 }
 #d2{
-	width: 100px;
-	height: 100px;
-	background-color: blue
+	width: 90%;
+	height: 200px;
+	color: white;
+	background-color: green;
+	overflow: auto;
 }
-#d3{
-	width: 50px;
-	height: 50px;
-	background-color: #999
-}
+
 </style>
 </head>
 <body>
 	<div>
-		<h1>DIV布局与定位</h1>
-		<div id="d1"><div id="d2"><div id="d3"></div></div></div>
+		<h1>盒子模型</h1>
+		<div id="d1"><div id="d2">
+所有HTML元素可以看作盒子，在CSS中，"box model"这一术语是用来设计和布局时使用。
+CSS盒模型本质上是一个盒子，封装周围的HTML元素，它包括：边距，边框，填充，和实际内容。
+盒模型允许我们在其它元素和周围元素边框之间的空间放置元素。
+下面的图片说明了盒子模型(Box Model)：<br><img src="box.jpg">
+		</div></div>
 	</div>
 	<div id="lx">
-		<h2>请按照要求完成对左边的<font color="blue">蓝色的DIV</font>的样式进行修改</h2>
+		<h2>请按照要求完成对左边的<font color="green">绿色的DIV</font>的样式进行修改</h2>
 		<ol>
 			<li v-for="(q,index) in qlist">
 				<span>{{q.name}}</span>: 
@@ -77,26 +80,26 @@ h1{
 	</div>
 	<script type="text/javascript">
 		var qlist=[
-			{name:'设置边框样式为直线',answer:'border-style:solid', visibility:'hidden'},
-			{name:'设置边框样式为虚线',answer:'border-style:dashed', visibility:'hidden'},
-			{name:'设置边框样式为点状(dotted)',answer:'border-style:dotted', visibility:'hidden'},
-			{name:'设置边框宽度为1px',answer:'border-width:1px', visibility:'hidden'},
-			{name:'设置边框宽度为3像素',answer:'border-width:3px', visibility:'hidden'},
-			{name:'设置上边框宽度为6像素',answer:'border-top-width:6px', visibility:'hidden'},
-			{name:'设置下边框宽度为6像素',answer:'border-down-width:6px', visibility:'hidden'},
-			{name:'设置左边框宽度为6像素',answer:'border-left-width:6px', visibility:'hidden'},
-			{name:'设置右边框宽度为6像素',answer:'border-right-width:6px', visibility:'hidden'},
-			{name:'设置边框颜色为red',answer:'border-color:red', visibility:'hidden'},
-			{name:'设置上边框颜色为#0f0',answer:'border-top-color:#0f0', visibility:'hidden'},
-			{name:'设置下边框颜色为#666666',answer:'border-down-color:#666666', visibility:'hidden'},
-			{name:'设置左边框颜色为#ffff00',answer:'border-left-color:#ffff00', visibility:'hidden'},
-			{name:'设置右边框颜色为#999',answer:'border-right-color:#999', visibility:'hidden'},
-			{name:'设置背景颜色为#AAA',answer:'background-color:#AAA', visibility:'hidden'},
-			{name:'设置背景颜色为#777888',answer:'background-color:#777888', visibility:'hidden'},
-			{name:'设置背景为图片OK.png',answer:'background-image:url(OK.png)', visibility:'hidden'},
-			{name:'设置背景为图片OK.png, 并且不平铺',answer:'background:url(OK.png) no-repeat', visibility:'hidden'},
+			{name:'设置宽度为80像素',answer:'width:80px', visibility:'hidden'},
+			{name:'设置高度为80像素',answer:'height:80px', visibility:'hidden'},
+			{name:'设置宽度为70%',answer:'width:70%', visibility:'hidden'},
+			{name:'设置高度为百分之50',answer:'height:50%', visibility:'hidden'},
+			{name:'设置宽度为120px',answer:'width:120px', visibility:'hidden'},
+			{name:'设置高度为120px',answer:'height:120px', visibility:'hidden'},
+			{name:'设置外距为20px',answer:'margin:20px', visibility:'hidden'},
+			{name:'设置上外边距为30px',answer:'margin-top:30px', visibility:'hidden'},
+			{name:'设置下外边距为30px',answer:'margin-bottom:30px', visibility:'hidden'},
+			{name:'设置内距为20px',answer:'padding:20px', visibility:'hidden'},
+			{name:'设置左内边距为30px',answer:'padding-left:30px', visibility:'hidden'},
+			{name:'设置右内边距为30px',answer:'padding-right:30px', visibility:'hidden'},
+			{name:'设置内距为5%',answer:'padding:5%', visibility:'hidden'},
+			{name:'设置上内边距为10%',answer:'padding-top:10%', visibility:'hidden'},
+			{name:'设置下内边距为10%',answer:'padding-bottom:10%', visibility:'hidden'},
+			{name:'设置外边距为百分之8',answer:'margin:8%', visibility:'hidden'},
+			{name:'设置左外边距为百分之10',answer:'margin-left:10%', visibility:'hidden'},
+			{name:'设置右外边距为百分之10',answer:'margin-right:10%', visibility:'hidden'},
 		];
-		qlist.sort((a,b)=>{return Math.random()>.5 ? -1 : 1}); 
+		//qlist.sort((a,b)=>{return Math.random()>.5 ? -1 : 1}); 
 		var lx = new Vue({
 			el : '#lx',
 			data : {
@@ -110,7 +113,7 @@ h1{
 						a1 = a1.replace(/\s+/g, '');
 						a2 = a2.replace(/\s+/g, '');
 						var arr = a1.split(":");
-						$("h1").css(arr[0],arr[1]);
+						$("#d2").css(arr[0],arr[1]);
 						a1 = a1.toLowerCase();
 						a2 = a2.toLowerCase();
 						q.visibility = a1 == a2 ? 'visible':'hidden';
