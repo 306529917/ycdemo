@@ -33,7 +33,7 @@ li>*:nth-child(2),li>*:nth-child(3){
 	float: right;
 }
 li>span{
-	width:60%
+	width:60%;
 }
 li>input{
 	width:30%
@@ -68,6 +68,10 @@ CSS盒模型本质上是一个盒子，封装周围的HTML元素，它包括：�
 	</div>
 	<div id="lx">
 		<h2>请按照要求完成对左边的<font color="green">绿色的DIV</font>的样式进行修改</h2>
+		<dl>
+			<dt>注意!
+			<dd>由于div宽度设置原因, 可能某些属性设置会看不出变化
+		</dl>
 		<ol>
 			<li v-for="(q,index) in qlist">
 				<span>{{q.name}}</span>: 
@@ -97,15 +101,15 @@ CSS盒模型本质上是一个盒子，封装周围的HTML元素，它包括：�
 			{name:'设置下内边距为10%',answer:'padding-bottom:10%', visibility:'hidden'},
 			{name:'设置外边距为百分之8',answer:'margin:8%', visibility:'hidden'},
 			{name:'设置左外边距为百分之10',answer:'margin-left:10%', visibility:'hidden'},
-			{name:'设置右外边距为百分之10',answer:'margin-right:10%', visibility:'hidden'},
+			{name:'设置右外边距为百分之15',answer:'margin-right:15%', visibility:'hidden'},
 		];
 		qlist.sort((a,b)=>{return Math.random()>.5 ? -1 : 1});
-		qlist.push({name:'同时设置上内边距为10%, 左右内边距为5%',answer:'padding:10% 5%', visibility:'hidden'});
-		qlist.push({name:'同时设置上内边距为20px, 左右内边距为40px, 下内边距为60px',answer:'padding:20px 40px 60px', visibility:'hidden'});
-		qlist.push({name:'同时设置上下左右内边距分别为: 20px, 5%, 5px, 10%',answer:'padding:20px 10% 5% 5px', visibility:'hidden'});
-		qlist.push({name:'同时设置上下左右外边距分别20px和10px',answer:'margin:20px 10px', visibility:'hidden'});
-		qlist.push({name:'同时设置上外边距为10px, 左右外边距为30px, 下内边距为50px',answer:'margin:10px 30px 50px', visibility:'hidden'});
-		qlist.push({name:'同时设置上下左右外边距分别为: 10px, 10%, 15px, 5%',answer:'margin:10px 5% 10% 15px', visibility:'hidden'});
+		qlist.push({name:'同时设置内边距, 上为10%,左右为5%',answer:'padding:10% 5%', visibility:'hidden'});
+		qlist.push({name:'同时设置内边距, 上为20px,左右为40px,下为60px',answer:'padding:20px 40px 60px', visibility:'hidden'});
+		qlist.push({name:'同时设置内边距, 上下左右分别为: 20px,5%,5px,10%',answer:'padding:20px 10% 5% 5px', visibility:'hidden'});
+		qlist.push({name:'同时设置外边距, 上下左右分别为: 20px,10px',answer:'margin:20px 10px', visibility:'hidden'});
+		qlist.push({name:'同时设置外边距, 上为10px,左右为30px,下为50px',answer:'margin:10px 30px 50px', visibility:'hidden'});
+		qlist.push({name:'同时设置外边距, 上下左右分别为: 10px,10%,15px,5%',answer:'margin:10px 5% 10% 15px', visibility:'hidden'});
 		
 		var lx = new Vue({
 			el : '#lx',
