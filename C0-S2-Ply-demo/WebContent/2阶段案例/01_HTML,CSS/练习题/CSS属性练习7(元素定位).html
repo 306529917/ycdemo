@@ -50,8 +50,8 @@ h1{
 #d2{
 	width: 60%;
 	height: 150px;
-	color: white;
-	background-color: green;
+	color: blue;
+	background-color: rgba(0,255,0,0.5);
 	overflow: auto;
 }
 
@@ -61,7 +61,7 @@ h1{
 	<div>
 		<h1>元素定位</h1>
 		<div id="d1">
-		前面的内容
+		<p style="background: #999">前面的内容</p>
 		<div id="d2">
 CSS position属性用于指定一个元素在文档中的定位方式。top、right、bottom、left 属性则决定了该元素的最终位置。
 <h4>文档流</h4>
@@ -79,7 +79,7 @@ CSS position属性用于指定一个元素在文档中的定位方式。top、ri
 <li><b>fixed:</b> 不为元素预留空间，而是通过指定元素相对于屏幕视口（viewport）的位置来指定元素位置。元素的位置在屏幕滚动时不会改变。打印时，元素会出现在的每页的固定位置
 </ol>
 		</div>
-		后面的内容
+		<p style="background: #aaa">后面的内容</p>
 		</div>
 	</div>
 	<div id="lx">
