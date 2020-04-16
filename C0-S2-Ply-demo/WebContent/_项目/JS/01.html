@@ -23,6 +23,13 @@ legend {
 	font-weight: bold;
 }
 </style>
+</head>
+<body>
+	<fieldset>
+		<legend>请点击灯泡</legend>
+		<img id="img" src="images/01/pic_bulboff.gif" onclick="changeImg()"><br>
+	</fieldset>
+</body>
 <script>
 	function changeImg() {
 		if (img.src.indexOf("pic_bulboff.gif") > 0) {
@@ -32,11 +39,4 @@ legend {
 		}
 	}
 </script>
-</head>
-<body>
-	<fieldset>
-		<legend>请点击灯泡</legend>
-		<img id="img" src="images/01/pic_bulboff.gif" onclick="changeImg()"><br>
-	</fieldset>
-</body>
 </html>
