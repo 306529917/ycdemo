@@ -454,6 +454,18 @@ public class DBHelper {
 		}
 	}
 	
+	public static String and(String sql, String condition, Object value, List<Object  > params) {
+		if (isEmpty(value) == false) {
+			sql += " and " + condition;
+			params.add(value);
+			return sql;
+		}
+		return sql;
+	}
+
+	private static boolean isEmpty(Object value) {
+		return value == null || value instanceof String && value.toString().trim().isEmpty();
+	}
 	/**
 	 * 将 List<Map<String,Object>> 转换成 List<T>  T 表示一个未知的实体类
 	 * @param list	要转换的数据的集合

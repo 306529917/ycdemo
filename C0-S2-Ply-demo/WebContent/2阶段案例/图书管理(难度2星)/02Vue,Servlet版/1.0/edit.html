@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>编辑图书</title>
+<link href="css/style.default.css" rel="stylesheet">
+<link href="css/select2.css" rel="stylesheet" />
+<link href="css/style.datatables.css" rel="stylesheet">
+<link href="css/datatables.responsive.css" rel="stylesheet">
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="https://unpkg.com/vue"></script>
+<script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
+<script type="text/javascript" src="/C0-S2-Ply-demo/_js/util.js"></script>
+<style type="text/css">
+label {
+	width: 100px;
+	display: inline-block;
+	text-align: left;
+}
+form{
+	margin: 50px auto
+}
+li{
+	list-style-type: none;
+	text-align: center;
+	padding: 10px
+}
+input,select{
+	width: 200px;
+}
+input[type=button]{
+	width: auto;
+}
+h3, li:last-child label{
+	text-align: center;
+}
+</style>
+</head>
+<body>
+<h3>图书信息编辑</h3>
+<form id="app" method="post" style="margin: 10px">
+	<ul>
+	<li><label>编号:</label><input v-model="book.bookid" disabled="disabled"> 
+	<li><label>书名:</label><input v-model="book.bookname">
+	<li><label>作者:</label><input v-model="book.bookauthor"> 
+	<li><label>出版社:</label>
+		<input v-model="book.bookpress" list="pis">
+		<datalist id="pis">
+			<option v-for="p in pressItems" >{{p.bookpress}}</option>
+		</datalist>
+	<li><label>出版时间:</label><input v-model="book.pressdate"> 
+	<li><label>数量:</label><input v-model="book.bookcount"> 
+	<li><label>图片:</label><input v-model="book.bookimage">
+	<li>
+		<label><input type="button" value="保  存" @click="save" class="btn btn-default btn-rounded"></label>
+		<label><input type="button" value="放  弃" @click="back" class="btn btn-default btn-rounded"></label>
+	</li>
+	</ul>
+</form>
+<script type="text/javascript">
+
+	var path = window.location.href.split("?") //分割url
+	if(path.length>1){
+		var id = path[1].split("=")[1];
+	}
+	
+	var v = new Vue({
+		el : "#app",
+		data : {
+			pressItems:[],
+			book:{
+				bookid:0,
+				bookname:null,
+				bookauthor:null,
+				bookpress:null,
+				pressdate:new Date().format("yyyy-MM-dd"),
+				bookcount:1,
+				bookimage:null,
+			}
+		},
+		created : function(){
+			this.$http.get("/C0-S2-Ply-demo/图书管理/4.0/book.do?op=getPressItems").then(res => {
+				populateArray(res.data, this.pressItems);
+			})
+			if(id){
+				this.$http.get("/C0-S2-Ply-demo/图书管理/4.0/book.do?op=get&bookid="+id).then(res => {
+					populateObject(res.data, this.book);
+				})
+			}
+		},
+		methods : {
+			save(){
+				this.$http.get("/C0-S2-Ply-demo/图书管理/4.0/book.do?op=save",{params:this.book},{emulateJSON:true}).then(res => { 
+					if(res.data.code){
+						alert("图书保存成功!");
+						location.href = "index.html";
+					} else {
+						alert(res.data.msg);
+					}
+				});
+			},
+			back(){
+				history.back();
+			}
+		}
+	})
+
+</script>
+</body>
+</html>

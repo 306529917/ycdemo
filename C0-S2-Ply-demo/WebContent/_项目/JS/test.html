@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+html,body,div,iframe{
+	height: 100%;
+}
+iframe{
+	width:100%
+}
+</style>
+<script type="text/javascript">
+function go(){
+	console.info(f.contentWindow);
+	f.contentWindow.history.go(1);
+}
+function bk(){
+	console.info(f.contentWindow);
+	f.contentWindow.history.go(-1);
+}
+</script>
+</head>
+<body>
+<button onclick="go()">前进</button>
+<button onclick="bk()">回退</button>
+<div>
+<iframe id="f" src="a.html"></iframe>
+</div>
+</body>
+</html>

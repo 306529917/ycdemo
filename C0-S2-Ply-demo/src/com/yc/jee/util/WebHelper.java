@@ -6,8 +6,10 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.Arrays;
+import java.util.Map.Entry;
 
 import javax.servlet.ServletContext;
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.PageContext;
 
@@ -70,4 +72,9 @@ public class WebHelper {
 		return file;
 	}
 
+	public static void printParams(ServletRequest request) {
+		for(Entry<String, String[]> m : request.getParameterMap().entrySet()) {
+			System.out.println(m.getKey() + ": " + Arrays.toString(m.getValue()));
+		}
+	}
 }
