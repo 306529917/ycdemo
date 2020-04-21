@@ -1,4 +1,8 @@
-<form method="post">
-<input type="submit" value="refresh" formaction="actuator/refresh">
-<input type="submit" value="test" formaction="test">
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<h3>刷新参数必须使用 POST 请求, 请求地址为 actuator/refresh</h3>
+<form action="http://127.0.0.1/test">
+<input type="button" value="refresh" 
+onclick="$.post('http://127.0.0.1/actuator/refresh',null,function(data){alert('ok');$('#t').append(data+'<br>')})">
+<input type="submit" value="test" >
 </form>
+<div id="t"></div>
