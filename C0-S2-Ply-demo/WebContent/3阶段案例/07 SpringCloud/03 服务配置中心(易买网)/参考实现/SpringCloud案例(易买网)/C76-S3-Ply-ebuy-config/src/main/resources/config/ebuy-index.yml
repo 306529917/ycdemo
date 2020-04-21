@@ -35,7 +35,7 @@ feign:
     enabled: true
     
     
-test: 测试数据222222222
+test: 测试数据3333333
 
 management:
   endpoint:
