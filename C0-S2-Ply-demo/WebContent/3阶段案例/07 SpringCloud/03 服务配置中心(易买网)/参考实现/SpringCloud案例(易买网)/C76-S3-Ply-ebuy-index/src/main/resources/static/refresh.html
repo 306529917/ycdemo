@@ -1,8 +1,4 @@
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-
-<form action="http://127.0.0.1/test">
-<input type="button" value="refresh" 
-onclick="$.post('http://127.0.0.1/actuator/refresh',null,function(data){alert('ok');$('#t').append(data+'<br>')})">
-<input type="submit" value="test" >
+<form>
+<input type="submit" value="refresh" formaction="actuator/refresh">
+<input type="submit" value="test" formaction="test">
 </form>
-<div id="t"></div>
