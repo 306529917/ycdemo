@@ -4,6 +4,19 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<script type="text/javascript">
+var date = new Date(2019,4,1);
+console.info('Sun, 31 Dec 2021 12:00:00 UTC');
+console.info(date);
+console.info(date.toString());
+console.info(date.toUTCString());
+console.info(date.toGMTString());
+console.info(date.toLocaleString());
+
+document.cookie="name=zhangsan;path=/;expires="+date.toString();
+document.cookie="pwd=123";
+alert(document.cookie);
+</script>
 <body>
 <a href="b.html">b</a>
 </body>
