@@ -24,6 +24,10 @@ public class Result {
 		this.msg = msg;
 	}
 
+	public Result(int code) {
+		this.code = code;
+	}
+	
 	public static Result failure(String msg, Object data) {
 		return new Result(0, msg, data);
 	}
