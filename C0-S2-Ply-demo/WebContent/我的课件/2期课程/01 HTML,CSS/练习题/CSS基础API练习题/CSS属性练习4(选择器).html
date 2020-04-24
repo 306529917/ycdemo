@@ -163,6 +163,8 @@ h1{
 			q('所有的 class=dlc2 的元素', '.dlc2'),
 			q('所有的 dlc3类 的元素', '.dlc3'),
 			q('id=dt1 的元素', '#dt1'),
+			q('id=dt1 和 id=dt2 的元素', '#dt1,#dt2'),
+			q('class=dlc1 和 id=dt3 的元素', '.dlc1,#dt3'),
 			q('id=dt2 的元素', '#dt2'),
 			q('id=dt3 的元素', '#dt3'),
 			q('id=dt4 的元素', '#dt4'),
@@ -175,10 +177,9 @@ h1{
 			q('class=dlc2元素子dt元素', '.dlc2>dt'),
 			q('class=dlc1元素后代dt元素', '.dlc1 dt'),
 			q('class=dlc2元素后代dt元素', '.dlc2 dt'),
-			q('class=dlc1元素子a元素', '.dlc1 a', null, '哈哈, 没效果吧, 仔细看看, a 不是class=dlc1元素的子元素, 是它的孙子(后代元素)'),
-			q('class=dlc2元素子a元素', '.dlc2 a', null, '哈哈, 没效果吧, 仔细看看, a 不是class=dlc2元素的子元素, 是它的孙子(后代元素)'),
+			q('class=dlc1元素子a元素', '.dlc1>a', null, '哈哈, 没效果吧, 仔细看看, a 不是class=dlc1元素的子元素, 是它的孙子(后代元素)'),
 			q('class=dlc1元素后代a元素', '.dlc1 a'),
-			q('class=dlc2元素后代a元素', '.dlc2 a'),
+			q('class=dlc2元素子dd元素', '.dlc2>dd'),
 			];
 		qlist.sort((a,b)=>{return Math.random()>.5 ? -1 : 1});
 
