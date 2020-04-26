@@ -140,13 +140,13 @@ body {
 
 /* searchcar类元素里面的 txt类元素  (搜索框搜索栏（input）设置)
 	 宽416 高38 行高38 文本缩进40 
-	背景图：images/search.png, 不重复， 图片位移 12,9
+	背景图：../images/search.png, 不重复， 图片位移 12,9
 */
 .searchcar .txt {
 	width: 416px;
 	height: 38px;
 	line-height: 38px;
-	background: url(images/search.png) no-repeat 12px 9px;
+	background: url(../images/search.png) no-repeat 12px 9px;
 	text-indent: 40px;
 }
 
@@ -177,7 +177,7 @@ body {
 /* buy 类元素 里面的 a (设置我的购物车)
 	宽158 高38 行高38 字体14 字颜色 #37ab40 缩进 56 
 	 向左浮动   边框 1px solid #dddddd  
-	 背景图  images/buycar.png 不重复   位置偏移 14,10
+	 背景图  ../images/buycar.png 不重复   位置偏移 14,10
 */
 .buy a {
 	float: left;
@@ -189,7 +189,7 @@ body {
 	color: #37ab40;
 	font-size: 14px;
 	line-height: 38px;
-	background: url(images/buycar.png) no-repeat 14px 10px;
+	background: url(../images/buycar.png) no-repeat 14px 10px;
 	text-indent: 56px;
 }
 
@@ -298,7 +298,7 @@ body {
 
 /* .flist 类元素里面的 li (水果列表) 
 	宽198 高44 边框 1px solid #f7f7f7 上边框宽度0 
-	行高44   文本居中   背景图 ：images/sprite.png  不重复    位移 33,9
+	行高44   文本居中   背景图 ：../images/sprite.png  不重复    位移 33,9
 */
 .flist li {
 	width: 198px;
@@ -307,7 +307,7 @@ body {
 	border-top: 0;
 	line-height: 44px;
 	text-align: center;
-	background: url(images/sprite.png) no-repeat 33px 9px;
+	background: url(../images/sprite.png) no-repeat 33px 9px;
 }
 
 /* .flist 类元素里面的第2个 li (雪碧图位置设置, 请采用 nth-child选择器)
@@ -347,11 +347,11 @@ body {
 
 /* .flist 类元素里面的a (食品分类列表)  
 	高度198  宽度 44 字体大小 14  向右浮动
-	背景图  images/sprite.png 不重复    偏移170 -291  
+	背景图  ../images/sprite.png 不重复    偏移170 -291  
 */
 .flist a {
 	font-size: 14px;
-	background: url(images/sprite.png) no-repeat 170px -291px;
+	background: url(../images/sprite.png) no-repeat 170px -291px;
 	float: right;
 	width: 198px;
 	height: 44px;
@@ -384,12 +384,12 @@ body {
 
 /* .lfbtu 类元素 (左右按钮) 
 	宽25高25 绝对定位   底边距 123  左边距 12  鼠标光标样式：手型（pointer）
-	背景图 images/sprite.png  不重复   偏移  0, -350
+	背景图 ../images/sprite.png  不重复   偏移  0, -350
 */
 .lfbtu {
 	width: 25px;
 	height: 25px;
-	background: url(images/sprite.png) no-repeat 0px -350px;
+	background: url(../images/sprite.png) no-repeat 0px -350px;
 	position: absolute;
 	bottom: 123px;
 	left: 12px;
@@ -398,12 +398,12 @@ body {
 
 /* .rgbtu 类元素 (左右按钮) 
 	宽25高25 绝对定位   底边距 123  左边距 12  鼠标光标样式：手型（pointer）
-	背景图 images/sprite.png  不重复   偏移  0, -400
+	背景图 ../images/sprite.png  不重复   偏移  0, -400
 */
 .rgbtu {
 	width: 25px;
 	height: 25px;
-	background: url(images/sprite.png) no-repeat 0px -400px;
+	background: url(../images/sprite.png) no-repeat 0px -400px;
 	position: absolute;
 	bottom: 123px;
 	right: 12px;
