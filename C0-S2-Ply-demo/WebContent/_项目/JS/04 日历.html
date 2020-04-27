@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>日历</title>
+
+<script type="text/javascript">
+	var weeks = [ "一", "二", "三", "四", "五", "六", "天" ];
+	function build(year, month) {
+		var date = new Date();
+		if (year) {
+			date.setFullYear(year);
+		} else {
+			setSelectedItem(selYear, date.getFullYear());
+		}
+		if (month) {
+			date.setMonth(month - 1);
+		} else {
+			setSelectedItem(selMonth, date.getMonth() + 1);
+		}
+		cal.innerHTML = "";
+		date.setDate(1);
+		
+		if(! head.innerHTML ) {
+			for ( var i in weeks) {
+				var span = document.createElement("SPAN");
+				span.innerText = weeks[i];
+				span.style.border = "1px solid #eee";
+				head.appendChild(span);
+			}
+		}
+
+		for (var i = 0; i < date.getDay(); i++) {
+			var span = document.createElement("SPAN");
+			cal.appendChild(span);
+		}
+
+		var month = date.getMonth();
+		while (month == date.getMonth()) {
+			var span = document.createElement("SPAN");
+			span.innerText = date.getDate();
+			cal.appendChild(span);
+			date.setDate(date.getDate() + 1);
+		}
+		cal.style.height = cal.scrollHeight + 3 + "px";
+
+	}
+	function addMonth(offset){
+		var date = new Date();
+		date.setFullYear(getSelectedItem(selYear).innerText);
+		date.setMonth(getSelectedItem(selMonth).innerText);
+		date.setMonth(date.getMonth() - 1);
+		date.setMonth(date.getMonth() + offset);
+		console.info(date.getFullYear() + "," +(date.getMonth()))
+		build(date.getFullYear(), date.getMonth() + 1);
+		setSelectedItem(selYear, date.getFullYear());
+		setSelectedItem(selMonth, date.getMonth() + 1);
+	}
+	
+	function setSelectedItem(obj, value){
+		for(var i in obj.options){
+			if(obj.options[i].innerText == value){
+				obj.selectedIndex = i;
+				break;
+			}
+		}
+	}
+	
+	function getSelectedItem(obj){
+		return obj.options[obj.selectedIndex]
+	}
+</script>
+</head>
+<body onload="build()">
+	<div id="main">
+		<div id="ctrl">
+			<button>假期</button>
+			<button>今天</button>
+			<div id="choose">
+				<input type="button" value="<" onclick="addMonth(-1)">
+				<select id="selYear" onchange="build(options[selectedIndex].innerText)">
+					<option>2019</option>
+					<option>2020</option>
+				</select>
+				<select id="selMonth" onchange="build(0, options[selectedIndex].innerText)">
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>4</option>
+					<option>5</option>
+					<option>6</option>
+					<option>7</option>
+					<option>8</option>
+					<option>9</option>
+					<option>10</option>
+					<option>11</option>
+					<option>12</option>
+				</select>
+				<input type="button" value=">" onclick="addMonth(1)">
+			</div>
+		</div>
+		<div id="head"></div>
+		<div id="cal"></div>
+	</div>
+</body>
+<style type="text/css">
+* {
+	margin: 0px;
+	padding: 0px;
+}
+
+body {
+	text-align: center
+}
+
+div {
+	background: #eee;
+	border-radius: 5px
+}
+
+#main {
+	padding: 20px;
+	display: inline-block;
+	margin: 10px auto;
+	border: 1px solid #bbb;
+}
+
+#head, #cal {
+	width: 336px;
+	height: 48px;
+	margin: 0px auto;
+	clear: both;
+}
+
+span {
+	float: left;
+	width: 40px;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	border: 1px solid #777;
+	margin: 3px;
+	border-radius: 2px
+}
+
+span:hover {
+	border-color: #00f;
+	cursor: pointer;
+}
+
+button {
+	margin-top: 2px
+}
+
+button, select {
+	padding: 5px 10px;
+}
+
+#ctrl button:nth-child(1) {
+	float: left;
+}
+
+#ctrl button:nth-child(2) {
+	float: right;
+}
+
+#choose {
+	height: 34px;
+	line-height: 32px
+}
+
+input {
+	padding: 4px
+}
+</style>
+</html>
