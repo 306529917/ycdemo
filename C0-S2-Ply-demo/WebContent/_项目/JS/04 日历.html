@@ -6,6 +6,7 @@
 
 <script type="text/javascript">
 	var weeks = [ "一", "二", "三", "四", "五", "六", "天" ];
+	var holidays = [[1,1],[4,4],[4,5],[4,6],[5,1],[10,1]];
 	var today = new Date();
 	function refresh(year, month) {
 		var date = new Date();
@@ -29,6 +30,7 @@
 		// 添加上月天数
 		for (var i = 0; i < date.getDay(); i++) {
 			var span = document.createElement("SPAN");
+			span.classList.add("day");
 			span.style.borderColor = "rgba(0,0,0,0)"
 			cal.appendChild(span);
 		}
@@ -36,6 +38,7 @@
 		var month = date.getMonth();
 		while (month == date.getMonth()) {
 			var span = document.createElement("SPAN");
+			span.classList.add("day");
 			span.innerText = date.getDate();
 			if (date.getDay() == 5 || date.getDay() == 6) {
 				span.classList.add("weekend");
@@ -44,6 +47,12 @@
 					&& date.getMonth() == today.getMonth()
 					&& date.getDate() == today.getDate()) {
 				span.classList.add("today");
+			}
+			if(isHoliday(date)){
+				var holiday = document.createElement("SPAN");
+				holiday.classList.add("holiday");
+				holiday.innerText = "休";
+				span.appendChild(holiday);
 			}
 			cal.appendChild(span);
 			date.setDate(date.getDate() + 1);
@@ -87,6 +96,7 @@
 		if (!head.innerHTML) {
 			for ( var i in weeks) {
 				var span = document.createElement("SPAN");
+				span.classList.add("day");
 				span.innerText = weeks[i];
 				span.style.border = "1px solid #eee";
 				head.appendChild(span);
@@ -106,6 +116,15 @@
 			main.style.width = "50px";
 			main.style.height = "30px";
 		}
+	}
+	function isHoliday(date){
+		for(var i in holidays){
+			if(date.getMonth() == holidays[i][0] - 1
+					&& date.getDate() == holidays[i][1]){
+				return true;
+			}
+		}
+		return false;
 	}
 </script>
 </head>
@@ -157,30 +176,37 @@ div {
 }
 
 #head, #cal {
-	width: 336px;
-	height: 48px;
+	width: 406px;
+	height: 58px;
 	margin: 0px auto;
 	clear: both;
 }
+#head>span {
+	font-size: 1.3em;
+	color: #777
+}
 
-span {
+.day {
 	float: left;
-	width: 40px;
-	height: 40px;
-	line-height: 40px;
+	width: 50px;
+	height: 50px;
+	line-height: 50px;
 	text-align: center;
 	border: 1px solid #777;
 	margin: 3px;
-	border-radius: 2px
+	border-radius: 2px;
+	position: relative;
 }
 
-span:hover {
+.day:hover {
 	border-color: #00f;
 	cursor: pointer;
 }
 
 .today {
 	background-color: #bbb;
+	font-weight: bold;
+	color: green
 }
 
 .weekend {
@@ -210,6 +236,20 @@ button, select {
 
 input {
 	padding: 4px
+}
+
+.holiday{
+	position: absolute;
+	color: #fff;
+	background: #f00;
+	font-size: 0.4em;
+	width: 18px;
+	height: 18px;
+	display: inline-block;
+	line-height: 20px;
+	text-align: center;
+	left: -3px;
+	top: -9px;
 }
 </style>
 </html>
