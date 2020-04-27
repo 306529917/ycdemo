@@ -6,7 +6,8 @@
 
 <script type="text/javascript">
 	var weeks = [ "一", "二", "三", "四", "五", "六", "天" ];
-	function build(year, month) {
+	var today = new Date();
+	function refresh(year, month) {
 		var date = new Date();
 		if (year) {
 			date.setFullYear(year);
@@ -18,20 +19,17 @@
 		} else {
 			setSelectedItem(selMonth, date.getMonth() + 1);
 		}
+		// 重置内容
 		cal.innerHTML = "";
+		// 重置高度
+		cal.style.height = "0px";
+		// 设置日期为1号
 		date.setDate(1);
-		
-		if(! head.innerHTML ) {
-			for ( var i in weeks) {
-				var span = document.createElement("SPAN");
-				span.innerText = weeks[i];
-				span.style.border = "1px solid #eee";
-				head.appendChild(span);
-			}
-		}
 
+		// 添加上月天数
 		for (var i = 0; i < date.getDay(); i++) {
 			var span = document.createElement("SPAN");
+			span.style.borderColor = "rgba(0,0,0,0)"
 			cal.appendChild(span);
 		}
 
@@ -39,68 +37,96 @@
 		while (month == date.getMonth()) {
 			var span = document.createElement("SPAN");
 			span.innerText = date.getDate();
+			if (date.getDay() == 5 || date.getDay() == 6) {
+				span.classList.add("weekend");
+			}
+			if (date.getYear() == today.getYear()
+					&& date.getMonth() == today.getMonth()
+					&& date.getDate() == today.getDate()) {
+				span.classList.add("today");
+			}
 			cal.appendChild(span);
 			date.setDate(date.getDate() + 1);
 		}
+		// 重置 cal 高度
 		cal.style.height = cal.scrollHeight + 3 + "px";
 
 	}
-	function addMonth(offset){
+	function addMonth(offset) {
 		var date = new Date();
 		date.setFullYear(getSelectedItem(selYear).innerText);
 		date.setMonth(getSelectedItem(selMonth).innerText);
 		date.setMonth(date.getMonth() - 1);
 		date.setMonth(date.getMonth() + offset);
-		console.info(date.getFullYear() + "," +(date.getMonth()))
-		build(date.getFullYear(), date.getMonth() + 1);
+		refresh(date.getFullYear(), date.getMonth() + 1);
 		setSelectedItem(selYear, date.getFullYear());
 		setSelectedItem(selMonth, date.getMonth() + 1);
 	}
-	
-	function setSelectedItem(obj, value){
-		for(var i in obj.options){
-			if(obj.options[i].innerText == value){
+
+	function setSelectedItem(obj, value) {
+		for ( var i in obj.options) {
+			if (obj.options[i].innerText == value) {
 				obj.selectedIndex = i;
 				break;
 			}
 		}
 	}
-	
-	function getSelectedItem(obj){
+
+	function getSelectedItem(obj) {
 		return obj.options[obj.selectedIndex]
+	}
+	function createItems(obj, begin, end) {
+		for (var i = begin; i <= end; i++) {
+			var option = document.createElement("option");
+			option.innerText = i;
+			obj.appendChild(option);
+		}
+	}
+	function init() {
+		// 构建 一 到 天
+		if (!head.innerHTML) {
+			for ( var i in weeks) {
+				var span = document.createElement("SPAN");
+				span.innerText = weeks[i];
+				span.style.border = "1px solid #eee";
+				head.appendChild(span);
+			}
+		}
+		// 初始化下列列表
+		createItems(selMonth, 1, 12);
+		var date = new Date();
+		var year = date.getFullYear();
+		createItems(selYear, year - 5, year + 5);
+	}
+	function resize() {
+		if (main.style.width == "50px") {
+			main.style.width = "auto";
+			main.style.height = "auto";
+		} else {
+			main.style.width = "50px";
+			main.style.height = "30px";
+		}
 	}
 </script>
 </head>
-<body onload="build()">
+<body onload="init(); refresh()">
 	<div id="main">
-		<div id="ctrl">
-			<button>假期</button>
-			<button>今天</button>
-			<div id="choose">
-				<input type="button" value="<" onclick="addMonth(-1)">
-				<select id="selYear" onchange="build(options[selectedIndex].innerText)">
-					<option>2019</option>
-					<option>2020</option>
-				</select>
-				<select id="selMonth" onchange="build(0, options[selectedIndex].innerText)">
-					<option>1</option>
-					<option>2</option>
-					<option>3</option>
-					<option>4</option>
-					<option>5</option>
-					<option>6</option>
-					<option>7</option>
-					<option>8</option>
-					<option>9</option>
-					<option>10</option>
-					<option>11</option>
-					<option>12</option>
-				</select>
-				<input type="button" value=">" onclick="addMonth(1)">
+		<div>
+			<div id="ctrl">
+				<button onclick="resize()">收起</button>
+				<button onclick="refresh()">今天</button>
+				<div id="choose">
+					<input type="button" value="<" onclick="addMonth(-1)">
+					<select id="selYear" onchange="refresh(options[selectedIndex].innerText)">
+					</select>
+					<select id="selMonth" onchange="refresh(0, options[selectedIndex].innerText)">
+					</select>
+					<input type="button" value=">" onclick="addMonth(1)">
+				</div>
 			</div>
+			<div id="head"></div>
+			<div id="cal"></div>
 		</div>
-		<div id="head"></div>
-		<div id="cal"></div>
 	</div>
 </body>
 <style type="text/css">
@@ -123,6 +149,11 @@ div {
 	display: inline-block;
 	margin: 10px auto;
 	border: 1px solid #bbb;
+	overflow: hidden;
+}
+
+#main>div {
+	display: inline-block;
 }
 
 #head, #cal {
@@ -146,6 +177,14 @@ span {
 span:hover {
 	border-color: #00f;
 	cursor: pointer;
+}
+
+.today {
+	background-color: #bbb;
+}
+
+.weekend {
+	background-color: #ddd;
 }
 
 button {
