@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>日历</title>
+<script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.js"></script>
+<script type="text/javascript">
+</script>
+</head>
+<body>
+	<div id="main">
+		<div>
+			<div id="ctrl">
+				<button @click="resize()">收起</button>
+				<button @click="refresh(new Date())">今天</button>
+				<div id="choose">
+					<input type="button" value="<" @click="addMonth(-1)">
+					<select id="selYear" v-model="selectedYear" @change="resetTime()">
+						<option v-for="y in years">{{y}}</option>
+					</select>
+					<select id="selMonth" v-model="selectedMonth" @change="resetTime()">
+						<option v-for="m in 12">{{m}}</option>
+					</select>
+					<input type="button" value=">" @click="addMonth(1)">
+				</div>
+			</div>
+			<div id="head">
+				<span v-for="week in weeks" class="day" 
+					style="border-color:rgba(0,0,0,0);">
+					{{week}}
+				</span>
+			</div>
+			<div id="cal">
+				<span v-for="day in days" class="day"
+					:class="{weekend:isWeekend(day), today:isToday(day)}"
+					:style="{borderColor:day==''?'transparent':'#777'}">
+					{{day.getDate ? day.getDate() : ''}}
+					<span v-if="isHoliday(day)" class="holiday">休</span>
+				</span>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		var holidays = [[1,1],[4,4],[4,5],[4,6],[5,1],[10,1],[10,2],[10,3]];
+		const today = new Date();
+		var vue = new Vue({
+			el : "#main",
+			data : {
+				weeks : [ "一", "二", "三", "四", "五", "六", "天" ],
+				years : [],
+				days : [],
+				selectedYear : null,
+				selectedMonth : null,
+				},
+			created : function(){
+				this.refresh(new Date());
+			},
+			methods : {
+				refresh(date){
+					// 清空天标签
+					this.days.splice(0,this.days.length);
+					this.selectedYear = date.getFullYear();
+					this.selectedMonth = date.getMonth() + 1;
+					for( var i= date.getFullYear()-5; i<=date.getFullYear()+5 ; i++){
+						this.years.push(i);
+					}
+					if(date.getDay() <6){
+						for( var i= 0; i<=date.getDay() ; i++){
+							this.days.push("");
+						}
+					}
+					var month = date.getMonth();
+					date.setDate(1);
+					while (month == date.getMonth()) {
+						this.days.push(new Date(date.getTime()));
+						date.setDate(date.getDate() + 1);
+					}
+				},
+				isWeekend(day){
+					return day.getDay && day.getDay() - 5 >= 0;
+				},
+				isHoliday(day){
+					if(day.getMonth){
+						for(var i in holidays){
+							if(day.getMonth() == holidays[i][0] - 1
+									&& day.getDate() == holidays[i][1]){
+								return true;
+							}
+						}
+					}
+					return false;
+				},
+				isToday(day){
+					if(day.getMonth){
+						return day.getYear() == today.getYear() &&
+						day.getMonth() == today.getMonth() &&
+						day.getDate() == today.getDate();
+					}
+					return false;
+				},
+				addMonth(offset){
+					var date = new Date();
+					date.setFullYear(this.selectedYear);
+					date.setMonth(this.selectedMonth-1+offset);
+					this.selectedYear = date.getFullYear();
+					this.selectedMonth = date.getMonth()+1;
+					this.refresh(date);
+				},
+				resetTime(){
+					var date = new Date();
+					date.setFullYear(this.selectedYear);
+					date.setMonth(this.selectedMonth-1);
+					this.refresh(date);
+				},
+				resize() {
+					if (main.style.width == "50px") {
+						main.style.width = "auto";
+						main.style.height = "auto";
+					} else {
+						main.style.width = "50px";
+						main.style.height = "30px";
+					}
+				}
+			}
+		});
+	</script>
+</body>
+<style type="text/css">
+* {
+	margin: 0px;
+	padding: 0px;
+}
+
+body {
+	text-align: center
+}
+
+div {
+	background: #eee;
+	border-radius: 5px
+}
+
+#main {
+	padding: 20px;
+	display: inline-block;
+	margin: 10px auto;
+	border: 1px solid #bbb;
+	overflow: hidden;
+}
+
+#main>div {
+	display: inline-block;
+}
+
+#head, #cal {
+	width: 406px;
+	height: 58px;
+	margin: 0px auto;
+	clear: both;
+}
+#head>span {
+	font-size: 1.3em;
+	color: #777
+}
+
+.day {
+	float: left;
+	width: 50px;
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+	border: 1px solid #777;
+	margin: 3px;
+	border-radius: 2px;
+	position: relative;
+}
+
+.day:hover {
+	border-color: #00f;
+	cursor: pointer;
+}
+
+.today {
+	background-color: #bbb;
+	font-weight: bold;
+	color: green
+}
+
+.weekend {
+	background-color: #ddd;
+}
+
+button {
+	margin-top: 2px
+}
+
+button, select {
+	padding: 5px 10px;
+}
+
+#ctrl button:nth-child(1) {
+	float: left;
+}
+
+#ctrl button:nth-child(2) {
+	float: right;
+}
+
+#choose {
+	height: 34px;
+	line-height: 32px
+}
+
+input {
+	padding: 4px
+}
+
+.holiday{
+	position: absolute;
+	color: #fff;
+	background: #f00;
+	font-size: 0.4em;
+	width: 18px;
+	height: 18px;
+	display: inline-block;
+	line-height: 20px;
+	text-align: center;
+	left: -3px;
+	top: -9px;
+}
+</style>
+</html>
