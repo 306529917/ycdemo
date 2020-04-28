@@ -10,39 +10,13 @@ select{
 </style>
 <script type="text/javascript" src="js/省市.js"></script>
 <script type="text/javascript">
-	function init(){
-		for( var i in provinces){
-			var opt = document.createElement("option");
-			opt.innerText = provinces[i];
-			sheng.appendChild(opt);
-		}
-		loadCitys();
-	}
-	function loadCitys(){
-		shi.innerHTML = "";
-		var index1 = sheng.selectedIndex;
-		for( var i in citys[index1]){
-			var opt = document.createElement("option");
-			opt.innerText = citys[index1][i];
-			shi.appendChild(opt);
-		}
-		loadCountys();
-	}
-	function loadCountys(){
-		xian.innerHTML = "";
-		var index1 = sheng.selectedIndex;
-		var index2 = shi.selectedIndex;
-		for( var i in countys[index1][index2]){
-			var opt = document.createElement("option");
-			opt.innerText = countys[index1][index2][i];
-			xian.appendChild(opt);
-		}
-	}
 </script>
 </head>
 <body onload="init()">
-	省:<select id="sheng" onchange="loadCitys()"></select>
-	市:<select id="shi" onchange="loadCountys()"></select>
+<div id="main">
+	省:<select id="sheng"></select>
+	市:<select id="shi"></select>
 	县:<select id="xian"></select>
+</div>
 </body>
 </html>
