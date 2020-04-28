@@ -35,7 +35,7 @@ select{
 			loadCitys(){
 				this.citys = citys[sheng.selectedIndex];
 				// 关于$nextTick 请看: https://www.cnblogs.com/HelloJC/p/11189853.html
-				this.$nextTick(function(){
+				this.$nextTick(()=>{
 					this.loadCountys();
 				});
 			},
