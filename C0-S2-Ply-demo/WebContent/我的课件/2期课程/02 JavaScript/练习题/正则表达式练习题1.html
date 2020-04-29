@@ -80,13 +80,14 @@ input {
 					new Q("var data = '你好世界';<br>var reg = 答题线; //定义正则表达式判断data中是否包含 好 字<br>reg.test(data); // 要求返回 ", true,
 							{expr: new RegExp("new"),msg:'代码必须包含字符串: new'}),
 					new Q("var data = '正则表达式';<br>var reg = /正则/; <br>reg.答题线(data); // 要求返回 ", true),
-					new Q("var data = '正则表达式';<br>var reg = /表达/; <br>var ret = reg.答题线(data);<br>ret.index; // 要求返回 2"),
-					new Q("var data = '字符串的match使用正则表达式模式对字符串执行查找，并将包含查找的结果作为数组返回';<br>var reg = /的/; <br>var ret = data.search(reg);<br>ret == 答题线; // 请填写 ret 的值, 要求返回 true"),
-					new Q("var data = '字符串的match使用正则表达式模式对字符串执行查找，并将包含查找的结果作为数组返回';<br>var regex = /c/; <br>答题线; // 请填写方法找到字符 c, 返回 ", 7),
-					new Q("var data = '字符串的search方法返回与正则表达式查找内容匹配的第一个子字符串的位置';<br>var reg = /的/; <br>var r = 答题线;// 查找 的 字 <br>r.index;// 返回 ", 3),
+					new Q("var data = '正则表达式';<br>var reg = /表达/; <br>var ret = reg.答题线(data);<br>ret.index; // 要求返回 ", 2),
+					new Q("var data = '字符串的match使用正则表达式模式对字符串执行查找，并将包含查找的结果作为数组返回';<br>var reg = /的/; <br>var ret = data.search(reg);<br>ret == 答题线; //  ret的值是多少? 返回 ", true),
+					new Q("var data = '字符串的match使用正则表达式模式对字符串执行查找，并将包含查找的结果作为数组返回';<br>var regex = /c/; <br>答题线; // 请填写代码查找字符 c, 返回 ", 7),
+					new Q("var data = '字符串的search方法返回与正则表达式查找内容匹配的第一个子字符串的位置';<br>var reg = /的/; <br>var r = 答题线;// 查找 \"的\" 字 <br>r.index;// 返回 ", 3),
 					new Q("var data = '小猫笑我,我笑猫小';<br>答题线;// 请将'我'字替换成'你'字, 返回:", '小猫笑你,你笑猫小'),
 					new Q("var data = '小猫笑我,我笑猫小';<br>答题线;// 根据结果填写<br>data// data的值, 返回:", '小狗笑我,我笑狗小'),
 					new Q("var data = '小明,小红,小黄,小丽';<br>答题线;// 拆分数组<br>arr.length// 返回:", 4),
+					new Q("var data = 答题线;// 定义字符串<br>var arr = data.split(/;/);// 拆分数组<br>arr.length// 返回:", 3),
 				]
 			},
 			methods : {
