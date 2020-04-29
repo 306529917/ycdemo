@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+<head>
+<meta charset="UTF-8">
+<title>正则表达式</title>
+<script src="https://cdn.bootcss.com/jquery/3.5.0/jquery.js"></script>
+<script src="https://cdn.bootcss.com/vue/2.6.11/vue.js"></script>
+<style type="text/css">
+body{
+	padding: 10px
+}
+.res{
+	display: inline-block;
+	margin : 0px 5px;
+	width: 60px;
+	height: 20px;
+	line-height:20px;
+}
+input {
+	background:#eee;
+	text-align: center;
+	letter-spacing: 0.3em;
+	font-size: 1.2em;
+	border-top:none;
+	border-left:none;
+	border-right:none;
+	border-bottom : 1px solid #555
+}
+</style>
+</head>
+<body style="height: 90%">
+	<div id="main">
+		<fieldset>
+			<legend>答题结果</legend>
+			<span class="res" v-for="q,i in questions">
+				题{{i+1}}: {{q.result?'对':''}}
+			</span>
+		</fieldset>
+		<fieldset>
+			<legend>题目: 请按照要求再横线处填写代码</legend>
+			<dl v-for="q,i in questions">
+				<dt>第{{i+1}}题</dt>
+				<dd>
+					<span v-html="q.prefix"></span>
+					<input @change="test(q,$event)">
+					<span v-html="q.suffix+q.expect"></span>
+				</dd>
+			</dl>
+		</fieldset>
+	</div>
+	<script type="text/javascript">
+		new Vue({
+			el : "#main",
+			data : {
+				questions : [
+					{prefix:"var data = 'CAt';<br>var reg=" , 
+						 suffix:";// 请判断data中是否包含 At<br>reg.test(data); // 返回 ",
+						 expect: true,
+						 result: false},
+					{prefix:"var data = 'CAt';<br>var reg=" , 
+						 suffix:";// 请判断data中是否包含 at(忽略大小写)<br>reg.test(data); // 返回 ",
+						 validate : {expr:/at/,msg:'代码必须包含字符串: at'},
+						 expect: true,
+						 result: false}
+				]
+			},
+			methods : {
+				test(q,event){
+					var value = event.srcElement.value;
+					if(q.validate){
+						if( ! q.validate.expr.test(value)) {
+							alert(q.validate.msg);
+							return;
+						}
+					}
+					var script = q.prefix.replace(/<br>/gi,'\r\n')
+						+ value
+						+ q.suffix.replace(/<br>/gi,'\r\n');
+					var ret = eval(script);
+					q.result = ret == q.expect;
+				}
+			}
+		});
+	</script>
+</body>
+</html>
