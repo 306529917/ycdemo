@@ -80,6 +80,8 @@ input {
 					new Q("var data = 'Dog Cat dog cat DOG CAT';<br>var reg = 答题线; //定义正则表达式<br>reg.exec(data).index; // 要求返回 ", 12),
 					new Q("var data = 'CAt';<br>var reg = 答题线; //定义正则表达式判断data中是否包含 at(忽略大小写)<br>reg.test(data); // 要求返回 ", true, 
 							{expr:/at/,msg:'代码必须包含字符串: at'}),
+					new Q("var data = 'CAt';<br>var reg = 答题线; //定义正则表达式判断data中是否包含 at(忽略大小写)<br>reg.test(data); // 要求返回 ", true, 
+							{expr: new RegExp("new"),msg:'代码必须包含字符串: new'}),
 					new Q("var data = '你好世界';<br>var reg = 答题线; //定义正则表达式判断data中是否包含 好 字<br>reg.test(data); // 要求返回 ", true,
 							{expr: new RegExp("new"),msg:'代码必须包含字符串: new'}),
 					new Q("var data = '正则表达式';<br>var reg = /正则/; <br>reg.答题线(data); // 要求返回 ", true),
@@ -99,6 +101,7 @@ input {
 					if(q.validate){
 						if( ! q.validate.expr.test(value)) {
 							alert(q.validate.msg);
+							q.result = false;
 							return;
 						}
 					}
