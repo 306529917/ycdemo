@@ -126,14 +126,6 @@ input {
 						['test','root','admi'],{expr:/[\\-]/,msg:"参考 '预定义类,量词' 定义正则表达式"}),
 					new Q("var data = '武松  李逵  阮小七  宋江 燕青  卢俊义';<br>//参考 '预定义类,量词' 使用 split 函数<br>var arr = 答题线; <br>arr.toString(); // 要求返回 ", 
 						['武松','李逵','阮小七','宋江','燕青','卢俊义']),
-						
-					new Q("var data = 'test:0,root:12,admin:345,yc:7890';<br>//参考 '预定义类,量词,边界词' 定义正则表达式<br>var reg = 答题线; <br>data.match(reg).toString(); // 要求返回 ", 
-						['test','root'],{expr:/[\\-]/,msg:"参考 '预定义类,量词,边界词' 定义正则表达式"}),
-					new Q("var data = 'test:0,root:12,admin:345,yc:7890';<br>//参考 '预定义类,量词,边界词' 定义正则表达式<br>var reg = 答题线; <br>data.match(reg).toString(); // 要求返回 ", 
-						['test','root',7890],{expr:/[\\-]/,msg:"参考 '预定义类,量词,边界词' 定义正则表达式"}),
-					new Q("var data = 'test:0,root:12,admin:345,yc:7890';<br>//参考 '预定义类,量词,边界词' 定义正则表达式<br>var reg = 答题线; <br>data.match(reg).toString(); // 要求返回 ", 
-						['12','yc'],{expr:/[\\-]/,msg:"参考 '预定义类,量词,边界词' 定义正则表达式"}),
-
 					]
 			},
 			methods : {
