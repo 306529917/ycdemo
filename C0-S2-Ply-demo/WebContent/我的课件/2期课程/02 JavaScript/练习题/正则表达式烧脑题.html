@@ -63,7 +63,7 @@ var qs = [
 			[true,true,false,false,false],null,'/^\\d{17}[0-9Xx]$/.test(data[i])'),
 	new Q("var data = ['306529917', '666666', '03657897', '3065A9987', '4567','78900','78900A'];<br>// 判断该组字符串是否是QQ号码<br>var arr = [];<br>for(var i in data){<br> var ret = 答题线; <br> arr.push(ret);<br>}<br>arr.toString() ; // 结果返回 ",
 			[true,true,false,false,false,true,false],null,'/^[1-9][0-9]{4,}$/.test(data[i])'),
-	new Q("var data = ['耄耋', '饕餮', '你好SMITH', '你好007', '詹姆斯-邦德','こんにちは'];<br>// 判断该组字符串是否是存中文, 提示中文的unicode字符编码访问是: 4e00 ~ 9fa5<br>var arr = [];<br>for(var i in data){<br> var ret = 答题线; <br> arr.push(ret);<br>}<br>arr.toString() ; // 结果返回 ",
+	new Q("var data = ['耄耋', '饕餮', '你好SMITH', '你好007', '詹姆斯-邦德','こんにちは'];<br>// 判断该组字符串是否是纯中文, 提示:中文的unicode字符编码访问是: 4e00 ~ 9fa5<br>var arr = [];<br>for(var i in data){<br> var ret = 答题线; <br> arr.push(ret);<br>}<br>arr.toString() ; // 结果返回 ",
 			[true,true,false,false,false,false],null,'/^[\\u4e00-\\u9fa5]+$/.test(data[i])'),
 	new Q("var data = ['01', '12', '1', '13', '100','20','A@'];<br>// 判断该组字符串是否是2位月份, 格式为：01～09或1～12<br>var arr = [];<br>for(var i in data){<br> var ret = 答题线; <br> arr.push(ret);<br>}<br>arr.toString() ; // 结果返回 ",
 			[true,true,true,false,false,false,false],null,'/^(0?[1-9]|1[0-2])$/.test(data[i])'),
