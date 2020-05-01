@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>颜色选择器</title>
+<script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		<div id="clr" :style="{backgroundColor: getColor16()}">
+			<span :style="{color: getColorRGB(1)}">{{getColor16()}}</span><br>
+			<span :style="{color: getColorRGB(1)}">{{getColorRGB()}}</span><br>
+		</div>
+		<input id="r" type="range" min="0" max="255" value="0" v-model="r">
+		<input id="g" type="range" min="0" max="255" value="0" v-model="g">
+		<input id="b" type="range" min="0" max="255" value="0" v-model="b">
+	</div>
+	<script type="text/javascript">
+		new Vue({
+			el : "#app",
+			data : {
+				r:'100',g:'100',b:'100'
+			},
+			methods : {
+				getColor16(){
+					return ('#'+this.to16(this.r)+this.to16(this.g)+this.to16(this.b)).toUpperCase();
+				},
+				getColorRGB(flag){
+					if(flag){
+						return 'rgb('+(255-this.r)+','+(255-this.g)+','+(255-this.b)+')';
+					}else{
+						return 'rgb('+this.r+','+this.g+','+this.b+')';
+					}
+				},
+				to16(c){
+					var ret = "0" + Number(c).toString(16);
+					ret = ret.substring(ret.length-2);
+					return ret;
+				}
+			}
+		})
+	</script>
+</body>
+<style>
+body{
+	text-align: center;
+}
+#app{
+	display:inline-block;
+	width:200px;
+	border: 1px solid #888;
+	padding: 5px
+}
+#clr{
+	height:200px;
+	background: #eee;
+	display: table-cell;
+	width: 200px;
+	vertical-align: middle;
+}
+input{
+	width:100%
+}
+span {
+	color: #fff;
+	font-weight: bold;
+	text-shadow: 2px 2px blue
+}
+</style>
+</html>
