@@ -74,6 +74,8 @@ var qs = [
 	new Q("var data = ['a~!@#$%^&*3', 'ab123', 'abc-123','123abc','abcdefghjk123456789'];<br>// 判断该组字符串是否是一个合法的密码, 要求以字母开头，长度在6~18之间，只能包含字符、数字和键盘可输入特殊字符<br>var arr = [];<br>for(var i in data){<br> var ret = 答题线; <br> arr.push(ret);<br>}<br>arr.toString() ; // 结果返回 ",
 			[true,false,true,false,false],null,'/^[A-z][A-z0-9\\^~!@#$%&*()_+-=]{5,17}$/.test(data[i])'),
 
+	new Q("var data = ['127.0.0.1', '192.168.1.100', '1.19.199.255', '01.a1.256.265', '192.168.1.1.1'];<br>// 判断该组字符串是否是合法的IP地址, 格式:由4个小于256的数字构成, 用英文点号分隔<br>var arr = [];<br>for(var i in data){<br> var ret = 答题线; <br> arr.push(ret);<br>}<br>arr.toString() ; // 结果返回 ",
+			[true,true,true,false,false],null,'/^((1\\d\\d|2[0-5][0-5]|[1-9]*\\d)\\.){3}(1\\d\\d|2[0-5][0-5]|[1-9]*\\d)$/.test(data[i])'),
 
 ];
 
