@@ -8,8 +8,8 @@
 <body>
 	<div id="app">
 		<div id="clr" :style="{backgroundColor: getColor16()}">
-			<span :style="{color: getColorRGB(1)}">{{getColor16()}}</span><br>
-			<span :style="{color: getColorRGB(1)}">{{getColorRGB()}}</span><br>
+			<span >{{getColor16()}}</span><br>
+			<span >{{getColorRGB()}}</span><br>
 		</div>
 		<label>红:</label><input id="r" type="range" min="0" max="255" value="0" v-model="r">
 		<label>绿:</label><input id="g" type="range" min="0" max="255" value="0" v-model="g">
@@ -19,7 +19,7 @@
 		new Vue({
 			el : "#app",
 			data : {
-				r:'100',g:'100',b:'100'
+				r:'196',g:'196',b:'196'
 			},
 			methods : {
 				getColor16(){
@@ -59,6 +59,7 @@ body{
 	display: table-cell;
 	width: 200px;
 	vertical-align: middle;
+	line-height: 40px
 }
 input{
 	width:170px
@@ -66,6 +67,11 @@ input{
 span {
 	color: #fff;
 	font-weight: bold;
+	background: #14B9E8;
+	border: 1px solid #000;
+	margin: 5px;
+	padding: 5px;
+	border-radius: 5px
 }
 </style>
 </html>
