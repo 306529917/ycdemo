@@ -1,3 +1,4 @@
+@charset "utf-8";
 body
 {
     text-align: center;
@@ -55,7 +56,7 @@ body
     -webkit-box-shadow: 0 0 40px #aaa;
 
 }
-/*牌面定位样式*/
+/*鐗岄潰瀹氫綅鏍峰紡*/
 .cardAJ{background-position: -800px 0;}
 .cardAQ{background-position: -880px 0;}
 .cardAK{background-position: -960px 0;}
@@ -65,18 +66,18 @@ body
 
 .card-flipped .front
 {
-    /*保证牌底在牌面下面，z-index值切换为小值*/
+    /*淇濊瘉鐗屽簳鍦ㄧ墝闈笅闈紝z-index鍊煎垏鎹负灏忓��*/
     z-index: 8;
     -webkit-transform: rotateY(180deg);
 }
 .card-flipped .back
 {
-    /*保证牌底在牌面上面，z-index值切换为大值*/
+    /*淇濊瘉鐗屽簳鍦ㄧ墝闈笂闈紝z-index鍊煎垏鎹负澶у��*/
     z-index: 10;
-    /*前面牌面已经翻过去，现在返回来*/
+    /*鍓嶉潰鐗岄潰宸茬粡缈昏繃鍘伙紝鐜板湪杩斿洖鏉�*/
     -webkit-transform: rotateY(0deg);
 }
-/*移除牌*/
+/*绉婚櫎鐗�*/
 .card-removed
 {
     opacity: 0;
