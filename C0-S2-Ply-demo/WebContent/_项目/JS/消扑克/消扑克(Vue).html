@@ -13,27 +13,28 @@
 		</div>
 	</section>
 	<script type="text/javascript">
-		var cardWidth = 80;		// 纸牌宽度
-		var cardHeight = 120;	// 纸牌高度
+		var cardWidth = 80;		// 小图片宽度
+		var cardHeight = 120;	// 小图片高度
+		var rowImgs = 13;		// 每行的图片数量
 		//  定义纸牌类
 		function Card(value){
 			this.value = value;	// 纸牌值: 0~51 表示52张纸牌
 			this.state = 0;		// 显示方式: 0 背面, 1正面, -1 消失
 			this.style = {};	// 样式值对象
 			// 刷新样式 xy 和 op
-			this.refreshStyle = function(){
+			this.refresh = function(){
 				if( this.state == 0 ){
 					this.style.backgroundPosition = "0px -480px";
 				} else {
-					var x = value % 13;
-					var y = parseInt(value / 13);
+					var x = value % rowImgs;
+					var y = parseInt(value / rowImgs);
 					// 背景偏移
 					this.style.backgroundPosition = "-" + x * cardWidth + "px" + " -" + y * cardHeight + "px";
 				}
 				// 透明度
 				this.style.opacity = this.state == 0 || this.state == 1 ? 1 : 0;
 			}
-			this.refreshStyle();
+			this.refresh();
 		};
 		// 创建12张纸牌
 		var cards = [];
@@ -63,7 +64,7 @@
 						return;
 					}
 					c.state = 1;
-					c.refreshStyle();
+					c.refresh();
 					if(this.card1 == null){
 						this.card1 = c;
 					} else {
@@ -72,8 +73,8 @@
 							var s = vue.$data.card1.value == vue.$data.card2.value ? -1 : 0;
 							vue.$data.card1.state = s;
 							vue.$data.card2.state = s;
-							vue.$data.card1.refreshStyle();
-							vue.$data.card2.refreshStyle();
+							vue.$data.card1.refresh();
+							vue.$data.card2.refresh();
 							vue.$data.card1 = null;
 							vue.$data.card2 = null;
 						},1000);
