@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
-<title>¹ºÎï³µ¸´Ñ¡¿ò</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>è´­ç‰©è½¦å¤é€‰æ¡†</title>
 
 <link href="css/index.css" rel="stylesheet" type="text/css" />
 
@@ -11,8 +11,8 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 
-		//jqueryÌØĞ§ÖÆ×÷¸´Ñ¡¿òÈ«Ñ¡·´Ñ¡È¡Ïû(ÎŞ²å¼ş)
-		// È«Ñ¡        
+		//jqueryç‰¹æ•ˆåˆ¶ä½œå¤é€‰æ¡†å…¨é€‰åé€‰å–æ¶ˆ(æ— æ’ä»¶)
+		// å…¨é€‰        
 		$(".allselect").click(function() {
 			$(".gwc_tb2 input[name=newslist]").each(function() {
 				$(this).attr("checked", true);
@@ -21,7 +21,7 @@
 			GetCount();
 		});
 
-		//·´Ñ¡
+		//åé€‰
 		$("#invert").click(function() {
 			$(".gwc_tb2 input[name=newslist]").each(function() {
 				if ($(this).attr("checked")) {
@@ -35,7 +35,7 @@
 			GetCount();
 		});
 
-		//È¡Ïû
+		//å–æ¶ˆ
 		$("#cancel").click(function() {
 			$(".gwc_tb2 input[name=newslist]").each(function() {
 				$(this).attr("checked", false);
@@ -44,7 +44,7 @@
 			GetCount();
 		});
 
-		// ËùÓĞ¸´Ñ¡(:checkbox)¿òµã»÷ÊÂ¼ş
+		// æ‰€æœ‰å¤é€‰(:checkbox)æ¡†ç‚¹å‡»äº‹ä»¶
 		$(".gwc_tb2 input[name=newslist]").click(function() {
 			if ($(this).attr("checked")) {
 				//$(this).next().css({ "background-color": "#3366cc", "color": "#ffffff" });
@@ -53,7 +53,7 @@
 			}
 		});
 
-		// Êä³ö
+		// è¾“å‡º
 		$(".gwc_tb2 input[name=newslist]").click(function() {
 			// $("#total2").html() = GetCount($(this));
 			GetCount();
@@ -89,16 +89,16 @@
 				<td class="tb1_td1">
 					<input id="Checkbox1" type="checkbox" class="allselect" />
 				</td>
-				<td class="tb1_td1">È«Ñ¡</td>
-				<td class="tb1_td3">ÉÌÆ·</td>
-				<td class="tb1_td4">ÉÌÆ·ĞÅÏ¢</td>
-				<td class="tb1_td5">ÊıÁ¿</td>
-				<td class="tb1_td6">½ğ¶î</td>
-				<td class="tb1_td7">²Ù×÷</td>
+				<td class="tb1_td1">å…¨é€‰</td>
+				<td class="tb1_td3">å•†å“</td>
+				<td class="tb1_td4">å•†å“ä¿¡æ¯</td>
+				<td class="tb1_td5">æ•°é‡</td>
+				<td class="tb1_td6">é‡‘é¢</td>
+				<td class="tb1_td7">æ“ä½œ</td>
 			</tr>
 		</table>
 
-		<!---ÉÌÆ·¼Ó¼õËã×ÜÊı---->
+		<!---å•†å“åŠ å‡ç®—æ€»æ•°---->
 		<script type="text/javascript">
 			$(function() {
 				var t = $("#text_box1");
@@ -130,9 +130,9 @@
 					<a href="#"><img src="images/img1.jpg" /></a>
 				</td>
 				<td class="tb2_td3">
-					<a href="#">²úÆ·±êÌâ</a>
+					<a href="#">äº§å“æ ‡é¢˜</a>
 				</td>
-				<td class="tb1_td4">Ò»¼ş</td>
+				<td class="tb1_td4">ä¸€ä»¶</td>
 				<td class="tb1_td5">
 					<input id="min1" type="button" value="-" />
 					<input id="text_box1" type="text" value="1"/>
@@ -142,12 +142,12 @@
 					<label id="total1" class="tot"></label>
 				</td>
 				<td class="tb1_td7">
-					<a href="#">É¾³ı</a>
+					<a href="#">åˆ é™¤</a>
 				</td>
 			</tr>
 		</table>
 
-		<!---ÉÌÆ·¼Ó¼õËã×ÜÊı---->
+		<!---å•†å“åŠ å‡ç®—æ€»æ•°---->
 		<script type="text/javascript">
 			$(function() {
 				var t = $("#text_box2");
@@ -178,9 +178,9 @@
 					<a href="#"><img src="images/img2.jpg" /></a>
 				</td>
 				<td class="tb2_td3">
-					<a href="#">²úÆ·±êÌâ</a>
+					<a href="#">äº§å“æ ‡é¢˜</a>
 				</td>
-				<td class="tb1_td4">Ò»¼ş</td>
+				<td class="tb1_td4">ä¸€ä»¶</td>
 				<td class="tb1_td5">
 					<input id="min2" type="button" value="-" />
 					<input id="text_box2" type="text" value="1"/>
@@ -190,12 +190,12 @@
 					<label id="total2" class="tot"></label>
 				</td>
 				<td class="tb1_td7">
-					<a href="#">É¾³ı</a>
+					<a href="#">åˆ é™¤</a>
 				</td>
 			</tr>
 		</table>
 
-		<!---×ÜÊı---->
+		<!---æ€»æ•°---->
 		<script type="text/javascript">
 			$(function() {
 				$(".quanxun").click(function() {
@@ -221,23 +221,23 @@
 				<td class="tb1_td1">
 					<input id="checkAll" class="allselect" type="checkbox" />
 				</td>
-				<td class="tb1_td1">È«Ñ¡</td>
+				<td class="tb1_td1">å…¨é€‰</td>
 				<td class="tb3_td1">
 					<input id="invert" type="checkbox" />
-					·´Ñ¡
+					åé€‰
 					<input id="cancel" type="checkbox" />
-					È¡Ïû
+					å–æ¶ˆ
 				</td>
 				<td class="tb3_td2">
-					ÒÑÑ¡ÉÌÆ·
+					å·²é€‰å•†å“
 					<label id="shuliang">0</label>
-					¼ş
+					ä»¶
 				</td>
 				<td class="tb3_td3">
-					ºÏ¼Æ(²»º¬ÔË·Ñ):<span>£¤</span><span><label id="zong1"></label></span>
+					åˆè®¡(ä¸å«è¿è´¹):<span>ï¿¥</span><span><label id="zong1"></label></span>
 				</td>
 				<td class="tb3_td4">
-					<span id="jz1">½áËã</span><a href="#" style="display: none;" class="jz2" id="jz2">½áËã</a>
+					<span id="jz1">ç»“ç®—</span><a href="#" style="display: none;" class="jz2" id="jz2">ç»“ç®—</a>
 				</td>
 			</tr>
 		</table>
