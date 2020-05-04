@@ -28,7 +28,7 @@
 		date.setDate(1);
 
 		// 添加上月天数
-		for (var i = 0; i < date.getDay(); i++) {
+		for (var i = 0; i < date.getDay()-1; i++) {
 			var span = document.createElement("SPAN");
 			span.classList.add("day");
 			span.style.borderColor = "rgba(0,0,0,0)"
