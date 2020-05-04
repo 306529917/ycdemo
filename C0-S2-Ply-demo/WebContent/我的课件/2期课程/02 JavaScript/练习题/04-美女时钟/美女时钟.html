@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>美女时钟</title>
+</head>
+<body>
+	<div id="main">
+		<div id="imgdiv">
+			<img id="img" src="images/girltime.png" width="630px">
+			<ul>
+				<li>星期一</li>
+				<li>21:23:02</li>
+			</ul>
+		</div>
+		<div>
+			<span>
+				<label for="i0">图片1</label>
+				<input type="radio" name="i" value="0" id="i0">
+			</span>
+			<span>
+				<label for="i1">图片2</label>
+				<input type="radio" name="i" value="1" id="i1">
+			</span>
+			<span>
+				<label for="i2">图片3</label>
+				<input type="radio" name="i" value="2" id="i2">
+			</span>
+		</div>
+		<div id="sytleattr">
+			<label>图片:</label><input style="width:480px">
+			<label>X坐标:</label><input type="number">
+			<label>Y坐标: </label><input type="number">
+			<label>旋转: </label><input type="number">
+			<label>字体大小: </label><input type="number">
+			<label>字体颜色: </label><input>
+			<label>背景颜色: </label><input>
+		</div>
+	</div>
+</body>
+<style type="text/css">
+*{
+	list-style-type: none;
+	margin: 0px;
+	padding: 0px;
+	font-size: 18px;
+}
+body{
+	background: #eee;
+	text-align: center;
+}
+div{
+	margin: 10px;
+}
+#imgdiv {
+	display:inline-block;
+	position: relative;
+}
+ul{
+	position: absolute;
+	font-weight: bold;
+	color: #fff;
+	left: 0px;
+	top: 0px;
+}
+#sytleattr {
+	display:inline-block;
+	width:630px;
+	text-align: left;
+	line-height: 30px
+}
+#sytleattr>input {
+	width:80px;
+	text-align: center;
+}
+label{
+	display:inline-block;
+	width:100px;
+	text-align: right;
+	padding: 0px 5px
+}
+ul>li{
+	font-size: inherit;
+	color:inherit; 
+}
+</style>
+</html>
