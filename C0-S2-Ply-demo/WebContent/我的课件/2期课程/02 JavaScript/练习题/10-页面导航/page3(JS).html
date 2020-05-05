@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>页面2</title>
+<style type="text/css">
+li{
+	list-style-type: none;
+}
+ul {
+	padding: 0px;
+	line-height: 30px
+}
+button{
+	margin-left: 10px
+}
+</style>
+</head>
+<body style="text-align: center;">
+	<h3>图片不是重点! 重点是页面跳转!!!</h3>
+	<img height="100px"  src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1587553893038&di=95517f704fa980e4d1a1777537e4998a&imgtype=0&src=http%3A%2F%2Fpic1.win4000.com%2Fpic%2F2%2F26%2Ff8181526900_130_170.jpg">
+	<ul>
+		<li><a href="page1(JS).html">page1(JS).html</a>
+		<li><a href="page2(JS).html">page2(JS).html</a>
+		<li><a href="page3(JS).html">page3(JS).html</a>
+		<li><button onclick="location.href='page1(JS).html'">使用 location.href 属性跳转 page1(JS).html</button>
+		<li><button onclick="self.location='page2(JS).html'">使用 self.location 属性跳转 page2(JS).html</button>
+		<li><button onclick="window.open('page3(JS).html','_self')">使用 open 函数跳转 page3(JS).html</button>
+		<li><button onclick="history.forward()">前进</button>
+		<a href="javascript:history.go(-1)">回退</a>
+	</ul>
+</body>
+</html>

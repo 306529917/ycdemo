@@ -16,14 +16,14 @@ ul {
 	<h3>图片不是重点! 重点是页面跳转!!!</h3>
 	<img height="100px"  src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1587553927899&di=44aa6309232bd53da8acfeaf560d0278&imgtype=0&src=http%3A%2F%2Fe.hiphotos.baidu.com%2Fbainuo%2Fcrop%3D0%2C0%2C584%2C880%3Bw%3D470%3Bq%3D99%3Bc%3Dnuomi%2C95%2C95%2Fsign%3Da3ddc74b44166d222c384fd47b1325c7%2Fb3b7d0a20cf431ad3dc903b94c36acaf2edd9813.jpg">
 	<ul>
-		<li><a href="#">page1.html</a>
-		<li><a href="#">page2.html</a>
-		<li><a href="#">page3.html</a>
-		<li><button>请使用 location.href 属性跳转 page1.html</button>
-		<li><button>请使用 self.location 属性跳转 page2.html</button>
-		<li><button>请使用 open 函数跳转 page3.html</button>
-		<li><button>前进</button>
-		<a href="#">回退</a>
+		<li><a href="page1(JS).html">page1(JS).html</a>
+		<li><a href="page2(JS).html">page2(JS).html</a>
+		<li><a href="page3(JS).html">page3(JS).html</a>
+		<li><button onclick="location.href='page1(JS).html'">使用 location.href 属性跳转 page1(JS).html</button>
+		<li><button onclick="self.location='page2(JS).html'">使用 self.location 属性跳转 page2(JS).html</button>
+		<li><button onclick="window.open('page3(JS).html','_self')">使用 open 函数跳转 page3(JS).html</button>
+		<li><button onclick="history.forward()">前进</button>
+		<a href="javascript:history.go(-1)">回退</a>
 	</ul>
 </body>
 </html>
