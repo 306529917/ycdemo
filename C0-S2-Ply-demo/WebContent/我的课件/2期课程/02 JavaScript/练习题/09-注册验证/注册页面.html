@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			form{width: 500px;overflow: hidden;margin: 50px auto;}
+			div{line-height: 40px;}
+			input{width: 250px;padding-left: 10px;height: 30px;
+			line-height: 30px;color: #333;font-size: 14px;
+			border: 1px solid #666;outline: none;margin-bottom: 10px;display: inline-block;}
+			span{display: inline-block;float: left;}
+			.submit{width: 120px;background: #666;color: #fff;margin-left: 70px;cursor: pointer;}
+		</style>
+	</head>
+	<body>
+		<form action="" method="post" class="form" onsubmit="return check(this)">
+			<div><span>姓名：</span><input type="text" name="name" id="name" placeholder="姓名" /><br /></div>
+			<div><span>电话：</span><input type="text" name="phone" id="phone" placeholder="电话" /><br /></div>
+			<div><span>密码：</span><input type="password" name="pwd1" id="pwd1" placeholder="输入密码" /><br /></div>						
+			<div><span>确认：</span><input type="password" name="pwd2" id="pwd2" placeholder="确认密码" /><br />	</div>					
+			<div><span>邮箱：</span><input type="text" name="email" id="email" placeholder="邮箱" /><br /></div>
+			<div><span>地址：</span><input type="text" name="address" id="address" placeholder="地址" /><br /></div>
+			<input type="submit" value="提交" class="submit" />
+		</form>
+	</body>
+</html>
