@@ -263,7 +263,7 @@ new Vue({
 			} else {
 				var inputs = event.srcElement.parentNode.querySelectorAll("input");
 				for( var input of inputs){
-					script = script.replace('<input placeholder="填写代码">', input.value);
+					script = script.replace(/<input.+?>/, input.value);
 				}
 			}
 			try{
