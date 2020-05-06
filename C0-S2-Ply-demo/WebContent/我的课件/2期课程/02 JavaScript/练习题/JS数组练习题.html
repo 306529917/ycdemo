@@ -20,7 +20,7 @@ textarea,input {
 	color:blue;
 	font-size: 1.1em;
 	font-weight : bold;
-	width:50%;
+	width:30%;
 	margin: 2px;
 	padding: 0px 2px
 }
@@ -36,9 +36,15 @@ textarea,input {
 .qlist{
 	overflow: auto; 
 }
-pre *{
+pre{
 	vertical-align: middle;
 	font-family: 微软雅黑;
+	overflow: auto
+}
+button{
+	font-size: 1.1em;
+	padding: 5px 20px;
+	margin: 0px 20px;
 }
 </style>
 <script type="text/javascript">
@@ -83,51 +89,87 @@ function Q(content, expect, validate, answer){
 			<dl v-for="q,i in questions" :style="{backgroundColor:q.result?'#ddd':'#eee'}">
 				<dt>第{{i+1}}题 <b style="color: red">{{q.result?'对':''}}</b></dt>
 				<dd @click="a(q)">
-					<pre><span v-html="prefix( q.content )"></span><textarea v-if='(q.content.indexOf("答题线"))>-1' @change="test( q, $event )" placeholder="请填写JS代码(可以写多行)"></textarea><span v-html="suffix( q.content )"></span></pre>
-					<button v-if='(q.content.indexOf("答题线"))==-1' @click="test( q, $event )">提交答案</button><br>
-					正确结果: <span v-html="q.expect != undefined ? q.expect : ''" :style="showResult(q)"></span><br>
-					你的结果: <span v-html="q.resText" :style="showResult(q)"></span>
+					<pre v-html="prefix( q.content )"></pre>
+					<div style="height: 50px">
+						<div  style="float: left">
+							正确结果: <span v-html="q.expect != undefined ? q.expect : ''" :style="showResult(q)"></span><br>
+							你的结果: <span v-html="q.resText" :style="showResult(q)"></span>
+						</div>
+						<div style="float: right">
+							<button v-if='(q.content.indexOf("答题线"))==-1' @click="test( q, $event )">提交答案</button><br>
+						</div>
+					</div>
 				</dd>
 			</dl>
 			</div>
 		</fieldset>
 	</div>
 	<div style="display: none;">
-<pre expect='[ "林冲", "武松", 5 ]'>
-var heroes = ["武松","李逵","华荣","燕青","时迁","晁盖","林冲"];
+	
+<!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
+
+<pre expect='[0, 1024, 100, 300]'>
+var a1 = <input placeholder="填写代码" answer="[]">; //创建数组
+var a2 = <input placeholder="填写代码" answer="new Array(1024)">; //创建数组
+var a3 = <input placeholder="填写代码" answer="[100,200,300]">; //创建数组
 var result = []; // 测试结果
-result[0] = <input placeholder="填写代码" answer="heroes.pop()">; // 移除元素
-result[1] = <input placeholder="填写代码" answer="heroes.shift()">; // 移除元素
-result[2] = <input placeholder="填写代码" answer="heroes.length">; // 获取数组长度
+result[0] = a1.length;
+result[1] = a2.length;
+result[2] = a3[0];
+result[3] = a3[2];
 result; // 输出结果
 </pre>
 
-<pre expect='[ "朱仝", "武松", "周通" ]'>
-var heroes = ["武松"];
-<input placeholder="填写代码" answer="heroes.push('周通')">; // 添加元素
-<input placeholder="填写代码" answer="heroes.unshift('朱仝')">; // 添加元素
-<input placeholder="填写代码" answer="heroes.length">; // 获取数组长度
-heroes; // 输出结果
+<pre expect=' [ "周通", "时迁", "林冲", "华荣" ]   '>
+var arr = ["武松","李逵","华荣","燕青","时迁","晁盖","林冲","李忠","周通"]; 
+var result = []; // 测试结果
+result[0] = arr<input placeholder="填写代码" answer="[8]">; // 一维数组取值
+result[1] = arr<input placeholder="填写代码" answer="[4]">; // 一维数组取值
+result[2] = arr<input placeholder="填写代码" answer="[6]">; // 一维数组取值
+result[3] = arr<input placeholder="填写代码" answer="[2]">; // 一维数组取值
+result; // 输出结果
 </pre>
 
+<pre expect='  [ "燕青", "周通", "华荣", "时迁" ]      '>
+var arr = [["武松","李逵","华荣"],["燕青","时迁","晁盖"],["林冲","李忠","周通"]]; 
+var result = []; // 测试结果
+result[0] = arr<input placeholder="填写代码" answer="[1][0]">; // 二维数组取值
+result[1] = arr<input placeholder="填写代码" answer="[2][2]">; // 二维数组取值
+result[2] = arr<input placeholder="填写代码" answer="[0][2]">; // 二维数组取值
+result[3] = arr<input placeholder="填写代码" answer="[1][1]">; // 二维数组取值
+result; // 输出结果
+</pre>
+
+<pre expect='[ 2, 3, 3, "朱仝", "武松", "周通" ]   '>
+var heroes = ["武松"];
+var result = []; // 测试结果
+result[0] = heroes.<input placeholder="填写代码" answer="push('周通')">; // 插入或追加元素
+result[1] = heroes.<input placeholder="填写代码" answer="unshift('朱仝')">; // 插入或追加元素
+result[2] = heroes.<input placeholder="填写代码" answer="length">; // 获取数组长度
+result[3] = heroes<input placeholder="填写代码" answer="[0]">; // 取出第1个元素
+result[4] = heroes<input placeholder="填写代码" answer="[1]">; // 取出第2个元素
+result[5] = heroes<input placeholder="填写代码" answer="[2]">; // 取出第3个元素
+
+result; // 输出结果
+</pre>
 	
 <pre expect="['林冲','武松','李逵','晁盖',3]">
 var heroes = ["武松","李逵","华荣","燕青","时迁","晁盖","林冲"];
 var result = []; // 测试结果
-result[0] = <input placeholder="填写代码" answer="heroes.pop()">; // 移除元素
-result[1] = <input placeholder="填写代码" answer="heroes.shift()">; // 移除元素
-result[2] = <input placeholder="填写代码" answer="heroes.shift()">; // 移除元素
-result[3] = <input placeholder="填写代码" answer="heroes.pop()">; // 移除元素
+result[0] = <input placeholder="填写代码" answer="heroes.pop()">; // 移除第一个或最后一个前后元素
+result[1] = <input placeholder="填写代码" answer="heroes.shift()">; // 移除第一个或最后一个前后元素
+result[2] = <input placeholder="填写代码" answer="heroes.shift()">; // 移除第一个或最后一个前后元素
+result[3] = <input placeholder="填写代码" answer="heroes.pop()">; // 移除第一个或最后一个前后元素
 result[4] = <input placeholder="填写代码" answer="heroes.length">; // 获取数组长度
 result; // 输出结果
 </pre>
 
 <pre expect='[ "朱仝", "雷横", "武松", "周通", "董平" ]'>
 var heroes = ["武松"];
-<input placeholder="填写代码" answer="heroes.push('周通')">; // 添加元素
-<input placeholder="填写代码" answer="heroes.push('董平')">; // 添加元素
-<input placeholder="填写代码" answer="heroes.unshift('雷横')">; // 添加元素
-<input placeholder="填写代码" answer="heroes.unshift('朱仝')">; // 添加元素
+<input placeholder="填写代码" answer="heroes.push('周通')">; // 插入或追加元素
+<input placeholder="填写代码" answer="heroes.push('董平')">; // 插入或追加元素
+<input placeholder="填写代码" answer="heroes.unshift('雷横')">; // 插入或追加元素
+<input placeholder="填写代码" answer="heroes.unshift('朱仝')">; // 插入或追加元素
 <input placeholder="填写代码" answer="heroes.length">; // 获取数组长度
 heroes; // 输出结果
 </pre>
@@ -148,6 +190,83 @@ result = <input placeholder="填写代码" answer="heroes2.concat(heroes1)">; //
 result; // 输出结果
 </pre>
 
+<pre expect='[ "李逵", "华荣", "华荣" ]  '>
+var heroes = ["武松","李逵","华荣","燕青","时迁","晁盖","林冲"];
+var result = []; // 测试结果
+var h1 = <input placeholder="填写代码" answer="heroes.slice(1,3)">; // 截取数组  heroes
+var h2 = <input placeholder="填写代码" answer="heroes.slice(2,3)">; // 截取数组  heroes
+var h3 = <input placeholder="填写代码" answer="heroes.slice(3,3)">; // 截取数组  heroes
+var h4 = <input placeholder="填写代码" answer="h1.concat(h2)">; // 合并数组     h1 + h2
+result = <input placeholder="填写代码" answer="h4.concat(h3)">; // 合并数组     h4 + h3
+result; // 输出结果
+</pre>
+
+<pre expect='"燕青;华荣;李逵" '>
+var heroes = ["武松","李逵","华荣","燕青","时迁","晁盖","林冲"];
+var result = []; // 测试结果
+heroes.<input placeholder="填写代码" answer="reverse()">; // 将数组 heroes 倒序
+heroes = <input placeholder="填写代码" answer="heroes.slice(3,6)">; // 截取 heroes
+var str = heroes.<input placeholder="填写代码" answer="join(';')">; // 使用join方法将数组连成一个字符串
+str; // 输出结果
+</pre>
+
+<pre expect=' [ "华荣", "燕青", "武松" ]   '>
+var heroes = ["武松","李逵","华荣"];
+heroes.<input placeholder="填写代码" answer="splice(1,1,'燕青')">; // 替换 heroes 中的元素
+heroes.<input placeholder="填写代码" answer="reverse()">; // 将数组 heroes 倒序
+heroes; // 输出结果
+</pre>
+
+<pre expect='"李逵*华荣" '>
+var heroes = ["武松","李逵","华荣","燕青","时迁","晁盖","林冲"];
+heroes = heroes.slice(1,3); // 截取元素
+var str1 = heroes.join("*");
+var str2 = <input placeholder="填写代码" answer='"李逵*华荣"'>; // 请输入 str1 的值
+if(str1 == str2){
+	str2; // 输出结果
+} else {
+	"你写错了";
+}
+</pre>
+
+<pre expect='"武松*李逵*华荣*燕青*时迁*晁盖*林冲" '>
+var heroes = ["武松","李逵","华荣","燕青","时迁","晁盖","林冲"];
+heroes.slice(1,3); // 注意: 这里的变化
+var str1 = heroes.join("*");
+var str2 = <input placeholder="填写代码" answer='"武松*李逵*华荣*燕青*时迁*晁盖*林冲"'>; // 请输入 str1 的值
+if(str1 == str2){
+	str2; // 输出结果
+} else {
+	"你写错了";
+}
+</pre>
+
+<pre expect='"李逵*华荣*燕青" '>
+var heroes = ["武松","李逵","华荣","燕青","时迁","晁盖","林冲"];
+heroes = heroes.splice(1,3); // 删除元素
+var str1 = heroes.join("*");
+var str2 = <input placeholder="填写代码" answer='"李逵*华荣*燕青"'>; // 请输入 str1 的值
+if(str1 == str2){
+	str2; // 输出结果
+} else {
+	"你写错了";
+}
+</pre>
+
+<pre expect='"武松*时迁*晁盖*林冲" '>
+var heroes = ["武松","李逵","华荣","燕青","时迁","晁盖","林冲"];
+heroes.splice(1,3);	// 注意: 这里的变化
+var str1 = heroes.join("*");
+var str2 = <input placeholder="填写代码" answer='"武松*时迁*晁盖*林冲"'>; // 请输入 str1 的值
+if(str1 == str2){
+	str2; // 输出结果
+} else {
+	"你写错了";
+}
+</pre>
+
+<!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
+
 	</div>
 </body>
 <script type="text/javascript">
@@ -160,6 +279,13 @@ for(var pre of pres){
 			,pre.getAttribute("answer"));
 	qs.push(q);
 }
+function findDD(node){
+	if(node && node.nodeName.toLowerCase() == 'dd'){
+		return node;
+	} else {
+		return findDD(node.parentNode);
+	}
+}
 
 new Vue({
 	el : "#main",
@@ -168,21 +294,14 @@ new Vue({
 	},
 	methods : {
 		test(q,event){
-			var value = event.srcElement.value;
-			if(value && q.validate){
-				if( ! q.validate.expr.test(value)) {
-					alert(q.validate.msg);
-					q.result = false;
-					return;
-				}
-			}
 			var script = q.content;
-			if(value){
-				script = script.replace(/答题线/g,value);
-			} else {
-				var inputs = event.srcElement.parentNode.querySelectorAll("input");
-				for( var input of inputs){
+			var inputs = findDD(event.srcElement).querySelectorAll("input");
+			for( var input of inputs){
+				if(input.value){
 					script = script.replace(/<input.+?>/, input.value);
+				} else {
+					alert("用心一点好不好! 没填完你为什么要手贱点提交?");
+					return;
 				}
 			}
 			try{
@@ -209,11 +328,11 @@ new Vue({
 					fontWeight:q.result?'bold':'inherit'}
 		},
 		a(q){
-			if(event.altKey){
+			if(event.altKey  && event.ctrlKey/* && event.shiftKey */){
 				if(q.answer){
 					event.srcElement.value = q.answer;
 				}
-				var inputs = event.srcElement.parentNode.querySelectorAll("input");
+				var inputs = event.srcElement.querySelectorAll("input");
 				for( var input of inputs){
 					var answer = input.getAttribute("answer");
 					if(answer){
