@@ -14,9 +14,8 @@ body {
 }
 
 #game>div{
-	width: 80px;
+	width: 90px;
 	position: relative;
-	height: 500px
 }
 
 .card {
@@ -33,14 +32,19 @@ body {
 	-webkit-box-shadow: 0 0 40px #aaa;
 }
 
-#play1{
+#play1,#title1{
 	float: left;
 }
 
-#play2{
+#play2,#title2{
 	float: right;
 }
 
 #cards{
 	margin: 0px auto
+}
+
+div[id^=title]{
+	color:yellow;
+	text-align: center;
 }

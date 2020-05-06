@@ -8,6 +8,13 @@
 </head>
 <body>
 	<section id="game">
+		<div id="title1" :style="{visibility: curPlay==1? 'visible': 'hidden'}">
+			出牌
+		</div>
+		<div id="title2" :style="{visibility: curPlay==2? 'visible': 'hidden'}">
+			出牌
+		</div>
+		<div style="clear: both;"></div>
 		<div id="play1">
 			<div class="card" v-for="c,i in play1" :style="{top:i*10+'px'}"></div>
 		</div>
@@ -15,7 +22,7 @@
 			<div class="card" v-for="c,i in play2" :style="c.getStyle(i)" @click="click(2)"></div>
 		</div>
 		<div id="cards">
-			<div class="card" v-for="c,i in cards" :style="c.getStyle(i,20)"></div>
+			<div class="card" v-for="c,i in cards" :style="c.getStyle(i,30)"></div>
 		</div>
 	</section>
 	<script type="text/javascript">
@@ -93,6 +100,11 @@
 							moved = true;
 							break;
 						}
+					}
+					if(play1.length==0){
+						alert("你赢了!")
+					} else if(play2.length==0){
+						alert("电脑赢了!")
 					}
 					// 未消牌则交换玩家
 					if(moved == false){
