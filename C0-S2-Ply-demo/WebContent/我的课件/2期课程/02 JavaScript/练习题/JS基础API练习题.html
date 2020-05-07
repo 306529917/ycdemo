@@ -302,9 +302,6 @@ new Vue({
 				console.info(script);
 				q.resText = eval(script);
 				console.info("====测试结束====");
-				console.info(q.resText.toString());
-				console.info(q.expect.toString());
-				console.info(q.resText.toString() == q.expect.toString());
 				q.result = q.expect != undefined ? q.resText.toString() == q.expect.toString() : true;
 			}catch(e){
 				alert(e.message);
