@@ -94,7 +94,7 @@ input {
 					new Q("var data = '字符串的match使用正则表达式模式对字符串执行查找，并将包含查找的结果作为数组返回';<br>var reg = 答题线; // 查找第一个 \"字符串\" <br>var r = data.match(reg); <br>r.length;// 返回 ", 1),
 					new Q("var data = '字符串的match使用正则表达式模式对字符串执行查找，并将包含查找的结果作为数组返回';<br>var regex = 答题线; // 查找所有的 \"查找\" <br>var r = data.match(regex); <br>r.length;// 返回 ", 2,
 							{expr: new RegExp("new"),msg:'代码必须包含关键字: new'}),
-					new Q("var data = '小猫笑我,我笑猫小';<br>var ret = 答题线;// 替换字符串<br> ret == '小猫笑你,你笑猫小'; // 返回: ",true ),
+					new Q("var data = '小猫笑我,我笑猫小';<br>var ret = 答题线;// 替换字符串<br> ret == '小猫笑你,我笑猫小'; // 返回: ",true ),
 					new Q("var data = '小猫笑我,我笑猫小';<br>答题线;// 根据结果填写<br>data == '小狗笑我,我笑狗小'; // 返回 ",true),
 					new Q("var data = '小明,小红,小黄,小丽';<br>答题线;// 拆分数组<br>arr.length// 返回:", 4),
 					new Q("var data = 答题线;// 定义字符串<br>var arr = data.split(/;/);// 拆分数组<br>arr.length// 返回:", 3),
