@@ -3,30 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style>
-html,body,div,iframe{
-	height: 100%;
-}
-iframe{
-	width:100%
-}
-</style>
-<script type="text/javascript">
-function go(){
-	console.info(f.contentWindow);
-	f.contentWindow.history.go(1);
-}
-function bk(){
-	console.info(f.contentWindow);
-	f.contentWindow.history.go(-1);
-}
-</script>
+<script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.js"></script>
 </head>
 <body>
-<button onclick="go()">前进</button>
-<button onclick="bk()">回退</button>
-<div>
-<iframe id="f" src="a.html"></iframe>
+<div id="app">
+{{say}} 
 </div>
+<script type="text/javascript">
+var vue = new Vue({
+	el : "#app",
+	data : {
+		msg : "hello world",
+		hello : "hello",
+		who : "zhangsan"
+	},
+	computed:{
+		say : function(){
+			return this.hello + " " + this.who;
+		}
+	}
+})
+</script>
 </body>
 </html>
