@@ -210,9 +210,11 @@ var v5 = new Vue({
 			绰号:<input v-model="sj.alias" name="alias"><br>
 			学历:<select v-model="sj.edu" name="edu"><option v-for="e in eduItems">{{e}}</select><br>
 			职位:<span v-for="j,i in jobItems">
-				<input :id="'job'+i" v-model="sj.job" name="job" type="radio">{{j}}
+					<input v-model="sj.job" name="job" type="radio" :value="j">{{j}}
 				</span><br>
-			爱好:<span v-for="l in likeItems"><input v-model="sj.like" name="like" type="checkbox">{{l}}</span><br>
+			爱好:<span v-for="l in likeItems">
+					<input v-model="sj.like" name="like" type="checkbox"  :value="l">{{l}}
+				</span><br>
 			介绍:<textarea v-model="sj.desc" name="desc"></textarea><br>
 		</form>
 	</fieldset>

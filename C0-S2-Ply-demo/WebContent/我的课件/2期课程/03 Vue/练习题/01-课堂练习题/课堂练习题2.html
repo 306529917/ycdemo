@@ -141,5 +141,39 @@ textarea{
 	*/
 	</script>
 
+	<fieldset id="E06">
+		<legend>练习题6: 表单元素绑定</legend>
+		<form action="">
+			姓名:<input  name="name"><br>
+			绰号:<input  name="alias"><br>
+			学历:<select  name="edu"><option ></select><br>
+			职位:<span >
+					<input  name="job" type="radio">
+				</span><br>
+			爱好:<span >
+					<input  name="like" type="checkbox">
+				</span><br>
+			介绍:<textarea  name="desc"></textarea><br>
+		</form>
+	</fieldset>
+	<script type="text/javascript">
+	var sj = {
+		name : "宋江",
+		alias : "及时雨",
+		edu : "秀才",
+		job : "老大",
+		like : ["读书","下棋","喝酒"],
+		desc : "宋江（1073年—1124年），字公明，绰号呼保义、及时雨、孝义黑三郎，施耐庵所作古典名著《水浒传》中的主人公。原为山东省郓城县押司，身材矮小，面目黝黑，为梁山起义军领袖"
+	};
+	var eduItems = ["进士","贡士","举人","秀才"];
+	var jobItems = ["老大","军师","武将","工匠"];
+	var likeItems = ["使枪","弄棒","喝酒","绣花","读书","蹴鞠","书法","绘画","下棋"];
+	
+	/**
+	1. 学历, 职位, 爱好的选项添加到对应的控件中
+	2. 将宋江的个人信息绑定到表单的对应元素中
+	*/
+	
+	</script>
 </body>
 </html>
