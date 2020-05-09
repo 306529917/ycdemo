@@ -142,6 +142,7 @@ var v4 = new Vue({
 				<th>力量</th>
 				<th>智力</th>
 				<th>敏捷</th>
+				<th>综合战斗力</th>
 			</tr>
 			<tr v-for="h,index in heroes">
 				<td>{{index}}</td>
@@ -162,6 +163,7 @@ var v4 = new Vue({
 					{{h.a}}
 					<button @click="change( h, 'a', 1)">+</button>
 				</td>
+				<td>{{sum(h)}}</td>
 			</tr>
 		</table>
 	</fieldset>
@@ -183,6 +185,7 @@ var v4 = new Vue({
 /**
 1. 将水浒英雄显示到表格中
 2. 实现属性值的加减
+3. 统计出每个影响的综合战斗力: 力量+智力+敏捷
 */
 var v5 = new Vue({
 	el : "#E05",
@@ -192,6 +195,9 @@ var v5 = new Vue({
 	methods :{
 		change(h,n,v){
 			h[n]+=v; 
+		},
+		sum(h){
+			return h.p + h.i + h.a;
 		}
 	}
 });
@@ -203,7 +209,9 @@ var v5 = new Vue({
 			姓名:<input v-model="sj.name" name="name"><br>
 			绰号:<input v-model="sj.alias" name="alias"><br>
 			学历:<select v-model="sj.edu" name="edu"><option v-for="e in eduItems">{{e}}</select><br>
-			职位:<span v-for="j in jobItems"><input v-model="sj.job" name="job" type="radio">{{j}}</span><br>
+			职位:<span v-for="j,i in jobItems">
+				<input :id="'job'+i" v-model="sj.job" name="job" type="radio">{{j}}
+				</span><br>
 			爱好:<span v-for="l in likeItems"><input v-model="sj.like" name="like" type="checkbox">{{l}}</span><br>
 			介绍:<textarea v-model="sj.desc" name="desc"></textarea><br>
 		</form>
