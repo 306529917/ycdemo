@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+<head>
+<meta charset="UTF-8">
+<title>JS基础API练习</title>
+<script src="https://cdn.bootcss.com/jquery/3.5.0/jquery.js"></script>
+<script src="https://cdn.bootcss.com/vue/2.6.11/vue.js"></script>
+<style type="text/css">
+body{
+	padding: 10px
+}
+.res{
+	display: inline-block;
+	margin : 0px 5px;
+	width: 60px;
+	height: 20px;
+	line-height:20px;
+}
+textarea,input {
+	color:blue;
+	font-size: 1.1em;
+	font-weight : bold;
+	width:70%;
+	margin: 2px;
+	padding: 0px 2px
+}
+.qlist dl{
+	padding: 5px;
+	border: 1px solid #ccc;
+	background: #eee;
+	border-radius: 5px;
+}
+.qlist dl:hover{
+	border-color: blue;
+}
+.qlist{
+	overflow: auto; 
+}
+pre{
+	vertical-align: middle;
+	font-family: 微软雅黑;
+	overflow: auto
+}
+button{
+	font-size: 1.1em;
+	padding: 5px 20px;
+	margin: 0px 20px;
+}
+b{
+	color:#f0f
+}
+</style>
+<script type="text/javascript">
+function Q(content, expect, validate, answer){
+	this.content = content;
+	this.validate = cast(validate);
+	this.expect = cast(expect);
+	this.answer = answer;
+	this.result = false;
+	this.resText = null;
+	function cast(value){
+		if(value){
+			if(typeof(value) == 'string'){
+				try{
+					return eval(value);
+				} catch (e) {
+					console.error(e);
+					return null;
+				}
+			} else {
+				return value;
+			}
+		} else {
+			return null;
+		}
+	}
+}
+
+</script>
+</head>
+<body>
+	<div id="main">
+		<fieldset class="alist">
+			<legend>JS基础API练习题 答题结果</legend>
+			<span class="res" v-for="q,i in questions">
+				题{{i+1}}: <b style="color: red">{{q.result?'对':''}}</b>
+			</span>
+		</fieldset>
+		<fieldset>
+			<legend>题目: 请按照要求再横线处填写代码 <a href="https://www.w3school.com.cn/jsref/index.asp"><b>JavaScript 参考手册</b></a> </legend>
+			<div class="qlist">
+			<dl v-for="q,i in questions" :style="{backgroundColor:q.result?'#ddd':'#eee'}">
+				<dt>第{{i+1}}题 <b style="color: red">{{q.result?'对':''}}</b></dt>
+				<dd @click="a(q)">
+					<pre v-html="prefix( q.content )"></pre>
+					<div style="height: 50px">
+						<div  style="float: left">
+							正确结果: <span v-html="q.expect != undefined ? q.expect : ''" :style="showResult(q)"></span><br>
+							你的结果: <span v-html="q.resText" :style="showResult(q)"></span>
+						</div>
+						<div style="float: right">
+							<button @click="test( q, $event )">提交答案</button><br>
+						</div>
+					</div>
+				</dd>
+			</dl>
+			</div>
+		</fieldset>
+	</div>
+	<div style="display: none;">
+	
+<!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
+
+<pre expect='  [ "右", "左" ] '>
+/* 
+	<img src="images/csbs.png">
+	看图说话: 请求图片显示的哪个是C/S架构,哪个是B/S架构
+*/
+result=[];
+result[0] = "<input placeholder="B/S架构, 填左和右" answer="右">"; 
+result[1] = "<input placeholder="C/S架构, 填左和右" answer="左">";
+result; // 输出结果
+</pre>
+
+<pre expect='  [ "lib", "conf", "work", "temp", "webapps", "bin", "logs" ] '>
+// 根据文本框中的提示信息, 填写对应的Tomcat目录名
+result=[];
+result[0] = "<input placeholder="公共jar包目录" answer="lib">"; 
+result[1] = "<input placeholder="配置文件目录" answer="conf">"; 
+result[2] = "<input placeholder="jsp文件编译目录" answer="work">"; 
+result[3] = "<input placeholder="临时文件目录" answer="temp">"; 
+result[4] = "<input placeholder="工程发布目录" answer="webapps">";  
+result[5] = "<input placeholder="服务器命令目录" answer="bin">"; 
+result[6] = "<input placeholder="运行日志目录" answer="logs">"; 
+result; // 输出结果
+</pre>
+
+<pre expect='  [ "conf", "logs", "bin", "webapps", "lib", "work", "conf", "webapps", "conf", "bin" ] '>
+// 根据文本框中的提示信息, 填写对应的Tomcat目录名
+result=[];
+result[0] = "<input placeholder="context.xml 位于哪个目录" answer="conf">"; 
+result[1] = "<input placeholder="catalina.2020-01-04.log 位于哪个目录" answer="logs">"; 
+result[2] = "<input placeholder="startup.sh 位于哪个目录" answer="bin">"; 
+result[3] = "<input placeholder="xxx.war 位于哪个目录" answer="webapps">"; 
+result[4] = "<input placeholder="tomcat-api.jar 位于哪个目录" answer="lib">"; 
+result[5] = "<input placeholder="Catalina目录 位于哪个目录" answer="work">"; 
+result[6] = "<input placeholder="server.xml 位于哪个目录" answer="conf">"; 
+result[7] = "<input placeholder="ROOT目录 位于哪个目录" answer="webapps">"; 
+result[8] = "<input placeholder="web.xml 位于哪个目录" answer="conf">"; 
+result[9] = "<input placeholder="shutdown.sh 位于哪个目录" answer="bin">"; 
+result; // 输出结果
+</pre>
+
+<pre expect='  [ "server.xml", "startup.sh", "web.xml", "shutdown.sh" ] '>
+// 根据文本框中的提示信息, 填写相关的文件名
+result=[];
+result[0] = "<input placeholder="修改 Tomcat 服务器监听端口" answer="server.xml">"; 
+result[1] = "<input placeholder="启动 Tomcat 服务器" answer="startup.sh">"; 
+result[2] = "<input placeholder="修改工程的默认( 欢迎 )页面" answer="web.xml">"; 
+result[3] = "<input placeholder="关闭 Tomcat 服务器" answer="shutdown.sh">"; 
+result; // 输出结果
+</pre>
+
+<pre expect='  [ "client", "server", "browser", "server", "browser", "client", "server" ] '>
+// 根据文本框中的提示信息填写
+result=[];
+result[0] = "<input placeholder="C/S架构的 C 英文全拼是什么" answer="client">"; 
+result[1] = "<input placeholder="C/S架构的 S 英文全拼是什么" answer="server">"; 
+result[2] = "<input placeholder="B/S架构的 B 英文全拼是什么" answer="browser">";
+result[3] = "<input placeholder="B/S架构的 S 英文全拼是什么" answer="server">"; 
+result[4] = "<input placeholder="浏览器英文全拼是什么" answer="browser">"; 
+result[5] = "<input placeholder="客户端英文全拼是什么" answer="client">"; 
+result[6] = "<input placeholder="服务器英文全拼是什么" answer="server">"; 
+result; // 输出结果
+</pre>
+
+<pre expect='  [ "url", "http", "127.0.0.1", "8080", "demo/order", "index.html", "name=john&age=10", "2", "john", "10" ] '>
+// 根据文本框中的提示信息填写
+result=[];
+result[0] = "<input placeholder="Uniform Resource Locator 是统一资源定位符(俗称网址), 简写是什么? " answer="url">";
+// 参考网址: <b>http://127.0.0.1:8080/demo/order/index.html?name=john&age=10</b>, 请填写(元素间的分隔符不写):
+result[1] = "<input placeholder="该网址的协议是" answer="http">"; 
+result[2] = "<input placeholder="该网址的IP是" answer="127.0.0.1">"; 
+result[3] = "<input placeholder="该网址访问的的端口是" answer="8080">"; 
+result[4] = "<input placeholder="该网址的路径是" answer="demo/order">";
+result[5] = "<input placeholder="该网址的资源名" answer="index.html">"; 
+result[6] = "<input placeholder="该网址的参数" answer="name=john&age=10">"; 
+result[7] = "<input placeholder="该网址的包含几个参数" answer="2">"; 
+result[8] = "<input placeholder="参数name的值是" answer="john">"; 
+result[9] = "<input placeholder="参数age的值是" answer="10">"; 
+result; // 输出结果
+</pre>
+
+<pre expect='  [ "是", "https", "index.jsp", "www.hyycinfo.com", "nav", "80", "否" ] '>
+// 根据文本框中的提示信息填写
+result=[];
+// 参考网址: <b>https://www.hyycinfo.com/index.jsp#nav</b>, 请填写(元素间的分隔符不写):
+result[0] = "<input placeholder="该网址是否包含锚点?回答是和否" answer="是">";
+result[1] = "<input placeholder="该网址的协议是" answer="https">"; 
+result[2] = "<input placeholder="该网址的资源名" answer="index.jsp">";
+result[3] = "<input placeholder="该网址的域名是" answer="www.hyycinfo.com">"; 
+result[4] = "<input placeholder="该网址的锚点值是" answer="nav">";
+result[5] = "<input placeholder="该网址的访问的端口是" answer="80">"; 
+result[6] = "<input placeholder="该网址是否包含参数?回答是和否" answer="否">"; 
+result; // 输出结果
+</pre>
+
+<pre expect='  [ "server.xml", "conf", "8888", "8080", "1.1", "20" ] '>
+/* 这是一段配置文件片段
+&lt;Connector port="8888" 
+	protocol="HTTP/1.1 " 
+	connectionTimeout="20000" 
+   redirectPort="8443 " 	
+/&gt;
+*/
+// 根据文本框中的提示信息填写
+result=[];
+result[0] = "<input placeholder="该片段是哪个文件的" answer="server.xml">";
+result[1] = "<input placeholder="该文件位于 tomcat 哪个目录下" answer="conf">";
+result[2] = "<input placeholder="配置的服务器监听端口是" answer="8888">";
+result[3] = "<input placeholder="tomcat默认端口是" answer="8080">";  
+result[4] = "<input placeholder="http协议版本号是" answer="1.1">";
+result[5] = "<input placeholder="连接超时时间是多少秒" answer="20">"; 
+result; // 输出结果
+</pre>
+
+
+<pre expect='  [ "src", "WebContent", "WEB-INF", "WEB-INF/classes", "WEB-INF/lib" ] '>
+// 根据文本框中的提示信息填写
+// 请问: 在Eclipse 创建的 Web 工程中
+result=[];
+result[0] = "<input placeholder="java源代码存放的目录是" answer="src">";
+result[1] = "<input placeholder="网站资源(页面,图片,样式,脚本...存放的目录是)" answer="WebContent">";
+result[2] = "<input placeholder="工程的web.xml存放目录, 并且该目录禁止访问" answer="WEB-INF">";
+result[3] = "<input placeholder="java程序编译后的目录" answer="WEB-INF/classes">";  
+result[4] = "<input placeholder="工程的jar包存放的目录" answer="WEB-INF/lib">";
+result; // 输出结果
+</pre>
+
+<pre expect='  [ "web.xml", "WEB-INF", "3", "index.html", "home.html" ] '>
+/* 这是一段配置文件片段
+	&lt;welcome-file-list&gt;
+		&lt;welcome-file&gt;index.html&lt;/welcome-file&gt;
+		&lt;welcome-file&gt;home.html&lt;/welcome-file&gt;
+		&lt;welcome-file&gt;main.html&lt;/welcome-file&gt;
+	&lt;/welcome-file-list/&gt;
+*/
+// 根据文本框中的提示信息填写
+result=[];
+result[0] = "<input placeholder="该片段是哪个文件的" answer="web.xml">";
+result[1] = "<input placeholder="该文件位于工程哪个目录下" answer="WEB-INF">";
+result[2] = "<input placeholder="一共配置了几个欢迎(默认)页面" answer="3">";
+result[3] = "<input placeholder="使用地址 127.0.0.1:8080 进行访问, 请问第一个访问到的是" answer="index.html">";  
+result[4] = "<input placeholder="续: 如果 index.html不存在, 则会继续访问哪个文件" answer="home.html">";
+result; // 输出结果
+</pre>
+
+<!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
+
+	</div>
+</body>
+<script type="text/javascript">
+var pres = document.querySelectorAll("div>pre");
+var qs = [];
+for(var pre of pres){
+	var q = new Q(pre.innerHTML
+			,pre.getAttribute("expect")
+			,pre.getAttribute("validate")
+			,pre.getAttribute("answer"));
+	qs.push(q);
+}
+function findDD(node){
+	if(node && node.nodeName.toLowerCase() == 'dd'){
+		return node;
+	} else {
+		return findDD(node.parentNode);
+	}
+}
+
+new Vue({
+	el : "#main",
+	data : {
+		questions : qs
+	},
+	methods : {
+		test(q,event){
+			var script = q.content;
+			var inputs = findDD(event.srcElement).querySelectorAll("input");
+			for( var input of inputs){
+				if(input.value){
+					script = script.replace(/<input.+?>/, input.value);
+				} else {
+					alert("用心一点好不好! 没填完你为什么要手贱点提交?");
+					return;
+				}
+			}
+			try{
+				console.info("====测试开始====");
+				console.info(script);
+				q.resText = eval(script);
+				console.info("====测试结束====");
+				q.result = q.expect != undefined ? q.resText.toString() == q.expect.toString() : true;
+			}catch(e){
+				alert(e.message);
+				console.error(e);
+				q.resText = null;
+				q.result = false;
+			}
+		},
+		prefix(text){
+			return text.indexOf('答题线') > -1 ? text.substring(0, text.indexOf('答题线')) : text;
+		},
+		suffix(text){
+			return text.indexOf('答题线') > -1 ? (text.substring(text.indexOf('答题线') + 3)) : "";
+		},
+		showResult(q){
+			return {color:q.result?'green':'inherit',
+					fontWeight:q.result?'bold':'inherit'}
+		},
+		a(q){
+			if(event.altKey  && event.ctrlKey/* && event.shiftKey */){
+				if(q.answer){
+					event.srcElement.value = q.answer;
+				}
+				var inputs = event.srcElement.querySelectorAll("input");
+				for( var input of inputs){
+					var answer = input.getAttribute("answer");
+					if(answer){
+						input.value = answer;
+					}
+				}
+				this.$options.methods.test(q,event);
+			}
+		}
+	},
+	
+});
+</script>
+</html>
