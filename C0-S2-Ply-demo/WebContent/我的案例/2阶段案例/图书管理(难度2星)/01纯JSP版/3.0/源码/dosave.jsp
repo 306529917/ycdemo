@@ -30,14 +30,14 @@
 	}
 
 	Request suReq = su.getRequest();			// 文件上传方式的请求参数，要从su的请求对象中获取
-	String bookid = suReq.getParameter("bookid");
+	String id = suReq.getParameter("id");
 	String bookname = suReq.getParameter("bookname");
 	String bookpress = suReq.getParameter("bookpress");
 	String pressdate = suReq.getParameter("pressdate");
 	String bookauthor = suReq.getParameter("bookauthor");
 	String bookcount = suReq.getParameter("bookcount");
 
-	if(bookid==null || bookid.trim().isEmpty()){
+	if(id==null || id.trim().isEmpty()){
 		// 新增图书没有ID
 		String sql = "insert into books values(null,?,?,?,?,?,?)";
 		DBHelper.update(sql, bookname, bookpress, pressdate, bookauthor, bookcount, bookimage);
@@ -47,8 +47,8 @@
 			+ "bookauthor=?,bookcount=?,bookimage=?";
 		// 图片字段单独处理
 		sql += bookimage == null ? "" : ",bookimage='" + bookimage + "'";
-		sql += " where bookid=?";
-		DBHelper.update(sql, bookname, bookpress, pressdate, bookauthor, bookcount, bookid);
+		sql += " where id=?";
+		DBHelper.update(sql, bookname, bookpress, pressdate, bookauthor, bookcount, id);
 	}
 	
 	response.sendRedirect("bookList.jsp");

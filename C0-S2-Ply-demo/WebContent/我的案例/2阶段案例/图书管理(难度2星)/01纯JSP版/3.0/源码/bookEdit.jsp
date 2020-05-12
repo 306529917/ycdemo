@@ -52,17 +52,17 @@ function loadImg(){
 <body>
 	<h1>图书信息编辑</h1>
 	<%
-		String bookid = request.getParameter("bookid");
-		if(bookid!=null){
-			String sql = "select * from books where bookid=?";
-			Map<String, Object> m = DBHelper.selectOne(sql, bookid);
+		String id = request.getParameter("id");
+		if(id!=null){
+			String sql = "select * from books where id=?";
+			Map<String, Object> m = DBHelper.selectOne(sql, id);
 			// 将查出的图书数据（map集合），放入页面上下文对象属性中，可以使用 EL表达式（${...}） 输出图书信息
 			pageContext.setAttribute("book", m);
 		}
 	%>
 	<!-- 文件上传 form 必填属性： method="post" enctype="multipart/form-data"-->
 	<form method="post" action="dosave.jsp" enctype="multipart/form-data">
-		<input type="hidden" name="bookid" value="${param.bookid}">
+		<input type="hidden" name="id" value="${param.id}">
 		<label>书名:</label>
 			<!-- 使用 EL 表达式输出图书信息 -->
 			<input name="bookname" value="${book.bookname}"><br>

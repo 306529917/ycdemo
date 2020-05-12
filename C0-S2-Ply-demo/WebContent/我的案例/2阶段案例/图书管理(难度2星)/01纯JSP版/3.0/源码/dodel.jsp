@@ -2,9 +2,9 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%
 	
-	String bookid = request.getParameter("bookid");
-	String sql = "delete from books where bookid = ?";
-	DBHelper.update(sql, bookid);
+	String id = request.getParameter("id");
+	String sql = "delete from books where id = ?";
+	DBHelper.update(sql, id);
 	
 	response.sendRedirect("bookList.jsp");
 

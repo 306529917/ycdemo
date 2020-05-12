@@ -46,7 +46,7 @@ input[type="submit"] {
 			</tr>
 			<tr v-for=" (book,i) in booklist">
 				<td>{{i+1}}</td>
-				<td>{{book.bookid}}</td>
+				<td>{{book.id}}</td>
 				<td>{{book.bookname}}</td>
 				<td>{{book.bookpress}}</td>
 				<td>{{book.pressdate}}</td>
@@ -73,7 +73,7 @@ input[type="submit"] {
 				  },
 				  del(book,i){
 					  if(confirm("请确认是否要删除图书 " +book.bookname + " ?")){
-						  this.$http.get("/C0-S2-Ply-demo/图书管理/4.0/book.do?op=del&id="+book.bookid).then(res => {
+						  this.$http.get("/C0-S2-Ply-demo/图书管理/4.0/book.do?op=del&id="+book.id).then(res => {
 							  if(res.data.code){
 								  this.booklist.splice(i,1); 
 							  } else {
@@ -86,7 +86,7 @@ input[type="submit"] {
 					  location.href='edit.html';
 				  },
 				  mod(book){
-					  location.href='edit.html?id='+book.bookid;
+					  location.href='edit.html?id='+book.id;
 				  },
 				  cls(){
 					  this.book.bookname = '';

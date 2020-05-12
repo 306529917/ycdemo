@@ -40,7 +40,7 @@ h3, li:last-child label{
 <h3>图书信息编辑</h3>
 <form id="app" method="post" style="margin: 10px">
 	<ul>
-	<li><label>编号:</label><input v-model="book.bookid" disabled="disabled"> 
+	<li><label>编号:</label><input v-model="book.id" disabled="disabled"> 
 	<li><label>书名:</label><input v-model="book.bookname">
 	<li><label>作者:</label><input v-model="book.bookauthor"> 
 	<li><label>出版社:</label>
@@ -69,7 +69,7 @@ h3, li:last-child label{
 		data : {
 			pressItems:[],
 			book:{
-				bookid:0,
+				id:0,
 				bookname:null,
 				bookauthor:null,
 				bookpress:null,
@@ -83,7 +83,7 @@ h3, li:last-child label{
 				populateArray(res.data, this.pressItems);
 			})
 			if(id){
-				this.$http.get("/C0-S2-Ply-demo/图书管理/4.0/book.do?op=get&bookid="+id).then(res => {
+				this.$http.get("/C0-S2-Ply-demo/图书管理/4.0/book.do?op=get&id="+id).then(res => {
 					populateObject(res.data, this.book);
 				})
 			}

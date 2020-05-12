@@ -27,10 +27,10 @@
 			for (Map<String, Object> m : list) {
 		%>
 		<tr>
-			<td><%=m.get("bookid")%></td>
+			<td><%=m.get("id")%></td>
 			<td>
 				<!-- 注意：此处生成超链接，用于打开查看图书页面，地址?后面是请求参数的格式 -->
-				<a href="bookShow.jsp?bookid=<%=m.get("bookid")%>">
+				<a href="bookShow.jsp?id=<%=m.get("id")%>">
 					<%=m.get("bookname")%>
 				</a>
 			</td>

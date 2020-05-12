@@ -17,12 +17,12 @@ span {
 <body>
 	<h1>图书信息</h1>
 	<%
-		String sql = "select * from books where bookid=?";
-		String bookid = request.getParameter("bookid");
-		Map<String, Object> m = DBHelper.selectOne(sql, bookid);
+		String sql = "select * from books where id=?";
+		String id = request.getParameter("id");
+		Map<String, Object> m = DBHelper.selectOne(sql, id);
 	%>
 	<ul>
-		<li><span>ID：</span><%=m.get("bookid")%></li>
+		<li><span>ID：</span><%=m.get("id")%></li>
 		<li><span>书名：</span><%=m.get("bookname")%></li>
 		<li><span>出版社：</span><%=m.get("bookpress")%></li>
 		<li><span>出版时间：</span><%=m.get("pressdate")%></li>

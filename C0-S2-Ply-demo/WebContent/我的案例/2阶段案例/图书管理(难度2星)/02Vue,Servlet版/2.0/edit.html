@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>编辑图书</title>
+<link href="css/style.default.css" rel="stylesheet">
+<link href="css/select2.css" rel="stylesheet" />
+<link href="css/style.datatables.css" rel="stylesheet">
+<link href="css/datatables.responsive.css" rel="stylesheet">
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="https://unpkg.com/vue"></script>
+<script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
+<script type="text/javascript" src="js/util.js"></script>
+<style type="text/css">
+*{
+	padding: 0px;
+	margin: 0px
+}
+label {
+	text-align: left;
+}
+form{
+	margin: 50px auto;
+	text-align: center;
+}
+ul{
+	display: inline-block;
+}
+li{
+	list-style-type: none;
+	padding: 5px;
+	text-align: left;
+}
+input,select{
+	width: 300px;
+}
+input[type=button]{
+	width: auto;
+}
+h3, li:last-child label{
+	text-align: center;
+}
+span {
+	display: inline-block;
+	padding: 0px 10px;
+	color: red
+}
+</style>
+</head>
+<body>
+<h3>图书信息编辑</h3>
+<form id="app" method="post" style="margin: 10px">
+	<ul>
+	<li><label>编号:</label><span>{{errors.id.defaultMessage}}</span><br><input v-model="book.id" disabled="disabled"> 
+	<li><label>书名:</label><span>{{errors.bookname.defaultMessage}}</span><br><input v-model="book.bookname">
+	<li><label>作者:</label><span>{{errors.bookauthor.defaultMessage}}</span><br><input v-model="book.bookauthor"> 
+	<li><label>出版社:</label><span>{{errors.bookpress.defaultMessage}}</span><br>
+		<input v-model="book.bookpress" list="pis">
+		<datalist id="pis">
+			<option v-for="p in pressItems" >{{p.bookpress}}</option>
+		</datalist>
+	<li><label>出版时间:</label><br><input v-model="book.pressdate"> 
+	<li><label>数量:</label><br><input v-model="book.bookcount"> 
+	<li><label>图片:</label><br><input v-model="book.bookimage">
+	<li style="text-align: center;">
+		<label><input type="button" value="保  存" @click="save" class="btn btn-default btn-rounded"></label>
+		<label><input type="button" value="放  弃" @click="back" class="btn btn-default btn-rounded"></label>
+	</li>
+	</ul>
+</form>
+<script type="text/javascript">
+	//var regex = /[\?&]id=(.+)[&\$]/
+	var path = window.location.href.split("?") //分割url
+	if(path.length>1){
+		var id = path[1].split("=")[1];
+	}
+	
+	var v = new Vue({
+		el : "#app",
+		data : {
+			pressItems:[],
+			book:{
+				id:0,
+				bookname:null,
+				bookauthor:null,
+				bookpress:null,
+				pressdate:new Date().format("yyyy-MM-dd"),
+				bookcount:1,
+				bookimage:null,
+			},
+			errors : {
+				id : {},
+				bookname : {},
+				bookauthor : {},
+				bookpress : {}
+			}
+		},
+		created : function(){
+			
+			this.$http.get("http://47.106.66.89:1112/books/getPressItems").then(res => {
+				this.pressItems = res.data.data;
+			})
+			if(id){
+				this.$http.get("http://47.106.66.89:1112/books/get?id="+id).then(res => {
+					this.book = res.data.data;
+				})
+			}
+		},
+		methods : {
+			save(){
+				this.$http.get("http://47.106.66.89:1112/books/save",{params:this.book},{emulateJSON:true}).then(res => { 
+					if(res.data.code==1){
+						alert("图书保存成功!");
+						location.href = "index.html";
+					} else {
+						for(var index in res.data.data){
+							if(this.errors[res.data.data[index].field]){
+								this.errors[res.data.data[index].field] = res.data.data[index];
+							}
+						}
+						if( ! this.book.id){
+							this.errors.id = {};
+						}
+					}
+				});
+			},
+			back(){
+				history.back();
+			}
+		}
+	})
+
+</script>
+</body>
+</html>

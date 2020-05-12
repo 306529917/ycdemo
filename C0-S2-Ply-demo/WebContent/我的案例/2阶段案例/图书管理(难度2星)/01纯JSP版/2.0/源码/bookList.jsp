@@ -24,9 +24,9 @@ tr:hover {
 }
 </style>
 <script type="text/javascript">
-function del(bookid){
+function del(id){
 	if(confirm("请确认要删除该图书吗?")){
-		location.href='dodel.jsp?bookid=' + bookid;
+		location.href='dodel.jsp?id=' + id;
 	}
 }
 </script>
@@ -79,9 +79,9 @@ function del(bookid){
 			for (Map<String, Object> m : list) {
 		%>
 		<tr>
-			<td><%=m.get("bookid")%></td>
+			<td><%=m.get("id")%></td>
 			<td>
-				<a href="bookShow.jsp?bookid=<%=m.get("bookid")%>">
+				<a href="bookShow.jsp?id=<%=m.get("id")%>">
 					<%=m.get("bookname")%>
 				</a>
 			</td>
@@ -90,8 +90,8 @@ function del(bookid){
 			<td><%=m.get("bookauthor")%></td>
 			<td><%=m.get("bookcount")%></td>
 			<td align="center">
-				<input type="button" value="修 改" onclick="location.href='bookEdit.jsp?bookid=<%=m.get("bookid")%>'">
-				<input type="button" value="删 除" onclick="del(<%=m.get("bookid")%>)">
+				<input type="button" value="修 改" onclick="location.href='bookEdit.jsp?id=<%=m.get("id")%>'">
+				<input type="button" value="删 除" onclick="del(<%=m.get("id")%>)">
 			</td>
 		</tr>
 		<%

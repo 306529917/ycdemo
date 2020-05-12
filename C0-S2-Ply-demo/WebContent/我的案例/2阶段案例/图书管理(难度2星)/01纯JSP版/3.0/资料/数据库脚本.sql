@@ -20,14 +20,14 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 DROP TABLE IF EXISTS `books`;
 CREATE TABLE `books` (
-  `bookid` int(11) NOT NULL auto_increment,
+  `id` int(11) NOT NULL auto_increment,
   `bookname` varchar(40) default NULL,
   `bookpress` varchar(40) default NULL,
   `pressdate` date default NULL,
   `bookauthor` varchar(40) default NULL,
   `bookcount` int(11) default NULL,
   `bookimage` varchar(40) default NULL,
-  PRIMARY KEY  (`bookid`)
+  PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------

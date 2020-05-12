@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>图书管理</title>
+<link href="css/style.default.css" rel="stylesheet">
+<link href="css/select2.css" rel="stylesheet" />
+<link href="css/style.datatables.css" rel="stylesheet">
+<link href="css/datatables.responsive.css" rel="stylesheet">
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/vue.min.js"></script>
+<script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
+<style type="text/css">
+label {
+	width: 100px;
+	display: inline-block;
+	text-align: center;
+}
+input[type="submit"] {
+	width: 80px
+}
+</style>
+</head>
+<body>
+	<div id="app">
+		<form method="post" style="margin: 10px">
+			<label>书名:</label><input v-model="book.bookname"> 
+			<label>出版社:</label><input v-model="book.bookpress">
+			<label>作者:</label><input v-model="book.bookauthor"> 
+			<label><input type="button" value="查 询" @click="getData" class="btn btn-default btn-rounded"></label>
+			<label><input type="button" value="重  置" @click="cls" class="btn btn-default btn-rounded"></label>
+			<label><input type="button" value="添 加" @click="add" class="btn btn-default btn-rounded"></label>
+		</form>
+		<table border="1" cellspacing="0" cellpadding="0" class="table">
+			<tr>
+				<th>序号</th>
+				<th>编号</th>
+				<th>书名</th>
+				<th>出版社</th>
+				<th>出版时间</th>
+				<th>作者</th>
+				<th>数量</th>
+				<th>图片</th>
+				<th>操作</th>
+			</tr>
+			<tr v-for=" (book,i) in booklist">
+				<td>{{i+1}}</td>
+				<td>{{book.id}}</td>
+				<td>{{book.bookname}}</td>
+				<td>{{book.bookpress}}</td>
+				<td>{{book.pressdate}}</td>
+				<td>{{book.bookauthor}}</td>
+				<td>{{book.bookcount}}</td>
+				<td align="center"><img :src="'images/'+book.bookimage" height="80px"></td>
+				<td align="center">
+				<input @click="mod(book)" type="button" value="修 改" class="btn btn-rounded">
+				<input @click="del(book,i)" type="button" value="删 除" class="btn btn-rounded"></td>
+			</tr>
+		</table>
+	</div>
+	<script type="text/javascript">
+		new Vue({
+			el:"#app",
+			data:{booklist:[], book:{}},
+			methods:{ 
+				  getData(){
+					this.book.op = "query";
+					let url = "http://47.106.66.89:1112/books/find?size=20";
+				  	this.$http.get(url).then(res => { 
+				  		this.booklist = res.data.data;
+				  	});
+				  },
+				  del(book,i){
+					  if(confirm("请确认是否要删除图书 " +book.bookname + " ?")){
+						  this.$http.get("http://47.106.66.89:1112/books/del?id="+book.id).then(res => {
+							  if(res.data.code){
+								  this.booklist.splice(i,1); 
+							  } else {
+								  alert(res.data.msg);
+							  }
+					  	});
+					  }
+				  },
+				  add(){
+					  location.href='edit.html';
+				  },
+				  mod(book){
+					  location.href='edit.html?id='+book.id;
+				  },
+				  cls(){
+					  this.book.bookname = '';
+					  this.book.bookpress = '';
+					  this.book.bookauthor = '';
+				  }
+			}, 
+			created:function() { 
+				this.getData(); 
+				$("td").css({"vertical-align":"middle","text-align":"center"});
+			}
+		});
+	</script>
+</body>
+</html>
