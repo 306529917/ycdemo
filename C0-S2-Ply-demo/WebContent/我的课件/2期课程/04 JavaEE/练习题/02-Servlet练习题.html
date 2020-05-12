@@ -82,13 +82,72 @@ function Q(content){
 <input size="50" answer="/img/icon/hello.s">
 4. 要求 mood.html 页面中超链接可以直接通过 hello.s 访问
 <input size="50" answer="/css/hello.s">
-5. 地址定义为 /test/hello.s, 请问 mood.html 页面中的超链接要访问到, 相对地址要怎么写? 
+5. 假设Servlet地址定义为 /test/hello.s, 请问 mood.html 页面中的超链接要访问到该Servlet, 
+	那么mood.html中, 超链接的 href 的相对地址要怎么写? 
 <input size="50" answer="../test/hello.s">
-
+6. 续: 那么mood.html中, 超链接的 href 的绝对地址要怎么写? 
+<input size="50" answer="/demo/test/hello.s">
+7. 续: 那么board.html中, 超链接的 href 的相对地址要怎么写? 
+<input size="50" answer="../../test/hello.s">
+8. 续: 那么board.html中, 超链接的 href 的绝对地址要怎么写? 
+<input size="50" answer="/demo/test/hello.s">
+9. 续: 那么index.html中, 超链接的 href 的相对地址要怎么写? 
+<input size="50" answer="test/hello.s">
+10. 续: 那么index.html中, 超链接的 href 的绝对地址要怎么写? 
+<input size="50" answer="/demo/test/hello.s">
 </pre>
 
+<pre>
+Servlet 的 doGet 和 doPost 方法参数中, 
+请求对象的类型是:<input answer="HttpServletRequest">
+请求对象的类型是:<input answer="HttpServletResponse">
+方法会抛出的异常与Servlet有关, 该异常的类名是<input answer="ServletException">
+方法的返回值类型是<input answer="void">
+</pre>
 
+<pre>
+Servlet 处理get请求是<input answer="doGet">方法
+处理post请求是<input answer="doPost">方法
+处理delete请求是<input answer="doDelete">方法
+在浏览器地址栏输入地址访问Servlet, Servlet执行的是<input answer="doGet">方法
+在页面中点击超链接访问Servlet, Servlet执行的是<input answer="doGet">方法
+通过表单默认方法访问Servlet, Servlet执行的是<input answer="doGet">方法
+使用 js 执行 location.href访问Servlet, Servlet执行的是<input answer="doGet">方法
+将表单method设置为post方法, 访问Servlet, Servlet执行的是<input answer="doPost">方法
+</pre>
 
+<pre>
+请参考:<a href="https://blog.csdn.net/WQY992/article/details/84626666" target="_blank">Servlet错误代码及其解决方法</a>
+在访问 Servlet 时, 如果地址写错, 
+服务器会返回<input answer="404">错误码
+如果使用超链接方式访问, Servlet没有定义doGet方法,
+服务器会返回<input answer="405">错误码
+在访问 Servlet 时, 如果出现异常, 例如: 空指针, 数组越界... 
+服务器会返回<input answer="500">错误码
+</pre>
+
+<pre>
+请参考:<a href="https://www.cnblogs.com/zhencool/p/10555916.html" target="_blank">Servlet运行原理以及生命周期</a>
+Servlet 生命周期包括
+	实例化, 服务器会调用Servlet的构造方法
+	初始化, 服务器会调用<input answer="init">方法
+	请求处理, 服务器会调用<input answer="service">方法
+	销毁, 服务器会调用<input answer="destroy">方法
+除构造方法, 生命周期方法中:
+	最先调用的是<input answer="init">方法
+	最后调用的是<input answer="destroy">方法
+	唯一会可能被调用多次的是<input answer="service">方法
+	<input answer="service">方法会根据接收到的请求, 调用对应的 doGet 或 doPost方法
+默认情况下, 当 Servlet 被第一次访问的时候, 按照先后顺序, Servlet的
+	<input answer="init">方法 和 <input answer="service">方法 会被调用
+在服务器关闭时, Servlet的:
+	<input answer="destroy">方法会被调用
+</pre>
+
+<pre>
+请参考:<a href="http://blog.sina.com.cn/s/blog_163b79a550102wkt1.html" target="_blank">学习笔记--请求对象与响应对象 </a>
+
+</pre>
 <!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
 
 	</div>
