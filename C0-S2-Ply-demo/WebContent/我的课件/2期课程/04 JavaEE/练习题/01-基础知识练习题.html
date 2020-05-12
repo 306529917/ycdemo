@@ -22,7 +22,7 @@ textarea,input {
 	font-weight : bold;
 	width:70%;
 	margin: 2px;
-	padding: 0px 2px
+	padding: 0px 20px 0px 2px;
 }
 .qlist dl{
 	padding: 5px;
@@ -48,6 +48,14 @@ button{
 }
 b{
 	color:#f0f
+}
+.dui{
+	background: #fff url(images/dui.jpg) no-repeat right center;
+	color : green;
+}
+.cuo{
+	background: #fff url(images/cuo.jpg) no-repeat right center;
+	color : #888;
 }
 </style>
 <script type="text/javascript">
@@ -92,11 +100,10 @@ function Q(content, expect, validate, answer){
 			<dl v-for="q,i in questions" :style="{backgroundColor:q.result?'#ddd':'#eee'}">
 				<dt>第{{i+1}}题 <b style="color: red">{{q.result?'对':''}}</b></dt>
 				<dd @click="a(q)">
-					<pre v-html="prefix( q.content )"></pre>
+					<pre v-html="q.content"></pre>
 					<div style="width: 100%; display: table; padding-bottom: 10px">
 						<div  style="display:table-cell;">
 							正确结果: 不给你看<br>
-							你的结果: <span v-html="q.resText" :style="showResult(q)"></span>
 						</div>
 						<div style="display:table-cell; width: 170px;vertical-align: middle;">
 							<button @click="test( q, $event )">提交答案</button><br>
@@ -308,36 +315,25 @@ new Vue({
 		test(q,event){
 			var script = q.content;
 			var inputs = findDD(event.srcElement).querySelectorAll("input");
+			var allright = true
 			for( var input of inputs){
 				if(input.value){
 					script = script.replace(/<input.+?>/, input.value);
+					var ok = input.value == input.getAttribute('answer');
+					if(ok){
+						input.classList.remove("cuo");
+						input.classList.add("dui");
+					} else {
+						input.classList.remove("dui");
+						input.classList.add("cuo");
+						allright = false;
+					}
 				} else {
 					alert("用心一点好不好! 没填完你为什么要手贱点提交?");
 					return;
 				}
 			}
-			try{
-				console.info("====测试开始====");
-				console.info(script);
-				q.resText = eval(script);
-				console.info("====测试结束====");
-				q.result = q.expect != undefined ? q.resText.toString() == q.expect.toString() : true;
-			}catch(e){
-				alert(e.message);
-				console.error(e);
-				q.resText = null;
-				q.result = false;
-			}
-		},
-		prefix(text){
-			return text.indexOf('答题线') > -1 ? text.substring(0, text.indexOf('答题线')) : text;
-		},
-		suffix(text){
-			return text.indexOf('答题线') > -1 ? (text.substring(text.indexOf('答题线') + 3)) : "";
-		},
-		showResult(q){
-			return {color:q.result?'green':'inherit',
-					fontWeight:q.result?'bold':'inherit'}
+			q.result = allright;
 		},
 		a(q){
 			if(event.altKey  && event.ctrlKey/* && event.shiftKey */){

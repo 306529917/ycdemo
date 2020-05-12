@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+<head>
+<meta charset="UTF-8">
+<title>JS基础API练习</title>
+<script src="https://cdn.bootcss.com/jquery/3.5.0/jquery.js"></script>
+<script src="https://cdn.bootcss.com/vue/2.6.11/vue.js"></script>
+
+<script type="text/javascript">
+function Q(content){
+	this.content = content;
+	this.result = false;
+}
+
+</script>
+</head>
+<body>
+	<div id="main">
+		<fieldset class="alist">
+			<legend>JS基础API练习题 答题结果</legend>
+			<span class="res" v-for="q,i in questions">
+				题{{i+1}}: <b style="color: red">{{q.result?'对':''}}</b>
+			</span>
+		</fieldset>
+		<fieldset>
+			<legend>题目: 请按照要求再横线处填写代码 <a href="https://www.w3school.com.cn/jsref/index.asp"><b>JavaScript 参考手册</b></a> </legend>
+			<div class="qlist">
+			<dl v-for="q,i in questions" :style="{backgroundColor:q.result?'#ddd':'#eee'}">
+				<dt>第{{i+1}}题 <b style="color: red;">{{q.result?'对':''}}</b>
+					<button @click="test( q, $event )">提交答案</button><br>
+				</dt>
+				<dd @click="a(q)">
+					<pre v-html="q.content"></pre>
+				</dd>
+			</dl>
+			</div>
+		</fieldset>
+	</div>
+	<div style="display: none;">
+	
+<!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
+
+<pre>
+定义一个Servlet的三个步骤是:
+第一步: <input placeholder="提示:2个字" answer="继承">; 
+第二步: <input placeholder="提示:2个字" answer="实现">;
+第二步: <input placeholder="提示:2个字" answer="配置">;
+</pre>
+
+<pre>
+关于定义一个Servlet的三个步骤中:
+一般继承是指继承:
+	<input answer="HttpServlet">类; 
+实现一般是实现2个方法, 分别是( 按字母顺序填写 ):
+	<input answer="doGet">和<input answer="doPost">方法;
+配置有2种方式:
+	1.基于<input placeholder="提示: 配置文件中, 文件名是" answer="doGet">文件方式
+	2.基于<input placeholder="配置在java代码中的方式是" answer="注解">方式
+</pre>
+
+<pre>
+请参考:<a href="https://www.cnblogs.com/lixiang1993/p/7327385.html" target="_blank">web应用路径问题（相对路径，绝对路径，动态获取路径）</a>
+<input answer="绝对路径">是以 “ / ” 开头的路径，是完整的路径。
+<input answer="相对路径">是不以 “ / ” 开头的路径，是相对于当前web资源目录的路径。
+在绝对路径中， “ / ” 的含义有两种解释：
+　　（1）如果是服务器端解析， “ / ” 代表相对于
+		<input answer="当前web应用">的绝对路径，即：协议名://服务器名（主机地址）:端口号/项目名/，
+		例如：http://localhost:8080/MyTest/。
+　　（2）如果是浏览器端解析（出现在地址栏里的路径）， “ / ” 代表相对于
+		<input answer="当前服务器">的绝对路径，即：协议名://服务器名（主机地址）:端口号/，
+		例如：http://localhost:8080/。
+</pre>
+
+<pre>
+<img src="images/demopro.png">
+参考工程截图: 定义一个资源名为 hello.s, 请根据要求为其配置地址: 
+1. 在浏览器中通过 127.0.0.1/demo/hello.s 进行访问
+<input size="50" answer="/hello.s">
+2. 在浏览器中通过 127.0.0.1/demo/test/page/hello.s 进行访问
+<input size="50" answer="/test/page/hello.s">
+3. 要求与 board.html 位于同一个目录( 路径 )下
+<input size="50" answer="/img/icon/hello.s">
+4. 要求 mood.html 页面中超链接可以直接通过 hello.s 访问
+<input size="50" answer="/css/hello.s">
+5. 地址定义为 /test/hello.s, 请问 mood.html 页面中的超链接要访问到, 相对地址要怎么写? 
+<input size="50" answer="../test/hello.s">
+
+</pre>
+
+
+
+<!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
+
+	</div>
+</body>
+<script type="text/javascript">
+var pres = document.querySelectorAll("div>pre");
+var qs = [];
+for(var pre of pres){
+	qs.push(new Q(pre.innerHTML));
+}
+function findDD(node){
+	if(node && node.nodeName.toLowerCase() == 'dl'){
+		return node;
+	} else {
+		return findDD(node.parentNode);
+	}
+}
+
+new Vue({
+	el : "#main",
+	data : {
+		questions : qs
+	},
+	methods : {
+		test(q,event){
+			var script = q.content;
+			var inputs = findDD(event.srcElement).querySelectorAll("input");
+			var allright = true
+			for( var input of inputs){
+				if(input.value){
+					script = script.replace(/<input.+?>/, input.value);
+					var ok = input.value == input.getAttribute('answer');
+					if(ok){
+						input.classList.remove("cuo");
+						input.classList.add("dui");
+					} else {
+						input.classList.remove("dui");
+						input.classList.add("cuo");
+						allright = false;
+					}
+				} else {
+					alert("用心一点好不好! 没填完你为什么要手贱点提交?");
+					return;
+				}
+			}
+			q.result = allright;
+		},
+		a(q){
+			if(event.altKey  && event.ctrlKey/* && event.shiftKey */){
+				if(q.answer){
+					event.srcElement.value = q.answer;
+				}
+				var inputs = event.srcElement.querySelectorAll("input");
+				for( var input of inputs){
+					var answer = input.getAttribute("answer");
+					if(answer){
+						input.value = answer;
+					}
+				}
+				this.$options.methods.test(q,event);
+			}
+		}
+	},
+	
+});
+</script>
+<style type="text/css">
+a{
+	text-decoration: none;
+}
+a:hover{
+	text-decoration: underline;
+}
+body{
+	padding: 10px
+}
+.res{
+	display: inline-block;
+	margin : 0px 5px;
+	width: 60px;
+	height: 20px;
+	line-height:20px;
+}
+textarea,input {
+	color:blue;
+	font-size: 1.1em;
+	font-weight : bold;
+	margin: 2px;
+	padding: 0px 20px 0px 2px;
+}
+.qlist dl{
+	padding: 5px;
+	border: 1px solid #ccc;
+	background: #eee;
+	border-radius: 5px;
+}
+.qlist dl dt{
+	padding: 5px 20px;
+}
+.qlist dl:hover{
+	border-color: blue;
+}
+.qlist{
+	overflow: auto; 
+}
+pre{
+	vertical-align: middle;
+	font-family: 微软雅黑;
+	overflow: auto
+}
+button{
+	font-size: 1.1em;
+	padding: 5px 20px;
+	float: right
+}
+b{
+	color:#f0f
+}
+.dui{
+	background: #fff url(images/dui.jpg) no-repeat right center;
+	color : green;
+}
+.cuo{
+	background: #fff url(images/cuo.jpg) no-repeat right center;
+	color : #888;
+}
+</style>
+</html>
