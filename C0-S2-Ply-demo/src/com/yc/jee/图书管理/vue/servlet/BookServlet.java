@@ -55,14 +55,14 @@ public class BookServlet extends BaseServlet {
 	}
 	
 	public void del(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String bookid = request.getParameter("id");
-		String sql = "delete from books where bookid=?";
+		String id = request.getParameter("id");
+		String sql = "delete from books where id=?";
 		try {
-			if(Long.valueOf(bookid)<=10) {
+			if(Long.valueOf(id)<=10) {
 				response.getWriter().print(Result.failure("演示数据不允许删除!"));
 				return;
 			}
-			DBHelper.update(sql, bookid);
+			DBHelper.update(sql, id);
 			response.getWriter().print(Result.SUCCESS);
 		} catch (RuntimeException e) {
 			e.printStackTrace();
@@ -72,9 +72,9 @@ public class BookServlet extends BaseServlet {
 
 
 	public void get(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String bookid = request.getParameter("bookid");
-		String sql = "select * from books where bookid=?";
-		response.getWriter().write(gson.toJson(DBHelper.selectOne(sql, bookid)));
+		String id = request.getParameter("id");
+		String sql = "select * from books where id=?";
+		response.getWriter().write(gson.toJson(DBHelper.selectOne(sql, id)));
 	}
 	
 	public void getPressItems(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

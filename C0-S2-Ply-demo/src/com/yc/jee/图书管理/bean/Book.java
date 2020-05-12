@@ -7,7 +7,7 @@ public class Book implements java.io.Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private Long bookid;
+	private Long id;
 	private String bookname;
 	private String bookpress;
 	private Date pressdate;
@@ -15,10 +15,10 @@ public class Book implements java.io.Serializable{
 	private Integer bookcount;
 	private String bookimage;
 	public Long getBookid() {
-		return bookid;
+		return id;
 	}
-	public void setBookid(Long bookid) {
-		this.bookid = bookid;
+	public void setBookid(Long id) {
+		this.id = id;
 	}
 	public String getBookname() {
 		return bookname;
@@ -63,7 +63,7 @@ public class Book implements java.io.Serializable{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((bookid == null) ? 0 : bookid.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 	@Override
@@ -75,16 +75,16 @@ public class Book implements java.io.Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Book other = (Book) obj;
-		if (bookid == null) {
-			if (other.bookid != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!bookid.equals(other.bookid))
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}
 	@Override
 	public String toString() {
-		return "Book [bookid=" + bookid + ", bookname=" + bookname + ", bookpress=" + bookpress + ", pressdate="
+		return "Book [id=" + id + ", bookname=" + bookname + ", bookpress=" + bookpress + ", pressdate="
 				+ pressdate + ", bookauthor=" + bookauthor + ", bookcount=" + bookcount + ", bookimage=" + bookimage
 				+ "]";
 	}

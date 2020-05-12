@@ -15,9 +15,9 @@ public class DoDelServlet extends HttpServlet {
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String bookid = request.getParameter("bookid");
-		String sql = "delete from books where bookid = ?";
-		DBHelper.update(sql, bookid);
+		String id = request.getParameter("id");
+		String sql = "delete from books where id = ?";
+		DBHelper.update(sql, id);
 		response.sendRedirect("bookList.jsp");
 	}
 
