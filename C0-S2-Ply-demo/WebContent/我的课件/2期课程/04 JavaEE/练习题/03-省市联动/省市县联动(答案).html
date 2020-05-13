@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>省市县联动</title>
+<style type="text/css">
+select {
+	width: 100px
+}
+</style>
+<script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+	<div id="main">
+		<h3>AJAX实现省市联动</h3>
+		省:<select id="sheng" @change="loadCitys">
+			<option v-for="p in provinces">{{p}}</option>
+		</select> 市:<select id="shi" @change="loadCountys">
+			<option v-for="c in citys">{{c}}</option>
+		</select> 县:<select id="xian">
+			<option v-for="c in countys">{{c}}</option>
+		</select>
+	</div>
+	<script type="text/javascript">
+	var vue = new Vue({
+		el : "#main",
+		data : {
+			provinces : [],
+			citys : [],
+			countys : []
+		},
+		methods : {
+			loadProvinces(){
+				axios.get('http://47.106.66.89:1112/areas')
+				  .then(resp => {
+					  this.provinces = resp.data;
+					  /* this.$nextTick(()=>{
+						  // 更好的写法
+						  this.loadCitys();
+					  }); */
+					  return axios.get('http://47.106.66.89:1112/areas',{params:{pIndex:0}});
+				  }).then(resp => {
+					  this.citys = resp.data;
+					  return axios.get('http://47.106.66.89:1112/areas',{params:{pIndex:0,cIndex:0}});
+				  }).then(resp => {
+					  this.countys = resp.data;
+				  });
+			},
+			loadCitys(){
+				axios.get('http://47.106.66.89:1112/areas',{params:{pIndex:sheng.selectedIndex}})
+				  .then(resp => {
+					  this.citys = resp.data;
+					  /* this.$nextTick(()=>{
+						  // 更好的写法
+						  this.loadCountys();
+					  }); */
+					  return axios.get('http://47.106.66.89:1112/areas',{params:{pIndex:sheng.selectedIndex,cIndex:0}});
+				  }).then(resp => {
+					  this.countys = resp.data;
+				  });
+			},
+			loadCountys(){
+				axios.get('http://47.106.66.89:1112/areas',{
+					params:{
+						pIndex:sheng.selectedIndex,
+						cIndex:shi.selectedIndex
+					}
+				})
+				  .then(resp => {
+					  this.countys = resp.data;
+				  });
+			}
+		},
+		// vue中created与mounted区别 : https://segmentfault.com/a/1190000020058583
+		mounted : function(){
+			this.loadProvinces();
+		}
+	});
+</script>
+</body>
+</html>
