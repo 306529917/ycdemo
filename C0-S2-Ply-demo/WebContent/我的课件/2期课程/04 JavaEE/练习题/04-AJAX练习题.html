@@ -85,7 +85,7 @@ function Q(content, expect){
 			</span>
 		</fieldset>
 		<fieldset>
-			<legend>题目: 请按照要求再横线处填写代码 <a href="https://tool.oschina.net/apidocs/apidoc?api=javaEE6"><b>JavaEE 参考手册</b></a> </legend>
+			<legend>题目: 请按照要求再横线处填写代码 <a href="https://blog.csdn.net/danglina123/article/details/80635531"><b>史上最全ajax全套讲解</b></a> </legend>
 			<div class="qlist">
 			<dl v-for="q,i in questions" :style="{backgroundColor:q.result?'#ddd':'#eee'}">
 				<dt>第{{i+1}}题 <b style="color: red;">{{q.result?'对':''}}</b>
@@ -203,17 +203,18 @@ alert("OK 大功告成! ");
 <tr>
 <td><input answer='readyState'></td>
 <td>	存有 XMLHttpRequest 的状态。从 0 到 4 发生变化。
-	<input size=1 answer='0'>: 请求未初始化
-	<input size=1 answer='1'>: 服务器连接已建立
-	<input size=1 answer='2'>: 请求已接收
-	<input size=1 answer='3'>: 请求处理中
-	<input size=1 answer='4'>: 请求已完成，且响应已就绪
+	<input size=1 answer='0'>: 表示请求未初始化
+	<input size=1 answer='1'>: 表示服务器连接已建立
+	<input size=1 answer='2'>: 表示请求已接收
+	<input size=1 answer='3'>: 表示请求处理中
+	<input size=1 answer='4'>: 表示请求已完成，且响应已就绪
 </td>
 </tr>
 <tr>
 <td><input answer='status'></td>
-<td>	<input size=1 answer='200'>: "OK"
-	<input size=1 answer='404'>: 未找到页面
+<td>	<input size=1 answer='200'>: 表示"OK"
+	<input size=1 answer='404'>: 表示未找到页面
+	<input size=1 answer='500'>: 表示服务器内部
 </tr>
 </tbody></table></pre>
 
