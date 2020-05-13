@@ -3,30 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <title>同名验证</title>
-<script src="https://cdn.bootcss.com/vue/2.6.11/vue.js"></script>
-<script type="text/javascript">
-	function showHint(str) {
-		var xmlhttp;
-		str = str.replace(/\s/g,"");
-		if (str.length == 0) {
-			v.$data.names = [];
-			return;
-		}
-		if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
-			xmlhttp = new XMLHttpRequest();
-		} else {// code for IE6, IE5
-			xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-		}
-		xmlhttp.onreadystatechange = function() {
-			if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-				var msg = xmlhttp.responseText;
-				v.$data.checkMsg = msg;
-			}
-		}
-		xmlhttp.open("GET", "http://47.106.66.89:1112/checkName?name=" + str, true);
-		xmlhttp.send();
-	}
-</script>
 <style type="text/css">
 .repeated{
 	color:red
@@ -40,16 +16,8 @@
 	<h3>请在下面的输入框中键入英文姓氏：(已注册的用户名: Abe , Abraham , Acheson)</h3>
 	<form action="" id="app">
 		姓氏：
-		<input type="text" id="txt1" onchange="showHint(this.value)"/>
-		<span id="checkMsg" :class="{repeated:checkMsg!='该用户名可以注册!'}">{{checkMsg}}</span>
+		<input type="text" id="txt1"/>
+		<span id="checkMsg">{{checkMsg}}</span>
 	</form>
-	<script type="text/javascript">
-		var v = new Vue({
-			el : "#app",
-			data : {
-				checkMsg : null
-			}
-		});
-	</script>
 </body>
 </html>
