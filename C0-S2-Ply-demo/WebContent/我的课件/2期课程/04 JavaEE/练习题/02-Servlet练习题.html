@@ -41,6 +41,17 @@ function Q(content){
 <!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
 
 <pre>
+参考: <a href="http://home.ustc.edu.cn/~xie1993/http/http-intro.html">HTTP 简介</a>完成练习题
+超文本传输协议（英文：HyperText Transfer Protocol，缩写：<input placeholder="大写" answer="HTTP">）是用于从万维网（WWW:World Wide Web ）服务器传输超文本到本地浏览器的传送协议。
+超文本传输协议的默认端口是:<input answer=80>
+超文本传输协议三点注意事项：
+	1.超文本传输协议是<input answer=无连接>：其含义是限制每次连接只处理一个请求。服务器处理完客户的请求，并收到客户的应答后，即断开连接。
+	2.超文本传输协议是<input answer=媒体独立>的：这意味着，只要客户端和服务器知道如何处理的数据内容，任何类型的数据都可以通过HTTP发送。
+	3.超文本传输协议是<input answer=无状态>：HTTP协议是无状态协议。无状态是指协议对于事务处理没有记忆能力。
+
+</pre>
+
+<pre>
 定义一个Servlet的三个步骤是:
 第一步: <input placeholder="提示:2个字" answer="继承">; 
 第二步: <input placeholder="提示:2个字" answer="实现">;
@@ -56,6 +67,42 @@ function Q(content){
 配置有2种方式:
 	1.基于<input placeholder="提示: 配置文件中, 文件名是" answer="doGet">文件方式
 	2.基于<input placeholder="配置在java代码中的方式是" answer="注解">方式
+</pre>
+
+<pre>
+参考:<a href="https://www.runoob.com/servlet/servlet-intro.html" target="_blank">Servlet 简介</a>
+Java Servlet 是运行在 Web 服务器或应用服务器上的程序，它是作为来自 Web 浏览器或其他 HTTP 客户端的请求和 HTTP 服务器上的数据库或应用程序之间的<input answer=中间层>。
+Servlet 执行以下主要任务：
+	<input answer="读取客户端（浏览器）发送的显式的数据">。这包括网页上的 HTML 表单，或者也可以是来自 applet 或自定义的 HTTP 客户端程序的表单。
+	<input answer="读取客户端（浏览器）发送的隐式的HTTP请求数据">。这包括 cookies、媒体类型和浏览器能理解的压缩格式等等。
+	<input answer="处理数据并生成结果">。这个过程可能需要访问数据库，执行 RMI 或 CORBA 调用，调用 Web 服务，或者直接计算得出对应的响应。
+	<input answer="发送显式的数据（即文档）到客户端（浏览器）">。该文档的格式可以是多种多样的，包括文本文件（HTML 或 XML）、二进制文件（GIF 图像）、Excel 等。
+	<input answer="发送隐式的HTTP响应到客户端（浏览器）">。这包括告诉浏览器或其他客户端被返回的文档类型（例如 HTML），设置 cookies 和缓存参数，以及其他类似的任务。
+</pre>
+
+<pre>
+参考:<a href="https://www.cnblogs.com/deng-cc/p/7462866.html">Servlet继承关系和生命周期</a>
+Servlet 核心的部分在于：
+两个顶级接口
+	<input answer="Servlet">
+	<input answer="ServletConfig">
+接口的实现类
+	<input answer="GenericServlet">
+基于HTTP协议的实现类
+	<input answer="HttpServlet">
+</pre>
+
+<pre>
+参考:<a href="https://blog.csdn.net/fg881218/article/details/89716366">什么是 Servlet 容器</a>
+Servlet 容器本质上是与 Servlet 交互的<input answer="Web服务器">的一部分。
+“Servlet 容器”是一个装载一堆 <input answer="Servlet"> 对象的“器具”（容器），并且具备管理这些对象的功能。
+Servlet 容器和 Web 服务器如何处理一个请求的？
+	1.Web 服务器接收 <input answer="HTTP"> 请求。
+	2.Web 服务器将请求转发到 <input answer="Servlet"> 容器。
+	3.如果对应的 Servlet 不在容器中，那么将被动态<input answer="检索并加载">到容器的地址空间中。
+	4.容器调用 <input answer="init()"> 方法进行初始化（仅在第一次加载 Servlet 时调用一次）。
+	5.容器调用 Servlet 的<input answer="service()">方法来处理 HTTP 请求，即读取请求中的数据并构建响应。Servlet 将暂时保留在容器的地址空间中，可以继续处理其它 HTTP 请求。
+	6.Web 服务器将<input answer="动态生成的结果">返回到浏览器/客户端。
 </pre>
 
 <pre>
@@ -117,7 +164,7 @@ Servlet 处理get请求是<input answer="doGet">方法
 </pre>
 
 <pre>
-请参考:<a href="https://blog.csdn.net/WQY992/article/details/84626666" target="_blank">Servlet错误代码及其解决方法</a>
+参考:<a href="https://blog.csdn.net/WQY992/article/details/84626666" target="_blank">Servlet错误代码及其解决方法</a>
 在访问 Servlet 时, 如果地址写错, 
 服务器会返回<input answer="404">错误码
 如果使用超链接方式访问, Servlet没有定义doGet方法,
@@ -127,7 +174,7 @@ Servlet 处理get请求是<input answer="doGet">方法
 </pre>
 
 <pre>
-请参考:<a href="https://www.cnblogs.com/zhencool/p/10555916.html" target="_blank">Servlet运行原理以及生命周期</a>
+参考:<a href="https://www.cnblogs.com/zhencool/p/10555916.html" target="_blank">Servlet运行原理以及生命周期</a>
 Servlet 生命周期包括
 	实例化, 服务器会调用Servlet的构造方法
 	初始化, 服务器会调用<input answer="init">方法
@@ -145,11 +192,17 @@ Servlet 生命周期包括
 </pre>
 
 <pre>
-请参考:<a href="http://blog.sina.com.cn/s/blog_163b79a550102wkt1.html" target="_blank">学习笔记--请求对象与响应对象 </a>
-关于 HTTP 请求方法 get 和 post
-<input answer="get">方法只能提交少量的数据
-<input answer="post">方法提交的数据大小没有限制, 甚至可以提交文件
+参考:<a href="https://www.w3school.com.cn/tags/html_ref_httpmethods.asp" target="_blank">HTTP 方法：GET 对比 POST </a>
+关于 HTTP 请求方法 get 和 post 对比, 请在文本框中填写对应的请求方法名
+<table>
+<tr><td>提交数据大小:<td><input placeholder="小" answer="get"><input placeholder="大" answer="post">
+<tr><td>安全性:<td><input placeholder="安全" answer="post"><input placeholder="不安全" answer="get">
+<tr><td>被浏览器缓存:<td><input placeholder="不缓存" answer="post"><input placeholder="缓存" answer="get">
+<tr><td>上传文件:<td><input placeholder="不可以" answer="get"><input placeholder="可以" answer="post">
+<tr><td>地址栏是否可以看到提交的数据:<td><input placeholder="可见" answer="get"><input placeholder="不可见" answer="post">
+</table>
 </pre>
+
 <!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
 
 	</div>
@@ -258,7 +311,12 @@ textarea,input {
 pre{
 	vertical-align: middle;
 	font-family: 微软雅黑;
-	overflow: auto
+	overflow: auto;
+	white-space:pre-wrap; /* css3.0 */ 
+	white-space:-moz-pre-wrap; /* Firefox */ 
+	white-space:-pre-wrap; /* Opera 4-6 */ 
+	white-space:-o-pre-wrap; /* Opera 7 */ 
+	word-wrap:break-word; /* Internet Explorer 5.5+ */ 
 }
 button{
 	font-size: 1.1em;
