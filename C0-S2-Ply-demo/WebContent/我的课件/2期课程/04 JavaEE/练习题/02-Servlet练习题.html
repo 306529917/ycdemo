@@ -203,6 +203,79 @@ Servlet 生命周期包括
 </table>
 </pre>
 
+<pre>
+参考:<a href="https://blog.csdn.net/Tang_ya/article/details/104717580" target="_blank">request请求对象和response响应对象的常用方法</a>
+根据后面的提示填写对应的方法签名 ( 注意: 尽量精简代码, 删除代码中不必要的空格符 )
+请求对象方法
+<input size="40" answer="getAttribute(String name)">;通过Key名得到请求对象中value值 
+<input size="40" answer="getParameterValues(String name)">;通过表单name属性名得到一组value属性值.
+<input size="40" answer="setCharacterEncoding(String env)">;设置post请求的编码
+<input size="40" answer="removeAttribute(String name)">;通过Key名删除Key-value对.
+<input size="40" answer="getMethod()">;得到请求提交的方式(get/post)
+<input size="40" answer="getParameterMap()">; 得到请求中所有数据.
+<input size="40" answer="getCookies()">;得到客户端的所有cookie信息.
+<input size="40" answer="setAttribute(String name,Object o)">;按key-value对方式将值存到请求对象中 
+<input size="40" answer="getParameter(String name)">;通过表单name属性名得到value属性值.
+<input size="40" answer="getSession()">;得到会话对象 
+响应对象方法
+<input size="40" answer="setContentType(String type)">;设置响应内容类型
+<input size="40" answer="setCharacterEncoding(String charset)">;设置响应编码方式
+<input size="40" answer="getWriter()">;获得网络字符输出流
+<input size="40" answer="addCookie(Cookie cookie)">;将cookie对象通过浏览器存在客户端.
+<input size="40" answer="getOutputStream()">;获得网络字节输出流
+<input size="40" answer="sendRedirect(String location)">;重定向,实现页面跳转
+</pre>
+
+<pre>
+通过浏览器向服务器发送一个Servlet请求, 请求地址为: http://localhost/demo/user/hello.do?name=宋江&age=40&job=老大
+请求根据注释信息写出方法中对应的代码 ( 注意: 尽量精简代码, 删除代码中不必要的空格符 )
+<input size="40" answer='@WebServlet("/user/hello.do")'>;// 配置Servlet的地址
+public class HelloServlet extends HttpServlet {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		<input size="40" answer='response.setCharacterEncoding("GBK")'>;// 设置响应对象的字符集编码为 GBK
+		<input size="40" answer='request.setCharacterEncoding("UTF-8")'>;// 设置请求对象的字符集编码为 UTF-8
+		<input size="40" answer='response.setContentType("text/html;charset=utf-8")'>;// 设置响应内容类型为 text/html;charset=utf-8
+		PrintWriter out = <input size="40" answer='response.getWriter()'>; // 获取响应字符输出流
+		String msg = "hello " + <input size="40" answer='request.getParameter("name")'>;// 获取请求参数name的值
+		<input size="40" answer='out.print(msg)'>;// out 对象使用 print 方法向浏览器输出 msg
+		<input size="40" answer='out.append("<br>")'>;// out 对象使用 append 方法向浏览器输出一个换行标签
+		String job = "job " + <input size="40" answer='request.getParameter("job")'>;// 获取请求参数job的值
+		<input size="40" answer='out.println(job)'>;// out 对象使用 println 方法向浏览器输出 job
+	}
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		<input size="40" answer='doGet(request,response)'>;// 执行 doGet 方法
+	}
+}
+<h3>该题目完成后, 请在自己工程里面实现该功能</h3></pre>
+
+<pre>
+请完成代码填空, 实现返回的页面上展示用户选择的爱好 ( 注意: 尽量精简代码, 删除代码中不必要的空格符 )
+
+在 demo 工程中有页面 demo.html, 位于 WebContent/page/mvc 下, 页面中有一个表单, 代码如下
+&lt;form action="<input placeholder="怎么填?看Servlet" answer='../../user/likes.do'>"
+		 method="<input placeholder="怎么填?看Servlet" answer='post'>"&gt;
+	&lt;input name="name"&gt;
+	&lt;input name="like" type="checkbox" value="读书"&gt;读书
+	&lt;input name="like" type="checkbox" value="电影"&gt;电影
+	&lt;input name="like" type="checkbox" value="手游"&gt;
+	&lt;input type="submit" value="提交"&gt;
+&lt;/form&gt;
+要求: 表单提交后, 请求发送给下面的Servlet
+@WebServlet("/user/likes.do")
+public class LikesServlet extends HttpServlet {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		<input size="40" answer='response.setCharacterEncoding("UTF-8")'>;// 设置响应对象的字符集编码为 UTF-8
+		<input size="40" answer='request.setCharacterEncoding("UTF-8")'>;// 设置请求对象的字符集编码为 UTF-8
+		<input size="40" answer='response.setContentType("text/html;charset=utf-8")'>;// 设置响应内容类型为 text/html;charset=utf-8
+		PrintWriter out = <input size="40" answer='response.getWriter()'>; // 获取响应字符输出流
+		String name = <input size="40" answer='request.getParameter("name")'>;// 获取请求参数name的值
+		String[] likes = <input size="40" answer='request.getParameterValues("like")'>;// 获取数组型请求参数like的值
+		String text = name + " 的爱好:  " + Arrays.toString(likes); 
+		<input size="40" answer='out.print(text)'>;// out 对象使用 print 方法向浏览器输出 text
+	}
+}
+<h3>该题目完成后, 请在自己工程里面实现该功能</h3></pre>
+
 <!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
 
 	</div>
@@ -333,6 +406,9 @@ b{
 .cuo{
 	background: #fff url(images/cuo.jpg) no-repeat right center;
 	color : #888;
+}
+h3{
+	color:red
 }
 </style>
 </html>
