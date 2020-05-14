@@ -129,6 +129,29 @@ result[1] = "<input placeholder="C/S架构, 填左和右" answer="左">";
 result; // 输出结果
 </pre>
 
+<pre expect='  [ "server.xml", "startup.sh", "web.xml", "shutdown.sh" ] '>
+// 根据文本框中的提示信息, 填写相关的文件名
+result=[];
+result[0] = "<input placeholder="修改 Tomcat 服务器监听端口" answer="server.xml">"; 
+result[1] = "<input placeholder="启动 Tomcat 服务器" answer="startup.sh">"; 
+result[2] = "<input placeholder="修改工程的默认( 欢迎 )页面" answer="web.xml">"; 
+result[3] = "<input placeholder="关闭 Tomcat 服务器" answer="shutdown.sh">"; 
+result; // 输出结果
+</pre>
+
+<pre expect='  [ "client", "server", "browser", "server", "browser", "client", "server" ] '>
+// 根据文本框中的提示信息填写
+result=[];
+result[0] = "<input placeholder="C/S架构的 C 英文全拼是什么" answer="client">"; 
+result[1] = "<input placeholder="C/S架构的 S 英文全拼是什么" answer="server">"; 
+result[2] = "<input placeholder="B/S架构的 B 英文全拼是什么" answer="browser">";
+result[3] = "<input placeholder="B/S架构的 S 英文全拼是什么" answer="server">"; 
+result[4] = "<input placeholder="浏览器英文全拼是什么" answer="browser">"; 
+result[5] = "<input placeholder="客户端英文全拼是什么" answer="client">"; 
+result[6] = "<input placeholder="服务器英文全拼是什么" answer="server">"; 
+result; // 输出结果
+</pre>
+
 <pre expect='  [ "lib", "conf", "work", "temp", "webapps", "bin", "logs" ] '>
 // 根据文本框中的提示信息, 填写对应的Tomcat目录名
 result=[];
@@ -155,29 +178,6 @@ result[6] = "<input placeholder="server.xml 位于哪个目录" answer="conf">";
 result[7] = "<input placeholder="ROOT目录 位于哪个目录" answer="webapps">"; 
 result[8] = "<input placeholder="web.xml 位于哪个目录" answer="conf">"; 
 result[9] = "<input placeholder="shutdown.sh 位于哪个目录" answer="bin">"; 
-result; // 输出结果
-</pre>
-
-<pre expect='  [ "server.xml", "startup.sh", "web.xml", "shutdown.sh" ] '>
-// 根据文本框中的提示信息, 填写相关的文件名
-result=[];
-result[0] = "<input placeholder="修改 Tomcat 服务器监听端口" answer="server.xml">"; 
-result[1] = "<input placeholder="启动 Tomcat 服务器" answer="startup.sh">"; 
-result[2] = "<input placeholder="修改工程的默认( 欢迎 )页面" answer="web.xml">"; 
-result[3] = "<input placeholder="关闭 Tomcat 服务器" answer="shutdown.sh">"; 
-result; // 输出结果
-</pre>
-
-<pre expect='  [ "client", "server", "browser", "server", "browser", "client", "server" ] '>
-// 根据文本框中的提示信息填写
-result=[];
-result[0] = "<input placeholder="C/S架构的 C 英文全拼是什么" answer="client">"; 
-result[1] = "<input placeholder="C/S架构的 S 英文全拼是什么" answer="server">"; 
-result[2] = "<input placeholder="B/S架构的 B 英文全拼是什么" answer="browser">";
-result[3] = "<input placeholder="B/S架构的 S 英文全拼是什么" answer="server">"; 
-result[4] = "<input placeholder="浏览器英文全拼是什么" answer="browser">"; 
-result[5] = "<input placeholder="客户端英文全拼是什么" answer="client">"; 
-result[6] = "<input placeholder="服务器英文全拼是什么" answer="server">"; 
 result; // 输出结果
 </pre>
 
