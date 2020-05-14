@@ -293,7 +293,6 @@ function findDD(node){
 		return findDD(node.parentNode);
 	}
 }
-document.querySelectorAll("a").forEach(a=>{a.target = "_blank"});
 new Vue({
 	el : "#main",
 	data : {
@@ -339,6 +338,9 @@ new Vue({
 			}
 		}
 	},
+	mounted : function(){
+		document.querySelectorAll("a").forEach(o=>o.target="_blank");
+	}
 	
 });
 </script>
