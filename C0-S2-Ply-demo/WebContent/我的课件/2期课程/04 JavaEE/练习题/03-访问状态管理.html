@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+<head>
+<meta charset="UTF-8">
+<title>练习题</title>
+<script src="https://cdn.bootcss.com/vue/2.6.11/vue.js"></script>
+
+<script type="text/javascript">
+function a(){
+	if(event.altKey  && event.ctrlKey/* && event.shiftKey */){
+		var e = event.srcElement;
+		var answer = e.getAttribute("answer");
+		if(answer){
+			e.value = answer;
+		}
+		event.stopPropagation();
+		return;
+	}
+}
+function Q(content, expect){
+	this.content = content;
+	this.expect = expect;
+	this.result = false;
+	this.resultText = null;
+	this.test = function(){
+		var script = this.content;
+		var inputs = findDD(event.srcElement).querySelectorAll("input");
+		var allright = true
+		for( var input of inputs){
+			if(input.value){
+				script = script.replace(/<input.+?>/, input.value);
+				if( ! this.expect){
+					var ok = input.value == input.getAttribute('answer');
+					var regex = input.getAttribute("regex");
+					if(ok == false && regex){
+						regex = new RegExp("^"+regex+"$");
+						ok = regex.test(input.value);
+					}
+					if(ok){
+						input.classList.remove("cuo");
+						input.classList.add("dui");
+					} else {
+						input.classList.remove("dui");
+						input.classList.add("cuo");
+						allright = false;
+					}
+				}
+			} else {
+				allright = false;
+			}
+		}
+		this.result = allright;
+		if(this.expect != undefined){
+			try{
+				script = script.replace(/<.+?>[^<]+?<\/.+?>/g, "");
+				script = script.replace(/<.+?>/g, "");
+				script = script.replace(/&amp;/g, "&");
+				console.info("========开始测试========");
+				console.log(script);
+				var ret = eval(script);
+				this.resultText = ret ? ret.toString() : "";
+				if(new RegExp("^\/.+\/$").test(this.expect)){
+					var reg = eval(this.expect);
+					this.result = reg.test(this.resultText);
+				} else {
+					this.result = this.expect == this.resultText;
+				}
+			} catch (e) {
+				console.error(e);
+				this.result = false;
+			}
+		}
+	}
+}
+
+</script>
+</head>
+<body>
+	<div id="main">
+		<fieldset class="alist">
+			<legend>JS基础API练习题 答题结果</legend>
+			<span class="res" v-for="q,i in questions">
+				题{{i+1}}: <b style="color: red">{{q.result?'对':''}}</b>
+			</span>
+		</fieldset>
+		<fieldset>
+			<legend>题目: 请按照要求再横线处填写代码<a target="_blank" href="https://tool.oschina.net/apidocs/apidoc?api=javaEE6"><b>JavaEE 参考手册</b></a> </legend>
+			<div id="qlistpre">
+			 	<div>
+					 <h4>答题注意事项: </h4>
+					 <ol>
+						 <li>请删除代码中的非必要空格   
+						 <li>定义JS的字符串请使用双引号
+						 <li>答题前请务必先认真阅读 "参考资料"
+						 <li>答题完成后, 请截图保存结果
+					 </ol>
+				 </div>
+				<div>
+					<h4>参考资料</h4>
+					<ol>
+						 <li><a href="https://segmentfault.com/a/1190000016248401">浏览器cookie详解</a>   
+						 <li><a href="https://blog.csdn.net/qq_30095631/article/details/103795327">java服务端操作cookie</a>
+						 <li><a href="https://baike.baidu.com/item/HttpSession/3159840?fr=aladdin">HttpSession(常用方法)</a>
+						 <li><a href="https://blog.csdn.net/qq_37834488/article/details/89422412">Web之状态管理 ( 重点 )</a>
+					 </ol>
+				 </div>
+			 </div>
+			<div class="qlist">
+			<dl v-for="q,i in questions" :style="{backgroundColor:q.result?'#ddd':'#eee'}">
+				<dt>第{{i+1}}题 <b style="color: red;">{{q.result?'对':''}}</b>
+					<button @click="q.test()">提交答案</button><br>
+				</dt>
+				<dd @click="a(q)">
+					<pre v-html="q.content"></pre>
+				</dd>
+				<dd v-if="q.expect">
+					正确的结果: <span>{{q.expect}}</span><br>
+					你写的结果: <span>{{q.resultText}}</span>
+				</dd>
+			</dl>
+			</div>
+		</fieldset>
+	</div>
+	<div style="display: none;">
+	
+<!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
+
+<pre>
+Cookie 是一项在客户端( 浏览器 )上保存用户少量数据的技术.
+Cookie 有个数和大小的限制，大小一般是<input size=1 answer="4k" regex="4[Kk]">
+在浏览器上操作cookie使用的是<input answer="document.cookie">对象
+	添加一个名称为 name, 值为 john 的 cookie, JS的语法是:
+	<input size=40 answer='document.cookie="name=john"'>;
+	加一个名称为 age, 值为 18, 有效时长(有效期)为 1 小时的cookie, JS的语法是:
+	<input size=40 answer='document.cookie="name=age;max-age=3600"'>;
+	获取当前页面所有的cookie值, JS的语法是:
+	<input size=40 answer='document.cookie'>;
+	删除名为 age 的cookie, JS的语法是:
+	<input size=40 answer='document.cookie="name=age;max-age=0"'>;
+在服务器端cookie被封装成<input placeholder="写类的完全限定名(包名+类名)" answer="javax.servlet.http.Cookie">类
+	创建一个名称为 name, 值为 john 的 cookie 对象 c1, Java的语法是:
+	<input size=40 answer='Cookie c1=new Cookie("name","john")'>;
+	续: 设置该 cookie 对象的有效期为 5 分钟
+	<input size=40 answer='c1.setMaxAge(300)'>;
+	续: 设置该 cookie 对象的路径为 /page/test/
+	<input size=40 answer='c1.setPath("/page/test/")'>;
+	续: 删除该 cookie 值
+	<input size=40 answer='c1.setMaxAge(0)'>;
+	续: 将该 cookie 对象添加到响应对象中, 假设响应对象名为 response
+	<input size=40 answer='response.addCookie(c1)'>;
+	从请求对象中获取所有的 cookie 对象, 假设请求对象名为 request, 获取到cookie存放到变量 cookies 中
+	<input size=40 answer='Cookie[] cookies = request.getCookies()'>;
+</pre>
+
+<pre>
+有 Servlet 定义如下, 请求按要求填写代码
+// 导入会话对象的类
+<input size="40" answer="import javax.servlet.http.HttpSession">;
+@WebServlet("/hello.s")
+public class HelloServlet extends HttpServlet {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 获取会话对象, 将该对象
+		HttpSession session = <input size="40" answer="reqeust.getSession()">;
+		// 获取会话id
+		String id = <input size="40" answer="session.getId()">;
+		// 添加一个名为 like, 值为 java 的属性 
+		<input size="40" answer='session.setAttribute("like","java")'>;
+		// 返回会话创建时间
+		long time = <input size="40" answer='session.getCreationTime()'>;
+		// 返回在会话时间内web容器接收到客户最后发出的请求的时间
+		long last = <input size="40" answer='session.getLastAccessedTime()'>;
+		// 获取名为 like 的属性值
+		String like = <input size="40" answer='session.getAttribute("like")'>;
+		// 移除名为 like 的属性值
+		<input size="40" answer='session.removeAttribute("like")'>;
+		// 使会话失效，同时删除属性对象
+		<input size="40" answer='session.invalidate()'>;
+	}
+}
+</pre>
+<!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
+
+	</div>
+</body>
+<script type="text/javascript">
+var pres = document.querySelectorAll("div>pre");
+var qs = [];
+for(var pre of pres){
+	qs.push(new Q(pre.innerHTML,pre.getAttribute("expect")));
+}
+function findDD(node){
+	if(node && node.nodeName.toLowerCase() == 'dl'){
+		return node;
+	} else {
+		return findDD(node.parentNode);
+	}
+}
+new Vue({
+	el : "#main",
+	data : {
+		questions : qs
+	},
+	methods : {
+		a(q){
+			if(event.altKey  && event.ctrlKey/* && event.shiftKey */){
+				var dd = findDD(event.srcElement);
+				var inputs = dd.querySelectorAll("input");
+				for( var input of inputs){
+					var answer = input.getAttribute("answer");
+					if(answer){
+						input.value = answer;
+					}
+				}
+				q.test();
+			}
+		}
+	},
+	mounted : function(){
+		document.querySelectorAll("pre input").forEach(o=>o.onclick=a);
+		document.querySelectorAll("a").forEach(o=>o.target="_blank");
+	}
+});
+</script>
+<style type="text/css">
+a{
+	text-decoration: none;
+}
+a:hover{
+	text-decoration: underline;
+}
+body{
+	padding: 10px
+}
+.res{
+	display: inline-block;
+	margin : 0px 5px;
+	width: 60px;
+	height: 20px;
+	line-height:20px;
+}
+textarea,input {
+	color:blue;
+	font-size: 1.1em;
+	font-weight : bold;
+	margin: 2px;
+	padding: 0px 20px 0px 2px;
+}
+.qlist dl{
+	padding: 5px;
+	border: 1px solid #ccc;
+	background: #eee;
+	border-radius: 5px;
+}
+.qlist dl dt{
+	padding: 5px 20px;
+	font-weight: bold;
+}
+.qlist dl:hover{
+	border-color: blue;
+}
+.qlist{
+	overflow: auto; 
+}
+pre{
+	vertical-align: middle;
+	font-family: 微软雅黑;
+	overflow: auto;
+	padding-right:20px;
+	white-space:pre-wrap; /* css3.0 */ 
+	white-space:-moz-pre-wrap; /* Firefox */ 
+	white-space:-pre-wrap; /* Opera 4-6 */ 
+	white-space:-o-pre-wrap; /* Opera 7 */ 
+	word-wrap:break-word; /* Internet Explorer 5.5+ */ 
+}
+button{
+	font-size: 1.1em;
+	padding: 5px 20px;
+	float: right
+}
+b{
+	color:#f0f
+}
+.dui{
+	background: #fff url(images/dui.jpg) no-repeat right center;
+	color : green;
+}
+.cuo{
+	background: #fff url(images/cuo.jpg) no-repeat right center;
+	color : #888;
+}
+pre h1, pre h2,pre h3, pre h4,pre h5, pre h6{
+	margin: 0px
+}
+pre h3{
+	color:red
+}
+pre table {
+	width:100%;
+}
+#qlistpre div{
+	display: table-cell;
+	padding-right: 50px
+}
+</style>
+</html>
