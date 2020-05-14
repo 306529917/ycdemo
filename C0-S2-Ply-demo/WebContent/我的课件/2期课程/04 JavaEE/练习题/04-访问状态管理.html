@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <title>练习题</title>
 <script src="https://cdn.bootcss.com/vue/2.6.11/vue.js"></script>
-
 <script type="text/javascript">
 function a(){
 	if(event.altKey  && event.ctrlKey/* && event.shiftKey */){
@@ -33,7 +32,7 @@ function Q(content, expect){
 					var ok = input.value == input.getAttribute('answer');
 					var regex = input.getAttribute("regex");
 					if(ok == false && regex){
-						regex = new RegExp("^"+regex+"$");
+						regex = eval(regex);
 						ok = regex.test(input.value);
 					}
 					if(ok){
@@ -126,8 +125,24 @@ function Q(content, expect){
 <!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
 
 <pre>
+<h3>状态管理</h3>
+<img src="images/进步一点点.jpg" style="float: right; width:300px">
+参考文档《<a href="https://blog.csdn.net/qq_37834488/article/details/89422412">Web之状态管理</a>》完成填空
+
+什么是状态管理：
+	状态指的是<input size=5 answer='数据'>，管理指的是<input size=20 answer='多次交互时对数据'>的修改。    
+	WEB应用中的会话是指一个客户端浏览器与WEB服务器之间连续发生的<input size=20 answer='一系列请求和响应'>过程。
+	WEB应用的会话状态是指WEB服务器与浏览器在会话过程中产生的<input size=10 answer='状态信息'>，借助会话状态，WEB服务器能够把属于同一会话中的一系列的<input size=10 answer='请求和响应过程'>关联起来。
+
+状态管理的两种常见模式：	
+	<input size=20 answer='客户端状态管理技术'>：将状态保存在客户端。代表性的是Cookie技术。
+	<input size=20 answer='服务器状态管理技术'>：将状态保存在服务器端。代表性的是session技术（服务器传递sessionID时需要使用Cookie的方式）和application
+</pre>
+
+<pre>
+<h3>Cookie API练习</h3>
 Cookie 是一项在客户端( 浏览器 )上保存用户少量数据的技术.
-Cookie 有个数和大小的限制，大小一般是<input size=1 answer="4k" regex="4[Kk]">
+Cookie 有个数和大小的限制，大小一般是<input size=1 answer="4k" regex="/^4[Kk]$/">
 在浏览器上操作cookie使用的是<input answer="document.cookie">对象
 	添加一个名称为 name, 值为 john 的 cookie, JS的语法是:
 	<input size=40 answer='document.cookie="name=john"'>;
@@ -153,6 +168,43 @@ Cookie 有个数和大小的限制，大小一般是<input size=1 answer="4k" re
 </pre>
 
 <pre>
+<h3>Cookie 概述</h3>
+<img src="images/Cookie实现机制1.jpg" style="float: right; width:500px">
+参考文档《<a href="https://blog.csdn.net/qq_37834488/article/details/89422412">Web之状态管理</a>》完成填空
+Cookie是在浏览器访问WEB服务器的某个资源时，由<input answer="WEB服务器">在HTTP响应消息头中附带传送给<input answer="浏览器">的一小段数据，WEB服务器传送给各个客户端浏览器的数据是可以各不相同的。
+一旦WEB浏览器保存了某个Cookie，那么它在以后每次访问该WEB服务器时，都应在HTTP请求头中将这个Cookie<input answer="回传给WEB服务器">。
+WEB服务器通过在HTTP响应消息中增加Set-Cookie响应头字段将Cookie信息发送给浏览器，浏览器则通过在HTTP请求消息中增加Cookie请求头字段将Cookie回传给WEB服务器。
+一个Cookie只能标识一种信息，它至少含有一个标识该信息的名称（<input answer="NAME" regex="/^name$/i">）和设置值（<input answer="value" regex="/^VALUE$/i">）。
+一个WEB站点可以给一个WEB浏览器发送多个Cookie，一个WEB浏览器也可以存储多个WEB站点提供的Cookie。
+
+现在有两个方法, 是该图3个步骤中需要用到的方法, 请将其填写到对应的步骤中, 如果没有请填写 "无"
+代码一: addCookie();
+代码二: getCookies();
+步骤1:<input answer="无">
+步骤2:<input answer="addCookie()">
+步骤3:<input answer="getCookies()">
+
+如果要设置 cookie 的有效期, 应该是在第<input size=1 answer="2">步中完成
+</pre>
+
+<pre>
+<h3>Cookie的优缺点</h3>
+<img src="images/Cookie实现机制.jpg" style="float: right; width:300px">
+参考文档《<a href="https://blog.csdn.net/qq_37834488/article/details/89422412">Web之状态管理</a>》完成填空
+
+优点：
+	<input answer="可配置到期规则">：Cookie 可以在浏览器会话结束时到期，或者可以在客户端计算机上无限期存在，这取决于客户端的到期规则，不需要任何服务器资源，Cookie 存储在客户端并在发送后由服务器读取。
+	<input answer="简单性">：Cookie 是一种基于文本的轻量结构，包含简单的键值对。
+	<input answer="数据持久性">：客户端计算机上 Cookie 的持续时间取决于客户端上的 Cookie 过期处理和用户干预，Cookie 通常是客户端上持续时间最长的数据保留形式
+
+缺点：
+	<input answer="大小受到限制">：大多数浏览器对 Cookie 的大小有 4096 字节的限制，尽管在当今新的浏览器和客户端设备版本中，支持 8192 字节的 Cookie 大小已愈发常见。
+	<input answer="用户配置为禁用">：有些用户禁用了浏览器或客户端设备接收 Cookie 的能力，因此限制了这一功能。
+	<input answer="潜在的安全风险">：Cookie 可能会被篡改。用户可能会操纵其计算机上的 Cookie，这意味着会对安全性造成潜在风险或者导致依赖于Cookie 的应用程序失败。
+</pre>
+
+<pre>
+<h3>Session API练习</h3>
 有 Servlet 定义如下, 请求按要求填写代码
 // 导入会话对象的类
 <input size="40" answer="import javax.servlet.http.HttpSession">;
@@ -177,6 +229,22 @@ public class HelloServlet extends HttpServlet {
 		<input size="40" answer='session.invalidate()'>;
 	}
 }
+</pre>
+<input size="10" answer=''>
+<pre>
+<h3>Session 概述</h3>
+<img src="images/会话实现机制1.jpg" style="float: right;">
+参考文档《<a href="https://blog.csdn.net/qq_37834488/article/details/89422412">Web之状态管理</a>》完成填空
+
+Session用于<input size="10" answer='跟踪客户的状态'>。Session指的是在一段时间内，单个客户与Web服务器的一连串相关的<input size="10" answer='交互过程'>。
+在一个Session中，客户可能会多次请求访问同一个网页，也有可能请求访问各种不同的服务器资源。
+session被用于表示一个<input size="10" answer='持续的连接状态'>，在网站访问中一般指代客户端浏览器的进程<input size="10" answer='从开启到结束'>的过程。
+session其实就是网站分析的访问（visits）度量，表示一个<input size="10" answer='访问的过程'>。
+session的常见实现形式是cookie（session cookie），即未设置过期时间的cookie，这个cookie的默认生命周期为<input size="10" answer='浏览器会话期间'>，只要关闭浏览器窗口，<input size="10" answer='cookie就消失了'>。
+    实现机制是当用户发起一个请求的时候，服务器会检查该请求中是否包含<input size="10" answer='sessionid'>，
+    如果未包含，则系统会创造一个名为<input size="10" answer='JSESSIONID'>的输出 cookie返回给浏览器(只放入内存，并不存在硬盘中)，并将其以HashTable的形式写到服务器的内存里面；
+    当已经包含sessionid时，服务端会检查找到与该session相匹配的信息，如果存在则直接使用该sessionid，若不存在则重新生成<input size="10" answer='新的session'>。
+    这里需要注意的是session始终是由<input size="10" answer='服务端创建的'>，并非浏览器自己生成的。
 </pre>
 <!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
 
@@ -266,6 +334,7 @@ pre{
 	font-family: 微软雅黑;
 	overflow: auto;
 	padding-right:20px;
+	line-height: 1.5em;
 	white-space:pre-wrap; /* css3.0 */ 
 	white-space:-moz-pre-wrap; /* Firefox */ 
 	white-space:-pre-wrap; /* Opera 4-6 */ 
@@ -290,9 +359,6 @@ b{
 }
 pre h1, pre h2,pre h3, pre h4,pre h5, pre h6{
 	margin: 0px
-}
-pre h3{
-	color:red
 }
 pre table {
 	width:100%;
