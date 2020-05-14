@@ -241,7 +241,7 @@ for(var pre of pres){
 			,pre.getAttribute("answer"));
 	qs.push(q);
 }
-
+document.querySelectorAll("a").forEach(a=>{a.target = "_blank"});
 new Vue({
 	el : "#main",
 	data : {

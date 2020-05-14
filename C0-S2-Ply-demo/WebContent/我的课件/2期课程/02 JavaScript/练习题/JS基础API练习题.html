@@ -279,7 +279,7 @@ function findDD(node){
 		return findDD(node.parentNode);
 	}
 }
-
+document.querySelectorAll("a").forEach(a=>{a.target = "_blank"});
 new Vue({
 	el : "#main",
 	data : {
