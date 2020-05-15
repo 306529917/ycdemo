@@ -141,7 +141,7 @@ session的常见实现形式是cookie（session cookie），即未设置过期�
 
 	<div id="main">
 		<fieldset class="alist">
-			<legend>04-访问状态管理练习题 答题结果</legend>
+			<legend>答题结果</legend>
 			<div style="display: table;width: 100%">
 				<div style="display: table-cell;vertical-align: middle;">
 					<span class="res" v-for="q,i in questions">
@@ -178,7 +178,7 @@ session的常见实现形式是cookie（session cookie），即未设置过期�
 			<div class="qlist">
 			<dl v-for="q,i in questions" :style="{backgroundColor:q.result?'#ddd':'#eee'}">
 				<dt>第{{i+1}}题 <b style="color: red;">{{q.result?'对':''}}</b>
-					<button @click="q.test()" style="float: right">提交答案</button><br>
+					<button @click="q.test()" style="float: right">提交本题</button><br>
 				</dt>
 				<dd @click="a(q)">
 					<pre v-html="q.content"></pre>
