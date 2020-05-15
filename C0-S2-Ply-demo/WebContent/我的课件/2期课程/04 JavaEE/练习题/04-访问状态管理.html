@@ -2,145 +2,33 @@
 <html style="height: 100%">
 <head>
 <meta charset="UTF-8">
-<title>练习题</title>
+<title>04-访问状态管理练习题</title>
+<link rel="stylesheet" type="text/css" href="http://47.106.66.89:1112/css/q.css">
 <script src="https://cdn.bootcss.com/vue/2.6.11/vue.js"></script>
-<script type="text/javascript">
-function a(){
-	if(event.altKey  && event.ctrlKey/* && event.shiftKey */){
-		var e = event.srcElement;
-		var answer = e.getAttribute("answer");
-		if(answer){
-			e.value = answer;
-		}
-		event.stopPropagation();
-		return;
-	}
-}
-function Q(content, expect){
-	this.content = content;
-	this.expect = expect;
-	this.result = false;
-	this.resultText = null;
-	this.test = function(){
-		var script = this.content;
-		var inputs = findDD(event.srcElement).querySelectorAll("input");
-		var allright = true
-		for( var input of inputs){
-			if(input.value){
-				script = script.replace(/<input.+?>/, input.value);
-				if( ! this.expect){
-					var ok = input.value == input.getAttribute('answer');
-					var regex = input.getAttribute("regex");
-					if(ok == false && regex){
-						regex = eval(regex);
-						ok = regex.test(input.value);
-					}
-					if(ok){
-						input.classList.remove("cuo");
-						input.classList.add("dui");
-					} else {
-						input.classList.remove("dui");
-						input.classList.add("cuo");
-						allright = false;
-					}
-				}
-			} else {
-				allright = false;
-			}
-		}
-		this.result = allright;
-		if(this.expect != undefined){
-			try{
-				script = script.replace(/<.+?>[^<]+?<\/.+?>/g, "");
-				script = script.replace(/<.+?>/g, "");
-				script = script.replace(/&amp;/g, "&");
-				console.info("========开始测试========");
-				console.log(script);
-				var ret = eval(script);
-				this.resultText = ret ? ret.toString() : "";
-				if(new RegExp("^\/.+\/$").test(this.expect)){
-					var reg = eval(this.expect);
-					this.result = reg.test(this.resultText);
-				} else {
-					this.result = this.expect == this.resultText;
-				}
-			} catch (e) {
-				console.error(e);
-				this.result = false;
-			}
-		}
-	}
-}
-
-</script>
+<script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/axios/0.19.2/axios.min.js"></script>
+<script type="text/javascript" src="http://47.106.66.89:1112/js/pub.js"></script>
 </head>
 <body>
-	<div id="main">
-		<fieldset class="alist">
-			<legend>JS基础API练习题 答题结果</legend>
-			<span class="res" v-for="q,i in questions">
-				题{{i+1}}: <b style="color: red">{{q.result?'对':''}}</b>
-			</span>
-		</fieldset>
-		<fieldset>
-			<legend>题目: 请按照要求再横线处填写代码<a target="_blank" href="https://tool.oschina.net/apidocs/apidoc?api=javaEE6"><b>JavaEE 参考手册</b></a> </legend>
-			<div id="qlistpre">
-			 	<div>
-					 <h4>答题注意事项: </h4>
-					 <ol>
-						 <li>请删除代码中的非必要空格   
-						 <li>定义JS的字符串请使用双引号
-						 <li>答题前请务必先认真阅读 "参考资料"
-						 <li>答题完成后, 请截图保存结果
-					 </ol>
-				 </div>
-				<div>
-					<h4>参考资料</h4>
-					<ol>
-						 <li><a href="https://segmentfault.com/a/1190000016248401">浏览器cookie详解</a>   
-						 <li><a href="https://blog.csdn.net/qq_30095631/article/details/103795327">java服务端操作cookie</a>
-						 <li><a href="https://baike.baidu.com/item/HttpSession/3159840?fr=aladdin">HttpSession(常用方法)</a>
-						 <li><a href="https://blog.csdn.net/qq_37834488/article/details/89422412">Web之状态管理 ( 重点 )</a>
-					 </ol>
-				 </div>
-			 </div>
-			<div class="qlist">
-			<dl v-for="q,i in questions" :style="{backgroundColor:q.result?'#ddd':'#eee'}">
-				<dt>第{{i+1}}题 <b style="color: red;">{{q.result?'对':''}}</b>
-					<button @click="q.test()">提交答案</button><br>
-				</dt>
-				<dd @click="a(q)">
-					<pre v-html="q.content"></pre>
-				</dd>
-				<dd v-if="q.expect">
-					正确的结果: <span>{{q.expect}}</span><br>
-					你写的结果: <span>{{q.resultText}}</span>
-				</dd>
-			</dl>
-			</div>
-		</fieldset>
-	</div>
-	<div style="display: none;">
-	
+<div style="display: none;">
 <!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
-
 <pre>
 <h3>状态管理</h3>
-<img src="images/进步一点点.jpg" style="float: right; width:300px">
+<img src="images/进步一点点.jpg" style="float: right; width:300px;margin: 0px 0px 5px 5px">
 参考文档《<a href="https://blog.csdn.net/qq_37834488/article/details/89422412">Web之状态管理</a>》完成填空
 
 什么是状态管理：
-	状态指的是<input size=5 answer='数据'>，管理指的是<input size=20 answer='多次交互时对数据'>的修改。    
+	状态指的是<input answer='数据'>，管理指的是<input size=20 answer='多次交互时对数据'>的修改。    
 	WEB应用中的会话是指一个客户端浏览器与WEB服务器之间连续发生的<input size=20 answer='一系列请求和响应'>过程。
 	WEB应用的会话状态是指WEB服务器与浏览器在会话过程中产生的<input size=10 answer='状态信息'>，借助会话状态，WEB服务器能够把属于同一会话中的一系列的<input size=10 answer='请求和响应过程'>关联起来。
 
 状态管理的两种常见模式：	
-	<input size=20 answer='客户端状态管理技术'>：将状态保存在客户端。代表性的是Cookie技术。
-	<input size=20 answer='服务器状态管理技术'>：将状态保存在服务器端。代表性的是session技术（服务器传递sessionID时需要使用Cookie的方式）和application
+	<input answer='客户端状态管理技术'>：将状态保存在客户端。代表性的是Cookie技术。
+	<input answer='服务器状态管理技术'>：将状态保存在服务器端。代表性的是session技术（服务器传递sessionID时需要使用Cookie的方式）和application
 </pre>
 
 <pre>
 <h3>Cookie API练习</h3>
+<img src="images/不改BUG.jpg" style="float: right; margin: 0px 0px 5px 5px">
 Cookie 是一项在客户端( 浏览器 )上保存用户少量数据的技术.
 Cookie 有个数和大小的限制，大小一般是<input size=1 answer="4k" regex="/^4[Kk]$/">
 在浏览器上操作cookie使用的是<input answer="document.cookie">对象
@@ -169,7 +57,7 @@ Cookie 有个数和大小的限制，大小一般是<input size=1 answer="4k" re
 
 <pre>
 <h3>Cookie 概述</h3>
-<img src="images/Cookie实现机制1.jpg" style="float: right; width:500px">
+<img src="images/Cookie实现机制1.jpg" style="float: right; width:500px;margin: 0px 0px 5px 5px">
 参考文档《<a href="https://blog.csdn.net/qq_37834488/article/details/89422412">Web之状态管理</a>》完成填空
 Cookie是在浏览器访问WEB服务器的某个资源时，由<input answer="WEB服务器">在HTTP响应消息头中附带传送给<input answer="浏览器">的一小段数据，WEB服务器传送给各个客户端浏览器的数据是可以各不相同的。
 一旦WEB浏览器保存了某个Cookie，那么它在以后每次访问该WEB服务器时，都应在HTTP请求头中将这个Cookie<input answer="回传给WEB服务器">。
@@ -189,7 +77,7 @@ WEB服务器通过在HTTP响应消息中增加Set-Cookie响应头字段将Cookie
 
 <pre>
 <h3>Cookie的优缺点</h3>
-<img src="images/Cookie实现机制.jpg" style="float: right; width:300px">
+<img src="images/Cookie实现机制.jpg" style="float: right; width:300px;margin: 0px 0px 5px 5px">
 参考文档《<a href="https://blog.csdn.net/qq_37834488/article/details/89422412">Web之状态管理</a>》完成填空
 
 优点：
@@ -233,7 +121,7 @@ public class HelloServlet extends HttpServlet {
 <input size="10" answer=''>
 <pre>
 <h3>Session 实现机制</h3>
-<img src="images/会话实现机制1.jpg" style="float: right;">
+<img src="images/会话实现机制1.jpg" style="float: right;margin: 0px 0px 5px 5px">
 参考文档《<a href="https://blog.csdn.net/qq_37834488/article/details/89422412">Web之状态管理</a>》完成填空
 
 Session用于<input size="10" answer='跟踪客户的状态'>。Session指的是在一段时间内，单个客户与Web服务器的一连串相关的<input size="10" answer='交互过程'>。
@@ -246,126 +134,63 @@ session的常见实现形式是cookie（session cookie），即未设置过期�
     当已经包含sessionid时，服务端会检查找到与该session相匹配的信息，如果存在则直接使用该sessionid，若不存在则重新生成<input size="10" answer='新的session'>。
     这里需要注意的是session始终是由<input size="10" answer='服务端创建的'>，并非浏览器自己生成的。
 </pre>
-<!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
 
+<!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
+</div>
+
+
+	<div id="main">
+		<fieldset class="alist">
+			<legend>04-访问状态管理练习题 答题结果</legend>
+			<div style="display: table;width: 100%">
+				<div style="display: table-cell;vertical-align: middle;">
+					<span class="res" v-for="q,i in questions">
+						题{{i+1}}: <b style="color: red">{{q.result?'对':''}}</b>
+					</span>
+				</div>
+				<div style="display: table-cell; width: 150px; text-align: center;">
+					<button @click="commit" :disabled="finish==false">提交答卷</button>
+				</div>
+			</div>
+		</fieldset>
+		<fieldset>
+			<legend>题目: 请按照要求再横线处填写代码<a target="_blank" href="https://tool.oschina.net/apidocs/apidoc?api=javaEE6"><b>JavaEE 参考手册</b></a> </legend>
+			<div id="qlistpre">
+			 	<div>
+					 <h4>答题注意事项: </h4>
+					 <ol>
+						 <li>请删除代码中的非必要空格   
+						 <li>定义JS的字符串请使用双引号
+						 <li>答题前请务必先认真阅读 "参考资料"
+						 <li>答题完成后, 请截图保存结果
+					 </ol>
+				 </div>
+				<div>
+					<h4>参考资料</h4>
+					<ol>
+						 <li><a href="https://segmentfault.com/a/1190000016248401">浏览器cookie详解</a>   
+						 <li><a href="https://blog.csdn.net/qq_30095631/article/details/103795327">java服务端操作cookie</a>
+						 <li><a href="https://baike.baidu.com/item/HttpSession/3159840?fr=aladdin">HttpSession(常用方法)</a>
+						 <li><a href="https://blog.csdn.net/qq_37834488/article/details/89422412">Web之状态管理 ( 重点 )</a>
+					 </ol>
+				 </div>
+			 </div>
+			<div class="qlist">
+			<dl v-for="q,i in questions" :style="{backgroundColor:q.result?'#ddd':'#eee'}">
+				<dt>第{{i+1}}题 <b style="color: red;">{{q.result?'对':''}}</b>
+					<button @click="q.test()" style="float: right">提交答案</button><br>
+				</dt>
+				<dd @click="a(q)">
+					<pre v-html="q.content"></pre>
+				</dd>
+				<dd v-if="q.expect">
+					正确的结果: <span>{{q.expect}}</span><br>
+					你写的结果: <span>{{q.resultText}}</span>
+				</dd>
+			</dl>
+			</div>
+		</fieldset>
 	</div>
 </body>
-<script type="text/javascript">
-var pres = document.querySelectorAll("div>pre");
-var qs = [];
-for(var pre of pres){
-	qs.push(new Q(pre.innerHTML,pre.getAttribute("expect")));
-}
-function findDD(node){
-	if(node && node.nodeName.toLowerCase() == 'dl'){
-		return node;
-	} else {
-		return findDD(node.parentNode);
-	}
-}
-new Vue({
-	el : "#main",
-	data : {
-		questions : qs
-	},
-	methods : {
-		a(q){
-			if(event.altKey  && event.ctrlKey/* && event.shiftKey */){
-				var dd = findDD(event.srcElement);
-				var inputs = dd.querySelectorAll("input");
-				for( var input of inputs){
-					var answer = input.getAttribute("answer");
-					if(answer){
-						input.value = answer;
-					}
-				}
-				q.test();
-			}
-		}
-	},
-	mounted : function(){
-		document.querySelectorAll("pre input").forEach(o=>o.onclick=a);
-		document.querySelectorAll("a").forEach(o=>o.target="_blank");
-	}
-});
-</script>
-<style type="text/css">
-a{
-	text-decoration: none;
-}
-a:hover{
-	text-decoration: underline;
-}
-body{
-	padding: 10px
-}
-.res{
-	display: inline-block;
-	margin : 0px 5px;
-	width: 60px;
-	height: 20px;
-	line-height:20px;
-}
-textarea,input {
-	color:blue;
-	font-size: 1.1em;
-	font-weight : bold;
-	margin: 2px;
-	padding: 0px 20px 0px 2px;
-}
-.qlist dl{
-	padding: 5px;
-	border: 1px solid #ccc;
-	background: #eee;
-	border-radius: 5px;
-}
-.qlist dl dt{
-	padding: 5px 20px;
-	font-weight: bold;
-}
-.qlist dl:hover{
-	border-color: blue;
-}
-.qlist{
-	overflow: auto; 
-}
-pre{
-	vertical-align: middle;
-	font-family: 微软雅黑;
-	overflow: auto;
-	padding-right:20px;
-	line-height: 1.5em;
-	white-space:pre-wrap; /* css3.0 */ 
-	white-space:-moz-pre-wrap; /* Firefox */ 
-	white-space:-pre-wrap; /* Opera 4-6 */ 
-	white-space:-o-pre-wrap; /* Opera 7 */ 
-	word-wrap:break-word; /* Internet Explorer 5.5+ */ 
-}
-button{
-	font-size: 1.1em;
-	padding: 5px 20px;
-	float: right
-}
-b{
-	color:#f0f
-}
-.dui{
-	background: #fff url(images/dui.jpg) no-repeat right center;
-	color : green;
-}
-.cuo{
-	background: #fff url(images/cuo.jpg) no-repeat right center;
-	color : #888;
-}
-pre h1, pre h2,pre h3, pre h4,pre h5, pre h6{
-	margin: 0px
-}
-pre table {
-	width:100%;
-}
-#qlistpre div{
-	display: table-cell;
-	padding-right: 50px
-}
-</style>
+<script type="text/javascript" src="http://47.106.66.89:1112/js/q.js"></script>
 </html>
