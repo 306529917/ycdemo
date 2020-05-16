@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <title>练习题</title>
-<script src="https://cdn.bootcss.com/jquery/3.5.0/jquery.js"></script>
 <script src="https://cdn.bootcss.com/vue/2.6.11/vue.js"></script>
-
+<script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/axios/0.19.2/axios.min.js"></script>
+<script type="text/javascript" src="http://47.106.66.89:1112/js/pub.js"></script>
 <script type="text/javascript">
 function a(){
 	if(event.altKey  && event.ctrlKey/* && event.shiftKey */){
@@ -79,17 +79,24 @@ function Q(content, expect){
 <body>
 	<div id="main">
 		<fieldset class="alist">
-			<legend>JS基础API练习题 答题结果</legend>
-			<span class="res" v-for="q,i in questions">
-				题{{i+1}}: <b style="color: red">{{q.result?'对':''}}</b>
-			</span>
+			<legend>答题结果</legend>
+			<div style="display: table;width: 100%">
+				<div style="display: table-cell;vertical-align: middle;">
+					<span class="res" v-for="q,i in questions">
+						题{{i+1}}: <b style="color: red">{{q.result?'对':''}}</b>
+					</span>
+				</div>
+				<div style="display: table-cell; width: 150px; text-align: center;">
+					<button @click="commit" :disabled="finish==false">提交答卷</button>
+				</div>
+			</div>
 		</fieldset>
 		<fieldset>
 			<legend>题目: 请按照要求再横线处填写代码 <a target="_blank" href="https://www.w3school.com.cn/ajax/index.asp"><b>Ajax入门教程</b></a> </legend>
 			<div class="qlist">
 			<dl v-for="q,i in questions" :style="{backgroundColor:q.result?'#ddd':'#eee'}">
 				<dt>第{{i+1}}题 <b style="color: red;">{{q.result?'对':''}}</b>
-					<button @click="q.test()">提交答案</button><br>
+					<button @click="q.test()" style="float: right;">提交答案</button><br>
 				</dt>
 				<dd @click="a(q)">
 					<pre v-html="q.content"></pre>
@@ -176,7 +183,7 @@ xhr.<input answer='onreadystatechange'> = function(){
 	}
 }
 // 设置请求 , 方法名为 GET , 访问地址为  http://47.106.66.89:1112/hello.s, 只传 2 个参数完成调用
-<input size=50 answer='xhr.open("GET","http://47.106.66.89:1112/hello.s")'>;
+<input size=50 answer='xhr.open("GET","http://47.106.66.89:1112/exa/hello.s")'>;
 // 发送请求
 <input answer='xhr.send()'>;
 alert("OK 大功告成! ");
@@ -232,7 +239,7 @@ xhr.onreadystatechange = function(){
 	}
 }
 // 设置请求 , 方法名为 POST , 访问地址为  http://47.106.66.89:1112/add.do
-<input size=75 answer='xhr.open("POST","http://47.106.66.89:1112/add.do")'>;
+<input size=75 answer='xhr.open("POST","http://47.106.66.89:1112/exa/add.do")'>;
 // 设置请求头属性, 设置 Content-type 为 application/x-www-form-urlencoded
 // 注意 : POST 请求必须设置该参数, 并且还必须是在 open 方法执行之后才能设置
 <input size=75 answer='xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded")'>;
@@ -275,11 +282,37 @@ new Vue({
 				}
 				q.test();
 			}
+		},
+		commit(){
+			var index = location.href.lastIndexOf("/");
+			var hwName = location.href.substring(index+1);
+			hwName = decodeURIComponent(hwName);
+			if(hwName){
+				axios.post("/hw/commit",buildParams({
+					name : hwName
+				})).then(res=>{
+					if( res.data.code == 1){
+						alert("答案提交成功");
+					} else {
+						alert(res.data.msg || "答案提交失败");
+						if( res.data.code == -1){
+							location.href = "/user/myinfo.html";
+						}
+					}
+				});
+			}
 		}
 	},
 	mounted : function(){
 		document.querySelectorAll("pre input").forEach(o=>o.onclick=a);
 		document.querySelectorAll("a").forEach(o=>o.target="_blank");
+	},
+	computed : {
+		finish(){
+			return this.questions.every(q=>{
+				return q.result;
+			});
+		}
 	}
 });
 </script>
@@ -336,7 +369,6 @@ pre{
 button{
 	font-size: 1.1em;
 	padding: 5px 20px;
-	float: right
 }
 b{
 	color:#f0f

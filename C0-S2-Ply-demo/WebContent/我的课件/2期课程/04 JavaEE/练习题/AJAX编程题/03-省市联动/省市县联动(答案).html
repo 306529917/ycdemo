@@ -32,36 +32,36 @@ select {
 		},
 		methods : {
 			loadProvinces(){
-				axios.get('http://47.106.66.89:1112/areas')
+				axios.get('http://47.106.66.89:1112/exa/areas')
 				  .then(resp => {
 					  this.provinces = resp.data;
 					  /* this.$nextTick(()=>{
 						  // 更好的写法
 						  this.loadCitys();
 					  }); */
-					  return axios.get('http://47.106.66.89:1112/areas',{params:{pIndex:0}});
+					  return axios.get('http://47.106.66.89:1112/exa/areas',{params:{pIndex:0}});
 				  }).then(resp => {
 					  this.citys = resp.data;
-					  return axios.get('http://47.106.66.89:1112/areas',{params:{pIndex:0,cIndex:0}});
+					  return axios.get('http://47.106.66.89:1112/exa/areas',{params:{pIndex:0,cIndex:0}});
 				  }).then(resp => {
 					  this.countys = resp.data;
 				  });
 			},
 			loadCitys(){
-				axios.get('http://47.106.66.89:1112/areas',{params:{pIndex:sheng.selectedIndex}})
+				axios.get('http://47.106.66.89:1112/exa/areas',{params:{pIndex:sheng.selectedIndex}})
 				  .then(resp => {
 					  this.citys = resp.data;
 					  /* this.$nextTick(()=>{
 						  // 更好的写法
 						  this.loadCountys();
 					  }); */
-					  return axios.get('http://47.106.66.89:1112/areas',{params:{pIndex:sheng.selectedIndex,cIndex:0}});
+					  return axios.get('http://47.106.66.89:1112/exa/areas',{params:{pIndex:sheng.selectedIndex,cIndex:0}});
 				  }).then(resp => {
 					  this.countys = resp.data;
 				  });
 			},
 			loadCountys(){
-				axios.get('http://47.106.66.89:1112/areas',{
+				axios.get('http://47.106.66.89:1112/exa/areas',{
 					params:{
 						pIndex:sheng.selectedIndex,
 						cIndex:shi.selectedIndex
