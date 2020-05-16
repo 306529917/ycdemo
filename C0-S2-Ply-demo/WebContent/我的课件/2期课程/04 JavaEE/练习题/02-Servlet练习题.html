@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <title>练习题</title>
-<script src="https://cdn.bootcss.com/jquery/3.5.0/jquery.js"></script>
 <script src="https://cdn.bootcss.com/vue/2.6.11/vue.js"></script>
-
+<script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/axios/0.19.2/axios.min.js"></script>
+<script type="text/javascript" src="http://47.106.66.89:1112/js/pub.js"></script>
 <script type="text/javascript">
 function Q(content){
 	this.content = content;
@@ -17,17 +17,24 @@ function Q(content){
 <body>
 	<div id="main">
 		<fieldset class="alist">
-			<legend>JS基础API练习题 答题结果</legend>
-			<span class="res" v-for="q,i in questions">
-				题{{i+1}}: <b style="color: red">{{q.result?'对':''}}</b>
-			</span>
+			<legend>答题结果</legend>
+			<div style="display: table;width: 100%">
+				<div style="display: table-cell;vertical-align: middle;">
+					<span class="res" v-for="q,i in questions">
+						题{{i+1}}: <b style="color: red">{{q.result?'对':''}}</b>
+					</span>
+				</div>
+				<div style="display: table-cell; width: 150px; text-align: center;">
+					<button @click="commit" :disabled="finish==false">提交答卷</button>
+				</div>
+			</div>
 		</fieldset>
 		<fieldset>
 			<legend>题目: 请按照要求再横线处填写代码 <a target="_blank" href="https://tool.oschina.net/apidocs/apidoc?api=javaEE6"><b>JavaEE 参考手册</b></a> </legend>
 			<div class="qlist">
 			<dl v-for="q,i in questions" :style="{backgroundColor:q.result?'#ddd':'#eee'}">
 				<dt>第{{i+1}}题 <b style="color: red;">{{q.result?'对':''}}</b>
-					<button @click="test( q, $event )">提交答案</button><br>
+					<button @click="test( q, $event )" style="float: right;">提交答案</button><br>
 				</dt>
 				<dd @click="a(q)">
 					<pre v-html="q.content"></pre>
@@ -336,10 +343,36 @@ new Vue({
 				}
 				this.$options.methods.test(q,event);
 			}
+		},
+		commit(){
+			var index = location.href.lastIndexOf("/");
+			var hwName = location.href.substring(index+1);
+			hwName = decodeURIComponent(hwName);
+			if(hwName){
+				axios.post("/hw/commit",buildParams({
+					name : hwName
+				})).then(res=>{
+					if( res.data.code == 1){
+						alert("答案提交成功");
+					} else {
+						alert(res.data.msg || "答案提交失败");
+						if( res.data.code == -1){
+							location.href = "/user/myinfo.html";
+						}
+					}
+				});
+			}
 		}
 	},
 	mounted : function(){
 		document.querySelectorAll("a").forEach(o=>o.target="_blank");
+	},
+	computed : {
+		finish(){
+			return this.questions.every(q=>{
+				return q.result;
+			});
+		}
 	}
 	
 });
@@ -396,7 +429,6 @@ pre{
 button{
 	font-size: 1.1em;
 	padding: 5px 20px;
-	float: right
 }
 b{
 	color:#f0f
