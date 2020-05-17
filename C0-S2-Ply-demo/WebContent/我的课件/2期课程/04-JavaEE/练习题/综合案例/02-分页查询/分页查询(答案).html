@@ -32,7 +32,7 @@
 			},
 			methods : {
 				query(){
-					axios.get("http://127.0.0.1/exa/cr/categroy/find",{
+					axios.get("http://47.106.66.89:1112/exa/cr/categroy/find",{
 						params : {page:this.page, size:this.size}
 					}).then(res => {
 						this.clist = res.data.data.list;
@@ -77,7 +77,7 @@
 			},
 			methods : {
 				query(){
-					axios.get("http://127.0.0.1/exa/cr/categroy/find",{
+					axios.get("http://47.106.66.89:1112/exa/cr/categroy/find",{
 						params : {page:this.page, size:this.size}
 					}).then(res => {
 						this.data = res.data.data;
