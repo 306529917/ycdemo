@@ -64,7 +64,6 @@
 		<button @click="last">尾页</button>
 	</fieldset>
 	<script type="text/javascript">
-		var ddd;
 		new Vue({
 			el:"#app2",
 			data : {
@@ -103,6 +102,79 @@
 					if(this.page>this.data.pages){
 						this.page = this.data.pages;
 					}
+					this.query();
+				}
+			},
+			watch : {
+				page : function(oval, nval){
+					this.query();
+				}
+			}
+		});
+	</script>
+	
+	<fieldset id="app3">
+		<legend>王总: 旭元呀, 你可以实现分页编号链接么? <br>程旭元: So easy ! 你看是不是这意思?</legend>
+		<table border="1" style="width:100%">
+			<tr><th>编号<th>名称<th>父编号
+			<tr v-for="c in data.list">
+				<td width="20%">{{c.id}}</td>
+				<td>{{c.name}}</td>
+				<td width="20%">{{c.pid}}</td>
+			</tr>
+		</table>
+		<button @click="first">首页</button>
+		<button @click="pre">上页</button>
+		<span v-for="i of data.pages">&nbsp;&nbsp;
+			<a href="javascript:void()" @click="topage(i)" >{{i}}</a>
+		</span>
+		
+		<button @click="next">下页</button>
+		<button @click="last">尾页</button>
+	</fieldset>
+	<script type="text/javascript">
+		new Vue({
+			el:"#app3",
+			data : {
+				page:1,
+				size:10,
+				data : {pages:1}
+			},
+			created : function(){
+				this.query();
+			},
+			methods : {
+				query(){
+					axios.get("http://47.106.66.89:1112/exa/cr/categroy/find",{
+						params : {page:this.page, size:this.size}
+					}).then(res => {
+						this.data = res.data.data;
+					});
+				},
+				first(){
+					this.page = 1;
+					this.query();
+				},
+				last(){
+					this.page = this.data.pages;
+					this.query();
+				},
+				pre(){
+					this.page--;
+					if(this.page<1){
+						this.page = 1;
+					}
+					this.query();
+				},
+				next(){
+					this.page++;
+					if(this.page>this.data.pages){
+						this.page = this.data.pages;
+					}
+					this.query();
+				},
+				topage(i){
+					this.page = i;
 					this.query();
 				}
 			},
