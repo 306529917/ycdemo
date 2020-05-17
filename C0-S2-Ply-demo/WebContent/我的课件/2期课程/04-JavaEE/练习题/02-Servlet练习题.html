@@ -127,28 +127,33 @@ Servlet 容器和 Web 服务器如何处理一个请求的？
 
 <pre>
 <img src="images/demopro.png">
-参考工程截图: 定义一个资源名为 hello.s, 请根据要求为其配置地址: 
+
+参考工程截图: 假设有一个资源名为 hello.s 的 Servlet, 请根据要求为该 Servlet 配置地址: 
+
 1. 在浏览器中通过 127.0.0.1/demo/hello.s 进行访问
-<input size="50" answer="/hello.s">
+<input size="50" answer='@WebServlet("/hello.s")'>
 2. 在浏览器中通过 127.0.0.1/demo/test/page/hello.s 进行访问
-<input size="50" answer="/test/page/hello.s">
+<input size="50" answer='@WebServlet("/test/page/hello.s")'>
 3. 要求与 board.html 位于同一个目录( 路径 )下
-<input size="50" answer="/img/icon/hello.s">
+<input size="50" answer='@WebServlet("/img/icon/hello.s")'>
 4. 要求 mood.html 页面中超链接可以直接通过 hello.s 访问
-<input size="50" answer="/css/hello.s">
-5. 假设Servlet地址定义为 /test/hello.s, 请问 mood.html 页面中的超链接要访问到该Servlet, 
+<input size="50" answer='@WebServlet("/css/hello.s")'>
+
+下面是 页面中的超链接地址配置
+
+1. 假设Servlet地址定义为 /test/hello.s, 请问 mood.html 页面中的超链接要访问到该Servlet, 
 	那么mood.html中, 超链接的 href 的相对地址要怎么写? 
-<input size="50" answer="../test/hello.s">
-6. 续: 那么mood.html中, 超链接的 href 的绝对地址要怎么写? 
-<input size="50" answer="/demo/test/hello.s">
-7. 续: 那么board.html中, 超链接的 href 的相对地址要怎么写? 
-<input size="50" answer="../../test/hello.s">
-8. 续: 那么board.html中, 超链接的 href 的绝对地址要怎么写? 
-<input size="50" answer="/demo/test/hello.s">
-9. 续: 那么index.html中, 超链接的 href 的相对地址要怎么写? 
-<input size="50" answer="test/hello.s">
-10. 续: 那么index.html中, 超链接的 href 的绝对地址要怎么写? 
-<input size="50" answer="/demo/test/hello.s">
+<input size="50" answer='../test/hello.s'>
+2. 续: 那么mood.html中, 超链接的 href 的绝对地址要怎么写? 
+<input size="50" answer='/demo/test/hello.s'>
+3. 续: 那么board.html中, 超链接的 href 的相对地址要怎么写? 
+<input size="50" answer='../../test/hello.s'>
+4. 续: 那么board.html中, 超链接的 href 的绝对地址要怎么写? 
+<input size="50" answer='/demo/test/hello.s'>
+5. 续: 那么index.html中, 超链接的 href 的相对地址要怎么写? 
+<input size="50" answer='test/hello.s'>
+6. 续: 那么index.html中, 超链接的 href 的绝对地址要怎么写? 
+<input size="50" answer='/demo/test/hello.s'>
 </pre>
 
 <pre>
