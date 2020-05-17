@@ -27,14 +27,14 @@
 
 <fieldset>
 <legend>王总: 旭元呀, 每次上传完成, 总是跳到一个白页面显示信息, 能不能不跳转? </legend>
-<form id="form1" action="http://127.0.0.1/file/upload" method="post" enctype="multipart/form-data">
+<form id="form1" action="http://47.106.66.89:1112/file/upload" method="post" enctype="multipart/form-data">
 	文件: <input id="file1" type="file" name="file" multiple="multiple"><br>
 	文件: <input id="file1" type="file" name="file" multiple="multiple"><br>
 	文件: <input id="file1" type="file" name="file" multiple="multiple"><br>
 	<button type="button" onclick="upload1()">AJAX提交</button>
 	<script type="text/javascript">
 		function upload1(){
-			var url = "http://127.0.0.1/file/upload";
+			var url = "http://47.106.66.89:1112/file/upload";
 			var fd = new FormData(form1);
 			axios.post(url,fd).then(res=>{
 				var msg = res.data.msg;
@@ -51,13 +51,13 @@
 
 <fieldset>
 <legend>王总: 旭元呀, 我想让会员可以上传自己的头像, 有没有法子呀? </legend>
-<form id="form2" action="http://127.0.0.1/file/upload" method="post" enctype="multipart/form-data">
+<form id="form2" action="http://47.106.66.89:1112/file/upload" method="post" enctype="multipart/form-data">
 	<img alt="上传头像" src="../../images/头像.jpg" height="200px" id=head><br>
 	文件: <input id="file1" type="file" name="file"><br>
 	<button type="button" onclick="upload2()">上传头像</button>
 	<script type="text/javascript">
 		function upload2(){
-			var url = "http://127.0.0.1/file/upload";
+			var url = "http://47.106.66.89:1112/file/upload";
 			var fd = new FormData(form2);
 			axios.post(url,fd).then(res=>{
 				if(res.data.code && res.data.data){
