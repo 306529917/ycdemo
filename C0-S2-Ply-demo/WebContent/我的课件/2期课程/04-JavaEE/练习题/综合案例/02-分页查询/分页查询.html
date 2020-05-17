@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>分页查询</title>
+<script src="https://cdn.bootcss.com/vue/2.6.11/vue.js"></script>
+<script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/axios/0.19.2/axios.min.js"></script>
+</head>
+<body>
+	<fieldset id="app1">
+		<legend>王总: 程旭元你好, 我需要一个图书分类信息的分页显示查询, 每页10行.....<br>程旭元: 好嘞, 王总你不用话说了, 我是你肚子里的蛔虫, 我知道做成什么样 </legend>
+		<table border="1" style="width:100%">
+			<tr><th>编号<th>名称<th>父编号
+			<tr >
+				<td width="20%"></td>
+				<td></td>
+				<td width="20%"></td>
+			</tr>
+		</table>
+		第<input type="number" style="width:50px;text-align: center" min="1">页
+	</fieldset>
+	
+	<fieldset id="app2">
+		<legend>王总: 汗, 程旭元你知道我一共有多少行记录么? 我想直接看到最后一页怎么办?<br>程旭元: 额...., 好吧, 是我想的太简单, 速度改</legend>
+		<table border="1" style="width:100%">
+			<tr><th>编号<th>名称<th>父编号
+			<tr >
+				<td width="20%"></td>
+				<td></td>
+				<td width="20%"></td>
+			</tr>
+		</table>
+		<button >首页</button>
+		<button >上页</button>
+		第<input type="number" style="width:50px;text-align: center" min="1">页
+		<button >下页</button>
+		<button >尾页</button>
+	</fieldset>
+	
+	<fieldset id="app3">
+		<legend>王总: 旭元呀, 你可以实现分页编号链接么? <br>程旭元: So easy ! 你看是不是这意思?</legend>
+		<table border="1" style="width:100%">
+			<tr><th>编号<th>名称<th>父编号
+			<tr >
+				<td width="20%"></td>
+				<td></td>
+				<td width="20%"></td>
+			</tr>
+		</table>
+		<button >首页</button>
+		<button >上页</button>
+		<span >&nbsp;&nbsp;
+			<a href="javascript:void()"  >1</a>
+			<a href="javascript:void()"  >2</a>
+			<a href="javascript:void()"  >3</a>
+			<a href="javascript:void()"  >4</a>
+			...
+		</span>
+		
+		<button >下页</button>
+		<button >尾页</button>
+	</fieldset>
+
+</body>
+</html>
