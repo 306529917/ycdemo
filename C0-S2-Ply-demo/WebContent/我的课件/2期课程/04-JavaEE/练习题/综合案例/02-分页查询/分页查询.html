@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>分页查询</title>
+<script src="https://cdn.bootcss.com/vue/2.6.11/vue.js"></script>
+<script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/axios/0.19.2/axios.min.js"></script>
+</head>
+<body>
+	<fieldset id="app1">
+		<legend>王总: 程旭元你好, 我需要一个图书分类信息的分页显示查询, 每页10行.....<br>程旭元: 好嘞, 王总你不用话说了, 我是你肚子里的蛔虫, 我知道做成什么样 </legend>
+		<table border="1" style="width:100%">
+			<tr><th>编号<th>名称<th>父编号
+			<tr v-for="c in clist">
+				<td width="20%">{{c.id}}</td>
+				<td>{{c.name}}</td>
+				<td width="20%">{{c.pid}}</td>
+			</tr>
+		</table>
+		第<input v-model="page" type="number" style="width:50px;text-align: center" min="1">页
+	</fieldset>
+	<script type="text/javascript">
+		new Vue({
+			el:"#app1",
+			data : {
+				clist : [],
+				page:1,
+				size:10
+			},
+			created : function(){
+				this.query();
+			},
+			methods : {
+				query(){
+					axios.get("http://127.0.0.1/exa/cr/categroy/find",{
+						params : {page:this.page, size:this.size}
+					}).then(res => {
+						this.clist = res.data.data.list;
+					});
+				}
+			},
+			watch : {
+				page : function(oval, nval){
+					this.query();
+				}
+			}
+		});
+	</script>
+	
+	<fieldset id="app2">
+		<legend>王总: 汗, 程旭元你知道我一共有多少行记录么? 我想直接看到最后一页怎么办?<br>程旭元: 额...., 好吧, 是我想的太简单, 速度改</legend>
+		<table border="1" style="width:100%">
+			<tr><th>编号<th>名称<th>父编号
+			<tr v-for="c in data.list">
+				<td width="20%">{{c.id}}</td>
+				<td>{{c.name}}</td>
+				<td width="20%">{{c.pid}}</td>
+			</tr>
+		</table>
+		<button @click="first">首页</button>
+		<button @click="pre">上页</button>
+		第<input v-model="page" type="number" style="width:50px;text-align: center" min="1" :max="data.pages">页
+		<button @click="next">下页</button>
+		<button @click="last">尾页</button>
+	</fieldset>
+	<script type="text/javascript">
+		var ddd;
+		new Vue({
+			el:"#app2",
+			data : {
+				page:1,
+				size:10,
+				data : {pages:1}
+			},
+			created : function(){
+				this.query();
+			},
+			methods : {
+				query(){
+					axios.get("http://127.0.0.1/exa/cr/categroy/find",{
+						params : {page:this.page, size:this.size}
+					}).then(res => {
+						this.data = res.data.data;
+					});
+				},
+				first(){
+					this.page = 1;
+					this.query();
+				},
+				last(){
+					this.page = this.data.pages;
+					this.query();
+				},
+				pre(){
+					this.page--;
+					if(this.page<1){
+						this.page = 1;
+					}
+					this.query();
+				},
+				next(){
+					this.page++;
+					if(this.page>this.data.pages){
+						this.page = this.data.pages;
+					}
+					this.query();
+				}
+			},
+			watch : {
+				page : function(oval, nval){
+					this.query();
+				}
+			}
+		});
+	</script>
+
+</body>
+</html>
