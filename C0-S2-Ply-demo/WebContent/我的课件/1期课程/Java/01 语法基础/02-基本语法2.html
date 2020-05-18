@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+<head>
+<base target="_blank">
+<meta charset="UTF-8">
+<meta http-equiv="pragma" content="no-cache"> 
+<meta http-equiv="Cache-Control" content="no-cache, must-revalidate"> 
+<meta http-equiv="expires" content="Wed, 26 Feb 1997 08:21:57 GMT">
+<title>练习题</title>
+<script src="https://cdn.bootcss.com/vue/2.6.11/vue.js"></script>
+<script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/axios/0.19.2/axios.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../../../../_css/q.css">
+<script type="text/javascript" src="../../../../_js/pub.js"></script>
+</head>
+<body>
+<div style="display: none;" id="pres">
+<!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
+<pre>
+<h3>boolean类型</h3>
+下列关于 boolean 类型说法错误的是:
+	<cbx :v='["boolean 类型的 false 表示假, true 表示真"
+	,"一个 boolean 类型的变量用来表示一个或真或假的关系"
+	,"一个 boolean 类型变量的值必须是true 或 false二者之一"
+	,"数字 0 可以表示 false, 非 0 可以表示 true"]' :a="[1,2]" s="	"></cbx>
+	
+下列定义 boolean 类型变量, 语法正确的是:
+	<cbx :v='["boolean a = true;"
+	,"boolean b = 真;"
+	,"boolean c = 1;"
+	,"boolean d = 1 > 2;"]' :a="[0,3]" s="	"></cbx>
+</pre>
+
+<pre>
+<h3>char类型</h3>
+下列关于 char 类型说法错误的是:
+	<cbx :v='["其实就是一个无符号的16位整形，其范围为 -32768~32767"
+	,"用来存储该字符的 Unicode编码值"
+	,"因为Unicode 编码中包含汉字的编码，所以一个char类型的变量也可以存储一个汉字字符"
+	,"在代码中直接给出的一个字符值必须用双引号括起来"
+	,"可以把char类型数据当作整数数据来操作"]' :a="[0,3]" s="	"></cbx>
+	
+下列定义 char 类型变量, 语法正确的是:
+	
+</pre>
+
+<!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
+</div>
+<script type="text/javascript">
+new Vue({el:"#pres"});
+</script>
+<!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
+
+<div id="main">
+	<fieldset class="alist">
+		<legend>答题结果</legend>
+		<div style="display: table;width: 100%">
+			<div style="display: table-cell;vertical-align: middle;">
+				<span class="res" v-for="q,i in questions">
+					题{{i+1}}: <b style="color: red">{{q.result?'对':''}}</b>
+				</span>
+			</div>
+			<div style="display: table-cell; width: 150px; text-align: center;">
+				<button @click="commit" :disabled="finish==false">提交答卷</button>
+			</div>
+		</div>
+	</fieldset>
+	<fieldset>
+		<legend>题目: </legend>
+		<div class="qlist">
+		<dl v-for="q,i in questions" :style="{backgroundColor:q.result?'#ddd':'#eee'}">
+			<dt>第{{i+1}}题 <b style="color: red;">{{q.result?'对':''}}</b>
+				<button @click="q.test()" style="float: right">检 查</button><br>
+			</dt>
+			<dd @click="a(q)">
+				<pre v-html="q.content"></pre>
+			</dd>
+			<dd v-if="q.expect">
+				正确的结果: <span>{{q.expect}}</span><br>
+				你写的结果: <span>{{q.resultText}}</span>
+			</dd>
+		</dl>
+		</div>
+	</fieldset>
+</div>
+</body>
+<script type="text/javascript" src="../../../../_js/q.js"></script>
+</html>
