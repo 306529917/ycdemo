@@ -33,8 +33,13 @@ function Q(content, expect){
 				let answer = input.getAttribute('answer');
 				let regex = input.getAttribute("regex");
 				// 内容判断 + 正则判断
-				let ok = answer && val.replace(/\s/g,'') == answer.replace(/\s/g,'')
-						|| regex && eval(regex).test(val);
+				let ok;
+				if(answer || regex){
+					ok = answer && val.replace(/\s/g,'') == answer.replace(/\s/g,'')
+							|| regex && eval(regex).test(val);
+				} else {
+					ok = val == "";
+				}
 				if(isCR){
 					if(val){
 						input.nextSibling.classList.remove(ok ? "cuo" : "dui");
@@ -50,7 +55,7 @@ function Q(content, expect){
 						input.classList.remove("cuo","dui");
 					}
 				}
-				if((answer || regex ) && ! ok){
+				if( !ok ){
 					allright = false;
 				}
 			}
@@ -79,15 +84,6 @@ function Q(content, expect){
 	}
 }
 
-function insertAfter(targetEl, newEl){
-	var parentEl = targetEl.parentNode;
-	if(parentEl.lastChild == targetEl){
-		parentEl.appendChild(newEl);
-	}else{
-		parentEl.insertBefore(newEl,targetEl.nextSibling);
-	}            
-}
-
 var pres = document.querySelectorAll("div>pre");
 var qs = [];
 for(var pre of pres){
@@ -100,6 +96,17 @@ function findDD(node){
 		return findDD(node.parentNode);
 	}
 }
+
+function insertAfter(targetEl, newEl){
+	var parentEl = targetEl.parentNode;
+	if(parentEl.lastChild == targetEl){
+		parentEl.appendChild(newEl);
+	}else{
+		parentEl.insertBefore(newEl,targetEl.nextSibling);
+	}            
+}
+/******************************** VUE ***********************************/
+
 new Vue({
 	el : "#main",
 	data : {
@@ -150,23 +157,25 @@ new Vue({
 				o.size = answer.length * 1.7;
 			}
 			if(o.type=="checkbox" || o.type=="radio"){
-				let label = o.getAttribute("label");
-				let id = o.id;
 				// 有提供 answer 但是没有值, 则默认赋值 value
 				if(answer=='' && o.value){
 					o.setAttribute("answer", o.value);
 				}
 				// 自动添加 label
-				label = label || o.value;
-				if(! id){
-					id = "l" + index;
-					o.id = id;
+				let ns = o.nextSibling;
+				if(! ns || ns.type != "label" || ! ns.classList.contains("removeMe")){
+					let id = o.id;
+					if(! id){
+						id = "l" + index;
+						o.id = id;
+					}
+					let lab = document.createElement("label");
+					lab.classList.add("removeMe");
+					lab.setAttribute("for",id);
+					lab.innerText = o.value;
+					insertAfter(o, lab);
+					lab.style.width = lab.offsetWidth + 22 + "px";
 				}
-				let lab = document.createElement("label");
-				lab.setAttribute("for",id);
-				lab.innerText = label;
-				insertAfter(o, lab);
-				lab.style.width = lab.offsetWidth + 22 + "px";
 			}
 		});
 	},
