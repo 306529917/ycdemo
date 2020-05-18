@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+<head>
+<base target="_blank">
+<meta charset="UTF-8">
+<meta http-equiv="pragma" content="no-cache"> 
+<meta http-equiv="Cache-Control" content="no-cache, must-revalidate"> 
+<meta http-equiv="expires" content="Wed, 26 Feb 1997 08:21:57 GMT">
+<title>练习题</title>
+<script src="https://cdn.bootcss.com/vue/2.6.11/vue.js"></script>
+<script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/axios/0.19.2/axios.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../../../../_css/q.css">
+<script type="text/javascript" src="../../../../_js/pub.js"></script>
+</head>
+<body>
+<div style="display: none;">
+<!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
+<pre>
+Java的名字的由来跟哪个咖啡产地有关: 
+	<input type="radio" name="1" value="巴西">
+	<input type="radio" name="1" value="印尼爪哇岛" answer="印尼爪哇岛">
+	<input type="radio" name="1" value="中国海南岛">
+
+(    )使Java成为网络上最流行的编程语言: 
+	<input type="radio" name="2" value="Internet" answer>
+	<input type="radio" name="2" value="游戏">
+</pre>
+
+<pre>
+Java语言内部运行的核心, 说的是 (       ): 
+	<input type="radio" name="9" value="JDK">
+	<input type="radio" name="9" value="JRE">
+	<input type="radio" name="9" value="JVM" answer>
+
+包含Java运行的基本类库和开发命令，可以进行完整的Java开发, 说的是 (       ): 
+	<input type="radio" name="3" value="JDK" answer>
+	<input type="radio" name="3" value="JRE">
+	<input type="radio" name="3" value="JVM">
+
+包含Java运行的基本类库和一些运行命令，可以运行编译好的Java程序, 说的是 (       ): 
+	<input type="radio" name="4" value="JDK">
+	<input type="radio" name="4" value="JRE" answer>
+	<input type="radio" name="4" value="JVM">
+</pre>
+
+<pre>
+Java的企业版是 (       ): 
+	<input type="radio" name="5" value="JavaSE">
+	<input type="radio" name="5" value="JavaEE" answer>
+	<input type="radio" name="5" value="JavaME">
+
+Java的标准版是 (       ): 
+	<input type="radio" name="6" value="JavaSE" answer>
+	<input type="radio" name="6" value="JavaEE">
+	<input type="radio" name="6" value="JavaME">
+
+Java的微型版是 (       ): 
+	<input type="radio" name="7" value="JavaSE">
+	<input type="radio" name="7" value="JavaEE">
+	<input type="radio" name="7" value="JavaME" answer>
+</pre>
+
+<pre>
+安装Java需要配置的环境变量包括 (       ): 
+	<input type="checkbox" value="java_home" answer>
+	<input type="checkbox" value="javascript">
+	<input type="checkbox" value="classpath" answer>
+	<input type="checkbox" value="path" answer>
+
+配置 Java 安装路径的环境变量是 : <input answer="java_home" regex="/^java_home$/i">
+配置 Java 类路径的环境变量是 : <input answer="classpath" regex="/^classpath$/i">, 该环境变量配置最简单, 只要配置一个<input answer=".">号就可以了
+配置 Java 命令文件搜索路径的环境变量是 : <input answer="path" regex="/^path$/i">
+</pre>
+
+<pre>
+Java 的代码文件的后缀是
+Java 的源代码在编译后 , 产生的字节码文件的后缀是
+</pre>
+
+<!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
+</div>
+	<div id="main">
+		<fieldset class="alist">
+			<legend>答题结果</legend>
+			<div style="display: table;width: 100%">
+				<div style="display: table-cell;vertical-align: middle;">
+					<span class="res" v-for="q,i in questions">
+						题{{i+1}}: <b style="color: red">{{q.result?'对':''}}</b>
+					</span>
+				</div>
+				<div style="display: table-cell; width: 150px; text-align: center;">
+					<button @click="commit" :disabled="finish==false">提交答卷</button>
+				</div>
+			</div>
+		</fieldset>
+		<fieldset>
+			<legend>题目: </legend>
+			<div class="qlist">
+			<dl v-for="q,i in questions" :style="{backgroundColor:q.result?'#ddd':'#eee'}">
+				<dt>第{{i+1}}题 <b style="color: red;">{{q.result?'对':''}}</b>
+					<button @click="q.test()" style="float: right">检 查</button><br>
+				</dt>
+				<dd @click="a(q)">
+					<pre v-html="q.content"></pre>
+				</dd>
+				<dd v-if="q.expect">
+					正确的结果: <span>{{q.expect}}</span><br>
+					你写的结果: <span>{{q.resultText}}</span>
+				</dd>
+			</dl>
+			</div>
+		</fieldset>
+	</div>
+</body>
+<script type="text/javascript" src="../../../../_js/q.js"></script>
+</html>
