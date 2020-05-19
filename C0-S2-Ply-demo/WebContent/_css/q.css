@@ -26,6 +26,7 @@ textarea, input {
 	font-weight: bold;
 	margin: 2px;
 	padding: 0px 20px 0px 2px;
+	background-color: #fef
 }
 
 .qlist dl {
@@ -73,16 +74,14 @@ b {
 }
 
 .dui {
-	background: url(http://47.106.66.89:1112/images/dui.jpg) no-repeat right
-		center;
-	background-color: inherit;
+	background: url(/C0-S2-Ply-demo/_images/dui.jpg) no-repeat right center;
+	background-color: #fef;
 	color: green;
 }
 
 .cuo {
-	background: url(http://47.106.66.89:1112/images/cuo.jpg) no-repeat right
-		center;
-	background-color: inherit;
+	background: url(/C0-S2-Ply-demo/_images/cuo.jpg) no-repeat right center;
+	background-color: #fef;
 	color: #888;
 }
 
@@ -107,6 +106,7 @@ label {
 	padding-left: 3px;
 	margin: 0px 10px 0px 0px;
 	border: 1px #aaa dashed;
+	background-color: #fef
 }
 
 label:hover {

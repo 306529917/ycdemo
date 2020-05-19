@@ -29,37 +29,34 @@ function Q(content, expect){
 			}
 			script = script.replace(/<input.+?>/, val);
 			
-			if( ! this.expect){
-				let answer = input.getAttribute('answer');
-				let regex = input.getAttribute("regex");
-				// 内容判断 + 正则判断
-				let ok;
-				if(answer || regex){
-					ok = answer && val.replace(/\s/g,'').toLowerCase() == answer.replace(/\s/g,'').toLowerCase()
-							|| regex && eval(regex).test(val);
-				} else {
-					ok = val == "";
+			let answer = input.getAttribute('answer');
+			let regex = input.getAttribute("regex");
+			// 内容判断 + 正则判断
+			let ok;
+			if(answer){
+				answer = answer.replace(/\s/g,'');
+				let v = val.replace(/\s/g,'');
+				// 为定义期望值, 说明不是 js 代码,  忽略大小写
+				if(this.expect == undefined ){
+					answer = answer.toLowerCase();
+					v = v.toLowerCase();
 				}
-				if(isCR){
-					if(val){
-						input.nextSibling.classList.remove(ok ? "cuo" : "dui");
-						input.nextSibling.classList.add(ok ? "dui" : "cuo");
-					} else {
-						input.nextSibling.classList.remove("cuo","dui");
-					}
-				} else {
-					if(val){
-						input.classList.remove(ok ? "cuo" : "dui");
-						input.classList.add(ok ? "dui" : "cuo");
-					} else {
-						input.classList.remove("cuo","dui");
-					}
-				}
-				if( !ok ){
-					allright = false;
-				}
+				ok = v== answer || regex && eval(regex).test(val);
+			} else {
+				ok = val == "";
+			}
+			let changeElement = isCR ? input.nextSibling : input;
+			if(val){
+				changeElement.classList.remove( ok ? "cuo" : "dui" );
+				changeElement.classList.add( ok ? "dui" : "cuo" );
+			} else {
+				changeElement.classList.remove( "cuo","dui" );
+			}
+			if( !ok ){
+				allright = false;
 			}
 		}
+		
 		this.result = allright;
 		if(this.expect != undefined){
 			try{

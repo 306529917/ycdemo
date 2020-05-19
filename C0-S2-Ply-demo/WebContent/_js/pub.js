@@ -55,3 +55,23 @@ Vue.component('false',{
 			"<input type='radio' :name='n' value='错' answer='错'>" +
 			"</span>"
 });
+
+Vue.component('prompt',{
+	template : `
+		<div id="qlistpre">
+		 	<div>
+				 <h4>答题注意事项: </h4>
+				 <ol>
+					 <li>请删除代码中的非必要空格</li>
+					 <li>定义JS的字符串请使用双引号</li>
+					 <li>答题前请务必先认真阅读 "参考资料"</li>
+					 <li>答题完成后, 请截图保存结果</li>
+				 </ol>
+			 </div>
+			<div>
+				<h4>参考资料</h4>
+				<ol><slot></slot></ol>
+			 </div>
+		 </div>
+	`
+});
