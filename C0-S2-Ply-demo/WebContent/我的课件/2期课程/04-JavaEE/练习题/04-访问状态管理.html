@@ -66,7 +66,7 @@ Cookie 有个数和大小的限制，大小一般是<input size=1 answer="4k" re
 Cookie是在浏览器访问WEB服务器的某个资源时，由<input answer="WEB服务器">在HTTP响应消息头中附带传送给<input answer="浏览器">的一小段数据，WEB服务器传送给各个客户端浏览器的数据是可以各不相同的。
 一旦WEB浏览器保存了某个Cookie，那么它在以后每次访问该WEB服务器时，都应在HTTP请求头中将这个Cookie回传给<input answer="WEB服务器">。
 WEB服务器通过在HTTP响应消息中增加Set-Cookie响应头字段将Cookie信息发送给浏览器，浏览器则通过在HTTP请求消息中增加Cookie请求头字段将Cookie回传给WEB服务器。
-一个Cookie只能标识一种信息，它至少含有一个标识该信息的名称（<input answer="NAME" regex="/^name$/i">）和设置值（<input answer="value" regex="/^VALUE$/i">）。
+一个Cookie只能标识一种信息，它至少含有一个标识该信息的名称（<input answer="name">）和设置值（<input answer="value">）。
 一个WEB站点可以给一个WEB浏览器发送多个Cookie，一个WEB浏览器也可以存储多个WEB站点提供的Cookie。
 
 现在有两个方法, 是该图3个步骤中需要用到的方法, 请将其填写到对应的步骤中, 如果没有请填写 "无"

@@ -35,7 +35,7 @@ function Q(content, expect){
 				// 内容判断 + 正则判断
 				let ok;
 				if(answer || regex){
-					ok = answer && val.replace(/\s/g,'') == answer.replace(/\s/g,'')
+					ok = answer && val.replace(/\s/g,'').toLowerCase() == answer.replace(/\s/g,'').toLowerCase()
 							|| regex && eval(regex).test(val);
 				} else {
 					ok = val == "";
