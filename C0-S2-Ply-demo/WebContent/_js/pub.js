@@ -30,7 +30,7 @@ Vue.component('rdo',{
 	},
 	props : ["v","a","s"],
 	template : "<span class='releaseInner'><span class='releaseInner' v-for='(r,i) in v'>" +
-			"<input type='radio' :name='n' :value='r' :answer='a.includes(i)?r:false'><br v-if='s!=undefined'>{{s}}" +
+			"<input type='radio' :name='n' :value='r' :answer='a.includes(i)?r:false'><br v-if='s!=undefined && i<v.length-1'>{{s}}" +
 			"</span></span>"
 });
 
