@@ -6,8 +6,8 @@
 <meta http-equiv="Cache-Control" content="no-cache, must-revalidate"> 
 <meta http-equiv="expires" content="Wed, 26 Feb 1997 08:21:57 GMT">
 <title>练习题</title>
-<script src="https://cdn.bootcss.com/vue/2.6.11/vue.js"></script>
-<script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/axios/0.19.2/axios.min.js"></script>
+<script src="/C0-S2-Ply-demo/_js/vue.js"></script>
+<script type="text/javascript" src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script type="text/javascript" src="http://47.106.66.89:1112/js/pub.js"></script>
 <script type="text/javascript">
 function a(){
@@ -97,7 +97,7 @@ function Q(content, expect){
 		<fieldset>
 			<legend>题目: 请按照要求再横线处填写代码 <a target="_blank" href="https://www.w3school.com.cn/ajax/index.asp"><b>Ajax入门教程</b></a> </legend>
 			<div class="qlist">
-			<dl v-for="q,i in questions" :style="{backgroundColor:q.result?'#ddd':'#eee'}">
+			<dl v-for="q,i in questions">
 				<dt>第{{i+1}}题 <b style="color: red;">{{q.result?'对':''}}</b>
 					<button @click="q.test()" style="float: right;">提交答案</button><br>
 				</dt>

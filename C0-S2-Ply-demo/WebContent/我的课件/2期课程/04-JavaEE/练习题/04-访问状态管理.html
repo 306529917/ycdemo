@@ -7,8 +7,8 @@
 <meta http-equiv="Cache-Control" content="no-cache, must-revalidate"> 
 <meta http-equiv="expires" content="Wed, 26 Feb 1997 08:21:57 GMT">
 <title>练习题</title>
-<script src="https://cdn.bootcss.com/vue/2.6.11/vue.js"></script>
-<script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/axios/0.19.2/axios.min.js"></script>
+<script src="/C0-S2-Ply-demo/_js/vue.js"></script>
+<script type="text/javascript" src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <link rel="stylesheet" type="text/css" href="../../../../_css/q.css">
 <script type="text/javascript" src="../../../../_js/pub.js"></script>
 </head>
@@ -158,7 +158,7 @@ session的常见实现形式是cookie（session cookie），即未设置过期�
 		<fieldset>
 			<legend>题目: </legend>
 			<div class="qlist">
-			<dl v-for="q,i in questions" :style="{backgroundColor:q.result?'#ddd':'#eee'}">
+			<dl v-for="q,i in questions">
 				<dt>第{{i+1}}题 <b style="color: red;">{{q.result?'对':''}}</b>
 					<button @click="q.test()" style="float: right">检 查</button><br>
 				</dt>

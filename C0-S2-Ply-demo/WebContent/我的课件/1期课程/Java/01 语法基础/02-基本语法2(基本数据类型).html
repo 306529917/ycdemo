@@ -7,8 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, must-revalidate"> 
 <meta http-equiv="expires" content="Wed, 26 Feb 1997 08:21:57 GMT">
 <title>练习题</title>
-<script src="https://cdn.bootcss.com/vue/2.6.11/vue.js"></script>
-<script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/axios/0.19.2/axios.min.js"></script>
+<script src="/C0-S2-Ply-demo/_js/vue.js"></script>
 <link rel="stylesheet" type="text/css" href="../../../../_css/q.css">
 <script type="text/javascript" src="../../../../_js/pub.js"></script>
 </head>
@@ -40,7 +39,54 @@
 	,"可以把char类型数据当作整数数据来操作"]' :a="[0,3]" s="	"></cbx>
 	
 下列定义 char 类型变量, 语法正确的是:
+	<cbx :v="['char zhChar = \'中\';'
+	,'char nmChar = 69;'
+	,'char enChar = \'a\';'
+	,'char enChar = \'\\r\';'
+	,'char ucChar = \'\\u0060\'']" :a="[0,1,2,3,4]" s="	"></cbx>
+</pre>
+
+<pre>
+<h3>整数类型: byte, short, int, long</h3>
+下列关于整数类型说法正确的是:
+	<cbx :v='["有三种形式可以给一个整形变量直接赋值: 8进制, 10进制, 16进制"
+	,"8进制是在数字前加 0x, 16进制是在数字前加 0"
+	,"直接给出的值默认是int类型"
+	,"char 也属于整数类型"
+	,"长整形值应该在数字后面跟上 ‘l’ 或 ‘L’标示"]' :a="[0,2,4]" s="	"></cbx>
 	
+下列定义整数类型变量, 语法正确的是:
+	<cbx :v="['int a = 100;'
+	,'byte b = 128;'
+	,'long c = 100L;'
+	,'short d = 1 + 2;'
+	,'long e = 50.9;']" :a="[0,2,3]" s="	"></cbx>
+</pre>
+
+<pre>
+<h3>浮点数类型: float 和 double</h3>
+下列关于浮点数类型说法正确的是:
+	<cbx :v='["浮点数用于表示带小数的数值, 默认的浮点数类型是 float"
+	,"直接表示一个float 类型的值必须在数字后跟 ‘f’ 或‘F’"
+	,"直接表示一个double 类型的值可以在数字后跟‘d’ 或‘D’"
+	,"浮点数可以精确的表示所有有效范围内的数值"
+	,"可以用科学计数法表示，如：123.456e3或123.456E3"]' :a="[0,1,2,4]" s="	"></cbx>
+	
+关于浮点数的进度问题, 请编写以下的代码并运行, 一定会让你的脑洞大开
+	float f = 1234567831239f; // 值要足够大
+	float f1 = f + 1;
+	boolean res = f == f1;
+	System.out.println("f == f1 结果为: " + ( res ) );
+	// 请问 res 的值是 true 还是 false: <cbx :v='[true,false]' :a='[0]'></cbx>
+	float f2 = 0.1 + 0.2;
+	// 请填写 f2 的值 : <ipt a="0.30000000000000004"></ipt>
+	
+下列定义浮点数类型变量, 语法错误的是:
+	<cbx :v="['float a = 1.1;'
+	,'float b = 1.1f;'
+	,'double c = 1.1;'
+	,'double d = 1.1d;'
+	,'double e = -1.1e20']" :a="[0]" s="	"></cbx>
 </pre>
 
 <!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
@@ -67,7 +113,7 @@ new Vue({el:"#pres"});
 	<fieldset>
 		<legend>题目: </legend>
 		<div class="qlist">
-		<dl v-for="q,i in questions" :style="{backgroundColor:q.result?'#ddd':'#eee'}">
+		<dl v-for="q,i in questions">
 			<dt>第{{i+1}}题 <b style="color: red;">{{q.result?'对':''}}</b>
 				<button @click="q.test()" style="float: right">检 查</button><br>
 			</dt>

@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <title>正则表达式</title>
 <script src="https://cdn.bootcss.com/jquery/3.5.0/jquery.js"></script>
-<script src="https://cdn.bootcss.com/vue/2.6.11/vue.js"></script>
+<script src="/C0-S2-Ply-demo/_js/vue.js"></script>
 <style type="text/css">
 body{
 	padding: 10px
@@ -52,7 +52,7 @@ input {
 		<fieldset>
 			<legend>题目: 请按照要求再横线处填写代码, 浏览器控制台会打印每道题的返回结果</legend>
 			<div class="qlist">
-			<dl v-for="q,i in questions" :style="{backgroundColor:q.result?'#ddd':'#eee'}">
+			<dl v-for="q,i in questions">
 				<dt>第{{i+1}}题 <b style="color: red">{{q.result?'对':''}}</b></dt>
 				<dd>
 					<span v-html="prefix( q.content )"></span>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+<head>
+<base target="_blank">
+<meta charset="UTF-8">
+<meta http-equiv="pragma" content="no-cache"> 
+<meta http-equiv="Cache-Control" content="no-cache, must-revalidate"> 
+<meta http-equiv="expires" content="Wed, 26 Feb 1997 08:21:57 GMT">
+<title>练习题</title>
+<script src="/C0-S2-Ply-demo/_js/vue.js"></script>
+<link rel="stylesheet" type="text/css" href="../../../../_css/q.css">
+<script type="text/javascript" src="../../../../_js/pub.js"></script>
+</head>
+<body>
+<div style="display: none;" id="pres">
+<!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
+<pre>
+<h3>关于正码, 反码和补码</h3>
+计算机中的有符号数有三种表示方法，即原码、反码和补码。详细请参考: <a href="https://www.cnblogs.com/zhangziqiu/archive/2011/03/30/ComputerCode.html">原码, 反码, 补码 详解</a>
+
+已知有整数值 33 的正码是: 00100001, -33 的正码是 10100001 , 请分别写出它们的反码和补码
+	33 的反码: <ipt a="00100001"></ipt> , 33 的补码: <ipt a="00100001"></ipt>
+	-33 的反码:<ipt a="11011110"></ipt> , -33 的补码:<ipt a="11011111"></ipt>
+
+<!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
+</div>
+<script type="text/javascript">
+new Vue({el:"#pres"});
+</script>
+<!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
+
+<div id="main">
+	<fieldset class="alist">
+		<legend>答题结果</legend>
+		<div style="display: table;width: 100%">
+			<div style="display: table-cell;vertical-align: middle;">
+				<span class="res" v-for="q,i in questions">
+					题{{i+1}}: <b style="color: red">{{q.result?'对':''}}</b>
+				</span>
+			</div>
+			<div style="display: table-cell; width: 150px; text-align: center;">
+				<button @click="commit" :disabled="finish==false">提交答卷</button>
+			</div>
+		</div>
+	</fieldset>
+	<fieldset>
+		<legend>题目: </legend>
+		<div class="qlist">
+		<dl v-for="q,i in questions">
+			<dt>第{{i+1}}题 <b style="color: red;">{{q.result?'对':''}}</b>
+				<button @click="q.test()" style="float: right">检 查</button><br>
+			</dt>
+			<dd @click="a(q)">
+				<pre v-html="q.content"></pre>
+			</dd>
+			<dd v-if="q.expect">
+				正确的结果: <span>{{q.expect}}</span><br>
+				你写的结果: <span>{{q.resultText}}</span>
+			</dd>
+		</dl>
+		</div>
+	</fieldset>
+</div>
+</body>
+<script type="text/javascript" src="../../../../_js/q.js"></script>
+</html>
