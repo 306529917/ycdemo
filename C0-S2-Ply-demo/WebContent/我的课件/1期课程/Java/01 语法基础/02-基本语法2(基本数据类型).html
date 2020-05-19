@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, must-revalidate"> 
 <meta http-equiv="expires" content="Wed, 26 Feb 1997 08:21:57 GMT">
 <title>练习题</title>
-<script src="/C0-S2-Ply-demo/_js/vue.js"></script>
+<script src="/C0-S2-Ply-demo/_js/vue.min.js"></script>
 <link rel="stylesheet" type="text/css" href="../../../../_css/q.css">
 <script type="text/javascript" src="../../../../_js/pub.js"></script>
 </head>
@@ -87,6 +87,42 @@
 	,'double c = 1.1;'
 	,'double d = 1.1d;'
 	,'double e = -1.1e20']" :a="[0]" s="	"></cbx>
+</pre>
+
+<pre>
+<h3>数据类型转</h3>
+程序中经常会遇到要将数据类型进行转换的情况（如：在一个表达式中存在不同类型的操作数时），Java的数据类型转换比C控制得更为严格；
+数据类型转换有两种情况, 分别是: 
+	<ipt a="自动"></ipt>类型转换, 又称为隐式转换
+	<ipt a="强制"></ipt>类型转换, 又称为显式转换
+
+将一种类型的变量赋值给另一种类型的变量时，只要满足以下 (      ) 条件，就会发生自动类型转换：
+	<cbx :v='["两种类型之间相互兼容"
+	,"两种类型之间相互不兼容"
+	,"目标类型大于源类型（即类型提升）"
+	,"目标类型小于于源类型（即类型降低）"]' :a="[0,2]" s="	"></cbx>
+
+下列哪个转换会出错 ( 自动转换失败 )
+	<rdo :v="['int a = 1; short b = a;'
+	,'int a = 1; float b = a;'
+	,'float a = 1; double b = a;'
+	,'char a = 1; int b = a;'
+	,'byte a = 1; short b = a;']" :a="[0]" s="	"></rdo>
+
+请问哪些情况下需要使用强制类型转换
+	<cbx :v='["类型不兼容的两钟类型"
+	,"被转换的值的数据类型大于其目标类型，可能将会丢失部分信息"
+	,"浮点数转整数，将会丢失小数部分"
+	,"布尔类型转成其他类型"]' :a="[1,2]" s="	"></cbx>
+
+请问下列哪些转换需要并且允许进行强制类型转换 ? 
+	<cbx :v='[" int 转 float"
+	,"short 转 byte"
+	,"boolean 转 byte"
+	,"char 转 int"
+	,"char 转 byte"]' :a="[1,4]" s="	"></cbx>
+	
+
 </pre>
 
 <!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
