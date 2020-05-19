@@ -9,8 +9,8 @@ function buildParams(obj){
 }
 
 Vue.component('ipt',{
-	props : ["a","r"],
-	template : "<input :answer='a' :regex='r'>"
+	props : ["a","r","s"],
+	template : "<input :answer='a' :regex='r' :size='s'>"
 });
 
 var rdoNameIndex = 0;
