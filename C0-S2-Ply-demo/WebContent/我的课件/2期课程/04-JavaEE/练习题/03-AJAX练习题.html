@@ -243,9 +243,9 @@ xhr.onreadystatechange = function(){
 }
 // 设置请求 , 方法名为 POST , 访问地址为  POST","http://47.106.66.89:1112/exa/add.do
 <input size=75 answer='xhr.open("POST","http://47.106.66.89:1112/exa/add.do")'>;
-// 设置请求头属性, 设置 Content-type 为 application/x-www-form-urlencoded
+// 设置请求头属性, 设置 Content-Type 为 application/x-www-form-urlencoded
 // 注意 : POST 请求必须设置该参数, 并且还必须是在 open 方法执行之后才能设置
-<input size=75 answer='xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded")'>;
+<input size=75 answer='xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded")'>;
 // 发送请求 , 添加两个数字参数, 参数名分别是 num1 和 num2
 <input size=75 answer='xhr.send("num1=10&num2=20")' regex='xhr\.send\("num[12]=\d+&num[12]=\d+"\)'>;
 </pre>
