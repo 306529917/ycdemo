@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+<head>
+<base target="_blank">
+<meta charset="UTF-8">
+<meta http-equiv="pragma" content="no-cache"> 
+<meta http-equiv="Cache-Control" content="no-cache, must-revalidate"> 
+<meta http-equiv="expires" content="Wed, 26 Feb 1997 08:21:57 GMT">
+<title>练习题</title>
+<script src="/C0-S2-Ply-demo/_js/vue.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../../../../_css/q.css">
+<script type="text/javascript" src="../../../../_js/pub.js"></script>
+</head>
+<body>
+<div style="display: none;" id="pres">
+<!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
+<pre>
+<h3>运算符</h3>
+运算符是通过一定的运算规则操作一个或多个操作数，并生成结果的特定符号；
+运算符和操作数的有效组合称为表达式；
+Java提供了一系列丰富的运算符，包括 (    )
+	<cbx :v='["算术运算符"
+	,"关系运算符"
+	,"逻辑运算符"
+	,"条件运算符"
+	,"赋值运算符"]' :a="[0,1,2,3,4]" s="	"></cbx>
+</pre>
+
+<pre>
+<h3>算术运算符</h3>
+算术运算符主要用于数学计算，一般使用数值作为操作数：
+
+下列属于一元运算符的是:
+	<cbx :v='["+"
+	,"-"
+	,"++"
+	,"--"
+	,"%"]' :a="[1,2,3]"></cbx>
+
+下列属于二元运算符的是:
+	<cbx :v='["+"
+	,"-"
+	,"*"
+	,"--"
+	,"++"]' :a="[0,1,2]"></cbx>
+	
+取模( 求余数 )运算符是
+	<cbx :v='["+"
+	,"-"
+	,"*"
+	,"/"
+	,"%"]' :a="[4]"></cbx>
+</pre>
+
+<pre>
+<h3>关系运算符</h3>
+关系运算符可以测试两个操作数之间的关系（但不会改变操作数的值），关系表达式的结果为 boolean 类型
+
+下列不属于关系运算符的是:
+	<cbx :v='["=="
+	,"!="
+	,">="
+	,"<="
+	,"+="]' :a="[4]"></cbx>
+</pre>
+
+<pre>
+<h3>逻辑运算符</h3>
+逻辑运算符必须与 boolean 型操作数一起使用
+
+下列属于二元运算符的是:
+	<cbx :v='["!"
+	,"&"
+	,"|"
+	,"&&"
+	,"||"]' :a="[1,2,3,4]"></cbx>
+	
+实现逻辑"与"的运算符是:
+	<cbx :v='["!"
+	,"&"
+	,"|"
+	,"&&"
+	,"||"]' :a="[1,3]"></cbx>
+	
+实现逻辑"或"的运算符是:
+	<cbx :v='["!"
+	,"&"
+	,"|"
+	,"&&"
+	,"||"]' :a="[2,4]"></cbx>
+
+实现逻辑"非"的运算符是:
+	<cbx :v='["!"
+	,"&"
+	,"|"
+	,"&&"
+	,"||"]' :a="[0]"></cbx>
+	
+短路与和短路或
+对于短路与（&&），如果其左侧为<cbx :v="['true','false']" :a="[1]"></cbx>，则不再计算其右侧，整个表达式的结果为false，只有左侧为<cbx :v="['true','false']" :a="[0]"></cbx>时才计算右侧；
+对于短路或（||），如果其左侧为true，则不再计算其右侧，整个表达式的结果为<cbx :v="['true','false']" :a="[0]"></cbx>，只有左侧为false时，才计算右侧。
+</pre>
+
+<pre>
+<h3>赋值运算符</h3>
+赋值运算符的赋值方向是从右至左的
+
+下列哪个赋值运算符不会进行数学计算:
+	<cbx :v='["/="
+	,"+="
+	,"="
+	,"*="
+	,"%="]' :a="[2]"></cbx>
+</pre>
+
+<pre>
+<h3>条件运算符</h3>
+条件运算符又叫三元运算符, 它的一般形式是：表达式1 ? 表达式2 : 表达式3
+根据 表达式1 的结果来判断执行 表达式2 还是 表达式3，如果 表达式1 的结果为true，则执行<cbx :v='["表达式2","表达式3"]' :a="[0]"></cbx>，否则执行<cbx :v='["表达式2","表达式3"]' :a="[1]"></cbx>；
+</pre>
+
+<pre>
+<h3>运算符的优先级</h3>
+<img class="qImg" src="_images/运算符优先级.png">
+一个表达式由多个运算符组成，优先级决定运算符的计算顺序
+
+下列语句序列执行后，m 的值是(   )。 
+	int  a=10, b=3, m=5;  
+ 	if( a==b )  m+=a;  else   m=++a*m;
+ 	<cbx :v="['15','50','55','5']" :a="[2]"></cbx>
+ 	
+下列语句序列执行后，k 的值是( )。 
+	int  i=4, j=5, k=9, m=5;  
+	if( i > j || m &lt; k)  k++;  else k--;  
+	<cbx :v="['5','10','8','9']" :a="[1]"></cbx>
+
+下列语句序列执行后，x 的值是(   )。
+  	int  a=2, b=4, x=5; 
+  	if( a<--b ) x*=a; 
+	<cbx :v="['5','20','15','10']" :a="[3]"></cbx>
+	
+下列语句序列执行后，b 的值是(   )。
+	int  a=2, b=4;
+	if( a &lt; -- b )  a*=a;
+	<cbx :v="['5','3','15','4']" :a="[1]"></cbx>
+	
+下列语句序列执行后，m 的值是(    )。
+	int  i=9, j=8, m=10, n=9;
+	if( i &lt; j || m-- &lt; n )  i++;  else  j--;
+	<cbx :v="['6','7','8','9']" :a="[3]"></cbx>
+</pre>
+
+<!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
+</div>
+<script type="text/javascript">
+new Vue({el:"#pres"});
+</script>
+<!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
+
+<div id="main">
+	<fieldset class="alist">
+		<legend>答题结果</legend>
+		<div style="display: table;width: 100%">
+			<div style="display: table-cell;vertical-align: middle;">
+				<span class="res" v-for="q,i in questions">
+					题{{i+1}}: <b style="color: red">{{q.result?'对':''}}</b>
+				</span>
+			</div>
+			<div style="display: table-cell; width: 150px; text-align: center;">
+				<button @click="commit" :disabled="finish==false">提交答卷</button>
+			</div>
+		</div>
+	</fieldset>
+	<fieldset>
+		<legend>题目: </legend>
+		<div class="qlist">
+		<dl v-for="q,i in questions">
+			<dt>第{{i+1}}题 <b style="color: red;">{{q.result?'对':''}}</b>
+				<button @click="q.test()" style="float: right">检 查</button><br>
+			</dt>
+			<dd @click="a(q)">
+				<pre v-html="q.content"></pre>
+			</dd>
+			<dd v-if="q.expect">
+				正确的结果: <span>{{q.expect}}</span><br>
+				你写的结果: <span>{{q.resultText}}</span>
+			</dd>
+		</dl>
+		</div>
+	</fieldset>
+</div>
+</body>
+<script type="text/javascript" src="../../../../_js/q.js"></script>
+</html>
