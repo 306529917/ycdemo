@@ -119,7 +119,7 @@ protected void doPost(HttpServletRequest req,HttpServletResponse resp) throws Se
 <pic s="_images/会话实现机制1.jpg" class="qImg" w=300></pic>
 Session用于跟踪<cbx :v="['客户','服务器']" :a='[0]'></cbx>的状态。Session指的是在一段时间内，单个客户与Web服务器的一连串相关的<cbx :v="['资源共享','交互过程']" :a='[1]'></cbx>。
 在一个Session中，客户可能会多次请求访问同一个网页，也有可能请求访问各种不同的服务器资源。
-session被用于表示一个<cbx :v="['间断的','持续的']" :a='[1]'></cbx>的连接状态，在网站访问中一般指代客户端浏览器的进程<cbx :v="['从开启到结束','开启']" :a='[0]'></cbx>的过程。
+session被用于表示一个<cbx :v="['间断的','持续的']" :a='[1]'></cbx>的连接状态，在网站访问中一般指代客户端浏览器的进程<cbx :v="['从开启到结束','浏览网页']" :a='[0]'></cbx>的过程。
 session其实就是网站分析的访问（visits）度量，表示一个<cbx :v="['访问','等待']" :a='[0]'></cbx>的过程。
 session的常见实现形式是cookie（session cookie），即未设置过期时间的cookie，这个cookie的默认生命周期为<cbx :v="['永远有效','浏览器会话期间']" :a='[1]'></cbx>，只要关闭浏览器窗口，这个cookie就<cbx :v="['消失了','保存到磁盘了']" :a='[0]'></cbx>。
     实现机制是当用户发起一个请求的时候，服务器会检查该请求中是否包含<cbx :v="['会话ID(sessionId)','请求参数']" :a='[0]'></cbx>，
