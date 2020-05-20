@@ -9,26 +9,39 @@
 <title>练习题</title>
 <script src="/C0-S2-Ply-demo/_js/vue.min.js"></script>
 <script type="text/javascript" src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<link rel="stylesheet" type="text/css" href="../../../../_css/q.css">
-<script type="text/javascript" src="../../../../_js/pub.js"></script>
+<link rel="stylesheet" type="text/css" href="/C0-S2-Ply-demo/_css/q.css">
+<script type="text/javascript" src="/C0-S2-Ply-demo/_js/pub.js"></script>
 </head>
 <body>
-<div style="display: none;">
+<div style="display: none;" id="pres">
 <!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
 <pre>
 <img src="_images/java.jpg" class="qImg">
+<h3>Java语言简介</h3>
 Java的名字的由来跟哪个咖啡产地有关: 
-	<input type="radio" name="1" value="巴西">
-	<input type="radio" name="1" value="印尼爪哇岛" answer="印尼爪哇岛">
-	<input type="radio" name="1" value="中国海南岛">
+<cbx :v="['中国海南岛','印尼爪哇岛','巴西']" :a="[1]"></cbx>
 
-(    )使Java成为网络上最流行的编程语言: 
-	<input type="radio" name="2" value="Internet" answer>
-	<input type="radio" name="2" value="游戏">
+(    )使Java成为网络上最流行的编程语言:  
+<cbx :v="['Internet','游戏','黑客','经济危机']" :a="[0]"></cbx>
+
+<judge t>Java语言最大的特点是——跨平台</judge>
+
+Java的创始公司是:  
+<cbx :v="['Oracle','Sun','Microsoft','IBM']" :a="[1]"></cbx>
+
+Java首个版本发布时间是:  
+<cbx :v="['1991','1994','1995','1996']" :a="[2]"></cbx>
+
+Java最初的命名是:  
+<cbx :v="['Java','Oak','Oracle','PB']" :a="[1]"></cbx>
+
+<cbx :v="['A.比尔盖茨','B.马云','C.詹姆斯高斯林','D.布兰登艾特']" :a="[2]">Java的创始人是:  </cbx>
+<show style="margin:10px 35px" v-for="(a,i) in authors" :img="'_images/'+a+'.png'">{{codes.charAt(i)}} . {{a}}</show>
 </pre>
 
 <pre>
 <img src="_images/drv.jpg" class="qImg">
+<h3>三个重要概念</h3>
 Java语言内部运行的核心, 说的是 (       ): 
 	<input type="radio" name="9" value="JDK">
 	<input type="radio" name="9" value="JRE">
@@ -47,6 +60,7 @@ Java语言内部运行的核心, 说的是 (       ):
 
 <pre>
 <img src="_images/sem.jpg" class="qImg">
+<h3>语言的构成</h3>
 请选择: 
 Java的标准版是<input answer="D">
 Java的企业版是<input answer="A">
@@ -90,38 +104,49 @@ Java 的源代码在编译后 , 产生的字节码文件的后缀是<input answe
 
 <!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
 </div>
-	<div id="main">
-		<fieldset class="alist">
-			<legend>答题结果</legend>
-			<div style="display: table;width: 100%">
-				<div style="display: table-cell;vertical-align: middle;">
-					<span class="res" v-for="q,i in questions">
-						题{{i+1}}: <b style="color: red">{{q.result?'对':''}}</b>
-					</span>
-				</div>
-				<div style="display: table-cell; width: 150px; text-align: center;">
-					<button @click="commit" :disabled="finish==false">提交答卷</button>
-				</div>
+<script type="text/javascript">
+new Vue({
+	el:"#pres",
+	data : {
+		codes : 'ABCDEFG',
+		authors : ["比尔盖茨","马云","詹姆斯高斯林","布兰登艾奇"]
+	}
+});
+</script>
+<!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
+
+<div id="main">
+	<fieldset class="alist">
+		<legend>答题结果</legend>
+		<div style="display: table;width: 100%">
+			<div style="display: table-cell;vertical-align: middle;">
+				<span class="res" v-for="q,i in questions">
+					题{{i+1}}: <b style="color: red">{{q.result?'对':''}}</b>
+				</span>
 			</div>
-		</fieldset>
-		<fieldset>
-			<legend>题目: </legend>
-			<div class="qlist">
-			<dl v-for="q,i in questions">
-				<dt>第{{i+1}}题 <b style="color: red;">{{q.result?'对':''}}</b>
-					<button @click="q.test()" style="float: right">检 查</button><br>
-				</dt>
-				<dd @click="a(q)">
-					<pre v-html="q.content"></pre>
-				</dd>
-				<dd v-if="q.expect">
-					正确的结果: <span>{{q.expect}}</span><br>
-					你写的结果: <span>{{q.resultText}}</span>
-				</dd>
-			</dl>
+			<div style="display: table-cell; width: 150px; text-align: center;">
+				<button @click="commit" :disabled="finish==false">提交答卷</button>
 			</div>
-		</fieldset>
-	</div>
+		</div>
+	</fieldset>
+	<fieldset>
+		<legend>题目: </legend>
+		<div class="qlist">
+		<dl v-for="q,i in questions">
+			<dt>第{{i+1}}题 <b style="color: red;">{{q.result?'对':''}}</b>
+				<button @click="q.test()" style="float: right">检 查</button><br>
+			</dt>
+			<dd @click="a(q)">
+				<pre v-html="q.content"></pre>
+			</dd>
+			<dd v-if="q.expect">
+				正确的结果: <span>{{q.expect}}</span><br>
+				你写的结果: <span>{{q.resultText}}</span>
+			</dd>
+		</dl>
+		</div>
+	</fieldset>
+</div>
 </body>
-<script type="text/javascript" src="../../../../_js/q.js"></script>
+<script type="text/javascript" src="/C0-S2-Ply-demo/_js/q.js"></script>
 </html>
