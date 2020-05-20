@@ -8,7 +8,8 @@
 <meta http-equiv="expires" content="Wed, 26 Feb 1997 08:21:57 GMT">
 <title>练习题</title>
 <script src="/C0-S2-Ply-demo/_js/vue.min.js"></script>
-<script type="text/javascript" src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<link href="/C0-S2-Ply-demo/_css/magiczoomplus.css" rel="stylesheet" type="text/css" media="screen"/>
+<script src="/C0-S2-Ply-demo/_js/magiczoomplus.js"></script>
 <link rel="stylesheet" type="text/css" href="../../../../_css/q.css">
 <script type="text/javascript" src="../../../../_js/pub.js"></script>
 </head>
@@ -34,7 +35,7 @@
 
 <pre>
 <h3>Cookie</h3>
-<img src="_images/Cookie实现机制1.jpg" class="qImg">
+<pic s="_images/Cookie实现机制1.jpg" class="qImg" w=300></pic>
 下列关于Cookie 说法错误的有:
 	<cbx :v="['服务器可以发送Cookie值给浏览器'
 		,'浏览器会保存服务器发送给浏览器的Cookie值'
@@ -87,7 +88,7 @@ protected void doPost(HttpServletRequest req,HttpServletResponse resp) throws Se
 
 <pre expect="">
 <h3>Cookie API练习</h3>
-<img src="_images/不改BUG.jpg" class="qImg">
+<pic s="_images/不改BUG.jpg" class="qImg" w=300></pic>
 在浏览器上操作cookie使用的是 document.<input answer="cookie"> 对象
 	添加一个名称为 name, 值为 john 的 cookie, JS的语法是:
 	document.<input size=40 answer='cookie="name=john"'>;
@@ -115,7 +116,7 @@ protected void doPost(HttpServletRequest req,HttpServletResponse resp) throws Se
 
 <pre>
 <h3>Session 实现机制</h3>
-<img src="_images/会话实现机制1.jpg" class="qImg">
+<pic s="_images/会话实现机制1.jpg" class="qImg" w=300></pic>
 Session用于跟踪<cbx :v="['客户','服务器']" :a='[0]'></cbx>的状态。Session指的是在一段时间内，单个客户与Web服务器的一连串相关的<cbx :v="['资源共享','交互过程']" :a='[1]'></cbx>。
 在一个Session中，客户可能会多次请求访问同一个网页，也有可能请求访问各种不同的服务器资源。
 session被用于表示一个<cbx :v="['间断的','持续的']" :a='[1]'></cbx>的连接状态，在网站访问中一般指代客户端浏览器的进程<cbx :v="['从开启到结束','开启']" :a='[0]'></cbx>的过程。
