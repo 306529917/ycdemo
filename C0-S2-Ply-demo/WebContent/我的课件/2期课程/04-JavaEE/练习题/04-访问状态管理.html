@@ -101,15 +101,15 @@ protected void doPost(HttpServletRequest req,HttpServletResponse resp) throws Se
 在服务器端cookie被封装成<input placeholder="写类的完全限定名(包名+类名)" answer="javax.servlet.http.Cookie">类
 	创建一个名称为 name, 值为 john 的 cookie 对象 c1, Java的语法是:
 	Cookie c1=<input size=40 answer='new Cookie("name","john")'>;
-	续: 设置该 cookie 对象的有效期为 5 分钟
+	续: 设置 c1 对象的有效期为 5 分钟
 	<input size=40 answer='c1.setMaxAge(300)'>;
-	续: 设置该 cookie 对象的路径为 /page/test/
+	续: 设置 c1 对象的路径为 /page/test/
 	<input size=40 answer='c1.setPath("/page/test/")'>;
-	续: 删除该 cookie 值
+	续: 删除 c1 值
 	<input size=40 answer='c1.setMaxAge(0)'>;
-	续: 将该 cookie 对象添加到响应对象中, 假设响应对象名为 response
+	续: 将 c1 对象添加到响应对象中, 假设响应对象名为 response
 	<input size=40 answer='response.addCookie(c1)'>;
-	从请求对象中获取所有的 cookie 对象, 假设请求对象名为 request, 获取到cookie存放到变量 cookies 中
+	从请求对象中获取所有的 cookie 对象, 假设请求对象名为 request
 	Cookie[] cookies = <input size=40 answer='request.getCookies()'>;
 </pre>
 
