@@ -23,8 +23,8 @@ Vue.component('cbx',{
 	props : ["v","a","s"],
 	template : `<span class='releaseInner'><slot></slot>`
 		+`<span class='releaseInner' v-for='(r,i) in v'>`
-		+`<br v-if='s!=undefined'>{{s}}`
 		+`<input :type='a.length==1?"radio":"checkbox"' :name='n' :value='r' :answer='a.includes(i)?r:false'>`
+		+`<br v-if='s!=undefined && i<v.length-1'>{{s}}`
 		+`</span></span>`
 });
 

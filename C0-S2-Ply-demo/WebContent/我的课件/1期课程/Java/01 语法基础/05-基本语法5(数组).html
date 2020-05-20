@@ -35,6 +35,22 @@
 <h3>关于数组长度</h3>
 <judge t w="400px">在Java中数组自带的length属性将负责保管数组的长度</judge>
 <judge t w="400px">在Java中如果试图访问不在有效索引以内的元素，将会引发数组越界错误</judge>
+</pre>
+
+<pre>
+<h3>二维数组</h3>
+<judge t w="400px">值由行和列构成的, 我们称为二维数组或矩阵</judge>
+<judge t w="400px">在构造二维数组时，应确定所需要的行和列</judge>
+例如:
+   int rows=3;
+   int columns=3;
+   String[][] board = new String[ rows ][ columns ];
+
+<judge t w="400px">为访问一个特定的二维数组元素，应指定两个下标</judge>
+例如:
+   board[ 2 ][ 1 ] = “X”;
+
+<judge t w="400px">访问二维数组元素必须使用嵌套循环</judge>
 
 </pre>
 <!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
