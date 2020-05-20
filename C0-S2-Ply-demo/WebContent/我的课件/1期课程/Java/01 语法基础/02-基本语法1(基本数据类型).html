@@ -9,8 +9,8 @@
 <title>练习题</title>
 <script src="/C0-S2-Ply-demo/_js/vue.min.js"></script>
 <script type="text/javascript" src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<link rel="stylesheet" type="text/css" href="../../../../_css/q.css">
-<script type="text/javascript" src="../../../../_js/pub.js"></script>
+<link rel="stylesheet" type="text/css" href="/C0-S2-Ply-demo/_css/q.css">
+<script type="text/javascript" src="/C0-S2-Ply-demo/_js/pub.js"></script>
 </head>
 <body>
 <div style="display: none;" id="pres">
@@ -44,20 +44,19 @@ Java中对于标识符的命名规则作了如下限制:
 
 <pre>
 <h3>变量</h3>
-<true w="450px" v="变量是内存(堆栈)中的一块存储区域，是存储数据的基本单元"></true>
-<true w="450px" v="声明变量的语法：数据类型 标识符 [= 值];"></true>
+<judge w="450px" t="变量是内存(堆栈)中的一块存储区域，是存储数据的基本单元"></judge>
 
 判断下列变量定义是否正确
-	<true w="300px" v="int num;"></true>
-	<false w="300px" v="int a + b = 12;"></false>
-	<true w="300px" v="char ch1, ch2 = 'A';"></true>
-	<false w="300px" v="int a > b;"></false>
-	<true w="300px" v="float money = 123.45f;"></true>
+	<judge w="300px" t="int num;"></judge>
+	<judge w="300px" f="int a + b = 12;"></judge>
+	<judge w="300px" t="char ch1, ch2 = 'A';"></judge>
+	<judge w="300px" f="int a > b;"></judge>
+	<judge w="300px" t="float money = 123.45f;"></judge>
 </pre>
 
 <pre>
 <h3>数据类型 1</h3>
-<true w="450px" v="数据类型用来确定要存储在内存单元中的数据的类型"></true>
+<judge w="450px" t="数据类型用来确定要存储在内存单元中的数据的类型"></judge>
 
 在Java中，数据类型被区分成两个种类, 分别是(    )
 	<cbx :v='["原始数据类型","扩展数据类型","引用数据类型","派生数据类型"]' :a=[2,0] s="	"></cbx>
@@ -65,13 +64,13 @@ Java中对于标识符的命名规则作了如下限制:
 
 <pre>
 <h3>数据类型 2</h3>
-<true w="450px" v="原始数据类型是最简单的数据形式，分为 4 类 8 种"></true>
-
+<judge w="450px" t="原始数据类型是最简单的数据形式，分为 4 类 8 种"></judge>
+<judge t="数组可以是一维，也可以是多维" w="400px"></judge>
 Java基本数据类型中, 字符类型是(    )
-	<rdo :v='["byte","short","int","long","float","double","char","boolean"]' :a=[6]></rdo>
+	<cbx :v='["byte","short","int","long","float","double","char","boolean"]' :a=[6]></cbx>
 	
 Java基本数据类型中, 布尔类型是(    )
-	<rdo :v='["byte","short","int","long","float","double","char","boolean"]' :a=[7]></rdo>
+	<cbx :v='["byte","short","int","long","float","double","char","boolean"]' :a=[7]></cbx>
 	
 Java基本数据类型中, 整数类型是(    )
 	<cbx :v='["byte","short","int","long","float","double","char","boolean"]' :a=[0,1,2,3]></cbx>
@@ -99,28 +98,28 @@ Java基本数据类型中, 8个字节的类型是(    )
 <pre>
 <h3>数据类型 3</h3>
 Java基本数据类型中, 取值范围是 -1.7e+308~1.7e+308 的数据类型是(    )
-	<rdo :v='["byte","short","int","long","float","double","char","boolean"]' :a=[5]></rdo>
+	<cbx :v='["byte","short","int","long","float","double","char","boolean"]' :a=[5]></cbx>
 
 Java基本数据类型中, 取值范围是 true/false 的数据类型是(    )
-	<rdo :v='["byte","short","int","long","float","double","char","boolean"]' :a=[7]></rdo>
+	<cbx :v='["byte","short","int","long","float","double","char","boolean"]' :a=[7]></cbx>
 
 Java基本数据类型中, 取值范围是 -2的63次方~2的63次方-1 的数据类型是(    )
-	<rdo :v='["byte","short","int","long","float","double","char","boolean"]' :a=[3]></rdo>
+	<cbx :v='["byte","short","int","long","float","double","char","boolean"]' :a=[3]></cbx>
 
 Java基本数据类型中, 取值范围是 -128~127 的数据类型是(    )
-	<rdo :v='["byte","short","int","long","float","double","char","boolean"]' :a=[0]></rdo>
+	<cbx :v='["byte","short","int","long","float","double","char","boolean"]' :a=[0]></cbx>
 
 Java基本数据类型中, 取值范围是 '\u0000'~'\uFFFF' 对应数字 0-65535 的数据类型是(    )
-	<rdo :v='["byte","short","int","long","float","double","char","boolean"]' :a=[6]></rdo>
+	<cbx :v='["byte","short","int","long","float","double","char","boolean"]' :a=[6]></cbx>
 
 Java基本数据类型中, 取值范围是 -32768~32767 的数据类型是(    )
-	<rdo :v='["byte","short","int","long","float","double","char","boolean"]' :a=[1]></rdo>
+	<cbx :v='["byte","short","int","long","float","double","char","boolean"]' :a=[1]></cbx>
 
 Java基本数据类型中, 取值范围是 -2的31次方~2的31次方-1 的数据类型是(    )
-	<rdo :v='["byte","short","int","long","float","double","char","boolean"]' :a=[2]></rdo>
+	<cbx :v='["byte","short","int","long","float","double","char","boolean"]' :a=[2]></cbx>
 
 Java基本数据类型中, 取值范围是 -3.4e+38~3.4e+38 的数据类型是(    )
-	<rdo :v='["byte","short","int","long","float","double","char","boolean"]' :a=[4]></rdo>
+	<cbx :v='["byte","short","int","long","float","double","char","boolean"]' :a=[4]></cbx>
 </pre>
 
 <!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
@@ -163,5 +162,5 @@ new Vue({el:"#pres"});
 	</fieldset>
 </div>
 </body>
-<script type="text/javascript" src="../../../../_js/q.js"></script>
+<script type="text/javascript" src="/C0-S2-Ply-demo/_js/q.js"></script>
 </html>

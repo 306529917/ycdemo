@@ -13,31 +13,29 @@
 </head>
 <body>
 <div style="display: none;" id="pres">
-<!--
-	<cbx :v="['AAA','BBB','CCC','DDD']" :a="[0,1,2,3]" s="	"></cbx>
-	<ipt a="正确答案" r="正则验证" s="宽度"></ipt>
-	<true v="内容" w="宽度"></true>
-	<false v="内容" w="宽度"></false>
-	<prompt>
-		<li><a href="#">参考	( 必须放在 qlist 前)</a></li>
-	</prompt>
- -->
 <!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
 <pre>
 <h3>数组</h3>
-<true v="数组用于将相同类型的数据存储在连续的存储单元中" w="400px"></true>
-<true v="可以通过指定数组的名称和长度来声明数组" w="400px"></true>
-<true v="一旦声明数组的大小，就不能再修改" w="400px"></true>
-<true v="数组元素通过数组名和索引来访问，索引从0开始" w="400px"></true>
-<true v="数组可以是一维，也可以是多维" w="400px"></true>
+<judge t w="400px">数组用于将相同类型的数据存储在连续的存储单元中</judge>
+<judge t w="400px">可以通过指定数组的名称和长度来声明数组</judge>
+<judge t w="400px">一旦声明数组的大小，就不能再修改</judge>
+<judge t w="400px">数组元素通过数组名和索引来访问，索引从0开始</judge>
+<judge t w="400px">数组可以是一维，也可以是多维</judge>
 </pre>
 
 <pre>
 <h3>new关键字</h3>
-<true v="在Java中，不允许将数组分配在栈内存中，只能分配在堆内存中" w="400px"></true>
-<true v="new是Java中内置的操作符" w="400px"></true>
-<true v="new操作符用来从堆中分配指定类型的内存空间，并返回相应类型的引用" w="400px"></true>
-<true v="首次创建数组时，所有值均初始化为0(int[]或double[])、false(boolean[])、null(引用类型)" w="400px"></true>
+<judge t w="400px">在Java中，不允许将数组分配在栈内存中，只能分配在堆内存中</judge>
+<judge t w="400px">new是Java中内置的操作符</judge>
+<judge t w="400px">new操作符用来从堆中分配指定类型的内存空间，并返回相应类型的引用</judge>
+<judge t w="400px">首次创建数组时，所有值均初始化为0(int[]或double[])、false(boolean[])、null(引用类型)</judge>
+</pre>
+
+<pre>
+<h3>关于数组长度</h3>
+<judge t w="400px">在Java中数组自带的length属性将负责保管数组的长度</judge>
+<judge t w="400px">在Java中如果试图访问不在有效索引以内的元素，将会引发数组越界错误</judge>
+
 </pre>
 <!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
 </div>

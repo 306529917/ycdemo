@@ -9,8 +9,8 @@ function buildParams(obj){
 }
 
 Vue.component('ipt',{
-	props : ["a","r","s"],
-	template : "<input :answer='a' :regex='r' :size='s'>"
+	props : ["a","r","w"],
+	template : `<input :answer='a' :regex='r' :size='w.indexOf("px")>-1?"":w' :style='{width:w.indexOf("px")>-1?w:false}'>`
 });
 
 var rdoNameIndex = 0;
@@ -21,39 +21,26 @@ Vue.component('cbx',{
 		};
 	},
 	props : ["v","a","s"],
-	template : `<span class='releaseInner'>`
+	template : `<span class='releaseInner'><slot></slot>`
 		+`<span class='releaseInner' v-for='(r,i) in v'>`
+		+`<br v-if='s!=undefined'>{{s}}`
 		+`<input :type='a.length==1?"radio":"checkbox"' :name='n' :value='r' :answer='a.includes(i)?r:false'>`
-		+`<br v-if='s!=undefined && i<v.length-1'>{{s}}`
 		+`</span></span>`
 });
 
-Vue.component('true',{
+Vue.component('judge',{
 	data : function(){
 		return {
-			n : "rdo-" + ++rdoNameIndex
+			n : "jdg-" + ++rdoNameIndex
 		};
 	},
-	props : ["v","w"],
-	template : "<span class='releaseInner'>" +
-			"<span class='releaseInner' style='display:inline-block' :style='{width:w,marginRight:w?\"\":\"30px\"}'>{{v}}</span>" +
-			"<input type='radio' :name='n' value='对' answer='对'>" +
-			"<input type='radio' :name='n' value='错'>" +
-			"</span>"
-});
-
-Vue.component('false',{
-	data : function(){
-		return {
-			n : "rdo-" + ++rdoNameIndex
-		};
-	},
-	props : ["v","w"],
-	template : "<span class='releaseInner'>" +
-			"<span class='releaseInner' style='display:inline-block' :style='{width:w,marginRight:w?\"\":\"30px\"}'>{{v}}</span>" +
-			"<input type='radio' :name='n' value='对' >" +
-			"<input type='radio' :name='n' value='错' answer='错'>" +
-			"</span>"
+	props : ["t","f","w"],
+	template : `<span class='releaseInner'>
+			<span class='releaseInner' style='display:inline-block' :style='{width:w,marginRight:w?\"\":\"30px\"}'>
+			<slot>{{t||f}}</slot></span>
+			<input type='radio' :name='n' value='对' :answer='t!=undefined?"对":false'>
+			<input type='radio' :name='n' value='错' :answer='f!=undefined?"错":false'>
+			</span>`
 });
 
 Vue.component('prompt',{
