@@ -11,6 +11,12 @@ function a(){
 }
 function Q(content, expect){
 	this.content = content;
+	/**
+	 * 期望结果, 
+	 * 未定义: 不运行, 仅验证输入,  
+	 * 定义为"": 运行, 仅验证输入
+	 * 定义为非"": 运行, 验证输入 + 验证结果
+	 */ 
 	this.expect = expect;
 	this.result = false;
 	this.resultText = null;
@@ -74,8 +80,10 @@ function Q(content, expect){
 					this.result = this.expect == this.resultText;
 				}
 			} catch (e) {
-				console.error(e);
-				this.result = false;
+				if(this.expect){
+					console.error(e);
+					this.result = false;
+				}
 			}
 		}
 	}
