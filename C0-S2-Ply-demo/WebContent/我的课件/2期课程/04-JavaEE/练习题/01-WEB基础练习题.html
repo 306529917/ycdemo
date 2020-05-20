@@ -53,11 +53,11 @@ b{
 	color:#f0f
 }
 .dui{
-	background: #fff url(images/dui.jpg) no-repeat right center;
+	background: #fff url(_images/dui.jpg) no-repeat right center;
 	color : green;
 }
 .cuo{
-	background: #fff url(images/cuo.jpg) no-repeat right center;
+	background: #fff url(_images/cuo.jpg) no-repeat right center;
 	color : #888;
 }
 </style>
@@ -130,7 +130,7 @@ function Q(content, expect, validate, answer){
 
 <pre expect='  [ "右", "左" ] '>
 /* 
-	<img src="images/csbs.png">
+	<img src="_images/csbs.png">
 	看图说话: 请求图片显示的哪个是C/S架构,哪个是B/S架构
 */
 result=[];
@@ -274,7 +274,7 @@ result; // 输出结果
 
 <pre expect='   [ "http://demo.cn:6666/demo/index.html", "http://demo.cn:6666/demo/page/about.html", "http://demo.cn:6666/demo/img/icon/board.html", "page/about.html", "../index.html", "img/icon/board.html", "../../index.html", "../img/icon/board.html", "../../page/about.html" ] '>
 /* 
-	<img src="images/demopro.png">
+	<img src="_images/demopro.png">
 	看图说话: 有工程截图如上, 请根据要求写出对应的 URL 地址
 	前置条件: 
 		1. 协议 http

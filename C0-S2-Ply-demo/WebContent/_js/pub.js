@@ -34,9 +34,9 @@ Vue.component('judge',{
 			n : "jdg-" + ++rdoNameIndex
 		};
 	},
-	props : ["t","f","w"],
+	props : ["t","f","w"], // w 不写=>无,  写无值=>400
 	template : `<span class='releaseInner qspan'>
-			<span class='releaseInner' style='display:inline-block' :style='{width:w,marginRight:w?\"\":\"30px\"}'>
+			<span class='releaseInner' :style='{display:w==undefined?false:"inline-block",width:w==undefined?false:w?(w+(/^\d+$/.test(w)?"":"px")):"400px"}'>
 			<slot>{{t||f}}</slot></span>
 			<input type='radio' :name='n' value='对' :answer='t!=undefined || t==undefined && f==undefined ?"对":false'>
 			<input type='radio' :name='n' value='错' :answer='f!=undefined?"错":false'>
@@ -65,7 +65,15 @@ Vue.component('prompt',{
 
 Vue.component('pic',{
 	props : [ "s", "w"],
-	template : `
-		<div style="display:inline-block;text-align:center;margin:10px"><img v-if="s" :src="s" :style="{width:w?w:'100px'}"><br><slot></slot></div>
-	`
+	template : `<div style="
+				display:inline-block;
+				text-align:center;
+				margin:10px;
+				border-radius: 5px;
+				border:1px solid #888"
+				:style="{width:w?w.indexOf('px')>0?w:(w+'px'):'150px'}">`
+		+`<a :href="s" class='MagicZoom'>`
+		+`<img :src="s" style="width:100%">`
+		+`</a>`
+		+`<br><slot></slot></div>`
 });

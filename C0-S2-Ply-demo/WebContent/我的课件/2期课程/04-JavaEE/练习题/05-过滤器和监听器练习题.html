@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+<head>
+<base target="_blank">
+<meta charset="UTF-8">
+<meta http-equiv="pragma" content="no-cache"> 
+<meta http-equiv="Cache-Control" content="no-cache, must-revalidate"> 
+<meta http-equiv="expires" content="Wed, 26 Feb 1997 08:21:57 GMT">
+<title>练习题</title>
+<script src="/C0-S2-Ply-demo/_js/vue.min.js"></script>
+<link href="/C0-S2-Ply-demo/_css/magiczoomplus.css" rel="stylesheet" type="text/css" media="screen"/>
+<script src="/C0-S2-Ply-demo/_js/magiczoomplus.js"></script>
+<link rel="stylesheet" type="text/css" href="/C0-S2-Ply-demo/_css/q.css">
+<script type="text/javascript" src="/C0-S2-Ply-demo/_js/pub.js"></script>
+</head>
+<body>
+<div style="display: none;" id="pres">
+<!--
+	<cbx :v="['AAA','BBB','CCC','DDD']" a="0123" s></cbx>
+	<ipt a="正确答案" r="正则验证" w="宽度"></ipt>
+	<judge t|f="内容" w="宽度"></judge>
+	<prompt>
+		<li><a href="#">参考	( 必须放在 qlist 前)</a></li>
+	</prompt>
+ -->
+<!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
+<pre>
+<h3>监听器概述</h3>
+<pic s="_images/监听器1.jpg" class="qImg" w=300></pic>
+<judge w>在servlet中定义了一些事件，我们可以对这些事件编写相应的监听器，对这些事件进行相应的处理</judge>
+
+按监听的对象分，servlet2.4规范定义的事件对象有三种:
+	<cbx :v="['用于监听Cookie对象(Cookie)的事件监听器'
+	,'用于监听请求消息对象(ServletRequest)的事件监听器'
+	,'用于监听用户会话对象(HttpSession)的事件监听器)'
+	,'用于监听应用程序环境对象(ServletContext)的事件监听器']" a="123" s></cbx>
+
+常见的监听事件可以分成两类, 分别是:
+	<cbx :v="['监听对象的键盘事件'
+	,'监听对象的属性变化事件'
+	,'监听对象鼠标操作事件'
+	,'监听对象的生命周期事件']" a="13" s></cbx>
+</pre>
+
+<pre>
+<h3>监听器定义</h3>
+<pic s="_images/监听器.jpg" class="qImg" w=300></pic>
+<judge w>Servlet监听器由一系列接口构成</judge>
+<judge w>Servlet监听器配置注解是 @WebListener</judge>
+<judge w f>@WebListener 需要为其配置 URL 地址</judge>
+<judge w>所有的监听器都会在服务器启动时被创建</judge>
+
+Servlet监听器接口的命名由三部分构成:
+	<cbx :v="['监听对象的类名'
+	,'监听事件名, 如: Attribute, 如果没有这部分表示是监听生命周期事件'
+	,'监听事件对象Event的名称'
+	,'最后是Listener(监听器)']" a="013" s></cbx>
+
+已知系统中分别定义了以下类型的监听器:
+	A. HttpSessionAttributeListener
+	B. ServletContextListener
+	C. ServletRequestAttributeListener
+	D. ServletContextAttributeListener
+	E. HttpSessionListener
+	F. ServletRequestListener
+请问:
+请求对象生命周期监听器是:	<cbx :v="['A','B','C','D','E','F']" a="5"></cbx>
+会话对象生命周期监听器是:	<cbx :v="['A','B','C','D','E','F']" a="4"></cbx>
+应用上下文对象生命周期监听器是:	<cbx :v="['A','B','C','D','E','F']" a="1"></cbx>
+会话对象属性监听器是:	<cbx :v="['A','B','C','D','E','F']" a="0"></cbx>
+请求对象属性监听器是:	<cbx :v="['A','B','C','D','E','F']" a="2"></cbx>
+
+案例:
+	一、在线人数统计
+	二、实现相同用户只能有一个在线
+</pre>
+
+<pre>
+<h3>过滤器简介1</h3>
+<pic s="_images/过滤器.jpg" class="qImg" w=300></pic>
+<judge w>Servlet过滤器是在Java Servlet规范2.3中定义的，它能够对Servlet容器的请求和响应对象进行检查和修改。</judge>
+<judge w>Servlet过滤器本身并不生成请求和响应对象，它只提供过滤作用。</judge>
+<judge w>Servlet过滤器能够在Servlet被调用之前检查Request对象，修改Request Header和Request内容。</judge>
+<judge w>Servlet被调用之后检查Response对象，修改Response Header和Response内容。</judge>
+<judge w>Servlet过滤器负责过滤的Web组件可以是Servlet、JSP、HTML或其他任意的资源文件。</judge>
+</pre>
+
+<pre>
+<h3>过滤器简介2</h3>
+<pic s="_images/过滤器1.jpg" class="qImg" w=300></pic>
+<judge w>过滤器是向 Web 应用程序的请求和响应处理添加功能的, Web 服务组件</judge>
+<judge w f>过滤器没有生命周期的概念, 所以没有生命周期方法</judge>
+<judge w f>过滤器与监听器一样, 不需要配置过滤地址</judge>
+<judge w>Servlet过滤器配置注解是 @WebFilter</judge>
+<judge w f>过滤器的 doFilter 会在请求到达目标资源后执行</judge>
+<judge w f>如果服务器中配置了多个过滤器, 它们的 doFilter 方法会依被次执行</judge>
+<judge w>与 Servlet 不同, 过滤器的地址可以重复, 即允许全局不唯一</judge>
+</pre>
+
+<pre>
+<h3>过滤器配置</h3>
+<pic s="_images/过滤器2.jpg" class="qImg" w=300></pic>
+<judge w>过滤器是向 Web 应用程序的请求和响应处理添加功能的, Web 服务组件</judge>
+<judge w f>过滤器没有生命周期的概念, 所以没有生命周期方法</judge>
+<judge w f>过滤器与监听器一样, 不需要配置过滤地址</judge>
+<judge w>Servlet过滤器配置注解是 @WebFilter</judge>
+<judge w f>过滤器的 doFilter 会在请求到达目标资源后执行</judge>
+<judge w f>如果服务器中配置了多个过滤器, 它们的 doFilter 方法会依被次执行</judge>
+<judge w>与 Servlet 不同, 过滤器的地址可以重复, 即允许全局不唯一</judge>
+</pre>
+<!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
+</div>
+<script type="text/javascript">
+new Vue({el:"#pres"});
+</script>
+<!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
+
+<div id="main">
+	<fieldset class="alist">
+		<legend>答题结果</legend>
+		<div style="display: table;width: 100%">
+			<div style="display: table-cell;vertical-align: middle;">
+				<span class="res" v-for="q,i in questions">
+					题{{i+1}}: <b style="color: red">{{q.result?'对':''}}</b>
+				</span>
+			</div>
+			<div style="display: table-cell; width: 150px; text-align: center;">
+				<button @click="commit" :disabled="finish==false">提交答卷</button>
+			</div>
+		</div>
+	</fieldset>
+	<fieldset>
+		<legend>题目: </legend>
+		<div class="qlist">
+		<dl v-for="q,i in questions">
+			<dt>第{{i+1}}题 <b style="color: red;">{{q.result?'对':''}}</b>
+				<button @click="q.test()" style="float: right">检 查</button><br>
+			</dt>
+			<dd @click="a(q)">
+				<pre v-html="q.content"></pre>
+			</dd>
+			<dd v-if="q.expect">
+				正确的结果: <span>{{q.expect}}</span><br>
+				你写的结果: <span>{{q.resultText}}</span>
+			</dd>
+		</dl>
+		</div>
+	</fieldset>
+</div>
+</body>
+<script type="text/javascript" src="/C0-S2-Ply-demo/_js/q.js"></script>
+</html>
