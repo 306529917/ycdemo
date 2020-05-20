@@ -29,6 +29,9 @@ Java的名字的由来跟哪个咖啡产地有关:
 Java的创始公司是:  
 <cbx :v="['Oracle','Sun','Microsoft','IBM']" :a="[1]"></cbx>
 
+Java现在属于 (     ) 公司是:  
+<cbx :v="['Oracle','HP','Microsoft','IBM']" :a="[0]"></cbx>
+
 Java首个版本发布时间是:  
 <cbx :v="['1991','1994','1995','1996']" :a="[2]"></cbx>
 
@@ -36,70 +39,60 @@ Java最初的命名是:
 <cbx :v="['Java','Oak','Oracle','PB']" :a="[1]"></cbx>
 
 <cbx :v="['A.比尔盖茨','B.马云','C.詹姆斯高斯林','D.布兰登艾特']" :a="[2]">Java的创始人是:  </cbx>
-<show style="margin:10px 35px" v-for="(a,i) in authors" :img="'_images/'+a+'.png'">{{codes.charAt(i)}} . {{a}}</show>
+<pic style="margin:10px 35px" v-for="(a,i) in authors" :s="'_images/'+a+'.png'">{{codes.charAt(i)}} . {{a}}</pic>
 </pre>
 
 <pre>
 <img src="_images/drv.jpg" class="qImg">
 <h3>三个重要概念</h3>
-Java语言内部运行的核心, 说的是 (       ): 
-	<input type="radio" name="9" value="JDK">
-	<input type="radio" name="9" value="JRE">
-	<input type="radio" name="9" value="JVM" answer>
+Java语言内部运行的核心是Java虚拟机, 说的是 (       ): 
+	<cbx :v="['JDK','JRE','JVM']" :a="[2]"></cbx>
 
 包含Java运行的基本类库和开发命令，可以进行完整的Java开发, 说的是 (       ): 
-	<input type="radio" name="3" value="JDK" answer>
-	<input type="radio" name="3" value="JRE">
-	<input type="radio" name="3" value="JVM">
+	<cbx :v="['JDK','JRE','JVM']" :a="[0]"></cbx>
 
 包含Java运行的基本类库和一些运行命令，可以运行编译好的Java程序, 说的是 (       ): 
-	<input type="radio" name="4" value="JDK">
-	<input type="radio" name="4" value="JRE" answer>
-	<input type="radio" name="4" value="JVM">
+	<cbx :v="['JDK','JRE','JVM']" :a="[1]"></cbx>
 </pre>
 
 <pre>
 <img src="_images/sem.jpg" class="qImg">
 <h3>语言的构成</h3>
 请选择: 
-Java的标准版是<input answer="D">
-Java的企业版是<input answer="A">
-Java的微型版是<input answer="B">
-	A. JavaEE      B. JavaME      C. avaUE      D. JavaSE
+Java的标准版是: <cbx :v="['A','B','C','D']" :a="[3]"></cbx>
+Java的企业版是: <cbx :v="['A','B','C','D']" :a="[0]"></cbx>
+Java的微型版是: <cbx :v="['A','B','C','D']" :a="[1]"></cbx>
+
+A. JavaEE      B. JavaME      C. JavaUE      D. JavaSE
+	
 </pre>
 
 <pre>
 <img src="_images/conf.jpg" class="qImg">
 参考资料: <a href="https://jingyan.baidu.com/article/60ccbceb6f392f64cab19735.html?qq-pf-to=pcqq.c2c">Java环境变量设置</a>
 安装Java需要配置的环境变量包括 (       ): 
-	<input type="checkbox" value="java_home" answer>
-	<input type="checkbox" value="javascript">
-	<input type="checkbox" value="classpath" answer>
-	<input type="checkbox" value="path" answer>
+	<cbx :v="['java_home','javascript','classpath','path']" :a="[0,1,3]"></cbx>
 
-配置 Java 安装路径的环境变量是 : <input answer="java_home" regex="/^java_home$/i">
-配置 Java 类路径的环境变量是 : <input answer="classpath" regex="/^classpath$/i">, 该环境变量最简单的配置只要配置一个<input answer=".">号就可以了
-配置 Java 命令文件搜索路径的环境变量是 : <input answer="path" regex="/^path$/i">
+配置 Java 安装路径的环境变量是 : <ipt a="java_home"></ipt>
+配置 Java 类路径的环境变量是 : <ipt a="classpath"></ipt>, 该环境变量最简单的配置只要配置一个<ipt a="."></ipt>号就可以了
+配置 Java 命令文件搜索路径的环境变量是 : <ipt a="path"></ipt>
 </pre>
 
 <pre>
 <img src="_images/01.jpg" class="qImg">
 请问下那个命令是在编译 java 文件(   )
-	<input type="radio" name="01" value="java Hello.java">
-	<input type="radio" name="01" value="javac Hello.java" answer>
-	<input type="radio" name="01" value="javac Hello.class">
-	<input type="radio" name="01" value="javadoc Hello.java">
+	<cbx :v="['java Hello.java','javac Hello.java','javac Hello.class','javadoc Hello.java']" :a="[1]" s></cbx>
 	
 请问下那个命令是在执行 java 文件(   )
-	<input type="radio" name="02" value="java Hello.class">
-	<input type="radio" name="02" value="javadoc Hello">
-	<input type="radio" name="02" value="java Hello" answer>
-	<input type="radio" name="02" value="javac Hello">
+	<cbx :v="['java Hello.java','javac Hello.java','java Hello','javac Hello']" :a="[2]" s></cbx>
 	
-Java 的代码文件的后缀是<input  answer=".java" regex="/^\.?java$/i">
-Java 的源代码在编译后 , 产生的字节码文件的后缀是<input answer=".class" regex="/^\.?class$/i">
-编辑 java 文件的命令名是 : <input  answer="javac" regex="/^javac$/i">
-执行字节码 class 文件的命令名是 : <input  answer="java" regex="/^java$/i">
+请问下那个命令是在导出 java 文件中的文档注释(   )
+	<cbx :v="['java Hello.class','javadoc Hello.java','java Hello','javac Hello']" :a="[1]" s></cbx>
+	
+Java 的代码文件的后缀是<ipt  a=".java" r="/^\.?java$/i"></ipt>
+Java 的源代码在编译后 , 产生的字节码文件的后缀是<ipt  a=".class" r="/^\.?class$/i"></ipt>
+编辑 java 文件的命令名是 : <ipt  a="javac" r="/^javac$/i"></ipt>
+执行字节码 class 文件的命令名是 : <ipt  a="java" r="/^java$/i"></ipt>
 </pre>
 
 <!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->

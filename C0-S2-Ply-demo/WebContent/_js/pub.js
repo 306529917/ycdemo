@@ -10,7 +10,7 @@ function buildParams(obj){
 
 Vue.component('ipt',{
 	props : ["a","r","w"],
-	template : `<span class='releaseInner qspan' ><input :answer='a' :regex='r' :size='w.indexOf("px")>-1?"":w' :style='{width:w.indexOf("px")>-1?w:false}'><span>`
+	template : `<span class='releaseInner qspan'><input :answer='a' :regex='r' :size='w&&w.indexOf("px")>-1?false:w' :style='{width:w&&w.indexOf("px")>-1?w:false}'><span>`
 });
 
 var rdoNameIndex = 0;
@@ -60,5 +60,12 @@ Vue.component('prompt',{
 				<ol><slot></slot></ol>
 			 </div>
 		 </div>
+	`
+});
+
+Vue.component('pic',{
+	props : [ "s", "w"],
+	template : `
+		<div style="display:inline-block;text-align:center;margin:10px"><img v-if="s" :src="s" :style="{width:w?w:'100px'}"><br><slot></slot></div>
 	`
 });
