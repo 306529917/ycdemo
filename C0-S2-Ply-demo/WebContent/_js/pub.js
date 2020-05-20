@@ -10,7 +10,7 @@ function buildParams(obj){
 
 Vue.component('ipt',{
 	props : ["a","r","w"],
-	template : `<input :answer='a' :regex='r' :size='w.indexOf("px")>-1?"":w' :style='{width:w.indexOf("px")>-1?w:false}'>`
+	template : `<span class='releaseInner qspan' ><input :answer='a' :regex='r' :size='w.indexOf("px")>-1?"":w' :style='{width:w.indexOf("px")>-1?w:false}'><span>`
 });
 
 var rdoNameIndex = 0;
@@ -21,7 +21,7 @@ Vue.component('cbx',{
 		};
 	},
 	props : ["v","a","s"],
-	template : `<span class='releaseInner'><slot></slot>`
+	template : `<span class='releaseInner qspan'><slot></slot>`
 		+`<span class='releaseInner' v-for='(r,i) in v'>`
 		+`<input :type='a.length==1?"radio":"checkbox"' :name='n' :value='r' :answer='a.includes(i)?r:false'>`
 		+`<br v-if='s!=undefined && i<v.length-1'>{{s}}`
@@ -35,7 +35,7 @@ Vue.component('judge',{
 		};
 	},
 	props : ["t","f","w"],
-	template : `<span class='releaseInner'>
+	template : `<span class='releaseInner qspan'>
 			<span class='releaseInner' style='display:inline-block' :style='{width:w,marginRight:w?\"\":\"30px\"}'>
 			<slot>{{t||f}}</slot></span>
 			<input type='radio' :name='n' value='对' :answer='t!=undefined?"对":false'>
