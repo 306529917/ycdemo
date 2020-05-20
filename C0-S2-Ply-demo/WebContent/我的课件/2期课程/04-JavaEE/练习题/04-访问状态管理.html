@@ -21,8 +21,8 @@
 	<cbx :v="['HTTP协议是无状态的，不能保存每次提交的信息'
 		,'浏览器需要知道服务器的运行状态'
 		,'如果用户发来一个新的请求，服务器无法知道它是否与上次的请求有联系'
-		,'对于那些需要多次提交数据才能完成的Web操作（登录等），就成问题了']" 
-		:a="[0,2,3]" s="	"></cbx>
+		,'服务器需要知道浏览器的运行状态']" 
+		:a="[0,2]" s="	"></cbx>
 
 状态管理的两种常见模式包括：
 	<cbx :v="['硬盘空间状态管理技术'
@@ -62,15 +62,15 @@ getCookies() 	: <cbx :v="['步骤1','步骤2','步骤3']" :a="[2]"></cbx>
 
 @Override
 protected void doPost(HttpServletRequest req,HttpServletResponse resp) throws ServletException,IOException{
-    第1行:req.setCharacterEncoding("utf-8");
+    第1行: req.setCharacterEncoding("utf-8");
 	// 注意: encode 是对汉字编码, cookie默认不支持非西方文字
-    第2行:Cookie cookie = new Cookie("username", URLEncoder.encode("张三", "utf-8")); 
-    第3行:cookie.setMaxAge(60*60*24);
-    第4行:cookie.setPath("/");
-    第5行:cookie.setHttpOnly(true);
-    第6行:resp.addCookie(cookie);
-    第7行:resp.setContentType("text/html,charset=utf-8");
-    第8行:resp.getWriter().println("Cookie的使用");
+    第2行: Cookie cookie = new Cookie("username", URLEncoder.encode("张三", "utf-8")); 
+    第3行: cookie.setMaxAge(60*60*24);
+    第4行: cookie.setPath("/");
+    第5行: cookie.setHttpOnly(true);
+    第6行: resp.addCookie(cookie);
+    第7行: resp.setContentType("text/html,charset=utf-8");
+    第8行: resp.getWriter().println("Cookie的使用");
 }
 </pre>
 
