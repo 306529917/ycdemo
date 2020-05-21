@@ -21,8 +21,21 @@ Vue.component('cbx',{
 		};
 	},
 	props : ["v","a","s"],
+	methods : {
+		r(arr){
+			/**打乱顺序, 未完待续, 现在的方法会导致答案混乱*/
+			/*console.info("----------------");
+			console.info(arr);
+			arr.sort(function(a,b){
+				let n = Math.random();
+				return  n > 0.5 ? 1 : -1; 
+			});
+			console.info(arr);	*/
+			return arr;
+		}
+	},
 	template : `<span class='releaseInner qspan'><slot></slot>`
-		+`<span class='releaseInner' v-for='(r,i) in v'>`
+		+`<span class='releaseInner' v-for='(r,i) in this.r(v)'>`
 		+`<input :type='a.length==1?"radio":"checkbox"' :id='n+"-"+i' :name='n' :value='r' :answer='Array.isArray(a) && a.includes(i) || a.indexOf((""+i))>-1 ? r : false'>`
 		+`<label :for='n+"-"+i' style='padding-right:22px' class="removeMe">{{r}}</label>`
 		+`<br v-if='s!=undefined && i<v.length-1'>{{s}}`

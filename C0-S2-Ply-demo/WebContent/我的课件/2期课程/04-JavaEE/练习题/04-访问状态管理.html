@@ -126,7 +126,7 @@ session的常见实现形式是cookie（session cookie），即未设置过期�
 </pre>
 
 <pre>
-<h3>Session API</h3>
+<h3>Session API</h3><pic s="_images/会话ID.jpg" class="qImg" w=300></pic>
 Servlet会话对象的类的完全限定名是:
 <cbx :v="['javax.servlet.HttpSession'
 		,'javax.servlet.http.Session'
@@ -135,11 +135,49 @@ Servlet会话对象的类的完全限定名是:
 		,'javax.servlet.HttpServletSession']" 
 		:a="[2]" s=""></cbx>
 
+使session失效:
+<cbx :v="['Object getAttribute(String name)'
+		,'String getId()'
+		,'void setAttribute(String name,Object value)'
+		,'getCreationTime()'
+		,'void invalidate()']" 
+		:a="[4]" s=""></cbx>
 
+获取session的Id值: 
+<cbx :v="['void invalidate()'
+		,'String getId()'
+		,'int setMaxInactiveInterval()'
+		,'void removeAttribute(String name )'
+		,'Object getAttribute(String name)']" 
+		:a="[1]" s=""></cbx>
+
+获取session对象中名为参数name所指明的属性的值:
+<cbx :v="['Object getAttribute(String name)'
+		,'boolean isNew()'
+		,'void setAttribute(String name,Object value)'
+		,'void removeAttribute(String name )'
+		,'void invalidate()']" 
+		:a="[0]" s=""></cbx>
+		
+ 从session中删除名为参数name所指明的属性:
+<cbx :v="['Object getAttribute(String name)'
+		,'String getId()'
+		,'void setAttribute(String name,Object value)'
+		,'void removeAttribute(String name )'
+		,'void invalidate()']" 
+		:a="[3]" s=""></cbx>
+
+向session中存储数据:
+<cbx :v="['Object getAttribute(String name)'
+		,'String getId()'
+		,'void setAttribute(String name,Object value)'
+		,'void removeAttribute(String name )'
+		,'void invalidate()']" 
+		:a="[2]" s=""></cbx>
 </pre>
 
 <pre>
-<h3>WEB服务器组件之王——应用上下文对象</h3>
+<h3>WEB服务器组件之王——应用上下文对象</h3><pic s="_images/作用域.jpg" class="qImg" w=300></pic>
 
 
 </pre>
