@@ -17,26 +17,45 @@ var rdoNameIndex = 0;
 Vue.component('cbx',{
 	data : function(){
 		return {
-			n : "cor-" + ++rdoNameIndex
+			n : "cor-" + ++rdoNameIndex,
+			newa : "",
 		};
 	},
-	props : ["v","a","s"],
+	// v=>value, a=>answer, s=>新行前导, o=>不打乱顺序
+	props : ["v","a","s","o"],
 	methods : {
-		r(arr){
-			/**打乱顺序, 未完待续, 现在的方法会导致答案混乱*/
-			/*console.info("----------------");
-			console.info(arr);
-			arr.sort(function(a,b){
+		rand(v,a,o){
+			// o有值则不打乱
+			if(o!=undefined) return v;
+			/** 打乱顺序 */
+			let answers = [];
+			let astring = Array.isArray(a) ? a.join(",") : a;
+			// 保存正确答案
+			v.forEach((o,i)=>{
+				if(astring.indexOf(i)>-1){
+					answers.push(o);
+				}
+			});
+			// 打乱数组
+			v.sort(function(){
 				let n = Math.random();
 				return  n > 0.5 ? 1 : -1; 
 			});
-			console.info(arr);	*/
-			return arr;
+			astring = "";
+			// 重新构建答案字符串
+			v.forEach((o,i)=>{
+				let pos = answers.indexOf(o);
+				if(pos > -1){
+					astring += i;
+				}
+			});
+			this.newa = astring;
+			return v;
 		}
 	},
-	template : `<span class='releaseInner qspan'><slot></slot>`
-		+`<span class='releaseInner' v-for='(r,i) in this.r(v)'>`
-		+`<input :type='a.length==1?"radio":"checkbox"' :id='n+"-"+i' :name='n' :value='r' :answer='Array.isArray(a) && a.includes(i) || a.indexOf((""+i))>-1 ? r : false'>`
+	template : `<span class='releaseInner qspan' v-if="rand(v,a,o)"><slot></slot>`
+		+`<span class='releaseInner' v-for='(r,i) in v'>`
+		+`<input :type='a.length==1?"radio":"checkbox"' :id='n+"-"+i' :name='n' :value='r' :answer='newa.indexOf(i)>-1 ? r : false'>`
 		+`<label :for='n+"-"+i' style='padding-right:22px' class="removeMe">{{r}}</label>`
 		+`<br v-if='s!=undefined && i<v.length-1'>{{s}}`
 		+`</span></span>`
@@ -48,7 +67,7 @@ Vue.component('judge',{
 			n : "jdg-" + ++rdoNameIndex
 		};
 	},
-	props : ["t","f","w"], // w 不写=>无,  写无值=>400
+	props : ["t","f","w"], // w 不写=>无, 写无值=>400
 	template : `<span class='releaseInner qspan'>`
 			+`<span class='releaseInner' :style='{display:w==undefined?false:"inline-block",width:w==undefined?false:w?(w+(/^\d+$/.test(w)?"":"px")):"400px"}'>`
 			+`<slot>{{t||f}}</slot></span>`
@@ -82,6 +101,7 @@ Vue.component('prompt',{
 Vue.component('pic',{
 	props : [ "s", "w"],
 	template : `<div style="
+				clear:both;
 				display:inline-block;
 				text-align:center;
 				margin:10px;
