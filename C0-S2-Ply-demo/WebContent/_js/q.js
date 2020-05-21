@@ -99,7 +99,9 @@ for(var pre of pres){
 }
 // 移除div, 避免id冲突
 var pres = document.getElementById("pres");
-pres.parentNode.removeChild(pres);
+if(pres){
+	pres.parentNode.removeChild(pres);
+}
 
 function findDD(node){
 	if(node && node.nodeName.toLowerCase() == 'dl'){
