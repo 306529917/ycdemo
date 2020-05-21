@@ -178,8 +178,34 @@ Servlet会话对象的类的完全限定名是:
 
 <pre>
 <h3>WEB服务器组件之王——应用上下文对象</h3><pic s="_images/作用域.jpg" class="qImg" w=300></pic>
-<judge w>application类似于系统的“全局变量”，用于实现用户之间的数据共享</judge>
+<judge w>应用上下文对象的类是 ServletContext, 由于在JSP中它的对象名是application, 因此习惯上称呼它是application</judge>
+<judge w>application 类似于系统的“全局变量”，用于实现用户之间的数据共享</judge>
 
+请问下列哪些对象有获取 ServletContext 对象
+<cbx :v="['Servlet对象'
+		,'请求对象'
+		,'响应对象'
+		,'会话对象']" 
+		a="2" s=""></cbx>
+		
+下列应用上下文对象方法中:
+	A. getInitParameter()
+	B. getAttribute()
+	C. setAttribute()
+	D. getContextPath()
+	E. getRealPath()
+获取属性值的方法是: <cbx :v="['A','B','C','D','E']" a=1></cbx>
+设置属性值的方法是: <cbx :v="['A','B','C','D','E']" a=2></cbx>
+获取初始化参数值的方法是: <cbx :v="['A','B','C','D','E']" a=0></cbx>
+获取指定资源绝对(磁盘)路径的方法是: <cbx :v="['A','B','C','D','E']" a=4></cbx>
+获取应用路径(工程名)的方法是:<cbx :v="['A','B','C','D','E']" a=3></cbx>
+		
+要在两个会话间共享数据, 要用应用上下文对象的 (    ) 方法
+<cbx :v="['getInitParameter()'
+		,'getAttribute()'
+		,'setAttribute()'
+		,'getContextPath()']" 
+		a="21" s=""></cbx>
 </pre>
 
 <!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
@@ -208,7 +234,7 @@ new Vue({el:"#pres"});
 		<prompt>
 			<li><a href="https://segmentfault.com/a/1190000016248401">浏览器cookie详解</a></li>
 			<li><a href="https://blog.csdn.net/qq_30095631/article/details/103795327">java服务端操作cookie</a></li>
-			<li><a href="https://baike.baidu.com/item/HttpSession/3159840?fr=aladdin">HttpSession(常用方法)</a></li>
+			<li><a href="https://www.cnblogs.com/realshijing/p/7878949.html">HttpSession API</a></li>
 			<li><a href="https://blog.csdn.net/qq_37834488/article/details/89422412">Web之状态管理 ( 重点 )</a></li>
 		</prompt>
 		<div class="qlist">
