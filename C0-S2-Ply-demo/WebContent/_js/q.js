@@ -1,10 +1,13 @@
 function a(){
 	if(event.altKey  && event.ctrlKey/* && event.shiftKey */){
 		var e = event.srcElement;
-		var answer = e.getAttribute("answer");
-		if(answer){
-			e.value = answer;
+		if(e.nodeName!='CHECKBOX' && e.nodeName!='RADIO'){
+			var answer = e.getAttribute("answer");
+			if(answer){
+				e.value = answer;
+			}
 		}
+		qs[e.getAttribute("preIndex")].test();
 		event.stopPropagation();
 		return;
 	}
@@ -116,7 +119,7 @@ function insertAfter(targetEl, newEl){
 }
 /******************************** VUE ***********************************/
 
-new Vue({
+var vue = new Vue({
 	el : "#main",
 	data : {
 		questions : qs
@@ -158,34 +161,40 @@ new Vue({
 		}
 	},
 	mounted : function(){
-		document.querySelectorAll("dd pre input").forEach((o,index)=>{
-			o.onclick = a;
-			var answer = o.getAttribute("answer");
-			// 20 是默认值
-			if(o.size == undefined || o.size == 20 && answer){
-				o.size = answer.length * 1.7;
-			}
-			if(o.type=="checkbox" || o.type=="radio"){
-				// 有提供 answer 但是没有值, 则默认赋值 value
-				if(answer=='' && o.value){
-					o.setAttribute("answer", o.value);
+		document.querySelectorAll("dd pre").forEach((pre,pindex)=>{
+			let index = 0;
+			pre.querySelectorAll("input").forEach((ipt,iindex)=>{
+				// 设置后门方法
+				ipt.onclick = a;
+				// 设置题目编号
+				ipt.setAttribute("preIndex",pindex);
+				var answer = ipt.getAttribute("answer");
+				// 20 是默认值
+				if(ipt.size == undefined || ipt.size == 20 && answer){
+					ipt.size = answer.length * 1.7;
 				}
-				// 自动添加 label
-				let ns = o.nextSibling;
-				if(! ns || ns.nodeName != "LABEL" || ! ns.classList.contains("removeMe")){
-					let id = o.id;
-					if(! id){
-						id = "l" + index;
-						o.id = id;
+				if(ipt.type=="checkbox" || ipt.type=="radio"){
+					// 有提供 answer 但是没有值, 则默认赋值 value
+					if(answer=='' && ipt.value){
+						ipt.setAttribute("answer", ipt.value);
 					}
-					let lab = document.createElement("label");
-					lab.classList.add("removeMe");
-					lab.setAttribute("for",id);
-					lab.innerText = o.value;
-					lab.style.paddingRight = "22px";
-					insertAfter(o, lab);
+					// 自动添加 label
+					let ns = ipt.nextSibling;
+					if(! ns || ns.nodeName != "LABEL" || ! ns.classList.contains("removeMe")){
+						let id = ipt.id;
+						if(! id){
+							id = "l" + index++;
+							ipt.id = id;
+						}
+						let lab = document.createElement("label");
+						lab.classList.add("removeMe");
+						lab.setAttribute("for",id);
+						lab.innerText = ipt.value;
+						lab.style.paddingRight = "22px";
+						insertAfter(ipt, lab);
+					}
 				}
-			}
+			});
 		});
 	},
 	computed : {

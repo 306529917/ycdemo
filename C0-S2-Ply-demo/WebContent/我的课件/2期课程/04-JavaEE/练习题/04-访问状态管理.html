@@ -34,8 +34,7 @@
 </pre>
 
 <pre>
-<h3>Cookie</h3>
-<pic s="_images/Cookie实现机制1.jpg" class="qImg" w=300></pic>
+<h3>Cookie</h3><pic s="_images/Cookie实现机制1.jpg" class="qImg" w=300></pic>
 下列关于Cookie 说法错误的有:
 	<cbx :v="['服务器可以发送Cookie值给浏览器'
 		,'浏览器会保存服务器发送给浏览器的Cookie值'
@@ -87,8 +86,7 @@ protected void doPost(HttpServletRequest req,HttpServletResponse resp) throws Se
 </pre>
 
 <pre expect="">
-<h3>Cookie API练习</h3>
-<pic s="_images/不改BUG.jpg" class="qImg" w=300></pic>
+<h3>Cookie API练习</h3><pic s="_images/不改BUG.jpg" class="qImg" w=300></pic>
 在浏览器上操作cookie使用的是 document.<input answer="cookie"> 对象
 	添加一个名称为 name, 值为 john 的 cookie, JS的语法是:
 	document.<input size=40 answer='cookie="name=john"'>;
@@ -115,8 +113,7 @@ protected void doPost(HttpServletRequest req,HttpServletResponse resp) throws Se
 </pre>
 
 <pre>
-<h3>Session 实现机制</h3>
-<pic s="_images/会话实现机制1.jpg" class="qImg" w=300></pic>
+<h3>Session 实现机制</h3><pic s="_images/会话实现机制1.jpg" class="qImg" w=300></pic><pic s="_images/session.png" class="qImg" w=300 style="clear:right"></pic>
 Session用于跟踪<cbx :v="['客户','服务器']" :a='[0]'></cbx>的状态。Session指的是在一段时间内，单个客户与Web服务器的一连串相关的<cbx :v="['资源共享','交互过程']" :a='[1]'></cbx>。
 在一个Session中，客户可能会多次请求访问同一个网页，也有可能请求访问各种不同的服务器资源。
 session被用于表示一个<cbx :v="['间断的','持续的']" :a='[1]'></cbx>的连接状态，在网站访问中一般指代客户端浏览器的进程<cbx :v="['从开启到结束','浏览网页']" :a='[0]'></cbx>的过程。
@@ -126,6 +123,25 @@ session的常见实现形式是cookie（session cookie），即未设置过期�
     如果未包含，则系统会创造一个名为<cbx :v="['COOKIEID','JSESSIONID']" :a='[1]'></cbx>的输出 cookie返回给浏览器(只放入内存，并不存在硬盘中)，并将其以HashTable的形式写到服务器的内存里面；
     当已经包含sessionid时，服务端会检查找到与该session相匹配的信息，如果存在则直接使用该sessionid，若不存在则重新生成<cbx :v="['请求','会话']" :a='[1]'></cbx>。
     这里需要注意的是session始终是由<cbx :v="['服务端创建的','浏览器创建的']" :a='[0]'></cbx>，并非浏览器自己生成的。
+</pre>
+
+<pre>
+<h3>Session API</h3>
+Servlet会话对象的类的完全限定名是:
+<cbx :v="['javax.servlet.HttpSession'
+		,'javax.servlet.http.Session'
+		,'javax.servlet.http.HttpSession'
+		,'javax.servlet.http.HttpServletSession'
+		,'javax.servlet.HttpServletSession']" 
+		:a="[2]" s=""></cbx>
+
+
+</pre>
+
+<pre>
+<h3>WEB服务器组件之王——应用上下文对象</h3>
+
+
 </pre>
 
 <!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
