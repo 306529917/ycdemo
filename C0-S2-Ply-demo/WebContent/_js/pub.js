@@ -23,7 +23,8 @@ Vue.component('cbx',{
 	props : ["v","a","s"],
 	template : `<span class='releaseInner qspan'><slot></slot>`
 		+`<span class='releaseInner' v-for='(r,i) in v'>`
-		+`<input :type='a.length==1?"radio":"checkbox"' :name='n' :value='r' :answer='Array.isArray(a) && a.includes(i) || a.indexOf((""+i))>-1 ? r : false'>`
+		+`<input :type='a.length==1?"radio":"checkbox"' :id='n+"-"+i' :name='n' :value='r' :answer='Array.isArray(a) && a.includes(i) || a.indexOf((""+i))>-1 ? r : false'>`
+		+`<label :for='n+"-"+i' style='padding-right:22px' class="removeMe">{{r}}</label>`
 		+`<br v-if='s!=undefined && i<v.length-1'>{{s}}`
 		+`</span></span>`
 });
@@ -35,12 +36,14 @@ Vue.component('judge',{
 		};
 	},
 	props : ["t","f","w"], // w 不写=>无,  写无值=>400
-	template : `<span class='releaseInner qspan'>
-			<span class='releaseInner' :style='{display:w==undefined?false:"inline-block",width:w==undefined?false:w?(w+(/^\d+$/.test(w)?"":"px")):"400px"}'>
-			<slot>{{t||f}}</slot></span>
-			<input type='radio' :name='n' value='对' :answer='t!=undefined || t==undefined && f==undefined ?"对":false'>
-			<input type='radio' :name='n' value='错' :answer='f!=undefined?"错":false'>
-			</span>`
+	template : `<span class='releaseInner qspan'>`
+			+`<span class='releaseInner' :style='{display:w==undefined?false:"inline-block",width:w==undefined?false:w?(w+(/^\d+$/.test(w)?"":"px")):"400px"}'>`
+			+`<slot>{{t||f}}</slot></span>`
+			+`<input type='radio' :id='n+"-0"' :name='n' value='对' :answer='t!=undefined || t==undefined && f==undefined ?"对":false'>`
+			+`<label :for='n+"-0"' style='padding-right:22px' class="removeMe">对</label>`
+			+`<input type='radio' :id='n+"-1"' :name='n' value='错' :answer='f!=undefined?"错":false'>`
+			+`<label :for='n+"-1"' style='padding-right:22px' class="removeMe">错</label>`
+			+`</span>`
 });
 
 Vue.component('prompt',{

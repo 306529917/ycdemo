@@ -25,8 +25,7 @@
  -->
 <!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
 <pre>
-<h3>监听器概述</h3>
-<pic s="_images/监听器1.jpg" class="qImg" w=300></pic>
+<h3>监听器简介</h3><pic s="_images/监听器1.jpg" class="qImg" w=300></pic>
 <judge w>在servlet中定义了一些事件，我们可以对这些事件编写相应的监听器，对这些事件进行相应的处理</judge>
 
 按监听的对象分，servlet2.4规范定义的事件对象有三种:
@@ -43,8 +42,8 @@
 </pre>
 
 <pre>
-<h3>监听器定义</h3>
-<pic s="_images/监听器.jpg" class="qImg" w=300></pic>
+<h3>监听器接口</h3><pic s="_images/监听器.jpg" class="qImg" w=300></pic>
+<judge w>Servlet监听器用于监听服务器端的特定事件</judge>
 <judge w>Servlet监听器由一系列接口构成</judge>
 <judge w>Servlet监听器配置注解是 @WebListener</judge>
 <judge w f>@WebListener 需要为其配置 URL 地址</judge>
@@ -76,8 +75,7 @@ Servlet监听器接口的命名由三部分构成:
 </pre>
 
 <pre>
-<h3>过滤器简介1</h3>
-<pic s="_images/过滤器.jpg" class="qImg" w=300></pic>
+<h3>过滤器简介1</h3><pic s="_images/过滤器.jpg" class="qImg" w=300></pic>
 <judge w>Servlet过滤器是在Java Servlet规范2.3中定义的，它能够对Servlet容器的请求和响应对象进行检查和修改。</judge>
 <judge w>Servlet过滤器本身并不生成请求和响应对象，它只提供过滤作用。</judge>
 <judge w>Servlet过滤器能够在Servlet被调用之前检查Request对象，修改Request Header和Request内容。</judge>
@@ -86,27 +84,47 @@ Servlet监听器接口的命名由三部分构成:
 </pre>
 
 <pre>
-<h3>过滤器简介2</h3>
-<pic s="_images/过滤器1.jpg" class="qImg" w=300></pic>
+<h3>过滤器简介2</h3><pic s="_images/过滤器1.jpg" class="qImg" w=300></pic>
 <judge w>过滤器是向 Web 应用程序的请求和响应处理添加功能的, Web 服务组件</judge>
 <judge w f>过滤器没有生命周期的概念, 所以没有生命周期方法</judge>
 <judge w f>过滤器与监听器一样, 不需要配置过滤地址</judge>
 <judge w>Servlet过滤器配置注解是 @WebFilter</judge>
 <judge w f>过滤器的 doFilter 会在请求到达目标资源后执行</judge>
 <judge w f>如果服务器中配置了多个过滤器, 它们的 doFilter 方法会依被次执行</judge>
-<judge w>与 Servlet 不同, 过滤器的地址可以重复, 即允许全局不唯一</judge>
+<judge w>与 Servlet 不同, 过滤器的URL地址可以重复, 即允许全局不唯一</judge>
+<judge w f>与 Servlet 一样, 过滤器也是在第一次接收到请求时才被创建出来的</judge>
 </pre>
 
 <pre>
-<h3>过滤器配置</h3>
-<pic s="_images/过滤器2.jpg" class="qImg" w=300></pic>
-<judge w>过滤器是向 Web 应用程序的请求和响应处理添加功能的, Web 服务组件</judge>
-<judge w f>过滤器没有生命周期的概念, 所以没有生命周期方法</judge>
-<judge w f>过滤器与监听器一样, 不需要配置过滤地址</judge>
-<judge w>Servlet过滤器配置注解是 @WebFilter</judge>
-<judge w f>过滤器的 doFilter 会在请求到达目标资源后执行</judge>
-<judge w f>如果服务器中配置了多个过滤器, 它们的 doFilter 方法会依被次执行</judge>
-<judge w>与 Servlet 不同, 过滤器的地址可以重复, 即允许全局不唯一</judge>
+<h3>过滤器配置</h3><pic s="_images/过滤器2.jpg" class="qImg" w=300></pic>
+Filter 的地址配置规则与 Servlet 的地址配置规则一致, 有以下几种方式:
+<cbx :v="['全路径匹配：请求访问的url的地址必须与URL配置的内容完全一致'
+	,'路径匹配：前半段完全匹配，后半段存在*（*是通配符可以代表任何字符串）'
+	,'扩展名匹配: URL配置的内容是*.jsp、*.html、*.do这种类型的'
+	,'路径匹配 + 扩展名匹配: URL配置的内容是/a/*.jsp, /a/b/*.html 这种类型的']" a="012" s></cbx>
+
+下面关于 Filter 的地址配置中, 格式错误是:
+<cbx :v="['/page/a.jsp','/page','*.jsp','/page/*.jsp']" a="3"></cbx>
+</pre>
+
+<pre>
+<h3>过滤器配置</h3><pic s="_images/过滤器2.jpg" class="qImg" w=300></pic>
+下面关于 Filter 接口的完全限定名是:
+<cbx :v="['java.servlet.Filter','javax.servlet.Filter','javax.io.Filter','javax.servlet.WebFilter']" a="1" s></cbx>
+
+Filter 接口包含以下方法:
+<cbx :v="['destroy()','init()','service()','doFilter()']" a="013"></cbx>
+
+Filter 接口方法中无方法参数的方法是:
+<cbx :v="['init()','filter','destroy()','doFilter()']" a="2"></cbx>
+	
+Filter 接口方法中只会被服务器执行一次的方法是:
+<cbx :v="['init()','filter','destroy()','doFilter()']" a="02"></cbx>
+
+Filter 接口的 doFilter 方法的参数类型包括:
+<cbx :v="['FilterChain','ServletRequest','ServletResponse','HttpSession']" a="012"></cbx>
+	
+<judge w>Filter 的 doFilter() 在正常情况下要确保方法最后必须执行 chain.doFilter(request,response) 方法。</judge>
 </pre>
 <!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
 </div>

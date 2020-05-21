@@ -89,11 +89,15 @@ function Q(content, expect){
 	}
 }
 
-var pres = document.querySelectorAll("div>pre");
+var pres = document.querySelectorAll("#pres>pre");
 var qs = [];
 for(var pre of pres){
 	qs.push(new Q(pre.innerHTML,pre.getAttribute("expect")));
 }
+// 移除div, 避免id冲突
+var pres = document.getElementById("pres");
+pres.parentNode.removeChild(pres);
+
 function findDD(node){
 	if(node && node.nodeName.toLowerCase() == 'dl'){
 		return node;
@@ -168,7 +172,7 @@ new Vue({
 				}
 				// 自动添加 label
 				let ns = o.nextSibling;
-				if(! ns || ns.type != "label" || ! ns.classList.contains("removeMe")){
+				if(! ns || ns.nodeName != "LABEL" || ! ns.classList.contains("removeMe")){
 					let id = o.id;
 					if(! id){
 						id = "l" + index;
@@ -178,8 +182,8 @@ new Vue({
 					lab.classList.add("removeMe");
 					lab.setAttribute("for",id);
 					lab.innerText = o.value;
+					lab.style.paddingRight = "22px";
 					insertAfter(o, lab);
-					lab.style.width = lab.offsetWidth + 22 + "px";
 				}
 			}
 		});
