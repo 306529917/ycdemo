@@ -26,7 +26,10 @@ Vue.component('cbx',{
 	methods : {
 		rand(v,a,o){
 			// o有值则不打乱
-			if(o!=undefined) return v;
+			if(o!=undefined) {
+				this.newa = a;
+				return v;
+			}
 			/** 打乱顺序 */
 			let answers = [];
 			let astring = Array.isArray(a) ? a.join(",") : a;
