@@ -108,6 +108,13 @@
 <pre>
 <h3>包装器类</h3><pic v-for="f of []" :s="'_images/'+f" class=qImg w=500></pic>
 <h4>java包装类的缓存机制</h4>
+<judge w>java 包装类的缓存机制，是在Java 5中引入的一个有助于节省内存、提高性能的功能，只有在自动装箱时有效</judge>
+<judge w>使用自动装箱将基本类型转为封装类对象这个过程其实底层实现是调用封装类的valueOf方法</judge>
+<judge w>整数类型缓存默认范围为：-128到127之间，范围的最大值可以通过java.lang.Integer.IntegerCache.high设置，通过for循环将范围内的数据实例化为Integer对象放到cache数组里</judge>
+<judge w>Character的缓存范围在0 ~ 127之间</judge>
+<judge w>Boolean不需要缓存</judge>
+<judge w>Float 和 Double没有使用缓存，直接new的对象</judge>
+
 <h4>xxxValue, parseXXX, valueOf 的区别</h4>
 </pre>
 
