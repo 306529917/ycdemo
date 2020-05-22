@@ -112,7 +112,7 @@ Vue.component('pic',{
 				border:1px solid #888"
 				:style="{width:w?w.indexOf('px')>0?w:(w+'px'):'150px'}">`
 		+`<a :href="s" class='MagicZoom'>`
-		+`<img :src="s" style="width:100%">`
+		+`<img :src="s" style="background-color:#fff">`
 		+`</a>`
 		+`<br><slot></slot></div>`
 });
