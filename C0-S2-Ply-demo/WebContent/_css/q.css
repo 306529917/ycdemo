@@ -125,9 +125,11 @@ label:hover {
 /* vue 组件根元素*/
 .qspan{
 	display: inline-block;
-	border: 1px outset rgba(0,0,0,0);
+	border: 1px solid #ccc;
 	padding: 2px;
-	border-radius: 5px
+	border-radius: 5px;
+	background-color:#ddd;
+	margin: 1px
 }
 .qspan:hover{
 	border: 1px outset #999;

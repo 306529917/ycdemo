@@ -10,7 +10,7 @@ function buildParams(obj){
 
 Vue.component('ipt',{
 	props : ["a","r","w"],
-	template : `<span class='releaseInner qspan'><input :answer='a' :regex='r' :size='w&&w.indexOf("px")>-1?false:w' :style='{width:w&&w.indexOf("px")>-1?w:false}'><span>`
+	template : `<span class='releaseMe qspan'><input :answer='a' :regex='r' :size='w&&w.indexOf("px")>-1?false:w' :style='{width:w&&w.indexOf("px")>-1?w:false}'><span>`
 });
 
 var rdoNameIndex = 0;
@@ -56,8 +56,8 @@ Vue.component('cbx',{
 			return v;
 		}
 	},
-	template : `<span class='releaseInner qspan' v-if="rand(v,a,o)"><slot></slot>`
-		+`<span class='releaseInner' v-for='(r,i) in v'>`
+	template : `<span class='releaseMe qspan' v-if="rand(v,a,o)"><slot></slot>`
+		+`<span class='releaseMe' v-for='(r,i) in v'>`
 		+`<input :type='a.length==1?"radio":"checkbox"' :id='n+"-"+i' :name='n' :value='r' :answer='newa.indexOf(i)>-1 ? r : false'>`
 		+`<label :for='n+"-"+i' style='padding-right:22px' class="removeMe">{{r}}</label>`
 		+`<br v-if='s!=undefined && i<v.length-1'>{{s}}`
@@ -71,8 +71,8 @@ Vue.component('judge',{
 		};
 	},
 	props : ["t","f","w"], // w 不写=>无, 写无值=>400
-	template : `<span class='releaseInner qspan'>`
-			+`<span class='releaseInner' :style='{display:w==undefined?false:"inline-block",width:w==undefined?false:w?(w+(/^\d+$/.test(w)?"":"px")):"400px"}'>`
+	template : `<span class='releaseMe qspan'>`
+			+`<span class='releaseMe' :style='{display:w==undefined?false:"inline-block",width:w==undefined?false:w?(w+(/^\d+$/.test(w)?"":"px")):"400px"}'>`
 			+`<slot>{{t||f}}</slot></span>`
 			+`<input type='radio' :id='n+"-0"' :name='n' value='对' :answer='t!=undefined || t==undefined && f==undefined ?"对":false'>`
 			+`<label :for='n+"-0"' style='padding-right:22px' class="removeMe">对</label>`
