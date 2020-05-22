@@ -63,7 +63,7 @@
 </pre>
 
 <pre>
-<h3>浮点型数据的运算</h3><pic v-for="f of ['浮点数.jpg','类型提升.jpg']" :s="'_images/'+f" class=qImg w=500></pic>
+<h3>浮点型数据的运算</h3><pic v-for="f of ['浮点数.jpg']" :s="'_images/'+f" class=qImg w=500></pic>
 <h4>精度问题</h4><judge w>在计算机中,浮点数虽然表示的范围很大，但是浮点数有个非常重要的特点，就是浮点数常常无法精确表示</judge>
      double x=1.0 / 10;
      double y=1-9.0 / 10;
@@ -81,18 +81,34 @@
 	} else {
 		System.out.println("false");
 	}
-	
+</pre>
+
+<pre>
+<h3>运算过程中的数据类型</h3><pic v-for="f of ['类型提升.jpg']" :s="'_images/'+f" class=qImg w=500></pic>
 <h4>类型提升</h4><judge w>如果参与计算的两个数其中一个是整型，那么整型可以自动提升到浮点型</judge>
 <judge w>在一个复杂的四则运算中，两个整数的运算不会出现自动提升的情况</judge>
 
-<h4>byte加byte的结果为什么是int?</h4>
-byte a=1;
-byte b=2;
-a = a + b;//编译错误，byte+byte的结果不是byte类型，提示需要强制转换int.
-a = (byte)(a + b);
-
+<h4>byte加byte的结果为什么是int?</h4>	byte a=1;
+	byte b=2;
+	a = a + b;//编译错误，byte+byte的结果不是byte类型，提示需要强制转换int.
+	a = (byte)(a + b);
 原因 : 千言万语浓缩成一句话 —— 运算指令数量有限! 您老人家讲究着用吧! <a href="https://blog.csdn.net/ejiao1233/article/details/82292348">欲知详情点这里</a>
 
+<!-- <h4>包装器类</h4><judge w>所有的基本类型都有一个与之对应的类，这些类称为包装器类。</judge>
+<judge w>对象包装器类是不可改变的，即一旦构造类包装器类，就不允许更改包装在其中的值。</judge>
+<judge w>同时，对象包装器类还是final，因此不能定义它们的子类。</judge>
+
+下列关于自动拆箱／装箱正确的是:
+<cbx :v='["自动装箱可以直接将基本类型数据赋值给其对应的包装器类型"
+	,"自动装箱一定要类型严格匹配，包装器类型没有基本类型从小到大的转换"
+	,"在赋值的地方，都可以发生自动拆箱与装箱"
+	,"拆箱／装箱是在JDK1.7才开始支持"]' a=012 s></cbx> -->
+</pre>
+
+<pre>
+<h3>包装器类</h3><pic v-for="f of []" :s="'_images/'+f" class=qImg w=500></pic>
+<h4>java包装类的缓存机制</h4>
+<h4>xxxValue, parseXXX, valueOf 的区别</h4>
 </pre>
 
 <!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
@@ -125,6 +141,7 @@ new Vue({el:"#pres"});
 			<li><a href="https://www.cnblogs.com/minseo/p/11738475.html">Java之浮点数运算</a></li>
 			<li><a href="https://blog.csdn.net/DeMonliuhui/article/details/84585945">Java 浮点数运算不准确的原因及解决方案</a></li>
 			<li><a href="https://blog.csdn.net/ejiao1233/article/details/82292348">byte加byte的结果为什么是int？</a></li>
+			<li><a href="https://www.cnblogs.com/myseries/p/12076828.html">java包装类的缓存机制</a></li>
 		</prompt>
 		<div class="qlist">
 		<dl v-for="q,i in questions">
