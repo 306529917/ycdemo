@@ -74,10 +74,10 @@ Vue.component('judge',{
 	template : `<span class='releaseMe qspan'>`
 			+`<span class='releaseMe' :style='{display:w==undefined?false:"inline-block",width:w==undefined?false:w?(w+(/^\d+$/.test(w)?"":"px")):"400px"}'>`
 			+`<slot>{{t||f}}</slot></span>`
-			+`<input type='radio' :id='n+"-0"' :name='n' value='对' :answer='t!=undefined || t==undefined && f==undefined ?"对":false'>`
-			+`<label :for='n+"-0"' style='padding-right:22px' class="removeMe">对</label>`
-			+`<input type='radio' :id='n+"-1"' :name='n' value='错' :answer='f!=undefined?"错":false'>`
-			+`<label :for='n+"-1"' style='padding-right:22px' class="removeMe">错</label>`
+			+`<input type='radio' :id='n+"-0"' :name='n' value='是' :answer='t!=undefined || t==undefined && f==undefined ?"是":false'>`
+			+`<label :for='n+"-0"' style='padding-right:22px' class="removeMe">是</label>`
+			+`<input type='radio' :id='n+"-1"' :name='n' value='否' :answer='f!=undefined?"否":false'>`
+			+`<label :for='n+"-1"' style='padding-right:22px' class="removeMe">否</label>`
 			+`</span>`
 });
 

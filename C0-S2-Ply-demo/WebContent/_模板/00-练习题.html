@@ -25,8 +25,8 @@
 	</prompt>
  -->
 <!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
-<pre>
-<h3>练习题正在火速赶来!</h3><pic v-for="f of []" :s="'_images/'+f" class=qImg w=400></pic>
+<pre><pic v-for="f of ['','','','','']"  v-if="f" :s="'_images/'+f" class=qImg w=400></pic>
+<h3>练习题正在火速赶来!</h3>
 是不是已经迫不及待了? <cbx :v="['是','否']" :a='[0]'></cbx>
 
 <img src="/C0-S2-Ply-demo/_images/face/我要学习.jpg">
