@@ -10,7 +10,7 @@ function buildParams(obj){
 
 Vue.component('ipt',{
 	props : ["a","r","w"],
-	template : `<span class='releaseMe qspan'><input :answer='a' :regex='r' :size='w&&w.indexOf("px")>-1?false:w' :style='{width:w&&w.indexOf("px")>-1?w:false}'><span>`
+	template : `<span class='releaseMe qspan'><input :answer='a' :regex='r' style="text-align:center" :size='w&&w.indexOf("px")>-1?false:w' :style='{width:w&&w.indexOf("px")>-1?w:false}'><span>`
 });
 
 var rdoNameIndex = 0;
