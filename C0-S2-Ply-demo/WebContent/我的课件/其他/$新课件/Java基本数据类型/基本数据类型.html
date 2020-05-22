@@ -32,8 +32,20 @@
 <cbx :v="['扩展数据类型'
 	,'原始数据类型'
 	,'引用数据类型'
-	,'媒体数据类型']" a=12 o></cbx>
+	,'媒体数据类型']" a=12></cbx>
+</pre>
 
+<pre>
+<h3>boolean类型</h3><pic s="_images/boolean.jpg" class=qImg w=500>基本数据类型</pic>
+<judge w>一个boolean类型的变量用来表示一个或真或假的关系</judge>
+<judge w>一个 boolean类型变量的值必须是true或false二者之一 </judge>
+
+下列哪些是不合法的boolean类型变量的定义：
+<cbx :v='["boolean a = true;"
+	,"boolean a = false;"
+	,"boolean a = ture;"
+	,"boolean a = \"false\";"
+	,"boolean a = 真;"]' a=234 s></cbx>
 </pre>
 <!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
 </div>
@@ -58,6 +70,10 @@ new Vue({el:"#pres"});
 	</fieldset>
 	<fieldset>
 		<legend>题目: </legend>
+		<prompt>
+			<li><a href="https://blog.csdn.net/justloveyou_/article/details/52651211">Java 原生类型与包装器类型深度剖析</a></li>
+			<li><a href="https://www.sohu.com/a/342131560_453160">终于有人把“Java的浮点数”讲得明明白白了</a></li>
+		</prompt>
 		<div class="qlist">
 		<dl v-for="q,i in questions">
 			<dt>第{{i+1}}题 <b style="color: red;">{{q.result?'对':''}}</b>
