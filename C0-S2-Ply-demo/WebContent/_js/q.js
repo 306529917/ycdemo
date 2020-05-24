@@ -119,12 +119,47 @@ function insertAfter(targetEl, newEl){
 		parentEl.insertBefore(newEl,targetEl.nextSibling);
 	}            
 }
+
+/**
+ * 添加时钟
+ */
+var btnSmt = document.querySelector(".alist>div>div:nth-child(2)>button");
+if(btnSmt){
+	let span = document.createElement("div");
+	span.innerText = "{{showTime}}";
+	span.style.position = "fixed"; 
+	span.style.top="0px";
+	span.style.right="57px";
+	span.style.fontWeight="bold";
+	span.style.zIndex="1000";
+	span.setAttribute(":style","{color:colors[time%2],fontSize:sizes[time%2]}");
+	
+	btnSmt.parentNode.insertBefore(span,btnSmt);
+}
+function fmtTime(time, mask){
+	let ret = mask + time;
+	return ret.substring(ret.length - mask.length);
+}
+
 /******************************** VUE ***********************************/
 
 var vue = new Vue({
 	el : "#main",
 	data : {
-		questions : qs
+		colors : ["#A5A552","#FF8000"],
+		sizes : ["1.2em","1.5em"],
+		questions : qs,
+		time: 10800,
+		showTime : "03:00:00"
+	},
+	created : function(){
+		let i = setInterval(function(){
+			if(vue.$data.time > 0){
+				vue.$data.time -= 1;
+			} else {
+				clearInterval(i);
+			}
+		},1000);
 	},
 	methods : {
 		a(q){
@@ -201,9 +236,18 @@ var vue = new Vue({
 	},
 	computed : {
 		finish(){
-			return this.questions.every(q=>{
+			return this.time > 0 && this.questions.every(q=>{
 				return q.result;
 			});
+		}
+	},
+	watch : {
+		time(val){
+			let second = val % 60;
+			let minute = parseInt( val / 60 );
+			let hours = parseInt( minute / 60 );
+			minute = minute % 60;
+			this.showTime = fmtTime(hours,"00") + ":" + fmtTime(minute,"00") + ":" + fmtTime(second,"00");
 		}
 	}
 });
