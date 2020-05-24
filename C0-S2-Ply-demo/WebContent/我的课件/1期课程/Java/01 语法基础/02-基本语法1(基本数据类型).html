@@ -20,17 +20,12 @@
 变量、函数、数组、对象、类和接口等等都需要命名，这些名称统称为标识符
 Java中对于标识符的命名规则作了如下限制:
 
-	只能由英文字母、数字、下划线“_”和“$”符号组成
-		<input type="checkbox" name=1 value="字母" answer><input type="checkbox" name=1 value="$" answer><input type="checkbox" name=1 value="#"><input type="checkbox" name=1 value="数字" answer><input type="checkbox" name=1 value="_" answer>
+	只能由 (   ) 组成
+	<cbx :v="['英文字母','数字','下划线“_”','“$”','“#”']" a=0123></cbx>
 		
-	必须以英文字母、“_”或“$”开头，即不能以数字开头
-		<input type="radio" name=2 value="对" answer><input type="radio" name=2 value="错">
-		
-	不能与关键字冲突:
-		<input type="radio" name=3 value="对" answer><input type="radio" name=3 value="错">
-		
-	不区分大小写:
-		<input type="radio" name=4 value="对"><input type="radio" name=4 value="错" answer>
+	<judge w>不能与关键字冲突:</judge>
+	
+	<judge w f>不区分大小写:</judge>
 </pre>
 
 <pre>
@@ -60,12 +55,12 @@ Java中对于标识符的命名规则作了如下限制:
 
 在Java中，数据类型被区分成两个种类, 分别是(    )
 	<cbx :v='["原始数据类型","扩展数据类型","引用数据类型","派生数据类型"]' :a=[2,0] s=""></cbx>
+	
+<judge w="450px" t="原始数据类型是最简单的数据形式，分为 4 类 8 种"></judge>
 </pre>
 
 <pre>
 <h3>数据类型 2</h3>
-<judge w="450px" t="原始数据类型是最简单的数据形式，分为 4 类 8 种"></judge>
-
 Java基本数据类型中, 字符类型是(    )
 	<cbx :v='["byte","short","int","long","float","double","char","boolean"]' :a=[6]></cbx>
 	
@@ -74,35 +69,45 @@ Java基本数据类型中, 布尔类型是(    )
 	
 Java基本数据类型中, 整数类型是(    )
 	<cbx :v='["byte","short","int","long","float","double","char","boolean"]' :a=[0,1,2,3]></cbx>
-	
+</pre>
+
+<h3>数据类型 3</h3>
 Java基本数据类型中, 浮点数类型是(    )
 	<cbx :v='["byte","short","int","long","float","double","char","boolean"]' :a=[4,5]></cbx>
 	
 Java基本数据类型中, 属于数字类型是(    )
 	<cbx :v='["byte","short","int","long","float","double","char","boolean"]' :a=[0,1,2,3,4,5]></cbx>
 	
-Java基本数据类型中, 1个字节的类型是(    )
-	<cbx :v='["byte","short","int","long","float","double","char","boolean"]' :a=[0,7]></cbx>
-	
-Java基本数据类型中, 2个字节的类型是(    )
-	<cbx :v='["byte","short","int","long","float","double","char","boolean"]' :a=[1,6]></cbx>
-	
-Java基本数据类型中, 4个字节的类型是(    )
-	<cbx :v='["byte","short","int","long","float","double","char","boolean"]' :a=[2,4]></cbx>
-	
-Java基本数据类型中, 8个字节的类型是(    )
-	<cbx :v='["byte","short","int","long","float","double","char","boolean"]' :a=[3,5]></cbx>
+Java基本数据类型中, 字符类型是(    )
+	<cbx :v='["byte","short","int","long","float","double","char","boolean"]' :a=[6]></cbx>
+</pre>
 
+<h3>数据类型 4</h3>
+Java基本数据类型中, 布尔类型是(    )
+	<cbx :v='["byte","short","int","long","float","double","char","boolean"]' :a=[7]></cbx>
+	
+Java基本数据类型中, 整数类型是(    )
+	<cbx :v='["byte","short","int","long","float","double","char","boolean"]' :a=[0,1,2,3]></cbx>
+	
+Java基本数据类型中, 浮点数类型是(    )
+	<cbx :v='["byte","short","int","long","float","double","char","boolean"]' :a=[4,5]></cbx>
 </pre>
 
 <pre>
-<h3>数据类型 3</h3>
+<h3>数据类型 5</h3>
+Java基本数据类型中, 属于数字类型是(    )
+	<cbx :v='["byte","short","int","long","float","double","char","boolean"]' :a=[0,1,2,3,4,5]></cbx>
+
 Java基本数据类型中, 取值范围是 -1.7e+308~1.7e+308 的数据类型是(    )
 	<cbx :v='["byte","short","int","long","float","double","char","boolean"]' :a=[5]></cbx>
 
 Java基本数据类型中, 取值范围是 true/false 的数据类型是(    )
 	<cbx :v='["byte","short","int","long","float","double","char","boolean"]' :a=[7]></cbx>
 
+</pre>
+
+<pre>
+<h3>数据类型 6</h3>
 Java基本数据类型中, 取值范围是 -2的63次方~2的63次方-1 的数据类型是(    )
 	<cbx :v='["byte","short","int","long","float","double","char","boolean"]' :a=[3]></cbx>
 
@@ -112,6 +117,10 @@ Java基本数据类型中, 取值范围是 -128~127 的数据类型是(    )
 Java基本数据类型中, 取值范围是 '\u0000'~'\uFFFF' 对应数字 0-65535 的数据类型是(    )
 	<cbx :v='["byte","short","int","long","float","double","char","boolean"]' :a=[6]></cbx>
 
+</pre>
+
+<pre>
+<h3>数据类型 7</h3>
 Java基本数据类型中, 取值范围是 -32768~32767 的数据类型是(    )
 	<cbx :v='["byte","short","int","long","float","double","char","boolean"]' :a=[1]></cbx>
 
