@@ -67,12 +67,30 @@ Vue.component('cbx',{
 Vue.component('judge',{
 	data : function(){
 		return {
-			n : "jdg-" + ++rdoNameIndex
+			n : "jdg-" + ++rdoNameIndex,
+			neww : "400px"
 		};
 	},
+	methods : {
+		set(w){
+			if(w == undefined){
+				this.neww = false;
+			} else {
+				w = w.replace(/\s/g, "");
+				if(w>""){
+					if (w.indexOf("px")>0){
+						this.neww = w;
+					} else {
+						this.neww = w + "px";
+					}
+				}
+			}
+			return true;
+		}
+	},
 	props : ["t","f","w"], // w 不写=>无, 写无值=>400
-	template : `<span class='releaseMe qspan'>`
-			+`<span class='releaseMe' :style='{display:w==undefined?false:"inline-block",width:w==undefined?false:w?(w+(/^\d+$/.test(w)?"":"px")):"400px"}'>`
+	template : `<span class='releaseMe qspan' v-if="set(w)">`
+			+`<span class='releaseMe' :style='{display:w==undefined?false:"inline-block",width:neww}'>`
 			+`<slot>{{t||f}}</slot></span>`
 			+`<input type='radio' :id='n+"-0"' :name='n' value='是' :answer='t!=undefined || t==undefined && f==undefined ?"是":false'>`
 			+`<label :for='n+"-0"' style='padding-right:22px' class="removeMe">是</label>`
