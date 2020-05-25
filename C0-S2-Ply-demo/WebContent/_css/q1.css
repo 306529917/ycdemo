@@ -1,0 +1,136 @@
+@charset "UTF-8";
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+body {
+	padding: 10px
+}
+
+.res {
+	display: inline-block;
+	margin: 0px 5px;
+	width: 60px;
+	height: 20px;
+	line-height: 20px;
+}
+
+textarea, input {
+	color: blue;
+	font-size: 1.1em;
+	font-weight: bold;
+	margin: 2px;
+	padding: 0px 20px 0px 2px;
+	background-color: #fef
+}
+
+.qlist dl {
+	padding: 5px;
+	border: 1px solid #ccc;
+	background: #eee;
+	border-radius: 5px;
+}
+
+.qlist dl dt {
+	padding: 5px 20px;
+	font-weight: bold;
+	vertical-align: middle;
+	line-height: 38px
+}
+
+.qlist dl:hover {
+	border-color: blue;
+}
+
+.qlist {
+	overflow: auto;
+}
+
+.qlist>dl>dd>pre,.qlist>dl>dd>div {
+	vertical-align: middle;
+	font-family: 微软雅黑;
+	overflow: auto;
+	padding-right: 20px;
+	line-height: 1.5em;
+	white-space: pre-wrap; /* css3.0 */
+	white-space: -moz-pre-wrap; /* Firefox */
+	white-space: -pre-wrap; /* Opera 4-6 */
+	white-space: -o-pre-wrap; /* Opera 7 */
+	word-wrap: break-word; /* Internet Explorer 5.5+ */
+}
+
+button {
+	font-size: 1.1em;
+	padding: 5px 20px;
+}
+
+b {
+	color: #f0f
+}
+
+.dui {
+	background: url(/C0-S2-Ply-demo/_images/dui.jpg) no-repeat right center;
+	background-color: #fef;
+	color: green;
+}
+
+.cuo {
+	background: url(/C0-S2-Ply-demo/_images/cuo.jpg) no-repeat right center;
+	background-color: #fef;
+	color: #888;
+}
+
+pre h1, pre h2, pre h3, pre h4, pre h5, pre h6 {
+	margin: 0px
+}
+/*题目内部的表格*/
+pre table {
+	width: 100%;
+}
+
+/*题目列表前面的div, 放提示信息, 参考链接*/
+#qlistpre div {
+	display: table-cell;
+	padding-right: 50px
+}
+
+/*单选框,复选框后面的文字*/
+label {
+	border: 1px solid rgba(0, 0, 0, 0);
+	display: inline-block;
+	padding-left: 3px;
+	margin: 0px 10px 0px 0px;
+	border: 1px #aaa dashed;
+	background-color: #fef;
+	border-radius: 3px
+}
+
+label:hover {
+	border: 1px #777 solid;
+	background-color: #80ff80
+}
+
+/* 题目里面的图片 */
+.qImg {
+	float: right;
+	margin: 0px 0px 5px 5px;
+	max-width: 400px
+}
+
+/* vue 组件根元素*/
+.qspan{
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	background-color:#ddd;
+	padding:2px 5px;
+	margin:3px;
+	float: left;
+}
+.qspan:hover{
+	border: 1px outset #999;
+}
