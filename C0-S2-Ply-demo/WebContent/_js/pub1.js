@@ -65,12 +65,16 @@ Vue.component('c',{
 			// v不提供, 则为判断题
 			if( ! v){
 				this.isJuage = true;
-				// 教学模式不生成控件
-				if(!isTeach){
+				let isError = a && a.indexOf("2")>-1;
+				if(! isTeach){
 					this.values[0] = {value:"是"};
 					this.values[1] = {value:"否"};
-					let tIndex = ( a && a.indexOf("2")>-1 ) ? 1 : 0;
+					let tIndex = isError ? 1 : 0;
 					this.values[tIndex].isTrue = true;
+				} 
+				if( isTeach && isError){
+					// 教学模式不生错误的判断题
+					return false;
 				}
 			} else {
 				let tCount = 0;
