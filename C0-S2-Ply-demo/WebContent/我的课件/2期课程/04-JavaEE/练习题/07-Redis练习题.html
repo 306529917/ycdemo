@@ -3,9 +3,9 @@
 <head>
 <base target="_blank">
 <meta charset="UTF-8">
-<meta http-equiv="pragma" content="no-cache"> 
-<meta http-equiv="Cache-Control" content="no-cache, must-revalidate"> 
-<meta http-equiv="expires" content="Wed, 26 Feb 1997 08:21:57 GMT">
+<meta http-equit="pragma" content="no-cache"> 
+<meta http-equit="Cache-Control" content="no-cache, must-revalidate"> 
+<meta http-equit="expires" content="Wed, 26 Feb 1997 08:21:57 GMT">
 <title>练习题</title>
 <script src="/C0-S2-Ply-demo/_js/vue.min.js"></script>
 <script type="text/javascript" src="/C0-S2-Ply-demo/_js/axios.min.js"></script>
@@ -24,11 +24,102 @@
  -->
 <!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
 <div>
-<h3>Redis简介!</h3>
-	<c>REmote DIctionary Server(Redis) 是一个由Salvatore Sanfilippo写的key-value存储系统</c>
-	<c v="lists, sets, ordered sets , hashes ，strings" a=12345>Redis提供了一些丰富的数据结构，包括:</c>
-	<c v="数据结构丰富  , 支持持久化  , 支持简单事务 , 主从配置方便 ， 支持关系型数据" a=1234>Redis支持丰富操作, 包括:</c>
+<h3>Redis简介</h3>
+	<c t="REmote DIctionary Server(Redis) 是完全开源{[免费][收费]}的，遵守BSD协议，是一个高性能的key-value数据库"></c>
+	<c t="Redis提供了一些丰富的数据结构，包括:" s>
+		Sorted Set: 有序集合 | Set: 集合 | List: 列表 | Hash: 散列 | String: 字符串
+	</c>
+	<c t="Redis支持丰富操作, {[][但不]}包括:" s>
+		Redis支持数据的持久化，可以将内存中的数据保存在磁盘中，重启后再次加载进行使用  
+	   	Redis不仅支持key-value类型的数据，还提供list，set，zset，hash等数据结构的存储
+	   	Redis支持数据的备份，即master-slave模式的数据备份
+	   	 !支持关系型数据</c>
 </div>
+
+<div>
+<h3>Redis安装与配置</h3>
+	<c t="Redis服务器的启动命令{[][不]}包括: " s>
+		redis-server.exe redis.windows.conf|
+		redis-server.exe|
+		!redis-cli.exe -h 127.0.0.1 -p 6379|
+		!redis-cli.exe|</c>
+	<c t="Redis客户端的启动命令{[][不]}包括: "	s>
+		!redis-server.exe redis.windows.conf|
+		!redis-server.exe|
+		redis-cli.exe -h 127.0.0.1 -p 6379|
+		redis-cli.exe|</c>
+	<c t="Redis 获取配置参数的命令格式{[][错误的]}是:   " s>CONFIG GET 配置项  | ! CONFIG GET 配置项 配置值|  !CONFIG SET 配置项| !CONFIG SET 配置项 配置值</c>
+	<c t="Redis 设置配置参数的命令格式{[][错误的]}是: " s> !CONFIG GET 配置项  | ! CONFIG GET 配置项 配置值|  !CONFIG SET 配置项| CONFIG SET 配置项 配置值 </c>
+	<c t="Redis 的配置文件位于 Redis 安装目录下，文件名{[][错误的]}是:"s> !redis.ini|!redis.windows.ini|!redis-server.exe|redis.conf|redis.windows.conf|</c>
+	<c t="指定 Redis 监听端口，默认端口为 6379, {[][不是该]}配置项的是: "s>port |!bind |!databases |!save |!timeout |</c>
+	<c t="绑定的主机地址, {[][不是该]}配置项的是:"s>!port |bind |!databases |!save |!timeout | </c>
+	<c t="当客户端闲置多长秒后关闭连接，如果指定为 0 ，表示关闭该功能, {[][不是该]}配置项的是: "s>!port |!bind |!databases |!save |timeout |</c>
+	<c t="设置数据库的数量，默认数据库为0, {[][不是该]}配置项的是: "s>!port |!bind |databases |!save |!timeout |</c>
+	<c t="指定在多长时间内，有多少次更新操作，就将数据同步到数据文件, {[][不是该]}配置项的是: "s>!port |!bind |!databases |save |!timeout |</c>
+	<pic s="01-Redis目录.png | 01-服务器运行界面.png | 01-客户端操作界面.jpg" prefix="_images/redis/"></pic>
+</div>
+
+<div>
+<h3>Redis数据类型</h3>
+	<c t="最基本的类型, 一个 key 对应一个 value, {[][错误的]}是: " s>  ! hash（哈希）|	! list（列表）|	! set（集合）|   string（字符串）|  !  zset(sorted set：有序集合)</c>
+	<c t="键值(key=>value)对集合, {[][错误的]}是: " s>   hash（哈希）|	! list（列表）|	! set（集合）|   !string（字符串）|  !  zset(sorted set：有序集合)</c>
+	<c t=" 简单的字符串列表，按照插入顺序排序, {[][错误的]}是: " s> ! hash（哈希）|	list（列表）|	! set（集合）|   !string（字符串）|  !  zset(sorted set：有序集合)</c>
+	<c t=" string 类型的无序集合, {[][错误的]}是:  " s>! hash（哈希）|	! list（列表）|	 set（集合）|   !string（字符串）|  !  zset(sorted set：有序集合)</c>
+	<c t="也是string类型元素的集合,且不允许重复的成员。不同的是每个元素都会关联一个double类型的分数。redis正是通过分数来为集合中的成员进行从小到大的排序, {[][错误的]}是: " s> ! hash（哈希）|	! list（列表）|	! set（集合）|   !string（字符串）|   zset(sorted set：有序集合)</c>
+</div>
+
+<div>
+<h3>Key命令</h3>
+	<c t="DEL key {[是][不能]}: " s>
+		用于在 key 存在时删除 key。
+		! 检查给定 key 是否存在。
+		! 为给定 key 设置过期时间，以秒计。
+		! 查找所有符合给定模式( pattern)的 key 。
+		! 从当前数据库中随机返回一个 key 。
+		! 修改 key 的名称
+	</c>
+	<c t="EXISTS key {[是][不能]}: " s>
+		! 用于在 key 存在时删除 key。
+		检查给定 key 是否存在。
+		! 为给定 key 设置过期时间，以秒计。
+		! 查找所有符合给定模式( pattern)的 key 。
+		! 从当前数据库中随机返回一个 key 。
+		! 修改 key 的名称
+	</c>
+	<c t="EXPIRE key seconds {[是][不能]}: " s>
+		!用于在 key 存在时删除 key。
+		! 检查给定 key 是否存在。
+		 为给定 key 设置过期时间，以秒计。
+		! 查找所有符合给定模式( pattern)的 key 。
+		! 从当前数据库中随机返回一个 key 。
+		! 修改 key 的名称
+	</c>
+	<c t="KEYS pattern {[是][不能]}: " s>
+		! 用于在 key 存在时删除 key。
+		! 检查给定 key 是否存在。
+		! 为给定 key 设置过期时间，以秒计。
+		 查找所有符合给定模式( pattern)的 key 。
+		! 从当前数据库中随机返回一个 key 。
+		! 修改 key 的名称
+	</c>
+	<c t="RANDOMKEY {[是][不能]}: " s>
+		! 用于在 key 存在时删除 key。
+		! 检查给定 key 是否存在。
+		! 为给定 key 设置过期时间，以秒计。
+		! 查找所有符合给定模式( pattern)的 key 。
+		 从当前数据库中随机返回一个 key 。
+		! 修改 key 的名称
+	</c>
+	<c t="RENAME key newkey {[是][不能]}: " s>
+		! 用于在 key 存在时删除 key。
+		! 检查给定 key 是否存在。
+		! 为给定 key 设置过期时间，以秒计。
+		! 查找所有符合给定模式( pattern)的 key 。
+		! 从当前数据库中随机返回一个 key 。
+		修改 key 的名称
+	</c>
+</div>
+
 <!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
 </div>
 <script type="text/javascript">
@@ -53,7 +144,10 @@ new Vue({el:"#pres"});
 	<fieldset>
 		<legend>题目: </legend>
 		<prompt>
-			<li><a href="https://www.cnblogs.com/liu-bear/p/10782244.html">redis的优缺点</a></li>
+			<li><a href="https://www.runoob.com/redis/redis-tutorial.html">Redis 教程</a></li>
+			<li><a href="https://www.cnblogs.com/liu-bear/p/10782244.html">Redis 的优缺点</a></li>
+			<li><a href="http://try.redis.io/">Redis 在线测试</a></li>
+			<li><a href="http://doc.redisfans.com/">Redis 命令参考</a></li>
 		</prompt>
 		<div class="qlist">
 		<dl v-for="q,i in questions">

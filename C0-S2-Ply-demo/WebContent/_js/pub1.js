@@ -13,13 +13,14 @@ Vue.component('ipt',{
 	template : `<span class='releaseMe qspan'><input :answer='a' :regex='r' style="text-align:center" :size='w&&w.indexOf("px")>-1?false:w' :style='{width:w&&w.indexOf("px")>-1?w:false}'><span>`
 });
 
+// 拆解数组 + 去首尾空格
 function toArray(obj,spacer){
 	if(obj){
 		if(Array.isArray(obj)){
 			return obj;
 		} else {
 			obj += "";
-			spacer = spacer ? spacer : "[;,，；、]+";
+			spacer = spacer ? spacer : "[\\|\\n]+";
 			let ret = obj.split(new RegExp(spacer,"g"));
 			ret.forEach((r,i)=>{
 				ret[i] = r.replace(/(^\s+|\s+$)/g, "");
@@ -31,85 +32,116 @@ function toArray(obj,spacer){
 	}
 }
 
+//拆解正确和错误的题目
+function getTF(text){
+	var reg = /^(.+)\{\[(.*)\]\[(.*)\]\}(.+)$/;
+	if(reg.test(text)){
+		let arr = reg.exec(text);
+		return [ arr[1] + arr[2] + arr[4] , arr[1] + arr[3] + arr[4]];
+	} else {
+		return [text];
+	}
+}
+
 var isTeach = location.hash == "#teach";
 var	sn = "ABCDEFGHIJK";
 var cNameIndex=0;
+var falseAnswerReg = /^\s*[!！]\s*(.+)$/; 
+
 chtml = `<span class='releaseMe' v-for='(r,i) in values'>{{s}}`
-	+`<input v-if="!isTeach" :type='type' :id='name+"-"+i' :name='name' :value='r.value' :answer='r.isTrue?r.value:false'>`
+	+`<input v-if="type" :type='type' :id='name+"-"+i' :name='name' :value='r.value' :answer='r.isTrue?r.value:false'>`
 	+`<label :for='name+"-"+i' style='padding-right:22px' class="removeMe">{{values.length>2?sn[i]+". ":""}}{{r.value}}</label>`
-	+`<br v-if='s!=undefined && i<v.length-1'>`
+	+`<br v-if='s!=undefined && i<values.length-1'>`
 	+`</span></td></tr>`;
 Vue.component('c',{
 	data : function(){
 		return {
 			name : "c-" + ++cNameIndex,
-			type : "radio",
+			type : null,
 			values : [],
-			isJuage : false,
+			isJudge : false,
 			slotText : null
 		};
 	},
 	// v=>value, a=>answer 从1开始计数, s=>答案换行新行前导, spacer=>答案分隔符
-	props : ["v","a","s","w","spacer","noteach"],
+	props : ["t","s","w","spacer","noteach"],
 	methods : {
-		init(v,a,s,w,spacer,noteach){
+		init(t,a,s,w,spacer,noteach){
+			// 非教学题
 			if(noteach != undefined){
 				return false;
 			}
+
 			// 获取slot的值, 去掉首位空格
-			let st = this.$slots.default[0].text;
-			st = st.replace(/(^\s+|\s+$)/g,"");
-			this.slotText = st;
-			// 默认正确答案是第一个选项
-			a = a || "1";
-			// v不提供, 则为判断题
-			if( ! v){
-				this.isJuage = true;
-				let isError = a && a.indexOf("2")>-1;
-				if(! isTeach){
-					this.values[0] = {value:"是"};
-					this.values[1] = {value:"否"};
-					let tIndex = isError ? 1 : 0;
-					this.values[tIndex].isTrue = true;
-				} 
-				if( isTeach && isError){
-					// 教学模式不生错误的判断题
-					return false;
-				}
+			let v = this.$slots.default ? this.$slots.default[0].text : null;
+
+			let values = null;
+			if(!v){
+				this.isJudge = true;
+				values = [{value:"是",isTrue:true},{value:"否",isTrue:false}];
 			} else {
-				let tCount = 0;
+				v = v.replace(/(^\s+|\s+$)/g,"");
+				values = [];
 				v = toArray(v,spacer);
-				let values = [];
 				v.forEach((val,i)=>{
 					if(val){
+						let isTrue = true;
+						//判断是否是错误答案 值前面有 ! 号
+						if(falseAnswerReg.test(val)){
+							val = falseAnswerReg.exec(val)[1];
+							isTrue = false;
+						}
 						let vobj = {};
 						vobj.value = val;
-						vobj.isTrue = a.indexOf(i+1) > -1;
-						tCount += vobj.isTrue ? 1 : 0;
+						vobj.isTrue = isTrue;
 						// 教学模式不添加错误答案
 						if(vobj.isTrue || ! isTeach){
 							values.push(vobj);
 						}
 					}
 				});
-				this.type = tCount == 1 ? "radio" : "checkbox";
 				// 教学模式不生成控件, 不排序
 				if(!isTeach){
 					values.sort((a,b)=>{
 						return Math.random() > 0.5 ? 1 : -1; 
 					});
 				}
-				this.values = values;
 			}
+			
+			// 拆解正确和错误的题目
+			let textTF = getTF(t);
+			if(isTeach){
+				// 教育模式, 一律使用真题
+				this.slotText = textTF[0];
+			} else {
+				// 非教育模式, 随机选择真假题
+				let tCount = 0;
+				let isFalse = textTF.length == 1 ? false : (Math.random() > 0.5);
+				this.slotText = isFalse ? textTF[1] : textTF[0];
+				values.forEach(o=>{
+					if(isFalse){
+						o.isTrue = !o.isTrue;
+					}
+					tCount += o.isTrue ? 1 : 0;
+				});
+				// 没有正确答案, 这题取消, 例如:某多选题真题全对, 假题就没有正确答案
+				if(tCount == 0){
+					return false;
+				}
+				this.type = tCount > 1 ? "checkbox" : "radio";
+			}
+			
+			this.values = values;
+			
 			return true;
 		}
 	},
-	template : `<table class='releaseMe qspan' v-if="init(v,a,s,w,spacer,noteach)" :style="{width:w?w:'100%'}">`
-		+`<tr v-if="isJuage"><td>{{slotText}}</td>`
-		+`<td style="width:150px;text-align:center">`
+	template : `<table class='releaseMe qspan' v-if="init(t,s,w,spacer,noteach)" :style="{width:w?w:'100%'}">`
+		+`<tr v-if="isJudge"><td>{{slotText}}</td>`
+		+`<td v-if="!(isJudge && isTeach)" style="width:150px;text-align:center">`
 		+ chtml
-		+`<tr v-if="!isJuage"><td>{{slotText}}</td></tr>`
-		+`<tr v-if="!isJuage"><td>`
+		+`<tr v-if="!isJudge"><td>{{slotText}}</td></tr>`
+		+`<tr v-if="!isJudge"><td>`
 		+ chtml
 		+`</table>`
 })

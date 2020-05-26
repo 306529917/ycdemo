@@ -198,6 +198,15 @@ var vue = new Vue({
 		}
 	},
 	mounted : function(){
+		// 切换教学和练习模式
+		var leg = document.querySelector(".alist>legend");
+		leg.onclick = function(){
+			if(event.altKey  && event.ctrlKey/* && event.shiftKey */){
+				location.href = isTeach ? "#":"#teach";
+				location.reload();
+			}
+		}
+		
 		document.querySelectorAll("dd pre").forEach((pre,pindex)=>{
 			let index = 0;
 			pre.querySelectorAll("input").forEach((ipt,iindex)=>{
