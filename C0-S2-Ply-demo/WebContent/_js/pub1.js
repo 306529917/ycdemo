@@ -53,8 +53,8 @@ var falseAnswerReg = /^\s*[！!]\s*(.+)$/;
 
 chtml = `<span class='releaseMe' v-for='(r,i) in values'>`
 	+`<input v-if="type" :type='type' :id='name+"-"+i' :name='name' :value='r.value' :answer='r.isTrue?r.value:false'>`
-	+`<label :for='name+"-"+i' style='padding-right:22px' class="removeMe">{{values.length>2?sn[i]+". ":""}}{{r.value}}</label>`
-	+`<br v-if='isJudge == false && i<values.length-1'>`
+	+`<label :for='name+"-"+i' :style='{paddingRight:"22px"}' class="removeMe">{{values.length>2?sn[i]+". ":""}}{{r.value}}</label>`
+	+`<br v-if='(inline === false || inline === undefined ) && i<values.length-1'>`
 	+`</span></td></tr>`;
 Vue.component('c',{
 	data : function(){
@@ -63,28 +63,29 @@ Vue.component('c',{
 			type : null,
 			values : [],
 			isJudge : false,
-			slotText : null
+			slotText : null,
 		};
 	},
-	// spacer=>答案分隔符
-	props : ["w","spacer","noteach"],
+	// spacer:答案分隔符  noteach:非教学  inline:答案在一行中  isteach:教学案例, 错误答案不隐藏, 与noteach互斥
+	props : ["w","spacer","noteach","inline","isteach"],
 	methods : {
-		init(w,spacer,noteach){
-			// 非教学题
-			if(noteach != undefined){
+		init(){
+			// 非教学题   isTeach 全局变量
+			if(isTeach && this.noteach != undefined){
 				return false;
 			}
 
 			// 获取slot的值, 去掉首位空格
 			let v = this.$slots.default[0].text;
 			v = v.replace(/(^\s+|\s+$)/g,"");
-			v = toArray(v,spacer);
+			v = toArray(v,this.spacer);
 			// 内容的第一行就是题目
 			let title = v.shift();
 
 			let values = null;
 			if(v.length==0){
 				this.isJudge = true;
+				this.inline = true;
 				values = [{value:"是",isTrue:true},{value:"否",isTrue:false}];
 			} else {
 				values = [];
@@ -100,7 +101,7 @@ Vue.component('c',{
 						vobj.value = val;
 						vobj.isTrue = isTrue;
 						// 教学模式不添加错误答案
-						if(vobj.isTrue || ! isTeach){
+						if(vobj.isTrue || this.isteach != undefined || ! isTeach){
 							values.push(vobj);
 						}
 					}
@@ -120,30 +121,35 @@ Vue.component('c',{
 				this.slotText = textTF[0];
 			} else {
 				// 非教育模式, 随机选择真假题
-				let tCount = 0;
 				let isFalse = textTF.length == 1 ? false : (Math.random() > 0.5);
 				this.slotText = isFalse ? textTF[1] : textTF[0];
 				values.forEach(o=>{
 					if(isFalse){
 						o.isTrue = !o.isTrue;
 					}
-					tCount += o.isTrue ? 1 : 0;
 				});
-				// 没有正确答案, 这题取消, 例如:某多选题真题全对, 假题就没有正确答案
-				if(tCount == 0){
-					return false;
-				}
-				this.type = tCount > 1 ? "checkbox" : "radio";
 			}
 			
+			let tCount = 0;
+			values.forEach(o=>{
+				tCount += o.isTrue ? 1 : 0;
+			});
+			// 没有正确答案, 这题取消, 例如:某多选题真题全对, 假题就没有正确答案
+			if(tCount == 0){
+				return false;
+			}
+			// 教学用题 和 非教育模式, 要正常显示 选择框
+			if(this.isteach != undefined || ! isTeach) {
+				this.type = tCount > 1 ? "checkbox" : "radio";
+			}
 			this.values = values;
 			
 			return true;
 		}
 	},
-	template : `<table class='releaseMe qspan' v-if="init(w,spacer,noteach)" :style="{width:w?w:'100%'}">`
+	template : `<table class='releaseMe qspan' v-if="init()" :style="{width:w?w:'100%'}">`
 		+`<tr v-if="isJudge"><td>{{slotText}}</td>`
-		+`<td v-if="!(isJudge && isTeach)" style="width:150px;text-align:center">`
+		+`<td v-if="!(isJudge && isTeach) || isteach != undefined" style="width:150px;text-align:center">`
 		+ chtml
 		+`<tr v-if="!isJudge"><td>{{slotText}}</td></tr>`
 		+`<tr v-if="!isJudge"><td>`
