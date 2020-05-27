@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+<head>
+<base target="_blank">
+<meta charset="UTF-8">
+<meta http-equit="pragma" content="no-cache"> 
+<meta http-equit="Cache-Control" content="no-cache, must-revalidate"> 
+<meta http-equit="expires" content="Wed, 26 Feb 1997 08:21:57 GMT">
+<title>练习题</title>
+<script src="/C0-S2-Ply-demo/_js/vue.min.js"></script>
+<script type="text/javascript" src="/C0-S2-Ply-demo/_js/axios.min.js"></script>
+<link href="/C0-S2-Ply-demo/_css/magiczoomplus.css" rel="stylesheet" type="text/css" media="screen"/>
+<script src="/C0-S2-Ply-demo/_js/magiczoomplus.js"></script>
+<link rel="stylesheet" type="text/css" href="/C0-S2-Ply-demo/_css/q1.css">
+<script type="text/javascript" src="/C0-S2-Ply-demo/_js/pub1.js"></script>
+</head>
+<body>
+<div style="display: none;" id="pres">
+<!--
+	<ipt a="正确答案" r="正则验证" w="宽度"></ipt>
+	<prompt>
+		<li><a href="#">参考	( 必须放在 qlist 前)</a></li>
+	</prompt>
+ -->
+<!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
+<div>
+<h3>列表(List)</h3>
+	<c>
+		{[][下列不是]}将一个或多个值插入到列表头部的是:
+		LPUSH key value1 [value2] |!RPUSH key value1 [value2]   |!LPOP key |!LLEN key  |!LSET key index value 
+	</c>
+	<c>
+		{[][下列不是]}在列表中添加一个或多个值的是:
+		!LPUSH key value1 [value2] |RPUSH key value1 [value2]   |!LPOP key |!LLEN key  |!LSET key index value 
+	</c>
+	<c>
+		{[][下列不是]}移出并获取列表的第一个元素的是:
+		!LPUSH key value1 [value2] |!RPUSH key value1 [value2]   |LPOP key |!LLEN key  |!LSET key index value 
+	</c>
+	<c>
+		{[][下列不是]}获取列表长度的是:
+		!LPUSH key value1 [value2] |!RPUSH key value1 [value2]   |!LPOP key |LLEN key  |!LSET key index value 
+	</c>
+	<c>
+		{[][下列不是]}通过索引设置列表元素的值的是:
+		!LPUSH key value1 [value2] |!RPUSH key value1 [value2]   |!LPOP key |!LLEN key  |LSET key index value 
+	</c>
+</div>
+
+<div>
+<h3>集合(Set)</h3>
+	<c>Redis 的 Set 集合是 String 类型的{[无序][有序]}集合</c>
+	<c>Redis 的 Set 集合成员是唯一的，这就意味着集合中{[不能][允许]}出现重复的数据</c>
+	<c>Redis 的 Set 集合是通过哈希表实现的，所以添加，删除，查找的复杂度都是 O(1)</c>
+	<c>
+		{[][下列不是]}获取集合的成员数的是:
+		SCARD key |!SISMEMBER key member  |!SDIFF key1 [key2] |!SINTERSTORE destination key1 [key2]   |!SMOVE source destination member 
+	</c>
+	<c>
+		{[][下列不是]}判断 member 元素是否是集合 key 的成员的是:
+		!SCARD key |SISMEMBER key member  |!SDIFF key1 [key2] |!SINTERSTORE destination key1 [key2]   |!SMOVE source destination member 
+	</c>
+	<c>
+		{[][下列不是]}返回给定所有集合的差集的是:
+		!SCARD key |!SISMEMBER key member  |SDIFF key1 [key2] |!SINTERSTORE destination key1 [key2]   |!SMOVE source destination member 
+	</c>
+	<c>
+		{[][下列不是]}返回给定所有集合的交集并存储在 destination 中的是:
+		!SCARD key |!SISMEMBER key member  |!SDIFF key1 [key2] |SINTERSTORE destination key1 [key2]   |!SMOVE source destination member 
+	</c>
+	<c>
+		{[][下列不是]}将 member 元素从 source 集合移动到 destination 集合的是:
+		!SCARD key |!SISMEMBER key member  |!SDIFF key1 [key2] |!SINTERSTORE destination key1 [key2]   |SMOVE source destination member 
+	</c>
+</div>
+
+<div>
+<h3>有序集合(sorted set)</h3>
+	<c>Redis 有序集合和集合一样也是string类型元素的集合,且  {[ 不  ][   ]}   允许重复的成员</c>
+	<c>Redis 有序集合的每个元素都会关联一个  {[ double  ][ integer  ]}   类型的分数。redis正是通过分数来为集合中的成员进行从小到大的排序。</c>
+	<c>有序集合的成员是唯一的, {[ 但分数(score)却可以重复  ][ 分数(score)同样也不能重复  ]} 。</c>
+	<c>
+		{[][下列不是]}向有序集合添加一个或多个成员，或者更新已存在成员的分数的是:
+		ZADD key score1 member1 [score2 member2] |
+		!ZCOUNT key min max   |
+		!ZRANK key member  |
+		!ZSCORE key member |
+		!ZREM key member [member ...]  
+	</c>
+	<c>
+		{[][下列不是]}计算在有序集合中指定区间分数的成员数的是:
+		!ZADD key score1 member1 [score2 member2] |
+		ZCOUNT key min max   |
+		!ZRANK key member  |
+		!ZSCORE key member |
+		!ZREM key member [member ...]  
+	</c>
+	<c>
+		{[][下列不是]}返回有序集合中指定成员的索引的是:
+		!ZADD key score1 member1 [score2 member2] |
+		!ZCOUNT key min max   |
+		ZRANK key member  |
+		!ZSCORE key member |
+		!ZREM key member [member ...]  
+	</c>
+	<c>
+		{[][下列不是]}返回有序集中，成员的分数值的是:
+		!ZADD key score1 member1 [score2 member2] |
+		!ZCOUNT key min max   |
+		!ZRANK key member  |
+		ZSCORE key member |
+		!ZREM key member [member ...]  
+	</c>
+	<c>
+		{[][下列不是]}移除有序集合中的一个或多个成员的是:
+		!ZADD key score1 member1 [score2 member2] |
+		!ZCOUNT key min max   |
+		!ZRANK key member  |
+		!ZSCORE key member |
+		ZREM key member [member ...]  
+	</c>
+</div>
+<!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
+</div>
+<script type="text/javascript">
+new Vue({el:"#pres"});
+</script>
+<!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
+
+<div id="main">
+	<fieldset class="alist">
+		<legend>答题结果</legend>
+		<div style="display: table;width: 100%">
+			<div style="display: table-cell;vertical-align: middle;">
+				<span class="res" v-for="q,i in questions">
+					题{{i+1}}: <b style="color: red">{{q.result?'对':''}}</b>
+				</span>
+			</div>
+			<div style="display: table-cell; width: 150px; text-align: center;">
+				<button @click="commit" :disabled="finish==false">提交答卷</button>
+			</div>
+		</div>
+	</fieldset>
+	<fieldset>
+		<legend>题目: </legend>
+		<prompt>
+			<li><a href="https://www.runoob.com/redis/redis-tutorial.html">Redis 教程</a></li>
+			<li><a href="https://www.cnblogs.com/liu-bear/p/10782244.html">Redis 的优缺点</a></li>
+			<li><a href="http://try.redis.io/">Redis 在线测试</a></li>
+			<li><a href="http://doc.redisfans.com/">Redis 命令参考</a></li>
+		</prompt>
+		<div class="qlist">
+		<dl v-for="q,i in questions">
+			<dt>第{{i+1}}题 <b style="color: red;">{{q.result?'对':''}}</b>
+				<button @click="q.test()" style="float: right">检 查</button><br>
+			</dt>
+			<dd @click="a(q)">
+				<pre v-html="q.content"></pre>
+			</dd>
+			<dd v-if="q.expect">
+				正确的结果: <span>{{q.expect}}</span><br>
+				你写的结果: <span>{{q.resultText}}</span>
+			</dd>
+		</dl>
+		</div>
+	</fieldset>
+</div>
+</body>
+<script type="text/javascript" src="/C0-S2-Ply-demo/_js/q1.js"></script>
+</html>

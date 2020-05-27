@@ -34,7 +34,7 @@ function toArray(obj,spacer){
 
 //拆解正确和错误的题目
 function getTF(text){
-	var reg = /^(.+)\{\[(.*)\]\[(.*)\]\}(.+)$/;
+	var reg = /^(.*)\{\[(.*)\]\[(.*)\]\}(.*)$/;
 	if(reg.test(text)){
 		let arr = reg.exec(text);
 		return [ arr[1] + arr[2] + arr[4] , arr[1] + arr[3] + arr[4]];
@@ -46,12 +46,12 @@ function getTF(text){
 var isTeach = location.hash == "#teach";
 var	sn = "ABCDEFGHIJK";
 var cNameIndex=0;
-var falseAnswerReg = /^\s*[!！]\s*(.+)$/; 
+var falseAnswerReg = /^\s*[！!]\s*(.+)$/; 
 
-chtml = `<span class='releaseMe' v-for='(r,i) in values'>{{s}}`
+chtml = `<span class='releaseMe' v-for='(r,i) in values'>`
 	+`<input v-if="type" :type='type' :id='name+"-"+i' :name='name' :value='r.value' :answer='r.isTrue?r.value:false'>`
 	+`<label :for='name+"-"+i' style='padding-right:22px' class="removeMe">{{values.length>2?sn[i]+". ":""}}{{r.value}}</label>`
-	+`<br v-if='s!=undefined && i<values.length-1'>`
+	+`<br v-if='isJudge == false && i<values.length-1'>`
 	+`</span></td></tr>`;
 Vue.component('c',{
 	data : function(){
@@ -63,26 +63,28 @@ Vue.component('c',{
 			slotText : null
 		};
 	},
-	// v=>value, a=>answer 从1开始计数, s=>答案换行新行前导, spacer=>答案分隔符
-	props : ["t","s","w","spacer","noteach"],
+	// spacer=>答案分隔符
+	props : ["w","spacer","noteach"],
 	methods : {
-		init(t,a,s,w,spacer,noteach){
+		init(w,spacer,noteach){
 			// 非教学题
 			if(noteach != undefined){
 				return false;
 			}
 
 			// 获取slot的值, 去掉首位空格
-			let v = this.$slots.default ? this.$slots.default[0].text : null;
+			let v = this.$slots.default[0].text;
+			v = v.replace(/(^\s+|\s+$)/g,"");
+			v = toArray(v,spacer);
+			// 内容的第一行就是题目
+			let title = v.shift();
 
 			let values = null;
-			if(!v){
+			if(v.length==0){
 				this.isJudge = true;
 				values = [{value:"是",isTrue:true},{value:"否",isTrue:false}];
 			} else {
-				v = v.replace(/(^\s+|\s+$)/g,"");
 				values = [];
-				v = toArray(v,spacer);
 				v.forEach((val,i)=>{
 					if(val){
 						let isTrue = true;
@@ -109,7 +111,7 @@ Vue.component('c',{
 			}
 			
 			// 拆解正确和错误的题目
-			let textTF = getTF(t);
+			let textTF = getTF(title);
 			if(isTeach){
 				// 教育模式, 一律使用真题
 				this.slotText = textTF[0];
@@ -136,7 +138,7 @@ Vue.component('c',{
 			return true;
 		}
 	},
-	template : `<table class='releaseMe qspan' v-if="init(t,s,w,spacer,noteach)" :style="{width:w?w:'100%'}">`
+	template : `<table class='releaseMe qspan' v-if="init(w,spacer,noteach)" :style="{width:w?w:'100%'}">`
 		+`<tr v-if="isJudge"><td>{{slotText}}</td>`
 		+`<td v-if="!(isJudge && isTeach)" style="width:150px;text-align:center">`
 		+ chtml

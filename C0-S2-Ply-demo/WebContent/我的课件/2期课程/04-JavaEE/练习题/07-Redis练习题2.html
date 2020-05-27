@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+<head>
+<base target="_blank">
+<meta charset="UTF-8">
+<meta http-equit="pragma" content="no-cache"> 
+<meta http-equit="Cache-Control" content="no-cache, must-revalidate"> 
+<meta http-equit="expires" content="Wed, 26 Feb 1997 08:21:57 GMT">
+<title>练习题</title>
+<script src="/C0-S2-Ply-demo/_js/vue.min.js"></script>
+<script type="text/javascript" src="/C0-S2-Ply-demo/_js/axios.min.js"></script>
+<link href="/C0-S2-Ply-demo/_css/magiczoomplus.css" rel="stylesheet" type="text/css" media="screen"/>
+<script src="/C0-S2-Ply-demo/_js/magiczoomplus.js"></script>
+<link rel="stylesheet" type="text/css" href="/C0-S2-Ply-demo/_css/q1.css">
+<script type="text/javascript" src="/C0-S2-Ply-demo/_js/pub1.js"></script>
+</head>
+<body>
+<div style="display: none;" id="pres">
+<!--
+	<ipt a="正确答案" r="正则验证" w="宽度"></ipt>
+	<prompt>
+		<li><a href="#">参考	( 必须放在 qlist 前)</a></li>
+	</prompt>
+ -->
+<!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
+<div>
+<h3>字符串(String)1</h3>
+	<c>
+		{[][下列不是]}设置指定 key 的值的是:
+		SET key value  | 	!GET key  | !GETRANGE key start end  | !GETSET key value | !GETBIT key offset
+	</c>
+	<c>
+		{[][下列不是]}返回 key 中字符串值的子字符的是:
+		!SET key value  | 	!GET key  | GETRANGE key start end  | !GETSET key value | !GETBIT key offset
+	</c>
+	<c>
+		{[][下列不是]}将给定 key 的值设为 value ，并返回 key 的旧值(old value)的是:
+		!SET key value  | 	!GET key  | !GETRANGE key start end  | GETSET key value | !GETBIT key offset
+	</c>
+	<c>
+		{[][下列不是]}对 key 所储存的字符串值，获取指定偏移量上的位(bit)的是:
+		!SET key value  | 	!GET key  | !GETRANGE key start end  | !GETSET key value | GETBIT key offset
+	</c>
+</div>
+
+<div>
+<h3>字符串(String)2</h3>
+	<c>
+		{[][下列不是]}获取所有(一个或多个)给定 key 的值的是:
+		MGET key1 [key2..]  | 	!SETBIT key offset value  | !SETRANGE key offset value  | !STRLEN key | !SETNX key value
+	</c>
+	<c>
+		{[][下列不是]}对 key 所储存的字符串值，设置或清除指定偏移量上的位(bit)的是:
+		!MGET key1 [key2..]  | 	SETBIT key offset value  | !SETRANGE key offset value  | !STRLEN key | !SETNX key value
+	</c>
+	<c>
+		{[][下列不是]}用 value 参数覆写给定 key 所储存的字符串值，从偏移量 offset 开始的是:
+		!MGET key1 [key2..]  | 	!SETBIT key offset value  | SETRANGE key offset value  | !STRLEN key | !SETNX key value
+	</c>
+	<c>
+		{[][下列不是]}返回 key 所储存的字符串值的长度的是:
+		!MGET key1 [key2..]  | 	!SETBIT key offset value  | !SETRANGE key offset value  | STRLEN key | !SETNX key value
+	</c>
+	<c>
+		{[][下列不是]}只有在 key 不存在时设置 key 的值的是:
+		!MGET key1 [key2..]  | 	!SETBIT key offset value  | !SETRANGE key offset value  | STRLEN key | !SETNX key value
+	</c>
+</div>
+
+<div>
+<h3>字符串(String)3</h3>
+	<c>
+		{[][下列不是]}将 key 中储存的数字值增一的是:
+			INCR key  | 	!INCRBY key increment  | !DECR key  | !DECRBY key decrement | !APPEND key value
+	</c>
+	<c>
+		{[][下列不是]}将 key 所储存的值加上给定的增量值（increment）的是:
+			!INCR key  | 	INCRBY key increment  | !DECR key  | !DECRBY key decrement | !APPEND key value
+	</c>
+	<c>
+		{[][下列不是]}将 key 中储存的数字值减一的是:
+			!INCR key  | 	!INCRBY key increment  | DECR key  | !DECRBY key decrement | !APPEND key value
+	</c>
+	<c>
+		{[][下列不是]}key 所储存的值减去给定的减量值（decrement）的是:
+			!INCR key  | 	!INCRBY key increment  | !DECR key  | DECRBY key decrement | !APPEND key value
+	</c>
+	<c>
+		{[][下列不是]}如果 key 已经存在并且是一个字符串， APPEND 命令将指定的 value 追加到该 key 原来值（value）的末尾的是:
+			!INCR key  | 	!INCRBY key increment  | !DECR key  | !DECRBY key decrement | APPEND key value
+	</c>
+</div>
+
+<div>
+<h3>哈希(Hash)1</h3>
+	<c>
+		{[][下列不是]}查看哈希表 key 中，指定的字段是否存在的是:
+		HEXISTS key field   | !HGET key field   | !	HKEYS key  | !HMGET key field1 [field2] |!HGETALL key 
+	</c>
+	<c>
+		{[][下列不是]}获取存储在哈希表中指定字段的值的是:
+		!HEXISTS key field   | HGET key field   | !	HKEYS key  | !HMGET key field1 [field2] |!HGETALL key 
+	</c>
+	<c>
+		{[][下列不是]}获取所有哈希表中的字段的是:
+		!HEXISTS key field   | !HGET key field   | HKEYS key  | !HMGET key field1 [field2] |!HGETALL key 
+	</c>
+	<c>
+		{[][下列不是]}获取所有给定字段的值的是:
+		!HEXISTS key field   | !HGET key field   | !	HKEYS key  | HMGET key field1 [field2] |!HGETALL key 
+	</c>
+	<c>
+		{[][下列不是]}获取在哈希表中指定 key 的所有字段和值的是:
+		!HEXISTS key field   | !HGET key field   | !	HKEYS key  | !HMGET key field1 [field2] |HGETALL key 
+	</c>
+</div>
+
+<div>
+<h3>哈希(Hash)2</h3>
+	<c>
+		{[][下列不是]}删除一个或多个哈希表字段的是:
+		HDEL key field1 [field2] | !HLEN key    | !	HINCRBY key field increment   | !HSET key field value  |!HSETNX key field value 
+	</c>
+	<c>
+		{[][下列不是]}为哈希表 key 中的指定字段的整数值加上增量 increment的是:
+		!HDEL key field1 [field2] | !HLEN key    | 	HINCRBY key field increment   | !HSET key field value  |!HSETNX key field value 
+	</c>
+	<c>
+		{[][下列不是]}获取哈希表中字段的数量的是:
+		!HDEL key field1 [field2] | HLEN key    | !	HINCRBY key field increment   | !HSET key field value  |!HSETNX key field value 
+	</c>
+	<c>
+		{[][下列不是]}将哈希表 key 中的字段 field 的值设为 value的是:
+		!HDEL key field1 [field2] | !HLEN key    | !	HINCRBY key field increment   | HSET key field value  |!HSETNX key field value 
+	</c>
+	<c>
+		{[][下列不是]}只有在字段 field 不存在时，设置哈希表字段的值的是:
+		!HDEL key field1 [field2] | !HLEN key    | !	HINCRBY key field increment   | !HSET key field value  |HSETNX key field value 
+	</c>
+</div>
+<!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
+</div>
+<script type="text/javascript">
+new Vue({el:"#pres"});
+</script>
+<!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
+
+<div id="main">
+	<fieldset class="alist">
+		<legend>答题结果</legend>
+		<div style="display: table;width: 100%">
+			<div style="display: table-cell;vertical-align: middle;">
+				<span class="res" v-for="q,i in questions">
+					题{{i+1}}: <b style="color: red">{{q.result?'对':''}}</b>
+				</span>
+			</div>
+			<div style="display: table-cell; width: 150px; text-align: center;">
+				<button @click="commit" :disabled="finish==false">提交答卷</button>
+			</div>
+		</div>
+	</fieldset>
+	<fieldset>
+		<legend>题目: </legend>
+		<prompt>
+			<li><a href="https://www.runoob.com/redis/redis-tutorial.html">Redis 教程</a></li>
+			<li><a href="https://www.cnblogs.com/liu-bear/p/10782244.html">Redis 的优缺点</a></li>
+			<li><a href="http://try.redis.io/">Redis 在线测试</a></li>
+			<li><a href="http://doc.redisfans.com/">Redis 命令参考</a></li>
+		</prompt>
+		<div class="qlist">
+		<dl v-for="q,i in questions">
+			<dt>第{{i+1}}题 <b style="color: red;">{{q.result?'对':''}}</b>
+				<button @click="q.test()" style="float: right">检 查</button><br>
+			</dt>
+			<dd @click="a(q)">
+				<pre v-html="q.content"></pre>
+			</dd>
+			<dd v-if="q.expect">
+				正确的结果: <span>{{q.expect}}</span><br>
+				你写的结果: <span>{{q.resultText}}</span>
+			</dd>
+		</dl>
+		</div>
+	</fieldset>
+</div>
+</body>
+<script type="text/javascript" src="/C0-S2-Ply-demo/_js/q1.js"></script>
+</html>
