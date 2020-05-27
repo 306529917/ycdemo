@@ -25,6 +25,9 @@
 <!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
 <div>
 <h3>列表(List)</h3>
+	<c>Redis列表是简单的字符串列表，按照插入顺序排序。</c>
+	<c>Redis列表  {[可以添加一个元素到列表的头部（左边）或者尾部（右边）][只可以添加一个元素到列表的尾部（右边）]}</c>
+	<c>一个列表最多可以包含 2的32次方 - 1 个元素 (4294967295, 每个列表超过40{[亿][万]}个元素)</c>
 	<c>
 		{[][下列不是]}将一个或多个值插入到列表头部的是:
 		LPUSH key value1 [value2] |!RPUSH key value1 [value2]   |!LPOP key |!LLEN key  |!LSET key index value 
@@ -52,6 +55,7 @@
 	<c>Redis 的 Set 集合是 String 类型的{[无序][有序]}集合</c>
 	<c>Redis 的 Set 集合成员是唯一的，这就意味着集合中{[不能][允许]}出现重复的数据</c>
 	<c>Redis 的 Set 集合是通过哈希表实现的，所以添加，删除，查找的复杂度都是 O(1)</c>
+	<c>Redis 的 Set 集合最多可以包含 2的{[32][16]}次方 - 1 个元素 (4294967295, 每个列表超过40亿个元素)</c>
 	<c>
 		{[][下列不是]}获取集合的成员数的是:
 		SCARD key |!SISMEMBER key member  |!SDIFF key1 [key2] |!SINTERSTORE destination key1 [key2]   |!SMOVE source destination member 
