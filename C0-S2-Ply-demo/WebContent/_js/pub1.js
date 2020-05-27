@@ -10,7 +10,10 @@ function buildParams(obj){
 
 Vue.component('ipt',{
 	props : ["a","r","w"],
-	template : `<span class='releaseMe qspan'><input :answer='a' :regex='r' style="text-align:center" :size='w&&w.indexOf("px")>-1?false:w' :style='{width:w&&w.indexOf("px")>-1?w:false}'><span>`
+	template : `<span class='releaseMe qspan' style="float:none">`
+		+`<input v-if="!isTeach" :answer='a' :regex='r' style="text-align:center" :size='w&&w.indexOf("px")>-1?false:w' :style='{width:w&&w.indexOf("px")>-1?w:false}'>`
+		+`<span v-else>{{a}}</span>`
+		+`<span>`
 });
 
 // 拆解数组 + 去首尾空格
@@ -34,7 +37,7 @@ function toArray(obj,spacer){
 
 //拆解正确和错误的题目
 function getTF(text){
-	var reg = /^(.*)\{\[(.*)\]\[(.*)\]\}(.*)$/;
+	var reg = /^(.*?)\s*\{\[\s*(.*?)\s*\]\[\s*(.*?)\s*\]\}\s*(.*)$/;
 	if(reg.test(text)){
 		let arr = reg.exec(text);
 		return [ arr[1] + arr[2] + arr[4] , arr[1] + arr[3] + arr[4]];

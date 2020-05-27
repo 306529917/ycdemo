@@ -24,6 +24,64 @@
  -->
 <!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
 <div>
+<h3>Key命令</h3>
+	<c>
+	 DEL key {[是][不能]}:
+		用于在 key 存在时删除 key。
+		! 检查给定 key 是否存在。
+		! 为给定 key 设置过期时间，以秒计。
+		! 查找所有符合给定模式( pattern)的 key 。
+		! 从当前数据库中随机返回一个 key 。
+		! 修改 key 的名称
+	</c>
+	<c>
+	 EXISTS key {[是][不能]}:
+		! 用于在 key 存在时删除 key。
+		检查给定 key 是否存在。
+		! 为给定 key 设置过期时间，以秒计。
+		! 查找所有符合给定模式( pattern)的 key 。
+		! 从当前数据库中随机返回一个 key 。
+		! 修改 key 的名称
+	</c>
+	<c>
+	 EXPIRE key seconds {[是][不能]}:
+		!用于在 key 存在时删除 key。
+		! 检查给定 key 是否存在。
+		 为给定 key 设置过期时间，以秒计。
+		! 查找所有符合给定模式( pattern)的 key 。
+		! 从当前数据库中随机返回一个 key 。
+		! 修改 key 的名称
+	</c>
+	<c>
+	 KEYS pattern {[是][不能]}:
+		! 用于在 key 存在时删除 key。
+		! 检查给定 key 是否存在。
+		! 为给定 key 设置过期时间，以秒计。
+		 查找所有符合给定模式( pattern)的 key 。
+		! 从当前数据库中随机返回一个 key 。
+		! 修改 key 的名称
+	</c>
+	<c>
+	 RANDOMKEY {[是][不能]}:
+		! 用于在 key 存在时删除 key。
+		! 检查给定 key 是否存在。
+		! 为给定 key 设置过期时间，以秒计。
+		! 查找所有符合给定模式( pattern)的 key 。
+		 从当前数据库中随机返回一个 key 。
+		! 修改 key 的名称
+	</c>
+	<c>
+	 RENAME key newkey {[是][不能]}:
+		! 用于在 key 存在时删除 key。
+		! 检查给定 key 是否存在。
+		! 为给定 key 设置过期时间，以秒计。
+		! 查找所有符合给定模式( pattern)的 key 。
+		! 从当前数据库中随机返回一个 key 。
+		修改 key 的名称
+	</c>
+</div>
+
+<div>
 <h3>字符串(String)1</h3>
 	<c>
 		{[][下列不是]}设置指定 key 的值的是:
@@ -91,55 +149,6 @@
 	</c>
 </div>
 
-<div>
-<h3>哈希(Hash)1</h3>
-	<c>Redis hash 是一个 {[string][object]} 类型的 field 和 value 的映射表，hash 特别适合用于存储对象。</c>
-	<c>Redis 中每个 hash 可以存储 2的32次方 - 1 键值对（40多亿）。</c>
-	<c>
-		{[][下列不是]}查看哈希表 key 中，指定的字段是否存在的是:
-		HEXISTS key field   | !HGET key field   | !	HKEYS key  | !HMGET key field1 [field2] |!HGETALL key 
-	</c>
-	<c>
-		{[][下列不是]}获取存储在哈希表中指定字段的值的是:
-		!HEXISTS key field   | HGET key field   | !	HKEYS key  | !HMGET key field1 [field2] |!HGETALL key 
-	</c>
-	<c>
-		{[][下列不是]}获取所有哈希表中的字段的是:
-		!HEXISTS key field   | !HGET key field   | HKEYS key  | !HMGET key field1 [field2] |!HGETALL key 
-	</c>
-	<c>
-		{[][下列不是]}获取所有给定字段的值的是:
-		!HEXISTS key field   | !HGET key field   | !	HKEYS key  | HMGET key field1 [field2] |!HGETALL key 
-	</c>
-	<c>
-		{[][下列不是]}获取在哈希表中指定 key 的所有字段和值的是:
-		!HEXISTS key field   | !HGET key field   | !	HKEYS key  | !HMGET key field1 [field2] |HGETALL key 
-	</c>
-</div>
-
-<div>
-<h3>哈希(Hash)2</h3>
-	<c>
-		{[][下列不是]}删除一个或多个哈希表字段的是:
-		HDEL key field1 [field2] | !HLEN key    | !	HINCRBY key field increment   | !HSET key field value  |!HSETNX key field value 
-	</c>
-	<c>
-		{[][下列不是]}为哈希表 key 中的指定字段的整数值加上增量 increment的是:
-		!HDEL key field1 [field2] | !HLEN key    | 	HINCRBY key field increment   | !HSET key field value  |!HSETNX key field value 
-	</c>
-	<c>
-		{[][下列不是]}获取哈希表中字段的数量的是:
-		!HDEL key field1 [field2] | HLEN key    | !	HINCRBY key field increment   | !HSET key field value  |!HSETNX key field value 
-	</c>
-	<c>
-		{[][下列不是]}将哈希表 key 中的字段 field 的值设为 value的是:
-		!HDEL key field1 [field2] | !HLEN key    | !	HINCRBY key field increment   | HSET key field value  |!HSETNX key field value 
-	</c>
-	<c>
-		{[][下列不是]}只有在字段 field 不存在时，设置哈希表字段的值的是:
-		!HDEL key field1 [field2] | !HLEN key    | !	HINCRBY key field increment   | !HSET key field value  |HSETNX key field value 
-	</c>
-</div>
 <!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
 </div>
 <script type="text/javascript">
