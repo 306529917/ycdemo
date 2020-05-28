@@ -43,7 +43,7 @@ label * {
 			<label class="right">密码:</label> <label class="left"><input></label><br> 
 			<label class="right">验证码:</label> <label class="left">
 				<input size=8 v-model="vcode"> 
-				<img alt="" src="http://47.106.66.89/C0-S2-Ply-demo/vcode.s" style="height: 25px" onclick="this.src='http://47.106.66.89/C0-S2-Ply-demo/vcode.s?'+new Date()"> 
+				<img alt="" src="/C0-S2-Ply-demo/vcode.s" style="height: 25px" onclick="this.src='/C0-S2-Ply-demo/vcode.s?'+new Date()"> 
 			</label><br>
 			<label class="right"><button>注册</button></label>
 			<label class="left" @click="verify()"><button>验证</button></label><br> 
@@ -57,7 +57,7 @@ label * {
 		},
 		methods : {
 			verify(){
-				axios.get("http://47.106.66.89/C0-S2-Ply-demo/vcode.s?vcode="+this.vcode).then(res=>{
+				axios.get("/C0-S2-Ply-demo/vcode.s?vcode="+this.vcode).then(res=>{
 					alert(res.data);
 				});
 			}
@@ -95,12 +95,12 @@ label * {
 		},
 		methods : {
 			verify(){
-				axios.get("http://47.106.66.89/C0-S2-Ply-demo/vmail.s?vcode="+this.vcode).then(res=>{
+				axios.get("/C0-S2-Ply-demo/vmail.s?vcode="+this.vcode).then(res=>{
 					alert(res.data);
 				});
 			},
 			send(){
-				axios.get("http://47.106.66.89/C0-S2-Ply-demo/vmail.s?email="+this.email).then(res=>{
+				axios.get("/C0-S2-Ply-demo/vmail.s?email="+this.email).then(res=>{
 					alert(res.data);
 				});
 			},
