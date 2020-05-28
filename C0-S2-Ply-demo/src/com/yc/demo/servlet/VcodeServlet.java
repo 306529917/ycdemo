@@ -12,7 +12,6 @@ import com.yc.jee.util.VerifyCodeUtils;
 @WebServlet("/vcode.s")
 public class VcodeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String vcode = request.getParameter("vcode");
@@ -28,7 +27,6 @@ public class VcodeServlet extends HttpServlet {
 			request.getSession().setAttribute("vcode", scode);
 		}
 	}
-
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doGet(request, response);
