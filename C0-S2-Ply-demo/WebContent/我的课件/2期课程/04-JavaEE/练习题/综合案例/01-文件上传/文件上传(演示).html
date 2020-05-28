@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <title>文件上传</title>
 <script src="/C0-S2-Ply-demo/_js/vue.min.js"></script>
-<script type="text/javascript" src="/C0-S2-Ply-demo/_js/axios.min.js"></script>
 </head>
 <body>
 <fieldset>
@@ -33,17 +32,39 @@
 	文件: <input id="file1" type="file" name="file" multiple="multiple"><br>
 	<button type="button" onclick="upload1()">AJAX提交</button>
 	<script type="text/javascript">
+		function post(url, param, callback){
+			var xhr = new XMLHttpRequest();
+			xhr.onreadystatechange = function(){
+				if(xhr.readyState==4 && xhr.status==200){
+					callback(xhr.responseText);
+				}
+			}
+			xhr.open("POST", url);
+			if(! param instanceof FormData){
+				xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+			}
+			xhr.send(param);
+		}
 		function upload1(){
 			var url = "http://47.106.66.89:1112/file/upload";
 			var fd = new FormData(form1);
-			axios.post(url,fd).then(res=>{
+			post(url, fd, function(data){
+				data = JSON.parse(data);
+				var msg = data.msg;
+				if(data.data){
+					var s = data.data.join("\r\n");
+					msg += "上传文件列表: \r\n" + s;
+				}
+				alert(msg);
+			});
+			/* axios.post(url,fd).then(res=>{
 				var msg = res.data.msg;
 				if(res.data.data){
 					var s = res.data.data.join("\r\n");
 					msg += "上传文件列表: \r\n" + s;
 				}
 				alert(msg);
-			});
+			}); */
 		}
 	</script>
 </form>
@@ -59,12 +80,20 @@
 		function upload2(){
 			var url = "http://47.106.66.89:1112/file/upload";
 			var fd = new FormData(form2);
-			axios.post(url,fd).then(res=>{
+			post(url,fd,function(data){
+				data = JSON.parse(data)
+				if(data.code && data.data){
+					head.src = data.data[0];
+				}
+				alert(data.msg);
+			})
+			
+			/* axios.post(url,fd).then(res=>{
 				if(res.data.code && res.data.data){
 					head.src = res.data.data[0];
 				}
 				alert(res.data.msg);
-			});
+			}); */
 		}
 	</script>
 </form>
