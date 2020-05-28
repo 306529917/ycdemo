@@ -20,9 +20,10 @@ public class VmailServlet extends HttpServlet {
 		String email = request.getParameter("email");
 		if (vcode != null && vcode.trim().isEmpty() == false) {
 			String scode = (String) request.getSession().getAttribute("vcode");
-			if (vcode.equals(scode)) {
+			if (vcode.equalsIgnoreCase(scode)) {
 				response.getWriter().append("verification code is correct!");
 			} else {
+				System.out.println("vcode:" + vcode + " != scode" + scode);
 				response.getWriter().append("verification code is error!");
 			}
 		} else if (email != null && email.trim().isEmpty() == false) {
