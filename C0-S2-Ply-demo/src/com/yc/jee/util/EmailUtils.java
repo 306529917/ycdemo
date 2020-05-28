@@ -21,7 +21,7 @@ public class EmailUtils {
 	 * @throws Exception 
 	 */
 	public static void main(String[] args) throws Exception {
-		send("306529917@qq.com","测-试-邮-件","测-试-邮-件,测试编号000111");
+		send("306529917@qq.com","测-试-邮-件","测-试-邮-件,测试编号123456");
 	}
 
 	private static String MAIL_SMTP_HOST = "smtp.qq.com";
@@ -101,6 +101,6 @@ public class EmailUtils {
 	
 	
 	private static String MAIL_USER = "306529917@qq.com";
-	private static String MAIL_PASSWORD = "epxyrxogkporcbbh";
+	private static String MAIL_PASSWORD = "sudvlewjfdubbibe";
 
 }
