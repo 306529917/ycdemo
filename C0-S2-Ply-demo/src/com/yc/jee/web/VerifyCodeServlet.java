@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.yc.jee.util.VerifyCodeUtils;
 
@@ -15,10 +16,11 @@ public class VerifyCodeServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
 		// 随机生成验证码
 		String verifyCode = VerifyCodeUtils.outputImage(response);
 		// 将验证码添加到会话中，注意：在会话中保存的验证码的名称 vcode
-		request.getSession().setAttribute("vcode", verifyCode);
+		session.setAttribute("vcode", verifyCode);
 	}
 
 	protected void doPost(HttpServletRequest request,
