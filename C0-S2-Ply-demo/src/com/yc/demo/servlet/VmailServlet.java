@@ -23,15 +23,17 @@ public class VmailServlet extends HttpServlet {
 			if (vcode.equalsIgnoreCase(scode)) {
 				response.getWriter().append("verification code is correct!");
 			} else {
+				System.out.println("2. Session ID :" + request.getSession().getId());
 				System.out.println("vcode:" + vcode + " != scode" + scode);
 				response.getWriter().append("verification code is error!");
 			}
 		} else if (email != null && email.trim().isEmpty() == false) {
 			String scode = (System.currentTimeMillis() + "");
 			scode = scode.substring(scode.length() - 4);
-			request.getSession().setAttribute("vcode", scode);
 			try {
 				EmailUtils.send(email, "廖老师的邮箱验证测试邮件", "重置密码的验证码是:" + scode);
+				System.out.println("1. Session ID :" + request.getSession().getId());
+				request.getSession().setAttribute("vcode", scode);
 				response.getWriter().append("send email success!");
 			} catch (MessagingException e) {
 				e.printStackTrace();
