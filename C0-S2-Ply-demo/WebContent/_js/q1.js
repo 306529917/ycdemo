@@ -142,7 +142,6 @@ function fmtTime(time, mask){
 }
 
 /******************************** VUE ***********************************/
-
 var vue = new Vue({
 	el : "#main",
 	data : {
@@ -178,23 +177,18 @@ var vue = new Vue({
 			}
 		},
 		commit(){
-			var index = location.href.lastIndexOf("/");
-			var hwName = location.href.substring(index+1);
-			hwName = decodeURIComponent(hwName);
-			if(hwName){
-				axios.post("/hw/commit",buildParams({
-					name : hwName
-				})).then(res=>{
-					if( res.data.code == 1){
-						alert("答案提交成功");
-					} else {
-						alert(res.data.msg || "答案提交失败");
-						if( res.data.code == -1){
-							location.href = "/user/myinfo.html";
-						}
+			axios.post("/hw/commit",buildParams({
+				name : hwName
+			})).then(res=>{
+				if( res.data.code == 1){
+					alert("答案提交成功");
+				} else {
+					alert(res.data.msg || "答案提交失败");
+					if( res.data.code == -1){
+						location.href = "/user/myinfo.html";
 					}
-				});
-			}
+				}
+			});
 		}
 	},
 	mounted : function(){
@@ -258,5 +252,29 @@ var vue = new Vue({
 			minute = minute % 60;
 			this.showTime = fmtTime(hours,"00") + ":" + fmtTime(minute,"00") + ":" + fmtTime(second,"00");
 		}
+	}
+});
+
+var index = location.href.lastIndexOf("/");
+var hwName = location.href.substring(index+1);
+hwName = decodeURIComponent(hwName);
+axios.post("/hw/isFinished",buildParams({
+	name : hwName
+})).then(res=>{
+	if( res.data.code == 1){
+		let span = document.createElement("span");
+		span.innerText="已 完 成 !";
+		span.style.position = "fixed";
+		span.style.opacity = 0.7;
+		span.style.top="100px";
+		span.style.color="red";
+		span.style.fontWeight="bold";
+		span.style.fontSize="2em";
+		span.style.right="100px";
+		span.style.zIndex="1000";
+		span.style["-webkit-transform"] = 'rotate(30deg)';
+		span.style["-moz-transform"] = 'rotate(30deg)';
+		span.style["-o-transform"] = 'rotate(30deg)';
+		document.body.appendChild(span);
 	}
 });
