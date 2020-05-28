@@ -1,4 +1,8 @@
 @charset "UTF-8";
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	color: #2e2e2e;
+}
 
 a {
 	text-decoration: none;
@@ -8,8 +12,8 @@ a:hover {
 	text-decoration: underline;
 }
 
-body {
-	padding: 10px
+details {
+	clear: both;
 }
 
 .res {
@@ -51,7 +55,7 @@ textarea, input {
 	overflow: auto;
 }
 
-.qlist>dl>dd>pre,.qlist>dl>dd>div {
+.qlist>dl>dd>pre, .qlist>dl>dd>div {
 	vertical-align: middle;
 	font-family: 微软雅黑;
 	overflow: auto;
@@ -67,10 +71,6 @@ textarea, input {
 button {
 	font-size: 1.1em;
 	padding: 5px 20px;
-}
-
-b {
-	color: #f0f
 }
 
 .dui {
@@ -123,14 +123,15 @@ label:hover {
 }
 
 /* vue 组件根元素*/
-.qspan{
+.qspan {
 	border: 1px solid #ccc;
 	border-radius: 5px;
-	background-color:#ddd;
-	padding:2px 5px;
-	margin:3px;
+	background-color: #ddd;
+	padding: 2px 5px;
+	margin: 3px;
 	float: left;
 }
-.qspan:hover{
+
+.qspan:hover {
 	border: 1px outset #999;
 }

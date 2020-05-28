@@ -17,24 +17,42 @@
 <body>
 <div style="display: none;" id="pres">
 <!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
-<pre>
+<div>
 <h3>标识符命名规则</h3>
-变量、函数、数组、对象、类和接口等等都需要命名，这些名称统称为标识符
-Java中对于标识符的命名规则作了如下限制:
+<c>变量、函数、数组、对象、类和接口等等都需要命名，这些名称统称为标识符</c>
+<b>Java中对于标识符的命名规则作了如下限制:</b>
 <c inline>{[Java中对于标识符, 只能由这些字符构成组成][Java中对于标识符, 下列属于非法字符的是: ]}
 	英文字母  | 数字  | 下划线“_”  | “$” | !“#”
 </c>
 <c>{[不能与关键字冲突:][可以与关键字重名:]}</c>
 <c>{[严格][不]}区分大小写:</c>
+<details><summary>关键字参考列表</summary><span>
+	abstract     boolean     break     byte     case      catch     char    class     continue     default     do      double  else     extends     enum     false      final       finally  float       for      if    implements     import    instanceof   int      interface     long      native      new     null   package     private     protected    public    return   short  static     super     switch     synchronized     this    throw    throws    transient    true    try    void     volatile   while 
+	保留字：const，goto
+	<b>注意:</b> 所有的关键字都是小写，friendly，sizeof不是java的关键字 
+	</span>
+</details><details><summary>Java的标示符命名习惯</summary><span>
+     类名, 接口名 ：每个单词的首字母应该大写。
+		class  MyFirstClass
+		interface  Weapon
+     字段、方法以及对象：第一个单词首字母应小写，其他单词首字母大写。
+		boolean isWoman
+		void setName(String name)
+    常量：全部用大写字母表示。
+		public final int  GREEN        
+		public final int  HEAD_ COUNT
+    Java包（Package）：它们全都字母小写。
+		package  java.awt.event
+	</span>
+</details>
 <c isteach>下列标识符{[不合法][合法]}的有（） |   new |   !$Usdollars |car.taxi |   1234 |</c>
 <c noteach>下列标识符{[不合法][合法]}的有（） |   Greeting1 |   !void |G |   !101dalmatians |!Hello, world</c>
 
-</pre>
+</div>
 
 <pre>
-<h3>变量</h3>
-<c>变量是内存(堆栈)中的一块存储区域，是{[存储数据][进行计算]}的基本单元</c>
-<c>定义变量的语法格式是 : 类型名 变量名 [= 值];</c>
+<h3>变量</h3><c>变量是内存(堆栈)中的一块存储区域，是{[存储数据][进行计算]}的基本单元</c>
+<c>声明变量的基本语法格式是 : 类型名 变量名 [= 值];</c>
 <c isteach>判断下列变量定义正确的有
 int num;
 !int a + b = 12;
@@ -45,7 +63,7 @@ float money = 123.45f;
 </pre>
 
 <pre>
-<h3>数据类型练习 1</h3>
+<h3>数据类型</h3>
 <c>数据类型用来确定要存储在{[内存][CPU]}单元中的数据的类型</c>
 <c>在Java中，数据类型被区分成两个种类{[][错误的选项是]}:
 原始数据类型 | 引用数据类型 | !扩展数据类型 | !派生数据类型
@@ -54,10 +72,10 @@ float money = 123.45f;
 <c isteach inline>{[常见的应用数据类型][下列哪些不是引用数据类型]}:
 String  | Object | 数组  | !double | !boolean
 </c>
-</pre>
+<pic s="01-基本数据类型.png" prefix="_images/课件/"></pic></pre>
 
 <pre>
-<h3>数据类型练习 2</h3>
+<h3>数据类型练习 1</h3>
 <c spacer='[",\n]' inline isteach>Java基本数据类型中{[是][不是]}字符类型的是: 
 "!byte","!short","!int","!long","!float","!double","char","!boolean"
 </c>
@@ -76,7 +94,7 @@ String  | Object | 数组  | !double | !boolean
 </pre>
 
 <pre>
-<h3>数据类型练习 3</h3>
+<h3>数据类型练习 2</h3>
 <c spacer='[",\[\]\n]' inline isteach>Java基本数据类型中取值范围是 -1.7e+308~1.7e+308 的数据类型是: 
 ["!byte","!short","!int","!long","!float","double","!char","!boolean"]
 </c>
