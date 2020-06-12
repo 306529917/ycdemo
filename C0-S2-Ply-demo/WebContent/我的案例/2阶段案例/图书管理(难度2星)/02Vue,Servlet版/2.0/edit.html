@@ -97,18 +97,18 @@ span {
 		},
 		created : function(){
 			
-			this.$http.get("http://47.106.66.89:1112/exa/books/getPressItems").then(res => {
-				this.pressItems = res.data.data;
+			this.$http.get("http://"+location.hostname+":1112/exa/books/item?col=bookpress").then(res => {
+				this.pressItems = res.data;
 			})
 			if(id){
-				this.$http.get("http://47.106.66.89:1112/exa/books/get?id="+id).then(res => {
-					this.book = res.data.data;
+				this.$http.get("http://"+location.hostname+":1112/exa/books/get?id="+id).then(res => {
+					this.book = res.data;
 				})
 			}
 		},
 		methods : {
 			save(){
-				this.$http.get("http://47.106.66.89:1112/exa/books/save",{params:this.book},{emulateJSON:true}).then(res => { 
+				this.$http.post("http://"+location.hostname+":1112/exa/books/save",this.book,{emulateJSON:true}).then(res => { 
 					if(res.data.code==1){
 						alert("图书保存成功!");
 						location.href = "index.html";
@@ -121,6 +121,7 @@ span {
 						if( ! this.book.id){
 							this.errors.id = {};
 						}
+						res.data.msg || alert(res.data.msg);
 					}
 				});
 			},

@@ -6,3 +6,5 @@ htmlsFinal:
    详解 RestTemplate 操作: https://blog.csdn.net/itguangit/article/details/78825505
    Spring Cloud入门教程: https://www.jianshu.com/p/664c71b6681a
    Spring Cloud中国社区: http://springcloud.cn/
+   SpringCloud 复杂对象接收时候对象变成LinkeHashMap: https://blog.csdn.net/qq_20746277/article/details/80923207
+   feign Method has too many Body parameters: https://my.oschina.net/u/182501/blog/1616188

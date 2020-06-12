@@ -8,7 +8,7 @@
 <body>
 <fieldset>
 <legend>王总: 程旭元你好, 帮我做一个文件上传的功能吧?</legend>
-<form action="http://47.106.66.89:1112/file/upload" method="post" enctype="multipart/form-data">
+<form method="post" enctype="multipart/form-data">
 	文件: <input type="file" name="file"><br>
 	<button>表单提交</button>
 </form>
@@ -16,7 +16,7 @@
 
 <fieldset>
 <legend>王总: 旭元呀, 你的上传功能每次只能上传一个文件, 太麻烦, 能一次传多个文件吗?</legend>
-<form action="http://47.106.66.89:1112/upload" method="post" enctype="multipart/form-data">
+<form method="post" enctype="multipart/form-data">
 	文件: <input type="file" name="file" multiple="multiple"><br>
 	文件: <input type="file" name="file" multiple="multiple"><br>
 	文件: <input type="file" name="file" multiple="multiple"><br>
@@ -26,7 +26,7 @@
 
 <fieldset>
 <legend>王总: 旭元呀, 每次上传完成, 总是跳到一个白页面显示信息, 能不能不跳转? </legend>
-<form id="form1" action="http://47.106.66.89:1112/file/upload" method="post" enctype="multipart/form-data">
+<form id="form1" method="post" enctype="multipart/form-data">
 	文件: <input id="file1" type="file" name="file" multiple="multiple"><br>
 	文件: <input id="file1" type="file" name="file" multiple="multiple"><br>
 	文件: <input id="file1" type="file" name="file" multiple="multiple"><br>
@@ -46,7 +46,7 @@
 			xhr.send(param);
 		}
 		function upload1(){
-			var url = "http://47.106.66.89:1112/file/upload";
+			var url = "http://"+location.hostname+":1112/exa/file/upload";
 			var fd = new FormData(form1);
 			post(url, fd, function(data){
 				data = JSON.parse(data);
@@ -72,13 +72,13 @@
 
 <fieldset>
 <legend>王总: 旭元呀, 我想让会员可以上传自己的头像, 有没有法子呀? </legend>
-<form id="form2" action="http://47.106.66.89:1112/file/upload" method="post" enctype="multipart/form-data">
+<form id="form2" method="post" enctype="multipart/form-data">
 	<img alt="上传头像" src="../../_images/头像.jpg" height="200px" id=head><br>
 	文件: <input id="file1" type="file" name="file"><br>
 	<button type="button" onclick="upload2()">上传头像</button>
 	<script type="text/javascript">
 		function upload2(){
-			var url = "http://47.106.66.89:1112/file/upload";
+			var url = "http://"+location.hostname+":1112/exa/file/upload";
 			var fd = new FormData(form2);
 			post(url,fd,function(data){
 				data = JSON.parse(data)
@@ -98,6 +98,10 @@
 	</script>
 </form>
 </fieldset>
-
+<script type="text/javascript">
+document.querySelectorAll("form").forEach(f=>{
+	f.action = "http://"+location.hostname+":1112/exa/file/upload";
+});
+</script>
 </body>
 </html>

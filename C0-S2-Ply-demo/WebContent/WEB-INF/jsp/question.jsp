@@ -13,7 +13,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <%!
-	private static final String EXERCISE_PATH = "http://47.106.66.89:1112";
 	private static final String QUESTION_DIR = "解题参考";
 	public void imgs(File dir, PageContext pageContext) throws IOException {
 		String path = QUESTION_DIR + "/" + dir.getName() + "/截图";
@@ -70,7 +69,7 @@ h3 {
 				File rootDir = new File(application.getRealPath("/"));
 				String path = srcDir.getPath().replace(rootDir.getPath(), "");
 				path = path.replaceAll("\\\\", "/");
-				zipa += " <a href='"+EXERCISE_PATH+"/zip.do?file=" + path + "'>点击下载题目初始代码</a>";
+				zipa += " <a href='http://"+request.getServerName()+":1112/zip.do?file=" + path + "'>点击下载题目初始代码</a>";
 			}
 	%>
 	<fieldset>

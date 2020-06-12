@@ -4,81 +4,57 @@
 <meta charset="UTF-8">
 <title>推箱子网页版</title>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
-<script src="/C0-S2-Ply-demo/_js/axios.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/axios/0.19.2/axios.min.js"></script>
 <script type="text/javascript" src="js/map.js"></script>
 <script type="text/javascript" src="js/game.js"></script>
 <style type="text/css">
 </style>
 <script type="text/javascript">
-	async function keydown(e) {
+	function keydown(e) {
 		if ( e.keyCode < 37 || e.keyCode > 40 ){
 			return;
 		}
-		e.keyCode==37 && game.left() 	||
-		e.keyCode==38 && game.up() 		||
-		e.keyCode==39 && game.right() 	||
-		e.keyCode==40 && game.down();
-		bindMap();
-		if(game.youWin()){
-			alert("你赢了, 共用了"+game.getStepNumber()+"步");
-			map = await game.next();
-			bindMap();
+		e.keyCode==37 && mapv.$data.game.left() 	||
+		e.keyCode==38 && mapv.$data.game.up() 		||
+		e.keyCode==39 && mapv.$data.game.right() 	||
+		e.keyCode==40 && mapv.$data.game.down();
+		if(mapv.$data.game.youWin()){
+			alert("你赢了, 共用了" + mapv.$data.game.getStepNumber()+"步");
+			mapv.$data.game.next();
 		}
-	}
-	
-	function restart(){
-		map = game.reset();
-		bindMap();
-	}
-	async function next(){
-		map = await game.next();
-		bindMap();
 	}
 </script>
 </head>
-<body onkeydown="keydown(event)" onload="load() ">
+<body onkeydown="keydown(event)">
 	<div id="main" style="padding: 20px;">
 		<h1>推箱子网页版</h1>
 		<div id="map" style="float: left">
-			<div v-for="row in map" style="height: 30px">
-				<img v-for="col in row" v-bind:src="'imgs/'+col.value+'.gif'">
+			<div v-for="row in game.map" style="height: 30px">
+				<img v-for="col in row" v-bind:src="'imgs/'+col+'.gif'">
 			</div>
 		</div>
-		<div id="ctl" style="padding: 20px;float: left;text-align: center;">
+		<div id="ctl" style="padding: 20px; float: left; text-align: center;">
 			<h2>{{'第'+game.getIndex()+'关'}}</h2>
-			<span>{{'第'+game.stepNumber+'步'}}</span><br><br>
-			<button style="width:100px" onclick="restart()">重新开始</button><br><br>
-			<button style="width:100px" onclick="next()">下  一  关</button>
+			<span>{{'第'+game.stepNumber+'步'}}</span><br>
+			<br>
+			<button style="width: 100px" @click="game.restart()">重新开始</button>
+			<br>
+			<br>
+			<button style="width: 100px" @click="game.next()">下 一 关</button>
 		</div>
 	</div>
 
 	<script type="text/javascript">
-		var game;
-		var map;
-		var mapo;
-		async function load(){
-			game = new Game();
-			map = await game.next();
-			mapo = [];
-			bindMap();
-			var mapv = new Vue({
-				el : '#main',
-				data : {
-					map : mapo,
-					game : game
-				}
-			})
-		}
-		// 同步界面
-		function bindMap() {
-			for (var y = 0; y < map.length; y++) {
-				mapo[y] || mapo.push([]);
-				for (var x = 0; x < map[y].length; x++) {
-					mapo[y][x] || ( mapo[y][x] = {} )==1;
-					mapo[y][x].value = map[y][x];
-				}
+	
+		var mapv = new Vue({
+			el : '#main',
+			data : {
+				game : new Game()
+			},
+			created : function(){
+				this.game.next();
 			}
-		}
+		})
 	</script>
 </body>
 </html>

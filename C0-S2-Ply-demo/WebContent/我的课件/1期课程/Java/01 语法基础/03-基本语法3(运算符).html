@@ -18,7 +18,8 @@
 <div style="display: none;" id="pres">
 <!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
 <pre>
-<h3>运算符</h3><c>运算符是通过一定的运算规则操作一个或多个操作数，并生成结果的特定符号</c>
+<h3>运算符</h3>
+<c>运算符是通过一定的运算规则操作一个或多个操作数，并生成结果的特定符号</c>
 <c>运算符和操作数的有效组合称为{[表达式][方程式]}</c>
 <c>Java提供了一系列丰富的运算符，包括
 	算术运算符|关系运算符|逻辑运算符|条件运算符|赋值运算符
@@ -26,15 +27,17 @@
 </pre>
 
 <pre>
-<h3>算术运算符</h3><c>算术运算符主要用于数学计算，一般使用{[数值][字符]}作为操作数</c>
+<h3>算术运算符</h3>
+<c>算术运算符主要用于数学计算，一般使用{[数值][字符]}作为操作数</c>
 <c noteach inline>下列{[][不]}属于一元运算符的是     |!+|-|++|--|!%</c>
 <c noteach inline>下列{[][不]}属于二元运算符的是     |+|-|!++|!--|*</c>
 <c noteach inline>取模( 求余数 )运算符是     |!+|!-|!/|%|!*</c>
 </pre>
 
 <pre>
-<h3>关系运算符</h3><c>关系运算符可以测试两个操作数之间的关系（但不会改变操作数的值），关系表达式的结果为 boolean 类型</c>
-<c inline fprefix="@">关系运算符{[包括][不包括]}:
+<h3>关系运算符</h3>
+<c>关系运算符可以测试两个操作数之间的关系（但不会改变操作数的值），关系表达式的结果为 boolean 类型</c>
+<c isteach inline fprefix="@">关系运算符{[包括][不包括]}:
 |==|!=|>=|<=|>|<|@+=
 </c>
 <c noteach inline fprefix="@">关系运算符中判断大小关系{[包括][不包括]}:
@@ -49,8 +52,9 @@
 </pre>
 
 <pre>
-<h3>逻辑运算符</h3><c>逻辑运算符{[必须][不一定非要]}与 boolean 型操作数一起使用</c>
-<c noteach inline fprefix="@" spacer="[#\n]">下列{[][不]}属于二元运算符的是:
+<h3>逻辑运算符</h3>
+<c>逻辑运算符{[必须][不一定非要]}与 boolean 型操作数一起使用</c>
+<c isteach inline fprefix="@" spacer="[#\n]">下列{[][不]}属于二元运算符的是:
 @!  #  &  #  &&  #  |  #  ||  #  
 </c>
 <c noteach inline fprefix="@" spacer="[#\n]">{[][不能]}实现逻辑"与"的运算符是:
@@ -71,42 +75,63 @@
 </pre>
 
 <pre>
-<h3>赋值运算符</h3><c>赋值运算符的赋值方向是{[从右至左的][从左至右的]}</c>
-<c inline>下列哪个赋值运算符{[不][]}会进行数学计算:
+<h3>赋值运算符</h3>
+<c>赋值运算符的赋值方向是{[从右至左的][从左至右的]}</c>
+<c isteach inline>下列哪个赋值运算符{[不][]}会进行数学计算:
 /= | +=  | != | *= | %=
 </c>
 </pre>
 
 <pre>
-<h3>条件运算符</h3><c>条件运算符又叫三元运算符, 它的一般形式是：表达式1 ? 表达式2 : 表达式3</c>
-根据 表达式1 的结果来判断执行 表达式2 还是 表达式3
+<h3>条件运算符</h3>
+<c>条件运算符又叫三元运算符, 它的一般形式是：表达式1 ? 表达式2 : 表达式3</c>
 <c>如果 表达式1 的结果为true，则执行{[表达式2][表达式3]}</c>
 <c>如果 表达式1 的结果为false，则执行{[表达式3][表达式2]}</c>
 </pre>
 
 <pre>
-<h3>运算符的优先级</h3><c>一个表达式由多个运算符组成，优先级决定运算符的计算顺序</c>
+<h3>运算符的优先级</h3>
+<c>一个表达式由多个运算符组成，优先级决定运算符的计算顺序</c>
 <!-- <img class="qImg" src="_images/运算符优先级.png"> -->
+<c inline isteach>
+	<template v-slot:desc>
 下列语句序列执行后 
 	int  a=10, b=3, m=5;  
- 	if( a==b )  m+=a;  else   m=++a*m;
-<c inline>m 的值是|!15|!50|55|!5</c>
+ 	if( a==b )  m+=a;  else   m=++a*m;</template>
+	m 的值是|!15|!50|55|!5
+</c>
+
+<c inline isteach>
+	<template v-slot:desc>
 下列语句序列执行后 
 	int  i=4, j=5, k=9, m=5;  
-	if( i > j || m &lt; k)  k++;  else k--; 
-<c inline>k 的值是|!5|10|!8|!9</c>
+	if( i > j || m &lt; k)  k++;  else k--;</template>
+	k 的值是|!5|10|!8|!9
+</c>
+
+<c inline noteach>
+	<template v-slot:desc>
 下列语句序列执行后 
 	int  a=2, b=4, x=5; 
-  	if( a<--b ) x*=a; 
-<c inline>x 的值是|!5|!20|!15|10</c>
+  	if( a<--b ) x*=a; </template>
+	x 的值是|!5|!20|!15|10
+</c>
+
+<c inline noteach>
+	<template v-slot:desc>
 下列语句序列执行后 
 	int  a=2, b=4;
-	if( a &lt; -- b )  a*=a;
-<c inline>b 的值是|!5|3|!15|!4</c>
+	if( a &lt; -- b )  a*=a;</template>
+	b 的值是|!5|3|!15|!4
+</c>
+
+<c inline noteach>
+	<template v-slot:desc>
 下列语句序列执行后 
 	int  i=9, j=8, m=10, n=9;
-	if( i &lt; j || m-- &lt; n )  i++;  else  j--;
-<c inline>m 的值是|!6|!7|!8|9</c>
+	if( i &lt; j || m-- &lt; n )  i++;  else  j--;</template>
+	m 的值是|!6|!7|!8|9
+</c>
 </pre>
 <!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
 </div>
@@ -136,7 +161,7 @@ new Vue({el:"#pres"});
 				<button @click="q.test()" style="float: right">检 查</button><br>
 			</dt>
 			<dd @click="a(q)">
-				<pre v-html="q.content"></pre>
+				<div v-html="q.content"></div>
 			</dd>
 			<dd v-if="q.expect">
 				正确的结果: <span>{{q.expect}}</span><br>

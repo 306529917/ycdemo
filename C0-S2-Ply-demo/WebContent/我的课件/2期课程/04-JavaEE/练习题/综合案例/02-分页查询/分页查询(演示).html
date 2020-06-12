@@ -32,10 +32,10 @@
 			},
 			methods : {
 				query(){
-					axios.get("http://47.106.66.89:1112/exa/cr/categroy/find",{
+					axios.get("http://"+location.hostname+":1112/exa/cr/categroy/query",{
 						params : {page:this.page, size:this.size}
 					}).then(res => {
-						this.clist = res.data.data.list;
+						this.clist = res.data.list;
 					});
 				}
 			},
@@ -76,10 +76,10 @@
 			},
 			methods : {
 				query(){
-					axios.get("http://47.106.66.89:1112/exa/cr/categroy/find",{
+					axios.get("http://"+location.hostname+":1112/exa/cr/categroy/query",{
 						params : {page:this.page, size:this.size}
 					}).then(res => {
-						this.data = res.data.data;
+						this.data = res.data;
 					});
 				},
 				first(){
@@ -145,10 +145,10 @@
 			},
 			methods : {
 				query(){
-					axios.get("http://47.106.66.89:1112/exa/cr/categroy/find",{
+					axios.get("http://"+location.hostname+":1112/exa/cr/categroy/query",{
 						params : {page:this.page, size:this.size}
 					}).then(res => {
-						this.data = res.data.data;
+						this.data = res.data;
 					});
 				},
 				first(){

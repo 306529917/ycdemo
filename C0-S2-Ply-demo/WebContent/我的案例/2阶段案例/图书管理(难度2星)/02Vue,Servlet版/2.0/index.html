@@ -65,14 +65,14 @@ input[type="submit"] {
 			methods:{ 
 				  getData(){
 					this.book.op = "query";
-					let url = "http://47.106.66.89:1112/exa/books/find?size=20";
+					let url = "http://"+location.hostname+":1112/exa/books/query?size=20";
 				  	this.$http.get(url).then(res => { 
-				  		this.booklist = res.data.data.list;
+				  		this.booklist = res.data.list;
 				  	});
 				  },
 				  del(book,i){
 					  if(confirm("请确认是否要删除图书 " +book.bookname + " ?")){
-						  this.$http.get("http://47.106.66.89:1112/exa/books/del?id="+book.id).then(res => {
+						  this.$http.post("http://"+location.hostname+":1112/exa/books/del",book).then(res => {
 							  if(res.data.code){
 								  this.booklist.splice(i,1); 
 							  } else {

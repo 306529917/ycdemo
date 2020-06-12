@@ -10,7 +10,7 @@ public class PushBoxAction {
 	
 	@RequestMapping("pushbox/next")
 	public int[][] next(int index){
-		return  Maps.next(index);
+		return  Maps.next(index+1);
 	}
 
 }

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Promise</title>
+</head>
+<script type="text/javascript">
+	var r
+	r = fetch("http://"+location.hostname+":1112/exa/user/find",).then(res=>{
+		return res.json();
+	});
+	console.info(r);
+</script>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Promise</title>
+</head>
+<script type="text/javascript">
+	function post(url, param, callback) {
+		var time = Math.random() * 1100;
+		console.info("访问:" + url + ' 参数:' + param + " 延时:" + time);
+		setTimeout(()=>{
+			"访问:" + url + ' 参数:' + param + " 延时:" + time;
+		}, time);
+	}
+
+	/* post("地址1", "参数1", function() {
+		console.info("结果1");
+		
+		post("地址2", "参数2", function() {
+			console.info("结果2");
+			
+			post("地址3", "参数3", function() {
+				console.info("结果3");
+			})
+		})
+	}); */
+	
+	function post(url, param) {
+		return new Promise(function(resolve,reject){
+			try{
+				var time = Math.random() * 1100;
+				var text = "访问:" + url + ' 参数:' + param + " 延时:" + time;
+				setTimeout(()=>{
+					resolve("成功: " + text);
+				}, time);
+			}catch(e){
+				resolve("失败: " + text);
+			}
+			
+		});
+	}
+
+	post("地址1","参数1").then( text=>{
+		console.info(text);
+		return post("地址2","参数2")
+	}).then( text=>{
+		console.info(text);
+		return post("地址3","参数3")
+	}).then( text=>{
+		console.info(text);
+	});
+	
+	
+</script>
+<body>
+
+</body>
+</html>

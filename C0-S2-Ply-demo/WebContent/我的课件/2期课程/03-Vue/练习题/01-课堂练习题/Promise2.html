@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Promise</title>
+</head>
+<script type="text/javascript">
+	function post(url, param) {
+		return new Promise(function(resolve,reject){
+			try{
+				var time = Math.random() * 1100;
+				var text = "访问:" + url + ' 参数:' + param + " 延时:" + time;
+				setTimeout(()=>{
+					resolve("成功: " + text);
+				}, time);
+			}catch(e){
+				resolve("失败: " + text);
+			}
+			
+		});
+	}
+
+	Promise.all([post("地址1","参数1"),
+		post("地址2","参数2"),
+		post("地址3","参数3")]).then(res=>{
+			for(r of res){
+				console.info(r);
+			}
+		});
+	
+	Promise.race([post("地址4","参数4"),
+		post("地址5","参数5"),
+		post("地址6","参数6")]).then(res=>{
+			console.info(res);
+		});
+	
+	Promise.resolve(post("地址7","参数7")).then(res=>{
+		console.info(res);
+	});
+	
+	Promise.reject(new Error("自定义错误")).then(res=>{
+		console.info(res);
+	});
+	
+</script>
+<body>
+
+</body>
+</html>

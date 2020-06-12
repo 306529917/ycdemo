@@ -177,7 +177,7 @@ var vue = new Vue({
 			}
 		},
 		commit(){
-			axios.post("/hw/commit",buildParams({
+			axios.post("/user/commit",buildParams({
 				name : hwName
 			})).then(res=>{
 				if( res.data.code == 1){
@@ -258,7 +258,7 @@ var vue = new Vue({
 var index = location.href.lastIndexOf("/");
 var hwName = location.href.substring(index+1);
 hwName = decodeURIComponent(hwName);
-axios.post("/hw/isFinished",buildParams({
+axios.post("/user/isFinished",buildParams({
 	name : hwName
 })).then(res=>{
 	if( res.data.code == 1){

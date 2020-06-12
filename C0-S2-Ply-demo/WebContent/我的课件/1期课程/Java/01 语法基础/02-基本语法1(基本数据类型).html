@@ -147,7 +147,7 @@ new Vue({el:"#pres"});
 				<button @click="q.test()" style="float: right">检 查</button><br>
 			</dt>
 			<dd @click="a(q)">
-				<pre v-html="q.content"></pre>
+				<div v-html="q.content"></div>
 			</dd>
 			<dd v-if="q.expect">
 				正确的结果: <span>{{q.expect}}</span><br>

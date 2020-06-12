@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>async and await</title>
+</head>
+<body>
+	<script type="text/javascript">
+		function getSomething() {
+			return "something";
+		}
+
+		async function testAsync() {
+			return Promise.resolve("hello async");
+		}
+
+		async function test() {
+			const v1 = await getSomething();
+			const v2 = await testAsync();
+			console.log(v1, v2);
+		}
+
+		test();
+		
+		
+		function post(url, param) {
+			return new Promise(function(resolve,reject){
+				try{
+					var time = Math.random() * 1100;
+					var text = "访问:" + url + ' 参数:' + param + " 延时:" + time;
+					setTimeout(()=>{
+						resolve("成功: " + text);
+					}, time);
+				}catch(e){
+					resolve("失败: " + text);
+				}
+				
+			});
+		}
+
+		// 带 await
+		async function test2(){
+			await post("地址1","参数1").then( text=>{
+				console.info(text);
+			});
+			
+			await post("地址2","参数2").then( text=>{
+				console.info(text);
+			});
+			
+			await post("地址3","参数3").then( text=>{
+				console.info(text);
+			});
+			
+		}
+		
+		test2()
+		
+		// 不带 await
+		async function test3(){
+			post("地址4","参数4").then( text=>{
+				console.info(text);
+			});
+			
+			post("地址5","参数5").then( text=>{
+				console.info(text);
+			});
+			
+			post("地址6","参数6").then( text=>{
+				console.info(text);
+			});
+			
+		}
+		
+		test3()
+	</script>
+</body>
+</html>

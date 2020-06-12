@@ -70,7 +70,12 @@ function Maps(){
 	}
 	// 远程获取地图
 	this.next = async function(){
-		var ret = await axios.post("next?index="+ ++this.index).then(res=>{return res.data});
+		var ret = await axios.post("next?index=" + this.index)
+		.then(
+			res=>{return res.data},
+			// 出错则取本地
+			err=>{return maps [ this.index % maps.length ]});
+		this.index ++;
 		return ret;
 	}
 }

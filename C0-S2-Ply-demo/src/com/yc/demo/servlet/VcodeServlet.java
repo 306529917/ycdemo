@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.yc.jee.util.VerifyCodeUtils;
 
@@ -14,6 +15,7 @@ public class VcodeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		HttpSession session = request.getSession();
 		String vcode = request.getParameter("vcode");
 		if (vcode != null) {
 			String scode = (String) request.getSession().getAttribute("vcode");
@@ -24,7 +26,7 @@ public class VcodeServlet extends HttpServlet {
 			}
 		} else {
 			String scode = VerifyCodeUtils.outputImage(response);
-			request.getSession().setAttribute("vcode", scode);
+			session.setAttribute("vcode", scode);
 		}
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
