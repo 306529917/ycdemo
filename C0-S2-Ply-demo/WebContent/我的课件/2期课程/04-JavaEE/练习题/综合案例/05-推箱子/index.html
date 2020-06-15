@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>推箱子网页版</title>
+<script src="/C0-S2-Ply-demo/_js/vue.min.js"></script>
+<script src="/C0-S2-Ply-demo/_js/axios.min.js"></script>
+<script type="text/javascript" src="js/map.js"></script>
+<script type="text/javascript" src="js/game.js"></script>
+<style type="text/css">
+ol,li{
+	margin:0px;
+	padding:0px
+}
+</style>
+<script type="text/javascript">
+	function keydown(e) {
+		if ( e.keyCode < 37 || e.keyCode > 40 ){
+			return;
+		}
+		// 判断 v 对象是否创建了
+		if(v){
+			e.keyCode==37  && v.$data.game.left() 	||
+			e.keyCode==38  && v.$data.game.up()  		||
+			e.keyCode==39  && v.$data.game.right()  	||
+			e.keyCode==40  && v.$data.game.down() ;
+			// 判断当前关结束就进入下一关
+			if(v.$data.game.youWin()){
+				alert("你赢了, 共用了" + v.$data.game.getStepNumber()+"步");
+				v.$data.game.next();
+			}
+		}
+	}
+</script>
+</head>
+<body onkeydown="keydown(event)">
+	<div id="main" style="padding: 20px;">
+		<h1>推箱子网页版</h1>
+		<div id="map" style="float: left;">
+			<div style="height: 30px;">
+				<img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img
+					src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img
+					src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif">
+			</div>
+			<div style="height: 30px;">
+				<img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img
+					src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img
+					src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif">
+			</div>
+			<div style="height: 30px;">
+				<img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img
+					src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img
+					src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif">
+			</div>
+			<div style="height: 30px;">
+				<img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img
+					src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img
+					src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif">
+			</div>
+			<div style="height: 30px;">
+				<img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img
+					src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/1.gif"><img src="imgs/1.gif"><img src="imgs/1.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img
+					src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif">
+			</div>
+			<div style="height: 30px;">
+				<img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img
+					src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/1.gif"><img src="imgs/4.gif"><img src="imgs/1.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img
+					src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif">
+			</div>
+			<div style="height: 30px;">
+				<img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/1.gif"><img
+					src="imgs/1.gif"><img src="imgs/1.gif"><img src="imgs/1.gif"><img src="imgs/3.gif"><img src="imgs/1.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img
+					src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif">
+			</div>
+			<div style="height: 30px;">
+				<img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/1.gif"><img
+					src="imgs/4.gif"><img src="imgs/2.gif"><img src="imgs/3.gif"><img src="imgs/5.gif"><img src="imgs/1.gif"><img src="imgs/1.gif"><img src="imgs/1.gif"><img
+					src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif">
+			</div>
+			<div style="height: 30px;">
+				<img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/1.gif"><img
+					src="imgs/1.gif"><img src="imgs/1.gif"><img src="imgs/3.gif"><img src="imgs/2.gif"><img src="imgs/3.gif"><img src="imgs/4.gif"><img src="imgs/1.gif"><img
+					src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif">
+			</div>
+			<div style="height: 30px;">
+				<img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img
+					src="imgs/0.gif"><img src="imgs/1.gif"><img src="imgs/2.gif"><img src="imgs/1.gif"><img src="imgs/1.gif"><img src="imgs/1.gif"><img src="imgs/1.gif"><img
+					src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif">
+			</div>
+			<div style="height: 30px;">
+				<img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img
+					src="imgs/0.gif"><img src="imgs/1.gif"><img src="imgs/4.gif"><img src="imgs/1.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img
+					src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif">
+			</div>
+			<div style="height: 30px;">
+				<img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img
+					src="imgs/0.gif"><img src="imgs/1.gif"><img src="imgs/1.gif"><img src="imgs/1.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img
+					src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif">
+			</div>
+			<div style="height: 30px;">
+				<img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img
+					src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img
+					src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif">
+			</div>
+			<div style="height: 30px;">
+				<img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img
+					src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img
+					src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif">
+			</div>
+			<div style="height: 30px;">
+				<img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img
+					src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img
+					src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif">
+			</div>
+			<div style="height: 30px;">
+				<img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img
+					src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img
+					src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif">
+			</div>
+			<div style="height: 30px;">
+				<img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img
+					src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img
+					src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif">
+			</div>
+			<div style="height: 30px;">
+				<img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img
+					src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img
+					src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif">
+			</div>
+			<div style="height: 30px;">
+				<img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img
+					src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img
+					src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif">
+			</div>
+			<div style="height: 30px;">
+				<img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img
+					src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img
+					src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif"><img src="imgs/0.gif">
+			</div>
+		</div>
+		<div id="ctl" style="padding: 20px; float: left; text-align: center;">
+			<h2>第1关</h2>
+			<span>第0步</span> <br> <br> <select id="level" style="width: 100px; text-align: center; height: 25px;"><option>第1关</option>
+				<option>第2关</option>
+				<option>第3关</option></select> <br> <br>
+			<input placeholder="尊姓大名" style="width: 96px; text-align: center;">
+			<br> <br>
+			<button style="width: 100px;">重新开始</button>
+			<br> <br>
+			<button style="width: 100px;">保 存</button>
+			<br> <br>
+			<button style="width: 100px;">加 载</button>
+		</div>
+		<div id="ctl" style="padding: 20px; float: left; text-align: center;">
+			<h2>排名</h2>
+			<ol>
+				<li>卢俊义 (7)</li>
+				<li>时迁 (7)</li>
+				<li>吴用 (6)</li>
+				<li>林冲 (5)</li>
+				<li>宋江 (4)</li>
+			</ol>
+		</div>
+	</div>
+</body>
+</html>

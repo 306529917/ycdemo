@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+<head>
+<base target="_blank">
+<meta charset="UTF-8">
+<meta http-equiv="pragma" content="no-cache"> 
+<meta http-equiv="Cache-Control" content="no-cache, must-revalidate"> 
+<meta http-equiv="expires" content="Wed, 26 Feb 1997 08:21:57 GMT">
+<title>练习题</title>
+<script src="/C0-S2-Ply-demo/_js/vue.min.js"></script>
+<script type="text/javascript" src="/C0-S2-Ply-demo/_js/axios.min.js"></script>
+<link href="/C0-S2-Ply-demo/_css/magiczoomplus.css" rel="stylesheet" type="text/css" media="screen"/>
+<script src="/C0-S2-Ply-demo/_js/magiczoomplus.js"></script>
+<link rel="stylesheet" type="text/css" href="/C0-S2-Ply-demo/_css/q1.css">
+<script type="text/javascript" src="/C0-S2-Ply-demo/_js/pub1.js"></script>
+</head>
+<body>
+<div style="display: none;" id="pres">
+<!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
+<div>
+<c>面向对象就是使用对象进行程序设计，简写成OOP，{[OOP由三个单词的首字母构成][OOP不包括哪个单词]}
+|Object|Oriented|Programming|!Original</c>
+</div>
+
+<div>
+<c>面向对象的编程思想{[][不]}包括
+|旨在计算机程序中模拟现实世界中的概念
+|在OOP中，现实世界的所有事物全都被视为对象
+|在计算机程序中用相似的实体模拟现实世界中的实体
+|设计和实现软件系统的方法
+|!只是程序设计的一种思想, 与编写代码无关</c>
+</div>
+
+<div>
+<c>{[什么是类?][关于类的描述错误的是]}
+|人们为了更好地认识世界，将现实生活中的事物（对象）划分成类
+|同一类中的事物总是具有一些共性
+|类以共同的特性和行为定义实体
+|类是具有相同属性和行为的一组对象的集合
+|!类一种看得到摸得着的物质</c>
+</div>
+
+<div>
+<c>对象是面向对象编程的核心部分，是实际存在的具体实体，具有明确定义的{[状态和行为][颜色和大小]}</c>
+<c>{[对象][类]}其实就是“数据”和“函数”的封装体</c>
+<c>对象中的{[数据][函数]}表示自身的状态，也称作“属性”或“成员数据”</c>
+<c>对象中的{[函数][数据]}表示自身的功能，也称作“方法”或“成员函数”</c>
+</div>
+<!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
+</div>
+<script type="text/javascript">
+new Vue({el:"#pres"});
+</script>
+<!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
+
+<div id="main">
+	<fieldset class="alist">
+		<legend>答题结果</legend>
+		<div style="display: table;width: 100%">
+			<div style="display: table-cell;vertical-align: middle;">
+				<span class="res" v-for="q,i in questions">
+					题{{i+1}}: <b style="color: red">{{q.result?'对':''}}</b>
+				</span>
+			</div>
+			<div style="display: table-cell; width: 150px; text-align: center;">
+				<button @click="commit" :disabled="finish==false">提交答卷</button>
+			</div>
+		</div>
+	</fieldset>
+	<fieldset>
+		<legend>题目: </legend>
+		<div class="qlist">
+		<dl v-for="q,i in questions">
+			<dt>第{{i+1}}题 <b style="color: red;">{{q.result?'对':''}}</b>
+				<button @click="q.test()" style="float: right">检 查</button><br>
+			</dt>
+			<dd @click="a(q)">
+				<div v-html="q.content"></div>
+			</dd>
+			<dd v-if="q.expect">
+				正确的结果: <span>{{q.expect}}</span><br>
+				你写的结果: <span>{{q.resultText}}</span>
+			</dd>
+		</dl>
+		</div>
+	</fieldset>
+</div>
+</body>
+<script type="text/javascript" src="/C0-S2-Ply-demo/_js/q1.js"></script>
+</html>
