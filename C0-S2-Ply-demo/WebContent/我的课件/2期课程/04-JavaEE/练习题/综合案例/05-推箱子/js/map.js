@@ -80,6 +80,8 @@ function Maps(){
 				// axios 会自动的帮我们转换 js 对象
 				// axios 返回的数据 是 res.data
 				return res.data;
+			}, ()=>{
+				return this.maps[this.index];
 			});
 		return ret;
 	}
