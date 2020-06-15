@@ -59,10 +59,10 @@ ol,li,{
 			<button @click="game.reset()"style="width: 100px">重新开始</button>
 			<br>
 			<br>
-			<button @click="save" style="width: 100px">保    存</button>
+			<button @click="save" style="width: 100px">存    档</button>
 			<br>
 			<br>
-			<button @click="load" style="width: 100px">加    载</button>
+			<button @click="load" style="width: 100px">取    档</button>
 		</div>
 		<div id="ctl" style="padding: 20px; float: left; text-align: center;">
 			<h2>排名</h2>
@@ -152,11 +152,7 @@ ol,li,{
 							var gameScore = res.data;
 							// 将data中的 json 字符串 转为 Game 对象
 							this.dbgame = JSON.parse(gameScore.data);
-							this.game.map = this.dbgame.map;
-							this.game.mapOld = this.dbgame.mapOld;
-							this.game.isOver = this.dbgame.isOver;
-							this.game.stepNumber = this.dbgame.stepNumber;
-							this.game.maps.index = this.dbgame.maps.index;
+							this.game.load(this.dbgame);
 							// 作业, 请尝试更新关数(数据库中有数据) 和 步数
 							//this.game.map.index = gameScore.level;
 							//alert(gameScore.level);
@@ -177,10 +173,8 @@ ol,li,{
 					//读取当前的选择的关数
 					var selLevel = document.getElementById("level");
 					var index = selLevel.selectedIndex;// 获取选中项的索引
-					// 设置 当前关为 选中的关数的前一关
-					this.game.maps.index = index; // index 正好前一关的索引
-					// 加载下一关( 选中的关 )
-					this.game.next();
+					// 设置 当前关为 选中的关数( 第一关不是0, 是 1)
+					this.game.reset( index + 1 );
 				}
 			}
 		})

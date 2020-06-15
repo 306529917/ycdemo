@@ -1,5 +1,5 @@
 function Game() {
-
+	// 地图对象
 	this.maps = new Maps();
 	// 地图 二维数组
 	this.map = null;
@@ -22,13 +22,21 @@ function Game() {
 	}
 
 	/**
-	 * 重来一次
+	 * 重来一次, index 表示关数(第一关是1), 不传入表示当前关从来,否则重来指定关数
 	 */
-	this.reset = function() {
-		this.stepNumber = 0;
-		this.isOver = false;
-		this.map = clone(this.mapOld);
-		return this.map;
+	this.reset = function(index) {
+		if(index){
+			// 先设置为前一关
+			this.maps.index = index - 1;
+			// 再加载下一关( 当前关 )
+			this.next();
+		} else {
+			// 重置属性
+			this.stepNumber = 0;
+			this.isOver = false;
+			this.map = clone(this.mapOld);
+			return this.map;
+		}
 	}
 
 	/**
@@ -38,21 +46,33 @@ function Game() {
 		return this.map;
 	}
 	
+	/**
+	 * 小人上移
+	 */
 	this.up = function() {
 		var xy = this.moveMan(0, -1);
 		this.map[xy[1]][xy[0]] = 8;
 	}
 
+	/**
+	 * 小人下移
+	 */
 	this.down = function() {
 		var xy = this.moveMan(0, 1);
 		this.map[xy[1]][xy[0]] = 5;
 	}
 
+	/**
+	 * 小人左移
+	 */
 	this.left = function() {
 		var xy = this.moveMan(-1, 0);
 		this.map[xy[1]][xy[0]] = 6;
 	}
 
+	/**
+	 * 小人右移
+	 */
 	this.right = function() {
 		var xy = this.moveMan(1, 0);
 		this.map[xy[1]][xy[0]] = 7;
@@ -60,7 +80,6 @@ function Game() {
 
 	/**
 	 * 移动小人
-	 * 
 	 * @param ox
 	 * @param oy
 	 * @return 返回小人的坐标
@@ -101,7 +120,6 @@ function Game() {
 
 	/**
 	 * 移动物体( 小人或箱子 )
-	 * 
 	 * @param x
 	 * @param y
 	 * @param ox
@@ -125,8 +143,6 @@ function Game() {
 
 	/**
 	 * 找小人的位置, 地图中为 5,6,7,8的格子
-	 * 
-	 * @return
 	 */
 	this.findMan = function() {
 		for (var y = 0; y < this.map.length; y++) {
@@ -142,8 +158,6 @@ function Game() {
 
 	/**
 	 * 判断游戏是否结束, 就是地图上所得目的的格子( 值为4) 全部被箱子替换了, 这要用原始地图来判断
-	 * 
-	 * @return
 	 */
 	this.youWin = function() {
 		for (var y = 0; y < this.map.length; y++) {
@@ -158,13 +172,31 @@ function Game() {
 		return true;
 	}
 
-	// 返回移动的步数
+	/**
+	 * 返回移动的步数
+	 */
 	this.getStepNumber = function() {
 		return this.stepNumber;
+	}
+	
+	/**
+	 * 加载游戏存档    dbgame 从数据库获取的存档对象(结构(属性)与当前对象一致, 但是没有函数)
+	 */ 
+	this.load = function(dbgame){
+		this.map = dbgame.map;
+		this.mapOld = dbgame.mapOld;
+		this.isOver = dbgame.isOver;
+		this.stepNumber = dbgame.stepNumber;
+		this.maps.index = dbgame.maps.index;
 	}
 
 }
 
+/**
+ * 克隆对象, js没有克隆方法, 要自己写
+ * @param Obj
+ * @returns
+ */
 function clone(Obj) {
 	var buf;
 	if (Obj instanceof Array) {
