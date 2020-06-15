@@ -81,7 +81,7 @@ function Maps(){
 				// axios 返回的数据 是 res.data
 				return res.data;
 			}, ()=>{
-				return this.maps[this.index];
+				return maps[this.index - 1];
 			});
 		return ret;
 	}
