@@ -9,8 +9,6 @@ function Game() {
 	this.isOver = null;
 	// 记录移动的步数
 	this.stepNumber = 0;
-	// 关数
-	this.getIndex = ()=>{return this.maps.index};
 
 	// 获取下一张地图
 	this.next = async function() {
@@ -39,13 +37,6 @@ function Game() {
 		}
 	}
 
-	/**
-	 * 返回当前地图
-	 */
-	this.getMap = function() {
-		return this.map;
-	}
-	
 	/**
 	 * 小人上移
 	 */
@@ -172,13 +163,6 @@ function Game() {
 		return true;
 	}
 
-	/**
-	 * 返回移动的步数
-	 */
-	this.getStepNumber = function() {
-		return this.stepNumber;
-	}
-	
 	/**
 	 * 加载游戏存档    dbgame 从数据库获取的存档对象(结构(属性)与当前对象一致, 但是没有函数)
 	 */ 

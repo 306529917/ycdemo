@@ -3,8 +3,88 @@
 <head>
 <meta charset="UTF-8">
 <title>案例说明</title>
+<style type="text/css">
+#server-api>li{
+	margin-bottom: 20px
+}
+label{
+	display: table-cell;
+}
+#olFile{
+	display: table;
+	width: 100%
+}
+#olFile>li{
+	display: table-row;
+}
+#olFile>li:hover{
+	background-color: #ddd
+}
+h3+*:hover{
+	background-color: #eee
+}
+</style>
 </head>
 <body>
-
+	<h3>案例说明</h3>
+	<p>推箱子游戏已经实现了游戏功能, 请根据要求完成游戏的相关功能.  <a href="index(演示).html" >功能演示</a></p>
+	<h3>需求说明</h3>
+	<ol>
+		<li>Game.map 对象是游戏的地图, 其为一个二维数组, 存放的元素为0~9的数字, 对应 imgs 下的图片, 请动态渲染到 map div 中
+		<li>实现游戏存档功能, 前提: 玩家必须输入姓名
+		<li>实现游戏取档功能, 前提: 玩家必须输入姓名
+		<li>实现页面打开时, 如果 cookie 中有 pushboxName 值, 则获取对应玩家存档, 直接打开玩家存档
+		<li>实现排行榜功能
+		<li>实现玩家选关功能(已经通关的关数)
+	</ol>
+	<h3>相关文件说明</h3>
+	<ol id="olFile">
+		<li><label>game.js</label><label>为游戏逻辑js文件( 请仔细查看源码获取游戏对象的操作函数说明 )</label>
+		<li><label>map.js</label><label>为地图js, 默认存放5张本地地图</label>
+		<li><label>index.html</label><label>游戏主界面, <b>请在该文件中完成前端代码开发</b></label>
+		<li><label>java/maps/*.map</label><label>为 50 个关卡地图文件</label>
+		<li><label>java/game_score.sql</label><label>游戏存档表SQL脚本</label>
+		<li><label>java/GameScore.java</label><label>游戏存档实体类</label>
+		<li><label>java/Maps.java</label><label>获取地图的工具类</label>
+	</ol>
+	<h3>服务器接口说明</h3>
+	<ol id="server-api">
+		<li><hr>排行榜接口： <a href="http://47.106.66.89:1112/exa/game/score/top">http://47.106.66.89:1112/exa/game/score/top</a><br>
+			<i>请求参数:</i>
+			<ol>
+				<li>rows: 取排行榜前几名(不传默认前5名), 例如:取前10名, rows=10
+			</ol>
+		<li><hr>获取地图接口： <a href="http://47.106.66.89:1112/exa/game/score/getMap?index=1">http://47.106.66.89:1112/exa/game/score/getMap?index=1</a><br>
+			<i>请求参数:</i>
+			<ol>
+				<li>index: 关数(数字:1~50)
+			</ol>
+		<li><hr>存档接口： http://47.106.66.89:1112/exa/game/score/save ( POST 请求, 无法测试)<br>
+			<i>请求参数:</i>
+			<ol>
+				<li>name: 玩家姓名(自定义)
+				<li>game: 推箱子(常量值)
+				<li>level: 当前关数(数字:1~50)
+				<li>data: game对象(json字符串)
+			</ol>
+		<li><hr>取档接口： http://47.106.66.89:1112/exa/game/score/load ( POST 请求, 无法测试)<br>
+			<i>请求参数:</i>
+			<ol>
+				<li>name: 玩家姓名(自定义)
+				<li>game: 推箱子(常量值)
+			</ol>
+	</ol>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 </body>
 </html>
