@@ -113,15 +113,18 @@ span {
 						alert("图书保存成功!");
 						location.href = "index.html";
 					} else {
-						for(var index in res.data.data){
-							if(this.errors[res.data.data[index].field]){
-								this.errors[res.data.data[index].field] = res.data.data[index];
+						for(let e in this.errors ){
+							this.errors[e] = {};
+						}
+						console.info(this.errors)
+						for(let e of res.data.data){
+							if(this.errors[e.field]){
+								this.errors[e.field] = e;
 							}
 						}
 						if( ! this.book.id){
 							this.errors.id = {};
 						}
-						res.data.msg || alert(res.data.msg);
 					}
 				});
 			},

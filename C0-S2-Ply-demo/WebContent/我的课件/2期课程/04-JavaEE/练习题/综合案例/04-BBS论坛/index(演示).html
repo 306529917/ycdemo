@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<TITLE>论坛</TITLE>
+<Link rel="stylesheet" type="text/css" href="style/style.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/axios/0.19.2/axios.min.js"></script>
+<script src="js/_bbs.js"></script>
+</HEAD>
+
+<BODY>
+	<div id="main">
+		<!--  页头 用户信息、登录、注册        -->
+		<bbshead></bbshead>
+		<!--      主体        -->
+		<DIV class="t">
+			<TABLE cellSpacing="0" cellPadding="0" width="100%">
+				<TR class="tr2" align="center">
+					<TD colSpan="2">论坛</TD>
+					<TD style="WIDTH: 10%;">主题</TD>
+					<TD style="WIDTH: 30%">最后发表</TD>
+				</TR>
+				<template v-for=" b in list "> 
+					<!--       主版块       -->
+					<TR v-if="showParent(b.pname)" class="tr3">
+						<TD colspan="4">{{b.pname}}</TD>
+					</TR>
+					<!--       子版块       -->
+					<TR class="tr3">
+						<TD width="5%">&nbsp;</TD>
+						<TH align="left"><IMG src="image/board.gif"> <A v-bind:href="  '_list.html#' + b.boardid">{{b.bname}}</A></TH>
+						<TD align="center">{{b.cnt}}</TD>
+						<TH><SPAN> <A v-bind:href="  '_detail.html#' + b.topicid">{{b.title}} </A>
+						</SPAN> <BR /> <SPAN>{{b.uid}}</SPAN> <SPAN class="gray">[ {{b.publishtime}} ]</SPAN></TH>
+					</TR>
+				</template>
+			</TABLE>
+		</DIV>
+		
+		<!-- 页脚 公司链接 -->
+		<bbsfoot></bbsfoot>
+		
+	</div>
+	<script type="text/javascript">
+	// 循环时, 记录当前的板块名
+	var currentBoardName = null;
+	var vue2 = new Vue( { 
+		el : "#main",   // 将 vue 对象与 dataTable 进行绑定
+		data : {
+			list : [],		 // 定义要展示的数据, js 的数组 用 [] 定义
+		},
+		created : function(){
+			var url = "queryIndex";
+			axios.get(url).then( res => {  // 箭头函数
+				// 将json字符串转成js对象(当前是数组)
+				// 赋值给 vue data 中 list 数组
+				this.list = res.data; 
+			});
+		},
+		methods : {
+			showParent(pname){
+				// 如果当前行的父板块等于 currentBoardName 那就不用显示父板块
+				if(pname == currentBoardName){
+					return false;
+				} else {
+					// 将当前行父板块名称赋值给 currentBoardName
+					currentBoardName = pname;
+					// 返回 true 表示要显示父板块
+					return true;
+				}
+			}
+		}
+	} );
+	
+	</script>
+</BODY>
+</HTML>

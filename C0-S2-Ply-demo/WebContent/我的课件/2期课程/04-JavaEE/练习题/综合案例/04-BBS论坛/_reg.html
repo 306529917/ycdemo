@@ -1,0 +1,121 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<TITLE>论坛--注册</TITLE>
+<!-- 导入 js 文件 -->
+<Link rel="stylesheet" type="text/css" href="style/style.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/axios/0.19.2/axios.min.js"></script>
+<script src="js/_bbs.js"></script>
+</HEAD>
+<BODY>
+	<div id="main">
+		<!--  页头 用户信息、登录、注册        -->
+		<bbshead></bbshead>
+
+		<BR />
+		<!--      导航        -->
+		<DIV>
+			&gt;&gt;<B><a href="_index.html">论坛首页</a></B>
+		</DIV>
+		<!--      用户注册表单        -->
+		<DIV class="t" style="MARGIN-TOP: 15px" align="center">
+			<FORM name="regForm" action="" method="post">
+				<br />用&nbsp;户&nbsp;名 &nbsp;
+				<INPUT v-model="uname" class="input" tabIndex="1" tryp="text" maxLength="20" size="35" name="uName">
+				<br />密&nbsp;&nbsp;&nbsp;&nbsp;码 &nbsp;
+				<INPUT v-model="upass" class="input" tabIndex="2" type="password" maxLength="20" size="40" name="uPass">
+				<br />重复密码 &nbsp;
+				<INPUT v-model="reupass" class="input" tabIndex="3" type="password" maxLength="20" size="40" name="uPass1">
+				<br />性别 &nbsp; 女
+				<input v-model="gender" type="radio" name="gender" value="1">
+				男
+				<input v-model="gender" type="radio" name="gender" value="2" />
+				<!--  checked="checked"  -->
+				<br />请选择头像 <br /> <img src="image/head/1.gif" />
+				<input v-model="head" type="radio" name="head" value="1.gif">
+				<!--  checked="checked"  -->
+				<img src="image/head/2.gif" />
+				<input v-model="head" type="radio" name="head" value="2.gif">
+				<img src="image/head/3.gif" />
+				<input v-model="head" type="radio" name="head" value="3.gif">
+				<img src="image/head/4.gif" />
+				<input v-model="head" type="radio" name="head" value="4.gif">
+				<img src="image/head/5.gif" />
+				<input v-model="head" type="radio" name="head" value="5.gif">
+				<BR /> <img src="image/head/6.gif" />
+				<input v-model="head" type="radio" name="head" value="6.gif">
+				<img src="image/head/7.gif" />
+				<input v-model="head" type="radio" name="head" value="7.gif">
+				<img src="image/head/8.gif" />
+				<input v-model="head" type="radio" name="head" value="8.gif">
+				<img src="image/head/9.gif" />
+				<input v-model="head" type="radio" name="head" value="9.gif">
+				<img src="image/head/10.gif" />
+				<input v-model="head" type="radio" name="head" value="10.gif">
+				<BR /> <img src="image/head/11.gif" />
+				<input v-model="head" type="radio" name="head" value="11.gif">
+				<img src="image/head/12.gif" />
+				<input v-model="head" type="radio" name="head" value="12.gif">
+				<img src="image/head/13.gif" />
+				<input v-model="head" type="radio" name="head" value="13.gif">
+				<img src="image/head/14.gif" />
+				<input v-model="head" type="radio" name="head" value="14.gif">
+				<img src="image/head/15.gif" />
+				<input v-model="head" type="radio" name="head" value="15.gif">
+				<br />
+				<INPUT @click="reg()" class="btn" tabIndex="4" type="button" value="注 册">
+			</FORM>
+		</DIV>
+		<!-- 页脚 公司链接 -->
+		<bbsfoot></bbsfoot>
+	</div>
+	<script type="text/javascript">
+var vue = new Vue( {
+	el : "#main",
+	data : {
+		// 定义vue变量
+		uname : "",
+		upass : "",
+		reupass : "",
+		gender : "1",
+		head : "1.gif",
+	},
+	// 定义vue方法
+	methods : {
+		// 注册方法
+		reg(){
+			this.uname = trim(this.uname);
+			this.upass = trim(this.upass);
+			this.reupass = trim(this.reupass);
+			
+			if(test(this.uname=='',"请输入用户名!") ||
+				test(this.upass=='',"请输入密码!") ||
+				test(this.reupass=='',"请输入确认密码!") ||
+				test(this.upass!=this.reupass,"两次输入的密码不一致!")){
+				return;
+			}
+			
+			var user = {
+				uname : this.uname,   // 前面是请求参数名,  后面是vue 变量值
+				upass : this.upass,
+				reupass : this.reupass,
+				gender : this.gender,
+				head : this.head,
+			}; // json 格式
+			
+			axios.post("user/add", params(user)).then( res => {
+				if(res.data.code){
+					alert("注册成功!");
+					location.href="_login.html";
+				} else {
+					alert(res.data.msg);
+				}
+			});
+		}
+	}
+} );
+
+</script>
+</HTML>

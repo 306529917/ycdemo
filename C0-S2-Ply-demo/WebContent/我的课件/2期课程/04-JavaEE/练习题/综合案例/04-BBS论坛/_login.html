@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<TITLE>论坛--登录</TITLE>
+<Link rel="stylesheet" type="text/css" href="style/style.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/axios/0.19.2/axios.min.js"></script>
+<script src="js/_bbs.js"></script>
+</HEAD>
+
+<BODY>
+	<div id="main">
+		<!--  页头 用户信息、登录、注册        -->
+		<bbshead></bbshead>
+
+
+		<BR />
+		<!--      导航        -->
+		<DIV>
+			&gt;&gt;<B><a href="index(演示).html">论坛首页</a></B>
+		</DIV>
+		<!--      用户登录表单        -->
+		<DIV class="t" style="MARGIN-TOP: 15px" align="center">
+			<FORM name="loginForm" action="" method="post">
+				<br />用户名 &nbsp;
+				<INPUT v-model="uname" class="input" tabIndex="1" type="text" maxLength="20" size="35" name="uName">
+				<br />密 码 &nbsp;
+				<INPUT v-model="upass" class="input" tabIndex="2" type="password" maxLength="20" size="40" name="uPass">
+				<br />
+				<INPUT @click="login()" class="btn" tabIndex="6" type="button" value="登 录">
+			</FORM>
+		</DIV>
+	</div>
+	<script type="text/javascript">
+var vue = new Vue({
+	el : "#main",
+	data : {
+		uname : "",
+		upass : ""
+	},
+	methods : {
+		login(){
+			var user = {
+				uname : this.uname,   // 前面是请求参数名,  后面是vue 变量值
+				upass : this.upass,
+			}; // json 格式
+			axios.post("user/login", params(user)).then( res => {
+				if(res.data.code){
+					document.cookie = "sid=" + res.data.data + ";path=/";
+					alert("登录成功!");
+					// 跳转到首页
+					location.href = "index(演示).html";
+				} else {
+					var msg = '';
+					for(var m of res.data.data){
+						msg += "\r\n"+m.defaultMessage;
+					}
+					alert(msg);
+				}
+			});
+		}
+	}
+});
+
+</script>
+</BODY>
+</HTML>
