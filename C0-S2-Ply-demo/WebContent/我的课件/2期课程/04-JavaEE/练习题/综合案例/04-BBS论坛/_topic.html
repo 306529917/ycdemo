@@ -13,24 +13,19 @@
 <BODY>
 	<div id="main">
 		<!--  页头 用户信息、登录、注册        -->
-		<bbshead></bbshead>
+		<bbshead ref="head" require></bbshead>
 
 		<BR />
 		<!--      导航        -->
 		<DIV>
-			&gt;&gt;<B><a href="index.html">论坛首页</a></B>
+			&gt;&gt;<B><a href="index(演示).html">论坛首页</a></B>
 		</DIV>
 		<!--      用户登录表单        -->
 		<DIV class="t" style="MARGIN-TOP: 15px" align="center">
 			<FORM name="loginForm" action="" method="post">
-
-				<br />标 题 &nbsp;
-				<INPUT v-model="title" class="input" tabIndex="1" type="text" maxLength="20" size="35" name="uName">
-				<br />内 容 &nbsp;
-				<textarea v-model="content" class="input" tabIndex="2" style="width: 210px"></textarea>
-
-				<br />
-				<INPUT @click="login()" class="btn" tabIndex="6" type="button" value="发 表">
+				<INPUT placeholder="标题" v-model="title" class="input" tabIndex="1" maxLength="20" name="uName">
+				<textarea id="cont" v-model="content" class="input" tabIndex="2" style="width: 210px"></textarea>
+				<INPUT @click="commit()" class="btn" tabIndex="6" type="button" value="发 表">
 			</FORM>
 		</DIV>
 	</div>
@@ -42,16 +37,17 @@ var vue = new Vue({
 		content : ""
 	},
 	methods : {
-		login(){
+		commit(){
 			var url = "topic/add";
 			// js 中有一个 location 对象(地址对象) , 其中有个属性叫hash, 浏览器地址中的锚点
 			var boardid = location.hash.substring(1) ;
-			var user = {
+			var data = {
 				title : this.title,   // 前面是请求参数名,  后面是vue 变量值
-				content : this.content,
-				boardid : boardid
+				content : CKEDITOR.instances.cont.getData(),
+				boardid : boardid,
+				uid : this.$refs.head.loginedUser.id
 			}; // json 格式
-			axios.post(url, params(user)).then( res => {
+			axios.post(url, params(data)).then( res => {
 				alert(res.data.msg);
 				if(res.data.code){
 					// 跳转到首页
@@ -59,6 +55,9 @@ var vue = new Vue({
 				}
 			});
 		}
+	},
+	mounted(){
+		CKEDITOR.replace( 'cont' );
 	}
 });
 

@@ -43,6 +43,7 @@ function getCookie(cname) {
 // axios.defaults.withCredentials = true;
 axios.defaults.baseURL = "http://" + location.hostname + ":1113/bbs/"
 var sid = getCookie("sid");
+var hashid = location.hash.substring(1);
 
 axios.interceptors.request.use(
 	config=>{
@@ -66,8 +67,12 @@ axios.interceptors.request.use(
  */ 
 Vue.component("bbshead",{
 	data(){
-		return {loginedUser : null}
+		return {
+			loginedUser : null,
+			require : undefined
+		}
 	},
+	props : ["require"],
 	template : `
 	<div>
 		<DIV>
@@ -75,9 +80,15 @@ Vue.component("bbshead",{
 		</DIV>
 		<!--      用户信息、登录、注册        -->
 		<DIV class="h">
-			<span v-if="loginedUser">欢迎 {{loginedUser.uname}}</span>
-			<span v-else>您尚未　<a href="_login.html">登录</a></span>
-			&nbsp;| &nbsp; <A href="_reg.html">注册</A> |
+			<span v-if="loginedUser">
+				欢迎 {{loginedUser.uname}}
+				&nbsp;| &nbsp; <A href="#" @click="logout">退出</A> |
+			</span>
+			<span v-else>
+				您尚未　<a href="_login.html">登录</a>
+				&nbsp;| &nbsp; <A href="_reg.html">注册</A> |
+			</span>
+			
 		</DIV>
 	</div>
 	`,
@@ -86,7 +97,18 @@ Vue.component("bbshead",{
 		axios.get("getLoginedUser").then( res => {
 			// 获取登录的用户名, 服务器会返回 null 字符串值
 			this.loginedUser = res.data;
+			if( this.require != undefined && ! res.data) {
+				alert("请先登录!");
+				location.href = "_login.html";
+			}
 		});
+	},
+	methods : {
+		logout(){
+			axios.get("user/logout").then( res => {
+				location.href = "index(演示).html";
+			});
+		}
 	}
 });
 
