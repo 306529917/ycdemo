@@ -125,26 +125,30 @@ function getCookie(cname) {
     return "";
 }
 
-if($ && $.messager){
-	window.alert = function(msg,icon,fn){
-		msg = msg.replace(/\n/g,"<br>");
-		$.messager.alert('系统提示',msg,icon?icon:"info",fn);
-	};
-	window.show = function(msg,config){
-		msg = msg.replace(/\n/g,"<br>");
-		if(! config){
-			config = {};
-		}
-		config.title = "系统提示";
-		config.msg = msg;
-		$.messager.show(config);
-	};
-	window.confirm = function(msg,fn){
-		msg = msg.replace(/\n/g,"<br>");
-		$.messager.confirm("系统提示", msg, fn);
-	};
-	window.prompt = function(msg,fn){
-		msg = msg.replace(/\n/g,"<br>");
-		$.messager.prompt("系统提示", msg, fn);
-	};
+try{
+	if($ && $.messager){
+		window.alert = function(msg,icon,fn){
+			msg = msg.replace(/\n/g,"<br>");
+			$.messager.alert('系统提示',msg,icon?icon:"info",fn);
+		};
+		window.show = function(msg,config){
+			msg = msg.replace(/\n/g,"<br>");
+			if(! config){
+				config = {};
+			}
+			config.title = "系统提示";
+			config.msg = msg;
+			$.messager.show(config);
+		};
+		window.confirm = function(msg,fn){
+			msg = msg.replace(/\n/g,"<br>");
+			$.messager.confirm("系统提示", msg, fn);
+		};
+		window.prompt = function(msg,fn){
+			msg = msg.replace(/\n/g,"<br>");
+			$.messager.prompt("系统提示", msg, fn);
+		};
+	}	
+}catch(e){
+	
 }
