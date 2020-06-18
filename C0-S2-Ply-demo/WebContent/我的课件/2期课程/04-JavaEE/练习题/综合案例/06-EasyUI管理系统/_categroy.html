@@ -27,9 +27,7 @@
 	
 	function query(){
 		$('#dg').datagrid('load',{
-			bookname: "~"+$("#name").textbox('getValue'),
-			bookpress: "~"+$("#press").textbox('getValue'),
-			pressdate: $("#date").textbox('getValue'),
+			name: "~"+$("#nm").textbox('getValue'),
 		});
 	}
 	
@@ -54,7 +52,7 @@
 		$.messager.confirm('系统提示', '请确认是否要删除该记录?', function(r){
 			if (r){
 				var rows = $('#dg').datagrid("getRows");
-				$.post(baseurl+"books/del",{id:rows[index].id},(ret)=>{
+				$.post(baseurl+"cr/categroy/del",{id:rows[index].id},(ret)=>{
 					if(ret.code){
 						alert('删除成功!');
 						$('#dg').datagrid("reload");
@@ -68,8 +66,8 @@
 	}
 	function save() {
 		$.post(
-			baseurl+"books/save",
-			paramsByEasyUI("id","bookname","bookpress", "pressdate","bookauthor","bookcount","bookimage")
+			baseurl+"cr/categroy/save",
+			paramsByEasyUI("id","name","pid")
 			,(ret)=>{
 				if(ret.code){
 					alert('保存成功!');
@@ -97,9 +95,7 @@
 		<div data-options="region:'north'" style="height: 50px;">
 			<!-- prompt="书名:"  ==  data-options="prompt:'书名:'" -->
 			<div style="height: 50px; margin: 10px">
-				<input class="easyui-textbox" label="书名:" style="width: 200px" id="name">
-				<input class="easyui-textbox" label="出版社:" style="width: 200px" id="press">
-				<input class="easyui-datebox" label="出版日期:" style="width: 200px" id="date" data-options="formatter:fmtDate">
+				<input class="easyui-textbox" label="名称:" style="width: 200px" id="nm">
 				<a class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="query()">查询</a>
 				<a class="easyui-linkbutton" data-options="iconCls:'icon-add'" onclick="edit()">新增</a>
 			</div>
@@ -107,31 +103,22 @@
 		<div data-options="region:'center',title:'查询结果', iconCls:'icon-ok'">
 			<table class="easyui-datagrid" id="dg"
 				data-options="
-				url:baseurl+'books/query',
+				url:baseurl+'cr/categroy/query',
 				method:'get',
 				border:false,
 				singleSelect:true,
 				fit:true,
 				fitColumns:true,
 				pagination:true,
-				pageList:[5,10,20,50],
-				pageSize:5,
+				pageList:[10,20,50,100],
 				loadFilter:lf,
 				onLoadSuccess:ols">
 				<thead>
 					<tr>
 						<th data-options="field:'id', width:30">编号</th>
-						<th data-options="field:'bookname', width:100">书名</th>
-						<th data-options="field:'bookpress', width:100">出版社</th>
-						<th data-options="field:'pressdate', width:100, formatter:fmtPd">出版时间</th>
-						<th data-options="field:'bookauthor', width:100">作者</th>
-						<th data-options="field:'bookcount', width:50">数量</th>
-						<th data-options="field:'bookimage', 
-							width:100, 
-							formatter:fmtImg, 
-							align:'center'">图片</th>
-						<!-- 使用一个不存在字段名 就能看到按钮 -->
-						<th data-options="field:'idd', width:100, formatter:fmtOp,align:'center'">操作</th>
+						<th data-options="field:'name', width:100">名称</th>
+						<th data-options="field:'pid', width:30">父编号</th>
+						<th data-options="field:'idd', width:30, formatter:fmtOp,align:'center'">操作</th>
 					</tr>
 				</thead>
 			</table>
@@ -139,7 +126,7 @@
 	</div>
 
 	<!-- 图书编辑窗口 -->
-	<div id="dd" class="easyui-dialog" title="编辑图书信息" style="width: 500px; height: 450px;"
+	<div id="dd" class="easyui-dialog" title="编辑图书信息" style="width: 500px; height: 250px;"
 		data-options="
 	    iconCls:'icon-save',
 	    resizable:true,
@@ -148,29 +135,18 @@
 	    buttons:'#bb'">
 		<form id="ff" style="text-align: center;">
 			<br>
-			<input style="width: 90%" class="easyui-textbox" id="id" name="id" label="编号:"  readonly="readonly">
+			<input style="width: 90%" class="easyui-textbox" id="id" name="id" label="编号:" readonly="readonly">
 			<br>
 			<br>
-			<input style="width: 90%" class="easyui-textbox" id="bookname" name="bookname" label="书名:">
+			<input style="width: 90%" class="easyui-textbox" id="name" name="name" label="名称:">
 			<br>
 			<br>
-			<input style="width: 90%" class="easyui-combobox" id="bookpress" name="bookpress" label="出版社:" valueField="bookpress" textField="bookpress" data-options="url:baseurl+'books/item?col=bookpress',method:'get'">
-			<br>
-			<br>
-			<input style="width: 90%" class="easyui-datebox" id="pressdate" name="pressdate" label="出版日期:" data-options="formatter:fmtDate">
-			<br>
-			<br>
-			<input style="width: 90%" class="easyui-textbox" id="bookauthor" name="bookauthor" label="作者:">
-			<br>
-			<br>
-			<input style="width: 90%" class="easyui-textbox" id="bookcount" name="bookcount" label="库存:">
-			<br>
-			<br>
-			<input style="width: 90%" class="easyui-textbox" id="bookimage" name="bookimage" label="图片:">
+			<input style="width: 90%" class="easyui-textbox" id="pid" name="pid" label="父编号:">
 		</form>
 	</div>
 	<div id="bb">
-		<a href="#" class="easyui-linkbutton" onclick="save()">保存</a> <a href="#" class="easyui-linkbutton" onclick='$("#dd").dialog("close")'>放弃</a>
+		<a href="#" class="easyui-linkbutton" onclick="save()"> 保 存 </a>
+		<a href="#" class="easyui-linkbutton" onclick='$("#dd").dialog("close")'> 放 弃 </a>
 	</div>
 </body>
 </html>
