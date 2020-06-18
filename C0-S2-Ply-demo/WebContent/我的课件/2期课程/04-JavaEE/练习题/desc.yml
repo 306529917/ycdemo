@@ -1,2 +1,5 @@
 zipEx: 
    - .+/\d+-[^/\.]+
+   
+htmlsFinal:
+   Jedis常用API整理-详细: https://blog.csdn.net/fanbaodan/article/details/89047909
