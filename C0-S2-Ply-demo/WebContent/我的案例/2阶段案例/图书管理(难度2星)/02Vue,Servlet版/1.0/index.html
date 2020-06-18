@@ -68,7 +68,7 @@ input[type="submit"] {
 					this.book.op = "query";
 					let url = "/C0-S2-Ply-demo/图书管理/4.0/book.do";
 				  	this.$http.get(url,{params:this.book}).then(res => { 
-				  		populateArray(res.data,this.booklist);
+				  		copyArray(res.data,this.booklist);
 				  	});
 				  },
 				  del(book,i){

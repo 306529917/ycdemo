@@ -14,7 +14,7 @@ Date.prototype.format = function (fmt) {
     return fmt;
 }
 
-function populateArray(src,desc,isAppend){
+function copyArray(src,desc,isAppend){
 	if( ! isAppend ){
 		desc.splice(0,desc.length); 
 	}
@@ -23,7 +23,7 @@ function populateArray(src,desc,isAppend){
 	});
 	return desc;
 }
-function populateObject(src,desc){
+function copy(src,desc){
 	for(var n in src){
 		desc[n] = src[n];
 	}

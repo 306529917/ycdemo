@@ -1,45 +1,3 @@
-function test(value, msg){
-	if(value){
-		alert(msg);
-	}
-	return value;
-}
-
-function check(){
-	for(var i=0; i<arguments.length; i++){
-		if( ! arguments ){
-			return false;
-		}
-	}
-	return true;
-}
-
-function trim(str){
-	return str.replace(/(^\s+|\s+$)/g,"")
-}
-
-function setCookie(cname, cvalue, time) {
-    var d = new Date();
-    d.setTime(d.getTime() + time * 1000);
-    var expires = "expires="+d.toUTCString();
-    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-}
-
-function getCookie(cname) {
-    var name = cname + "=";
-    var ca = document.cookie.split(';');
-    for(var i = 0; i < ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0) == ' ') {
-            c = c.substring(1);
-         }
-        if (c.indexOf(name)  == 0) {
-            return c.substring(name.length, c.length);
-         }
-    }
-    return "";
-}
-
 // axios.defaults.withCredentials = true;
 axios.defaults.baseURL = "http://" + location.hostname + ":1113/bbs/"
 var sid = getCookie("sid");
@@ -139,12 +97,3 @@ Vue.component("page",{
 	</DIV>
 	`
 });
-
-function params(obj){
-	var ret = new URLSearchParams();
-	for(var n in obj){
-		ret.append(n, obj[n]);
-	}
-	return ret;
-}
-

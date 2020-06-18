@@ -80,11 +80,11 @@ h3, li:last-child label{
 		},
 		created : function(){
 			this.$http.get("/C0-S2-Ply-demo/图书管理/4.0/book.do?op=getPressItems").then(res => {
-				populateArray(res.data, this.pressItems);
+				copyArray(res.data, this.pressItems);
 			})
 			if(id){
 				this.$http.get("/C0-S2-Ply-demo/图书管理/4.0/book.do?op=get&id="+id).then(res => {
-					populateObject(res.data, this.book);
+					copy(res.data, this.book);
 				})
 			}
 		},

@@ -3,11 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <title>图书管理</title>
-<link rel="stylesheet" type="text/css" href="easyui/themes/default/easyui.css">
-<link rel="stylesheet" type="text/css" href="easyui/themes/icon.css">
-<script type="text/javascript" src="easyui/jquery.min.js"></script>
-<script type="text/javascript" src="easyui/jquery.easyui.min.js"></script>
-<script type="text/javascript" src="easyui/locale/easyui-lang-zh_CN.js"></script>
+<link rel="stylesheet" type="text/css" href="/C0-S2-Ply-demo/_js/easyui/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="/C0-S2-Ply-demo/_js/easyui/themes/icon.css">
+<script type="text/javascript" src="/C0-S2-Ply-demo/_js/easyui/jquery.min.js"></script>
+<script type="text/javascript" src="/C0-S2-Ply-demo/_js/easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="/C0-S2-Ply-demo/_js/easyui/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="/C0-S2-Ply-demo/_js/util.js"></script>
 <script type="text/javascript">
 	var baseurl = "http://" + location.hostname + ":1113/";
 
@@ -34,15 +35,19 @@
 	
 	// 操作字段的格式化方法
 	function fmtOp(value, row, index) {
-		return "<button onclick='edit("+index+")'>修改</button>"+
-				"<button onclick='remove("+index+")'>删除</button>";
+		return '<a class="easyui-linkbutton" data-options="iconCls:\'icon-filter\'" onclick="edit('+index+')"> 修 改 </a>'+
+		' <a class="easyui-linkbutton" data-options="iconCls:\'icon-remove\'" onclick="remove('+index+')"> 删 除 </a>';
 	}
 	
 	// 打开修改窗口
 	function edit(index) {
-		var rows = $('#dg').datagrid("getRows");
+		if(index != undefined){
+			var rows = $('#dg').datagrid("getRows");
+			$('#ff').form('load',rows[index]);
+		} else {
+			$('#ff').form('clear');
+		} 
 		$("#dd").dialog('open');
-		$('#ff').form('load',rows[index]);
 	}
 	
 	function remove(index) {
@@ -51,32 +56,40 @@
 				var rows = $('#dg').datagrid("getRows");
 				$.post(baseurl+"books/del",{id:rows[index].id},(ret)=>{
 					if(ret.code){
-						$.messager.alert('系统提示','删除成功!','info');
+						alert('删除成功!');
 						$('#dg').datagrid("reload");
+						$("#dd").dialog('close');
 					} else {
-						$.messager.alert('系统提示',ret.msg,'error');
+						alert(ret.msg,'error');
 					}
 				})
 			}
 		});
 	}
-	
 	function save() {
-		$('#ff').form('submit',{
-			url : "../SaveBookServlet.do",
-			success : res=>{
-				alert(res);
-				// 关闭窗口
-				$("#dd").dialog('close');
-				// 刷新表格
-				$('#dg').datagrid("reload");
+		$.post(
+			baseurl+"books/save",
+			paramsByEasyUI("id","bookname","bookpress", "pressdate","bookauthor","bookcount","bookimage")
+			,(ret)=>{
+				if(ret.code){
+					alert('保存成功!');
+					$('#dg').datagrid("reload");
+				} else {
+					alert(ret.msg,'error');
+				}
 			}
-		});
+		);
 	}
 	function lf(data){
 		return {total:data.total,rows:data.list};
 	}
-	
+	function fmtPd(v,r,i){
+		return v.substr(0,10);
+	}
+	function ols(data){
+		// 渲染 操作按钮
+		$.parser.parse(".datagrid-cell-c1-idd")
+	}
 </script>
 </head>
 <body>
@@ -87,11 +100,13 @@
 				<input class="easyui-textbox" label="书名:" style="width: 200px" id="name">
 				<input class="easyui-textbox" label="出版社:" style="width: 200px" id="press">
 				<input class="easyui-datebox" label="出版日期:" style="width: 200px" id="date" data-options="formatter:fmtDate">
-				<a id="btn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="query()">查询</a>
+				<a class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="query()">查询</a>
+				<a class="easyui-linkbutton" data-options="iconCls:'icon-add'" onclick="edit()">新增</a>
 			</div>
 		</div>
 		<div data-options="region:'center',title:'查询结果', iconCls:'icon-ok'">
-			<table class="easyui-datagrid" id="dg" data-options="
+			<table class="easyui-datagrid" id="dg"
+				data-options="
 				url:baseurl+'books/query',
 				method:'get',
 				border:false,
@@ -101,13 +116,14 @@
 				pagination:true,
 				pageList:[5,10,20,50],
 				pageSize:5,
-				loadFilter:lf">
+				loadFilter:lf,
+				onLoadSuccess:ols">
 				<thead>
 					<tr>
 						<th data-options="field:'id', width:30">编号</th>
 						<th data-options="field:'bookname', width:100">书名</th>
 						<th data-options="field:'bookpress', width:100">出版社</th>
-						<th data-options="field:'pressdate', width:100">出版时间</th>
+						<th data-options="field:'pressdate', width:100, formatter:fmtPd">出版时间</th>
 						<th data-options="field:'bookauthor', width:100">作者</th>
 						<th data-options="field:'bookcount', width:50">数量</th>
 						<th data-options="field:'bookimage', 
@@ -123,7 +139,7 @@
 	</div>
 
 	<!-- 图书编辑窗口 -->
-	<div id="dd" class="easyui-dialog" title="My Dialog" style="width: 500px; height: 450px;"
+	<div id="dd" class="easyui-dialog" title="编辑图书信息" style="width: 500px; height: 450px;"
 		data-options="
 	    iconCls:'icon-save',
 	    resizable:true,
@@ -132,19 +148,29 @@
 	    buttons:'#bb'">
 		<form id="ff" style="text-align: center;">
 			<br>
-			<input style="width:90%" class="easyui-textbox" name="id" label="编号:"><br><br>
-			<input style="width:90%" class="easyui-textbox" name="bookname" label="书名:"><br><br>
-			<input style="width:90%" class="easyui-combobox" name="bookpress" label="出版社:" valueField="bookpress" textField="bookpress"
-				data-options="url:baseurl+'books/item?col=bookpress',method:'get'"><br><br>
-			<input style="width:90%" class="easyui-datebox" name="pressdate" label="出版日期:" data-options="formatter:fmtDate"><br><br>
-			<input style="width:90%" class="easyui-textbox" name="bookauthor" label="作者:"><br><br>
-			<input style="width:90%" class="easyui-textbox" name="bookcount" label="库存:"><br><br>
-			<input style="width:90%" class="easyui-textbox" name="bookimage" label="图片:">
+			<input style="width: 90%" class="easyui-textbox" id="id" name="id" label="编号:">
+			<br>
+			<br>
+			<input style="width: 90%" class="easyui-textbox" id="bookname" name="bookname" label="书名:">
+			<br>
+			<br>
+			<input style="width: 90%" class="easyui-combobox" id="bookpress" name="bookpress" label="出版社:" valueField="bookpress" textField="bookpress" data-options="url:baseurl+'books/item?col=bookpress',method:'get'">
+			<br>
+			<br>
+			<input style="width: 90%" class="easyui-datebox" id="pressdate" name="pressdate" label="出版日期:" data-options="formatter:fmtDate">
+			<br>
+			<br>
+			<input style="width: 90%" class="easyui-textbox" id="bookauthor" name="bookauthor" label="作者:">
+			<br>
+			<br>
+			<input style="width: 90%" class="easyui-textbox" id="bookcount" name="bookcount" label="库存:">
+			<br>
+			<br>
+			<input style="width: 90%" class="easyui-textbox" id="bookimage" name="bookimage" label="图片:">
 		</form>
 	</div>
 	<div id="bb">
-		<a href="#" class="easyui-linkbutton" onclick="save()">保存</a>
-		<a href="#" class="easyui-linkbutton" onclick='$("#dd").dialog("close")'>放弃</a>
+		<a href="#" class="easyui-linkbutton" onclick="save()">保存</a> <a href="#" class="easyui-linkbutton" onclick='$("#dd").dialog("close")'>放弃</a>
 	</div>
 </body>
 </html>
