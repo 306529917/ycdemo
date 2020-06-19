@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<base target="_blank">
+<title>案例说明</title>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
+</head>
+<body>
+	<div id="main">
+		<h3>案例说明</h3>
+		<p>
+			图书信息管理. <a href="index(演示).html">功能演示</a>
+		</p>
+		<h3>基本功能</h3>
+		<ol>
+			<li>图书管理(增删改查)
+			<li>图书类别管理(增删改查)
+		</ol>
+		<h3>扩展功能</h3>
+		<ol>
+			<li>实现图书的图片上传
+			<li>图书表(books)新增字段, 关联图书分类表
+		</ol>
+		<h3 v-if="files && files.length>0">原型文件说明</h3>
+		<ol class="olt" v-if="files && files.length>0">
+			<li v-for="f in files"><label>
+					<a :href="f.name">{{f.name}}</a>
+				</label> <label>{{f.desc}}</label></li>
+		</ol>
+		<h3>
+			演示接口说明
+		</h3>
+		<div id="api">
+			<fieldset v-for=" a in apis">
+				<legend v-html="a.name"></legend>
+				示例地址:<a :href="a.href">{{a.href}}</a><br>
+				<span v-if="a.args.length>0">参数说明:</span>
+				<ol v-if="a.args.length>0" class="olt">
+					<li v-for="arg in a.args"><label style="width: 15%" v-html="arg.ename"></label> <label style="width: 20%" v-html="arg.cname"></label> <label v-html="arg.desc"></label></li>
+				</ol>
+			</fieldset>
+		</div>
+	</div>
+	<script type="text/javascript">
+		function Api(name, href) {
+			let baseURL = "http://47.106.66.89:1113/"
+			this.name = name;
+			this.href = baseURL + href;
+			this.args = [];
+			for (var i = 2; i < arguments.length; i++) {
+				var arr = arguments[i].split("|");
+				this.args.push({
+					ename : arr[0],
+					cname : arr[1],
+					desc : arr[2]
+				});
+			}
+		}
+		function File(name, desc) {
+			this.name = name;
+			this.desc = desc;
+		}
+		var vue = new Vue(
+				{
+					el : "#main",
+					data : {
+						apis : [
+								new Api("图书信息查询", "books/query?page=1&rows=5",
+										"page|页数|第几页",
+										"rows|行数|每页行数",
+										"count|返回总行数|用于生成中页数",
+										"bookname|书名|模糊查询在参数前加一个 ~ 符号",
+										"bookpress|出版社|模糊查询在参数前加一个 ~ 符号",
+										"pressdate|出版时间|日期格式必须为 :yyyy-MM-dd",),
+								new Api("新增图书(POST请求)","books/add",
+										"bookname|书名|",
+										"bookpress|出版社|",
+										"pressdate|出版时间|日期格式必须为 :yyyy-MM-dd",
+										"bookauthor|作者|",
+										"bookcount|数量|",
+										"bookimage|图片|"),
+								new Api("修改图书(POST请求)","books/mod",
+										"id|编号|",
+										"bookname|书名|",
+										"bookpress|出版社|",
+										"pressdate|出版时间|日期格式必须为 :yyyy-MM-dd",
+										"bookauthor|作者|",
+										"bookcount|数量|",
+										"bookimage|图片|"),
+								new Api("删除图书(POST请求)","cr/categroy/del",
+										"id|编号|"),
+								new Api("图书出版社下列列表选项查询","books/item?col=bookpress"),
+								new Api("图书分类信息查询", "cr/categroy/query?page=1&rows=5",
+										"page|页数|第几页",
+										"rows|行数|每页行数",
+										"count|返回总行数|用于生成中页数",
+										"bookname|书名|模糊查询在参数前加一个 ~ 符号",
+										"bookpress|出版社|模糊查询在参数前加一个 ~ 符号",
+										"pressdate|出版时间|日期格式必须为 :yyyy-MM-dd",),
+								new Api("新增图书分类(POST请求)","cr/categroy/add",
+										"bookname|书名|",
+										"bookpress|出版社|",
+										"pressdate|出版时间|日期格式必须为 :yyyy-MM-dd",
+										"bookauthor|作者|",
+										"bookcount|数量|",
+										"bookimage|图片|"),
+								new Api("修改图书分类(POST请求)","cr/categroy/mod",
+										"id|编号|",
+										"bookname|书名|",
+										"bookpress|出版社|",
+										"pressdate|出版时间|日期格式必须为 :yyyy-MM-dd",
+										"bookauthor|作者|",
+										"bookcount|数量|",
+										"bookimage|图片|"),
+								new Api("删除图书分类(POST请求)","cr/categroy/del",
+										"id|编号|"), ],
+						files : [new File("books.sql", "图书信息数据库脚本"),
+							new File("cr_categroy.sql", "图书分类数据库脚本"),]
+					}
+				});
+	</script>
+</body>
+<style type="text/css">
+#server-api>li {
+	margin-bottom: 20px
+}
+
+ol {
+	margin-top: 1px;
+	margin-bottom: 1px
+}
+
+.olt {
+	display: table;
+	width: 95%;
+}
+
+.olt>li {
+	display: table-row;
+}
+
+.olt>li:hover {
+	background-color: #ddd
+}
+
+.olt>li>label {
+	display: table-cell;
+}
+
+h3 {
+	margin-bottom: 5px
+}
+
+h3+*:hover {
+	background-color: #eee
+}
+
+a {
+	text-decoration: none;
+	display: inline-block;
+	padding: 0px 5px
+}
+
+a:hover {
+	background-color: #fd9
+}
+</style>
+</html>
