@@ -44,7 +44,7 @@
 	</div>
 	<script type="text/javascript">
 		function Api(name, href) {
-			let baseURL = "http://47.106.66.89:1113/"
+			let baseURL = "http://"+location.hostname+":1113/"
 			this.name = name;
 			this.href = baseURL + href;
 			this.args = [];
