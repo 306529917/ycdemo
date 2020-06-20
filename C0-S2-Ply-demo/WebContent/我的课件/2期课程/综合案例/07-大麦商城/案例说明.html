@@ -19,7 +19,7 @@
 			<li>商品查询
 			<li>商品详情
 			<li>购物车
-			<li>订单管理
+			<li>订单流程
 		</ol>
 		<h3>扩展功能</h3>
 		<ol>
@@ -79,13 +79,48 @@
 					data : {
 						apis : [
 								new Api("商品查询 ", "dm/product/query",
-										"page | 页数 | 不解释",
-										"rows | 行数 | 不解释",
-										"count | 返回总行数 | 不解释",
+										"page | 页数 | 默认为1",
+										"rows | 行数 | 默认为10",
+										"count | 返回总行数 | 默认为true",
 										"pname | 商品名称 | 不解释",
 										"pdesc | 商品描述 | 不解释",
-										"isHot | 热销商品 | 不解释",
-										"cid | 商品类别 | 关联 dm_category.id"), ],
+										"isHot | 热销商品 |  1热销",
+										"cid | 商品类别 | 关联 dm_category.id"),
+								new Api("商品查询 ", "dm/product/query",
+										"page | 页数 | 默认为1",
+										"rows | 行数 | 默认为10",
+										"count | 返回总行数 | 默认为true",
+										"cname | 商品类别名称 | 不解释",
+										"pid | 父id | 关联 本表.id"),
+								new Api("购物车查询 ", "dm/cart/query",
+										"page | 页数 | 默认为1",
+										"rows | 行数 | 默认为10",
+										"count | 返回总行数 | 默认为true",
+										"uid | 用户id | 关联 dm_user.id"),
+								new Api("订单查询 ", "dm/orders/query",
+										"page | 页数 | 默认为1",
+										"rows | 行数 | 默认为10",
+										"count | 返回总行数 | 默认为true",
+										"uid | 用户id | 关联 dm_user.id",
+										"aid | 地址id | 关联 dm_address.id",
+										"state | 状态 | 0未支付,1已支付,2已发货,3已收货,4已评价,5已退货"
+								new Api("地址查询 ", "dm/address/query",
+										"page | 页数 | 默认为1",
+										"rows | 行数 | 默认为10",
+										"count | 返回总行数 | 默认为true",
+										"uid | 用户id | 关联 dm_user.id"),
+								new Api("商品增(add)删(del)改(mod) (POST请求)", "dm/product/add",
+										"id| 主键 | 不解释",
+										"pname | 商品名称 | 不解释",
+										"marketPrice | 市场价 | 不解释",
+										"shopPrice | 商城价 | 不解释",
+										"image | 图片 | 不解释",
+										"pdesc | 商品描述 | 不解释",
+										"isHot | 热销商品 | 1热销",
+										"cid | 商品类别 | 关联 dm_category.id"),
+								new Api("商品种类增(add)删(del)改(mod) (POST请求)", "dm/category/add",
+										"column| 表字段 | 参考SQL脚本中的字段备注"),
+								],
 						files : [ new File("cart.html", "购物车"),
 								new File("clist.html", "商品分类查询"),
 								new File("detail.html", "商品详情页面"),
