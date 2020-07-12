@@ -45,6 +45,18 @@ h3 {
 }
 
 </style>
+<script type="text/javascript">
+function copy(id) {
+    var Url2=document.getElementById(id).innerText;
+    var oInput = document.createElement('input');
+    oInput.value = Url2;
+    document.body.appendChild(oInput);
+    oInput.select(); // 选择对象
+    document.execCommand("Copy"); // 执行浏览器复制命令
+    oInput.className = 'oInput';
+    oInput.style.display='none';
+}
+</script>
 </head>
 <body>
 	<%
@@ -74,9 +86,11 @@ h3 {
 	%>
 	<fieldset>
 		<legend>
-			<h3>题目 <%=++index%><%=name%><span style="font-size: 0.7em"><%=zipa%></span></h3>
+			<h3>题目 <%=++index%><%=name%><span style="font-size: 0.7em"><%=zipa%></span>
+			<button onclick='copy("p<%=index%>")'>复制题目</button>
+			</h3>
 		</legend>
-		<p>
+		<div id="p<%=index%>">
 			<%
 				File desc = new File(d, "题目.html");
 					if (desc.exists()) {
@@ -96,7 +110,7 @@ h3 {
 						}
 					}
 			%>
-		</p>
+		</div>
 		<p>
 			<%
 				imgs(d, pageContext);
