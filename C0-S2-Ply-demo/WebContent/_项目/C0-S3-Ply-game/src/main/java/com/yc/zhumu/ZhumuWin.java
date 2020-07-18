@@ -1,0 +1,233 @@
+package com.yc.zhumu;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import javax.swing.JOptionPane;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import javax.swing.JPanel;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+
+public class ZhumuWin {
+
+	private JFrame frame;
+	private ZhumuBiz zb;
+	private JButton btnCommit = new JButton("提交");
+	private JButton btnCancel = new JButton("取消");
+	private JComboBox<String> cbbTitle = new JComboBox<String>();
+	private String _oldTitle;
+	private String[] titleItems = new String[] { "刚才讲解的内容", "刚才的这段代码", "作业完成情况", "在线的童鞋们!!!" };
+
+	Timer timer;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					ZhumuWin window = new ZhumuWin();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the application.
+	 */
+	public ZhumuWin() {
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frame = new JFrame();
+		frame.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				ZhumuBiz.setValues("xy", frame.getLocation().x + "", frame.getLocation().y + "");
+				ZhumuBiz.saveConf();
+				if (zb != null) {
+					zb.saveData();
+				}
+			}
+		});
+		frame.setTitle("瞩目助手");
+		frame.setBounds(100, 100, 273, 103);
+		frame.setPreferredSize(frame.getSize());
+		frame.setMinimumSize(frame.getSize());
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setAlwaysOnTop(true);
+		String[] xy = ZhumuBiz.getValues("xy", new String[0]);
+		if (xy.length > 0) {
+			int x = Integer.parseInt(xy[0]);
+			int y = Integer.parseInt(xy[1]);
+			frame.setLocation(x, y);
+		} else {
+			Utils.center(frame);
+		}
+		frame.getContentPane().setLayout(new BorderLayout(0, 0));
+
+		JPanel panel = new JPanel();
+		panel.setAlignmentY(0.0f);
+		panel.setAlignmentX(0.0f);
+		frame.getContentPane().add(panel, BorderLayout.SOUTH);
+
+		JComboBox<String> comboBox = new JComboBox<>();
+		comboBox.setPreferredSize(new Dimension(57, 25));
+		panel.add(comboBox);
+		comboBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					zb = new ZhumuBiz((String) comboBox.getSelectedItem());
+					ready();
+				} catch (Exception ex) {
+					JOptionPane.showConfirmDialog(frame, ex.getMessage(), "系统提示", JOptionPane.CLOSED_OPTION);
+				}
+			}
+		});
+		comboBox.setModel(new DefaultComboBoxModel<>(ZhumuBiz.getValues("clss", new String[0])));
+
+		JButton btnAddClass = new JButton("班级");
+		panel.add(btnAddClass);
+
+		panel.add(btnCommit);
+		btnCommit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				commit();
+			}
+		});
+
+		btnCommit.setEnabled(false);
+
+		panel.add(btnCancel);
+		btnCancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cancel();
+			}
+		});
+		btnCancel.setEnabled(false);
+		cbbTitle.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				start();
+			}
+		});
+		cbbTitle.setEnabled(false);
+		String[] items = ZhumuBiz.getValues("titles", null);
+		if (items == null) {
+			ZhumuBiz.setValues("titles", titleItems);
+			items = titleItems;
+		}
+		cbbTitle.setModel(new DefaultComboBoxModel<>(Utils.add(items, "", 0)));
+		cbbTitle.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				start();
+			}
+		});
+
+		cbbTitle.setEditable(true);
+		frame.getContentPane().add(cbbTitle, BorderLayout.CENTER);
+
+		btnAddClass.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new AddClassWin(frame).addWindowListener(new WindowAdapter() {
+					@Override
+					public void windowClosed(WindowEvent e) {
+						ZhumuBiz.loadConf();
+						comboBox.setModel(new DefaultComboBoxModel<>(ZhumuBiz.getValues("clss", new String[0])));
+					}
+				});
+			}
+		});
+		if (comboBox.getModel().getSize() > 0) {
+			comboBox.setSelectedIndex(0);
+		}
+	}
+
+	public void start() {
+		String title = (String) cbbTitle.getSelectedItem();
+		if (title != null && title.trim().isEmpty() == false && _oldTitle != title) {
+			_oldTitle = title;
+			zb.start(title, "1");
+			cbbTitle.setEnabled(false);
+			btnCommit.setEnabled(true);
+			btnCancel.setEnabled(true);
+			timer = new Timer();
+			timer.schedule(new TimerTask() {
+				int i = 30;
+
+				@Override
+				public void run() {
+					if (i == 0) {
+						commit();
+						btnCommit.setText("提交");
+						timer.cancel();
+					} else {
+						btnCommit.setText("" + i);
+						i--;
+					}
+				}
+			}, 0, 1000);
+		}
+	}
+
+	public void commit() {
+		int ret = JOptionPane.showConfirmDialog(frame, "请确认是否已经提交瞩目聊天记录?", "系统提示", JOptionPane.YES_NO_OPTION);
+		if (ret != 0) {
+			return;
+		}
+		Question q = zb.commit();
+		if (q == null) {
+			return;
+		}
+		timer.cancel();
+		ready();
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		PrintStream ps = new PrintStream(baos);
+		q.logs(false, ps);
+		new ResultWin(baos.toString(), frame);
+		try {
+			baos.close();
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	public void cancel() {
+		zb.cancel();
+		ready();
+	}
+
+	public void ready() {
+		_oldTitle = null;
+		cbbTitle.setEnabled(true);
+		cbbTitle.setSelectedIndex(0);
+		btnCancel.setEnabled(false);
+		btnCommit.setText("提交");
+		btnCommit.setEnabled(false);
+	}
+}
