@@ -23,6 +23,9 @@ import java.util.TimerTask;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.event.WindowFocusListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class ZhumuWin {
 
@@ -30,6 +33,7 @@ public class ZhumuWin {
 	private ZhumuBiz zb;
 	private JButton btnCommit = new JButton("提交");
 	private JButton btnCancel = new JButton("取消");
+	private JButton btnAddClass = new JButton("班级");
 	private JComboBox<String> cbbTitle = new JComboBox<String>();
 	private String _oldTitle;
 	private String[] titleItems = new String[] { "刚才讲解的内容", "刚才的这段代码", "作业完成情况", "在线的童鞋们!!!" };
@@ -64,6 +68,20 @@ public class ZhumuWin {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				System.out.println(e.getKeyChar());
+			}
+		});
+		frame.addWindowFocusListener(new WindowFocusListener() {
+			public void windowGainedFocus(WindowEvent e) {
+			}
+
+			public void windowLostFocus(WindowEvent e) {
+				start();
+			}
+		});
 		frame.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
@@ -101,16 +119,22 @@ public class ZhumuWin {
 		comboBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					zb = new ZhumuBiz((String) comboBox.getSelectedItem());
+					String cls = (String) comboBox.getSelectedItem();
+					zb = cls.isEmpty() ? null : new ZhumuBiz(cls);
+					btnAddClass.setEnabled(cls.isEmpty() == false);
 					ready();
 				} catch (Exception ex) {
+					comboBox.setSelectedIndex(0);
+					ex.printStackTrace();
 					JOptionPane.showConfirmDialog(frame, ex.getMessage(), "系统提示", JOptionPane.CLOSED_OPTION);
 				}
 			}
 		});
-		comboBox.setModel(new DefaultComboBoxModel<>(ZhumuBiz.getValues("clss", new String[0])));
+		String[] clsItems = ZhumuBiz.getValues("clss", new String[0]);
+		clsItems = Utils.add(clsItems, "", 0);
+		comboBox.setModel(new DefaultComboBoxModel<>(clsItems));
 
-		JButton btnAddClass = new JButton("班级");
+		btnAddClass.setEnabled(false);
 		panel.add(btnAddClass);
 
 		panel.add(btnCommit);
@@ -129,12 +153,6 @@ public class ZhumuWin {
 			}
 		});
 		btnCancel.setEnabled(false);
-		cbbTitle.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusLost(FocusEvent e) {
-				start();
-			}
-		});
 		cbbTitle.setEnabled(false);
 		String[] items = ZhumuBiz.getValues("titles", null);
 		if (items == null) {
@@ -143,7 +161,6 @@ public class ZhumuWin {
 		}
 		cbbTitle.setModel(new DefaultComboBoxModel<>(Utils.add(items, "", 0)));
 		cbbTitle.addActionListener(new ActionListener() {
-
 			public void actionPerformed(ActionEvent e) {
 				start();
 			}
@@ -163,13 +180,15 @@ public class ZhumuWin {
 				});
 			}
 		});
-		if (comboBox.getModel().getSize() > 0) {
-			comboBox.setSelectedIndex(0);
-		}
 	}
 
 	public void start() {
+		if (zb == null)
+			return;
 		String title = (String) cbbTitle.getSelectedItem();
+		if (title == null || title.trim().isEmpty()) {
+			title = (String) cbbTitle.getEditor().getItem();
+		}
 		if (title != null && title.trim().isEmpty() == false && _oldTitle != title) {
 			_oldTitle = title;
 			zb.start(title, "1");
@@ -204,7 +223,6 @@ public class ZhumuWin {
 		if (q == null) {
 			return;
 		}
-		timer.cancel();
 		ready();
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		PrintStream ps = new PrintStream(baos);
@@ -224,7 +242,11 @@ public class ZhumuWin {
 
 	public void ready() {
 		_oldTitle = null;
+		if (timer != null) {
+			timer.cancel();
+		}
 		cbbTitle.setEnabled(true);
+		cbbTitle.getEditor().setItem("");
 		cbbTitle.setSelectedIndex(0);
 		btnCancel.setEnabled(false);
 		btnCommit.setText("提交");

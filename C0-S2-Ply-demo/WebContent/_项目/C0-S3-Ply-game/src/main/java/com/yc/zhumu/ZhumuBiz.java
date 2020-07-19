@@ -101,13 +101,13 @@ public class ZhumuBiz {
 		if (question != null) {
 			commit();
 		}
+		content = Question.HMS.format(new Date()) + " " + content;
 		content += "\n已完成的请回复：" + value + "\n未完成的请回复：0";
 		question = new Question(content, value, members);
 		// 获取系统剪贴板
 		Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
 		// 封装文本内容
-		Transferable trans = new StringSelection(
-				"=========================\n" + content + "\n=========================");
+		Transferable trans = new StringSelection("========================\n" + content + "\n========================");
 		// 把文本内容设置到系统剪贴板
 		clipboard.setContents(trans, null);
 		return question;
@@ -219,17 +219,22 @@ public class ZhumuBiz {
 	public void saveData() {
 		commit();
 		PrintStream ps = null;
+		FileOutputStream fos = null;
 		try {
 			if (qList.size() == 0)
 				return;
 			File file = new File(zhumuHome, zhumuFile.getParentFile().getName() + ".txt");
-			ps = new PrintStream(file);
-			ps.println("=========================");
-			ps.println(cls + "班: " + members);
-			ps.println("=========================");
+			fos = new FileOutputStream(file, true);
+			ps = new PrintStream(fos);
+			if (file.length() == 0) {
+				ps.println("========================");
+				ps.println(cls + "班: " + members);
+				ps.println("========================");
+			}
 			for (Question q : qList) {
+				ps.println("\n========================");
 				q.logs(false, ps);
-				ps.println("=========================\n");
+				ps.println("========================");
 			}
 		} catch (IOException e) {
 			throw new RuntimeException(e);

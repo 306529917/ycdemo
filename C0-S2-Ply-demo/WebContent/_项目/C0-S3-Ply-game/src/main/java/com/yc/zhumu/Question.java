@@ -16,6 +16,7 @@ import java.util.regex.Pattern;
 
 public class Question {
 	public final static SimpleDateFormat YMD = new SimpleDateFormat("yyyy-MM-dd ");
+	public final static SimpleDateFormat HMS = new SimpleDateFormat("[HH:mm:ss]");
 	public final static SimpleDateFormat YMDHMS = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	private static Pattern p = Pattern.compile("(\\S+)\\s+(.+) : (.+)");
 	private Date date = new Date();
