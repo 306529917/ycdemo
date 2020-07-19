@@ -31,6 +31,7 @@ public class ZhumuBiz {
 	private List<Question> qList = new ArrayList<>();
 	private Question question;
 	private File zhumuFile;
+	private File zhumuDir;
 	private Random rand = new Random();
 	private String cls;
 
@@ -65,9 +66,21 @@ public class ZhumuBiz {
 		zb.saveData();
 	}
 
+	public ZhumuBiz(String cls) {
+		this(cls, Question.YMD.format(new Date()));
+	}
+
 	public ZhumuBiz(String cls, String date) {
 		this.cls = cls;
-		File zhumuDir = new File(zhumuHome);
+		init(date);
+	}
+	
+	public void init() {
+		init(Question.YMD.format(new Date()));
+	}
+	
+	public void init(String date) {
+		zhumuDir = new File(zhumuHome);
 		File[] files = zhumuDir.listFiles(new FileFilter() {
 
 			@Override
@@ -86,10 +99,6 @@ public class ZhumuBiz {
 		}
 		zhumuDir = files[files.length - 1];
 		zhumuFile = new File(zhumuDir, "meeting_saved_chat.txt");
-	}
-
-	public ZhumuBiz(String cls) {
-		this(cls, Question.YMD.format(new Date()));
 	}
 
 	public Question start(String content) {
@@ -242,6 +251,26 @@ public class ZhumuBiz {
 			if (ps != null)
 				ps.close();
 		}
+	}
+
+	public Set<String> getMembers() {
+		return members;
+	}
+
+	public Question getQuestion() {
+		return question;
+	}
+
+	public File getZhumuFile() {
+		return zhumuFile;
+	}
+
+	public File getZhumuDir() {
+		return zhumuDir;
+	}
+
+	public String getCls() {
+		return cls;
 	}
 
 }
