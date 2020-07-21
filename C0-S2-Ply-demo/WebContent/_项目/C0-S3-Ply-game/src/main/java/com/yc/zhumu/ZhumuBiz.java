@@ -34,11 +34,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ZhumuBiz {
-	private static String zhumuHome = "C:/Users/Administrator/Documents/zhumu";
+	public static String zhumuHome = "C:/Users/Administrator/Documents/zhumu";
+	public static File configFile = new File(zhumuHome, "zhumu.ini");
 	private static Properties conf = new Properties();
 	private Set<String> members = new HashSet<>();
 	private List<Question> qList = new ArrayList<>();
 	private Question question;
+	private File reportFile;
 	private File meetingFile;
 	private File meetingDir;
 	private Random rand = new Random();
@@ -106,6 +108,7 @@ public class ZhumuBiz {
 		}
 		meetingDir = files[files.length - 1];
 		meetingFile = new File(meetingDir, "meeting_saved_chat.txt");
+		reportFile = new File(zhumuHome, meetingFile.getParentFile().getName() + ".txt");
 		setCls(cls);
 	}
 
@@ -174,10 +177,9 @@ public class ZhumuBiz {
 		}
 		CharArrayWriter sb = new CharArrayWriter();
 		PrintWriter pw = new PrintWriter(sb);
-		File file = new File(zhumuHome, meetingFile.getParentFile().getName() + ".txt");
 		BufferedReader br = null;
 		try {
-			br = new BufferedReader(new FileReader(file));
+			br = new BufferedReader(new FileReader(reportFile));
 			String line = null;
 			String names[] = { "完成", "未完", "挂机", "访客" };
 			Pattern cp = Pattern.compile("完成.+?:\\s+\\[(.+)\\]");
@@ -284,11 +286,11 @@ public class ZhumuBiz {
 	public static void saveConf() {
 		FileOutputStream fos = null;
 		try {
-			File datafile = new File(zhumuHome, "zhumu.ini");
-			if (datafile.exists() == false) {
-				datafile.createNewFile();
+			
+			if (configFile.exists() == false) {
+				configFile.createNewFile();
 			}
-			fos = new FileOutputStream(datafile);
+			fos = new FileOutputStream(configFile);
 			OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF-8");
 			conf.store(osw, "save config");
 		} catch (IOException e) {
@@ -310,10 +312,9 @@ public class ZhumuBiz {
 		try {
 			if (qList.size() == 0)
 				return;
-			File file = new File(zhumuHome, meetingFile.getParentFile().getName() + ".txt");
-			fos = new FileOutputStream(file, true);
+			fos = new FileOutputStream(reportFile, true);
 			ps = new PrintStream(fos);
-			if (file.length() == 0) {
+			if (reportFile.length() == 0) {
 				ps.println("========================");
 				ps.println(cls + "班: " + members);
 				ps.println("========================");
@@ -350,6 +351,10 @@ public class ZhumuBiz {
 
 	public File getMeetingDir() {
 		return meetingDir;
+	}
+
+	public File getReportFile() {
+		return reportFile;
 	}
 
 }

@@ -42,7 +42,10 @@ public class ZhumuWin {
 	Timer timer;
 	private final JButton btnLookup = new JButton("查看");
 	private final JPopupMenu popupMenu = new JPopupMenu();
-	private final JMenuItem menuItem = new JMenuItem("统计报表");
+	private final JMenuItem menuItem = new JMenuItem("回复统计");
+	private final JMenuItem menuItem_1 = new JMenuItem("回复记录文件");
+	private final JMenuItem menuItem_2 = new JMenuItem("瞩目聊天文件");
+	private final JMenuItem menuItem_3 = new JMenuItem("配置信息文件");
 
 	/**
 	 * Launch the application.
@@ -116,13 +119,52 @@ public class ZhumuWin {
 		frame.getContentPane().add(panel, BorderLayout.SOUTH);
 
 		addPopup(panel, popupMenu);
+		menuItem_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (zb.getReportFile() != null) {
+					new ResultWin(frame, zb.getReportFile());
+				} else {
+					Utils.alert(frame, "至少要有一次提问记录!");
+				}
+			}
+		});
 		menuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println(zb.export());
+				if (zb.getReportFile() != null) {
+					new ResultWin(zb.export(), frame);
+				} else {
+					Utils.alert(frame, "至少要有一次提问记录!");
+				}
 			}
 		});
 
 		popupMenu.add(menuItem);
+
+		popupMenu.add(menuItem_1);
+		menuItem_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (zb.getMeetingFile() != null) {
+					new ResultWin(frame,zb.getMeetingFile());
+				} else {
+					Utils.alert(frame, "请先开启瞩目保存聊天记录!");
+				}
+			}
+		});
+
+		popupMenu.add(menuItem_2);
+		menuItem_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new ResultWin(frame,ZhumuBiz.configFile)
+				.addWindowListener(new WindowAdapter() {
+					@Override
+					public void windowClosed(WindowEvent e) {
+						ZhumuBiz.loadConf();
+					}
+				});;
+			}
+		});
+
+		popupMenu.add(menuItem_3);
 		panel.add(btnClass);
 
 		panel.add(btnCommit);
@@ -155,7 +197,6 @@ public class ZhumuWin {
 				if (e.isShiftDown() && e.getKeyCode() > 111 && e.getKeyCode() < 125) {
 					int index = e.getKeyCode() - 111;
 					if (index < cbbTitle.getItemCount()) {
-
 						cbbTitle.setSelectedIndex(index);
 					}
 				}
