@@ -305,13 +305,13 @@ public class ZhumuBiz {
 		}
 	}
 
-	public void saveData() throws ZhumuException {
-		commit();
+	public Question saveData() throws ZhumuException {
+		Question ret = commit();
 		PrintStream ps = null;
 		FileOutputStream fos = null;
 		try {
 			if (qList.size() == 0)
-				return;
+				return ret;
 			fos = new FileOutputStream(reportFile, true);
 			ps = new PrintStream(fos);
 			if (reportFile.length() == 0) {
@@ -325,6 +325,7 @@ public class ZhumuBiz {
 				ps.println("========================");
 			}
 			qList.clear();
+			return ret;
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		} finally {

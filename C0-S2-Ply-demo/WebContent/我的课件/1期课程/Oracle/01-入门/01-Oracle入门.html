@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+<head>
+<base target="_blank">
+<meta charset="UTF-8">
+<meta http-equiv="pragma" content="no-cache"> 
+<meta http-equiv="Cache-Control" content="no-cache, must-revalidate"> 
+<meta http-equiv="expires" content="Wed, 26 Feb 1997 08:21:57 GMT">
+<title>练习题</title>
+<script src="/C0-S2-Ply-demo/_js/vue.min.js"></script>
+<script type="text/javascript" src="/C0-S2-Ply-demo/_js/axios.min.js"></script>
+<link href="/C0-S2-Ply-demo/_css/magiczoomplus.css" rel="stylesheet" type="text/css" media="screen"/>
+<script src="/C0-S2-Ply-demo/_js/magiczoomplus.js"></script>
+<link rel="stylesheet" type="text/css" href="/C0-S2-Ply-demo/_css/q1.css">
+<script type="text/javascript" src="/C0-S2-Ply-demo/_js/pub1.js"></script>
+</head>
+<body>
+<div style="display: none;" id="pres">
+<!--
+	<cbx :v="['AAA','BBB','CCC','DDD']" a="0123" s></cbx>
+	<ipt a="正确答案" r="正则验证" w="宽度"></ipt>
+	<judge t|f="内容" w="宽度"></judge>
+	<prompt>
+		<li><a href="#">参考	( 必须放在 qlist 前)</a></li>
+	</prompt>
+ -->
+<!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
+<div>
+<h3>数据库概念</h3>
+<c>数据库是“按照数据结构来组织、存储和管理数据的仓库”。</c>
+<c>数据库是一个长期存储在计算机内的、有组织的、可共享的、统一管理的大量数据的集合。</c>
+<h3>数据库的分类</h3>
+<c>根据存储的数据结构{[可以将数据库分为][分类, 下列哪些是错误的]}: 
+关系型数据库
+非关系型数据库
+!虚拟数据库
+!模拟数据库</c>
+
+<c>常见的关系型数据库产品{[有][不包括]}: 
+Oracle
+SqlServer
+MySQL
+!Redis
+!HBase</c>
+
+<c>常见的非关系型数据库产品{[有][不包括]}: 
+Redis(键值存储)
+MangoDB(文档存储)
+Hbase(列存储)
+!Sqlite(手机数据库)
+!DB2(某知名品牌)</c>
+</div>
+
+<div>
+<h3>Oracle安装与配置</h3>
+<ul>
+<li><a href="https://www.cnblogs.com/shiyunli/p/12002956.html">oracle11g的安装以及配置</a>
+<li><a href="https://www.cnblogs.com/aggavara/archive/2012/11/19/2777320.html">Oracle网络配置用到的三个重要的ora文件</a>
+</ul>
+
+<c>oracle网络配置文件存放在:
+ORACLE安装目录\network\admin 目录下
+!$ORACLE_HOME\admin 目录下
+!$ORACLE_HOME\network 目录下
+!$ORACLE_HOME\admin\network 目录下
+</c>
+
+<c>Oracle网络配置文件{[][不]}包括:
+listener.ora
+tnsnames.ora
+sqlnet.ora
+!oracle.ora
+!config.ora
+</c>
+
+<c>启动Oracle数据库服务, {[至少应该启动以下][可以不启动哪些]}服务
+!OracleDBConsoleorcl
+!OracleJobSchedulerORCL
+!OracleOraDb11g_homeClrAgent
+OracleOraDb11g_homeTNSListener
+OracleServiceORCL
+</c>
+</div>
+
+<div>
+<h3>登录操作</h3>
+<c>Oracle 安装完成之后会自动创建3个初始用户, {[分别是][下列哪些不是]}: 
+SYS: Oracle中的一个超级用户
+SYSTEM: Oracle中默认的系统管理员
+SCOTT: Oracle数据库的一个示范用户
+!ROOT: Oracle的根用户
+!TEST: Oracle的测试用户
+</c>
+
+<c>SCOTT用户的默认密码是:{[tiger][oracle]}</c>
+
+<c>Oracle常用调试工具{[][不]}包括:
+sqlplus
+plsqldev
+!cmd
+!notepad++</c>
+
+<c>sqlplus 登录 Oracle 的语法是: {[sqlplus 账户名/密码 as 角色名][sqlplus 角色名/密码 as 账户名]}</c>
+<c>sqlplus 登录 Oracle 可以使用以下命令{[][, 请问:错误的有]}:
+sqlplus sys/a as sysdba
+sqlplus / as sysdba
+!sqlplus /a as sysdba
+sqlplus scott/tiger
+sqlplus
+</c>
+
+<c>scott 用户在安装后, 默认是锁定状态, 解锁scott用户要使用{[][的语句错误的是]}:
+alter user scott account unlock
+!alter user unlock account scott
+!alter user account scott unlock
+!alter user unlock scott account 
+</c>
+
+<c>修改 scott 用户密码要使用{[][的语句错误的是]}:
+alter user scott identified by 新密码
+!alter user identified by scott 新密码
+!alter user identified by 新密码 scott
+!alter user identified scott by 新密码
+</c>
+</div>
+
+<div>
+<h3>数据结构</h3>
+<pic s="表结构.png" w="500"></pic>
+<c>表 :  存放结构化数据的场所 ( 类似于二维数组 )</c>
+<c>表结构 : 就是定义一个表的字段(列)、类型、主键、外键、索引，这些基本的属性组成了数据库的表结构</c>
+<c>主键（primary key）是被挑选出来，作为{[表的行的惟一标识][主要保存数据]}的字段。</c>
+<c>{[主键可以由一个字段，也可以由多个字段组成，分别成为单字段主键或多字段主键][主键只能由一个字段构成]}</c>
+<pic s="数据类型.png" h="150"></pic>
+<c>
+Oracle 常用的字符串类型{[][不]}包括:
+char|varchar|varchar2|long|!string
+</c>
+<c>Oracle 的字符串值要使用 {[单引号][双引号]} 引住.</c>
+<c>
+Oracle 常用的数字类型{[][不]}包括:
+number|int|float|!byte|!short
+</c>
+<c>
+Oracle 常用的大数据类型{[][不]}包括:
+blob|clob|!long|!big|!image
+</c>
+</div>
+
+<div>
+<h3>运算符</h3>
+<ul>
+<li><a href="https://www.cnblogs.com/qufanblog/p/3875429.html">oracle 常用函数及运算符</a>
+</ul>
+<c>
+Oracle 的逻辑运算符{[][不]}包括
+and|or|not|!&&|!is
+</c>
+<c>
+Oracle 的比较运算符{[][不]}包括
+IS NULL|LIKE|BETWEEN|IN|!NOT
+</c>
+<c spacer="~">
+Oracle 连接两个字符串使用 {[||][+]} 号
+</c>
+</div>
+
+<div>
+<h3>SQL语句简介</h3>
+<ul>
+<li><a href="https://www.cnblogs.com/abcdjava/p/10885609.html">SQL语言的分类</a>
+</ul>
+<c>结构化查询语言(Structured Query Language)简称{[SQL][DBML]}</c>
+<c>结构化查询语言是一种数据库查询和程序设计语言，{[][不能]}用于
+查询数据
+更新数据
+管理关系数据库系统
+!启动或关闭数据库</c>
+<c>{[SQL语句分为:][SQL语句分类中不包括:]}
+DQL: 数据查询语句
+DML: 数据操作语句
+DDL: 数据定义语句
+DCL: 数据控制语句
+!SML: 系统管理语句</c>
+
+<c>数据查询语句(DQL){[][不]}包括
+select
+!insert
+!delete
+!update
+!create</c>
+<c>数据操作语句(DML){[][不]}包括
+!select
+insert
+delete
+update
+!create</c>
+<c>数据定义语句(DDL){[][不]}包括
+create
+alter
+drop
+!update
+!delete</c>
+<c>数据定义语句(DDL){[][不]}包括
+grant
+revoke
+commit
+rollback
+!create</c>
+</div>
+
+<!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
+</div>
+<script type="text/javascript">
+new Vue({el:"#pres"});
+</script>
+<!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
+
+<div id="main">
+	<fieldset class="alist">
+		<legend>答题结果</legend>
+		<div style="display: table;width: 100%">
+			<div style="display: table-cell;vertical-align: middle;">
+				<span class="res" v-for="q,i in questions">
+					题{{i+1}}: <b style="color: red">{{q.result?'对':''}}</b>
+				</span>
+			</div>
+			<div style="display: table-cell; width: 150px; text-align: center;">
+				<button @click="commit" :disabled="finish==false">提交答卷</button>
+			</div>
+		</div>
+	</fieldset>
+	<fieldset>
+		<legend>题目: </legend>
+		<div class="qlist">
+		<dl v-for="q,i in questions">
+			<dt>第{{i+1}}题 <b style="color: red;">{{q.result?'对':''}}</b>
+				<button @click="q.test()" style="float: right">检 查</button><br>
+			</dt>
+			<dd @click="a(q)">
+				<div v-html="q.content"></div>
+			</dd>
+			<dd v-if="q.expect">
+				正确的结果: <span>{{q.expect}}</span><br>
+				你写的结果: <span>{{q.resultText}}</span>
+			</dd>
+		</dl>
+		</div>
+	</fieldset>
+</div>
+</body>
+<script type="text/javascript" src="/C0-S2-Ply-demo/_js/q1.js"></script>
+</html>

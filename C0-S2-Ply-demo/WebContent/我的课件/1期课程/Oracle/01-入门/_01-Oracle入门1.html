@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+<head>
+<base target="_blank">
+<meta charset="UTF-8">
+<meta http-equiv="pragma" content="no-cache"> 
+<meta http-equiv="Cache-Control" content="no-cache, must-revalidate"> 
+<meta http-equiv="expires" content="Wed, 26 Feb 1997 08:21:57 GMT">
+<title>练习题</title>
+<script src="/C0-S2-Ply-demo/_js/vue.min.js"></script>
+<script type="text/javascript" src="/C0-S2-Ply-demo/_js/axios.min.js"></script>
+<link href="/C0-S2-Ply-demo/_css/magiczoomplus.css" rel="stylesheet" type="text/css" media="screen"/>
+<script src="/C0-S2-Ply-demo/_js/magiczoomplus.js"></script>
+<link rel="stylesheet" type="text/css" href="/C0-S2-Ply-demo/_css/q1.css">
+<script type="text/javascript" src="/C0-S2-Ply-demo/_js/pub1.js"></script>
+</head>
+<body>
+<div style="display: none;" id="pres">
+<!--
+	<cbx :v="['AAA','BBB','CCC','DDD']" a="0123" s></cbx>
+	<ipt a="正确答案" r="正则验证" w="宽度"></ipt>
+	<judge t|f="内容" w="宽度"></judge>
+	<prompt>
+		<li><a href="#">参考	( 必须放在 qlist 前)</a></li>
+	</prompt>
+ -->
+<!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
+<div>
+<h3>什么是数据库</h3>
+<c>数据库是存储{[在一起的相关][一些无关的]}数据的集合</c>
+<c>简单的说，数据库就是数据的仓库</c>
+</div>
+
+<div>
+<h3>数据库和应用程序</h3>
+<pic s="数据库和应用程序.png" w=400></pic>
+<c>{[前端][后台]}：漂亮的个性化窗口界面，吸引用户，可以用Java、.Net等开发</c>
+<c>{[后台][前端]}：存放数据的仓库，使用 SQL Server，Oracle，DB2 等开发</c>
+<c>前端和后台的关系：前端窗口界面根据要求显示后台的{[数据][源代码]}</c>
+<c>常见的数据库产品{[][不]}包括(  )|Oracle|MySQL|SqlServer|DB2|!Java</c>
+</div>
+
+<div>
+<h3>Oracle 数据库简介</h3>
+<c>Oracle {[][不]}是: 
+|对象关系型的数据库管理系统 (ORDBMS)
+|在管理信息系统、企业数据处理、因特网及电子商务等领域使用非常广泛
+|在数据安全性与数据完整性控制方面性能优越
+|跨操作系统、跨硬件平台的数据互操作能力
+|!一个开源免费的数据库产品</c>
+<c>Oracle数据库的主要特点{[][不]}包括: 
+|支持多用户、大事务量的事务处理
+|数据安全性和完整性控制
+|支持分布式数据处理
+|可移植性
+|!最简单的数据库</c>
+<c>Oracle数据库基于{[客户端][浏览器]}/服务器模式</c>
+<pic s="Oracle工作模式.png" w=400></pic>
+<c>Oracle数据库的主要作用{[][不]}包括: 
+|数据库服务器对数据库表进行最佳管理
+|处理多个客户端对同一数据的并发访问
+|全面地保持数据完整性
+|控制数据库访问权限等安全性需求
+|!用了Oracle让系统显得高大上</c>
+</div>
+
+<div>
+<h3>Oracle 10G 体系结构</h3>
+<pic s="Oracle服务器.png" w=400></pic>
+<c>数据库的体系结构{[是指][不包括]}|
+数据库的组成|
+工作过程与原理|
+数据在数据库中的组织与管理机制|
+!数据库目录文件结构</c>
+<c>Oracle服务器提供开放、全面和综合的信息管理，{[它由(  )组成][不包括]}
+Oracle数据库
+Oracle实例
+!Oracle售后服务
+!Oracle日志
+</c>
+</div>
+
+<div>
+<h3>Oracle 主要组件</h3>
+<pic s="Oracle 主要组件.png" w=400></pic>
+<c>Oracle 数据库由操作系统{[文件][虚拟内存]}组成，这些文件为数据库信息提供实际物理存储区</c>
+<pic s="Oracle 数据库结构.png" w=400></pic>
+<c>Oracle 数据库{[][不]}包括
+逻辑结构
+物理结构
+!文件结构
+!内存结构
+</c>
+<c>逻辑结构指数据库创建之后形成的{[逻辑概念][文件系统]}之间的关系</c>
+<c>Oracle 实例有几种不同类型的进程，{[它们是][错误的是]}
+用户进程
+服务器进程
+后台进程
+!自定义进程
+</c>
+<c>会话 {[是][不是]}:
+会话是用户与 Oracle 服务器的单个连接
+当用户与服务器建立连接时创建会话
+当用户与服务器断开连接时关闭会话
+!与客服的交谈
+</c>
+</div>
+
+<div>
+<h3>Oracle 物理组件</h3>
+<c>物理组件就是Oracle数据库所使用的操作系统{[物理文件][虚拟文件]}</c>
+<c>物理文件可分为三类, {[][不]}包括:
+数据文件
+控制文件
+日志文件
+!临时文件
+</c>
+<c>数据文件{[是][不是]}:
+数据文件用来存储数据库的数据，如表、索引等。
+!记录对数据库的操作，用来恢复和还原
+!作用是指导数据库 找到数据文件，日志文件并将数据库启动到 open 状态
+!记录数据库的版本信息
+</c>
+<c>日志文件{[是][不是]}:
+!数据文件用来存储数据库的数据，如表、索引等。
+记录对数据库的操作，用来恢复和还原
+!作用是指导数据库 找到数据文件，日志文件并将数据库启动到 open 状态
+!记录数据库的版本信息
+</c>
+<c>控制文件{[是][不是]}:
+!数据文件用来存储数据库的数据，如表、索引等。
+!记录对数据库的操作，用来恢复和还原
+作用是指导数据库 找到数据文件，日志文件并将数据库启动到 open 状态
+!记录数据库的版本信息
+</c>
+
+<c>数据文件的后缀{[是][不是]}:
+DBF
+!LOG
+!CTL
+!TXT
+</c>
+<c>日志文件的后缀{[是][不是]}:
+!DBF
+LOG
+!CTL
+!TXT
+</c>
+<c>控制文件的后缀{[是][不是]}:
+!DBF
+!LOG
+CTL
+!TXT
+</c>
+<c>控制文件{[记录了如下信息][不会记录]}：
+数据库的创建时间
+数据文件的位置
+日志文件的位置等
+!控制文件的路径
+</c>
+
+
+</div>
+
+<div>
+<h3>Oracle 逻辑组件</h3>
+<c>数据库的逻辑结构是从逻辑的角度分析数据库的组成。Oracle 的逻辑组件{[][不]}包括
+表空间
+段
+区
+数据块
+!位</c>
+
+<c>表空间是数据库中最大的逻辑单位, {[它具有以下特点][下列说法错误的是]}
+一个 Oracle 数据库至少包含一个表空间，就是名为SYSTEM的系统表空间
+每个表空间是由一个或多个数据文件组成的，一个数据文件只能与一个表空间相关联
+表空间的大小等于构成该表空间的所有数据文件大小之和
+!一个表空间可以同时属于多个数据库</c>
+
+<c>创建表空间的语法{[][错误的]}是：
+CREATE TABLESPACE 表空间名 ...
+!CREATE TABLE SPACE 表空间名 ...
+!CREATE TABLE_SPACE 表空间名 ...
+!CREATE TABLE-SPACE 表空间名 ...
+</c>
+</div>
+
+<!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
+</div>
+<script type="text/javascript">
+new Vue({el:"#pres"});
+</script>
+<!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
+
+<div id="main">
+	<fieldset class="alist">
+		<legend>答题结果</legend>
+		<div style="display: table;width: 100%">
+			<div style="display: table-cell;vertical-align: middle;">
+				<span class="res" v-for="q,i in questions">
+					题{{i+1}}: <b style="color: red">{{q.result?'对':''}}</b>
+				</span>
+			</div>
+			<div style="display: table-cell; width: 150px; text-align: center;">
+				<button @click="commit" :disabled="finish==false">提交答卷</button>
+			</div>
+		</div>
+	</fieldset>
+	<fieldset>
+		<legend>题目: </legend>
+		<div class="qlist">
+		<dl v-for="q,i in questions">
+			<dt>第{{i+1}}题 <b style="color: red;">{{q.result?'对':''}}</b>
+				<button @click="q.test()" style="float: right">检 查</button><br>
+			</dt>
+			<dd @click="a(q)">
+				<div v-html="q.content"></div>
+			</dd>
+			<dd v-if="q.expect">
+				正确的结果: <span>{{q.expect}}</span><br>
+				你写的结果: <span>{{q.resultText}}</span>
+			</dd>
+		</dl>
+		</div>
+	</fieldset>
+</div>
+</body>
+<script type="text/javascript" src="/C0-S2-Ply-demo/_js/q1.js"></script>
+</html>

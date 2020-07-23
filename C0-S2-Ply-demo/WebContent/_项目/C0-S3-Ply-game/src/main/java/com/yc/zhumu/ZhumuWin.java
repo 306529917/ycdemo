@@ -39,7 +39,6 @@ public class ZhumuWin {
 	private String _oldTitle;
 	private String[] titleItems = new String[] { "刚才讲解的内容", "刚才的这段代码", "作业完成情况", "在线的童鞋们!!!" };
 
-	Timer timer;
 	private final JButton btnLookup = new JButton("查看");
 	private final JPopupMenu popupMenu = new JPopupMenu();
 	private final JMenuItem menuItem = new JMenuItem("回复统计");
@@ -255,28 +254,14 @@ public class ZhumuWin {
 			btnCommit.setEnabled(true);
 			btnCancel.setEnabled(true);
 			btnLookup.setEnabled(true);
-			timer = new Timer();
-			timer.schedule(new TimerTask() {
-				int i = 30;
-
-				@Override
-				public void run() {
-					if (i == 0) {
-						btnCommit.setText("提交");
-						timer.cancel();
-					} else {
-						btnCommit.setText("" + i);
-						i--;
-					}
-				}
-			}, 0, 1000);
 		}
 	}
 
 	public void commit() {
+		Question q = null;
 		try {
 			if (Utils.confirm(frame, "请确认是否已经提交瞩目聊天记录?")) {
-				zb.saveData();
+				q = zb.saveData();
 			}
 		} catch (ZhumuException e1) {
 			Utils.alert(frame, e1.getMessage());
@@ -292,9 +277,6 @@ public class ZhumuWin {
 
 	public void ready() {
 		_oldTitle = null;
-		if (timer != null) {
-			timer.cancel();
-		}
 		cbbTitle.setEnabled(true);
 		cbbTitle.getEditor().setItem("");
 		cbbTitle.setSelectedIndex(0);

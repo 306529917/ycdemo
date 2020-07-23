@@ -178,15 +178,14 @@ Vue.component('prompt',{
 });
 
 Vue.component('pic',{
-	props : [ "s", "w", "prefix"],
-	template : `<div><div v-for="p in toArray(s)" v-if="p" style="
-				float:left;
+	props : [ "s", "w", "h", "prefix"],
+	template : `<div style="text-align:center"><div v-for="p in toArray(s)" v-if="p" style="
 				display:inline-block;
 				text-align:center;
 				margin:10px;
 				border-radius: 5px;
 				border:1px solid #888"
-				:style="{width:w?w.indexOf('px')>0?w:(w+'px'):'150px'}">`
+				:style="{width:w?w.indexOf('px')>0?w:(w+'px'):'150px', height:h?h.indexOf('px')>0?h:(h+'px'):false}">`
 		+`<a :href="(prefix?prefix:'_images/') + p" class='MagicZoom'>`
 		+`<img :src="(prefix?prefix:'_images/') + p" style="background-color:#fff">`
 		+`</a>`
