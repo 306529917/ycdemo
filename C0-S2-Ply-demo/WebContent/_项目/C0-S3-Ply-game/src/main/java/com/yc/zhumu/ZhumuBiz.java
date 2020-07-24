@@ -21,7 +21,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map.Entry;
@@ -37,8 +36,7 @@ public class ZhumuBiz {
 	public static String zhumuHome = "C:/Users/Administrator/Documents/zhumu";
 	public static File configFile = new File(zhumuHome, "zhumu.ini");
 	private static Properties conf = new Properties();
-	private Set<String> members = new HashSet<>();
-	private List<Question> qList = new ArrayList<>();
+	private Set<String> members = new LinkedHashSet<>();
 	private Question question;
 	private File reportFile;
 	private File meetingFile;
@@ -139,10 +137,10 @@ public class ZhumuBiz {
 		question = null;
 	}
 
-	public Question commit() throws ZhumuException {
+	public void commit() throws ZhumuException {
 		ready();
 		if (question == null) {
-			return null;
+			return;
 		}
 		FileInputStream fis = null;
 		try {
@@ -164,11 +162,6 @@ public class ZhumuBiz {
 				throw new RuntimeException(e);
 			}
 		}
-		// question.logs(true);
-		qList.add(question);
-		Question ret = question;
-		question = null;
-		return ret;
 	}
 
 	public String export() {
@@ -242,7 +235,7 @@ public class ZhumuBiz {
 	}
 
 	public static void addClass(String cls, String[] names) {
-		HashSet<String> members = new LinkedHashSet<>();
+		Set<String> members = new LinkedHashSet<>();
 		members.addAll(Arrays.asList(names));
 		members.removeIf(new Predicate<String>() {
 			@Override
@@ -305,27 +298,21 @@ public class ZhumuBiz {
 		}
 	}
 
-	public Question saveData() throws ZhumuException {
-		Question ret = commit();
+	public void saveData() throws ZhumuException {
+		commit();
 		PrintStream ps = null;
 		FileOutputStream fos = null;
 		try {
-			if (qList.size() == 0)
-				return ret;
 			fos = new FileOutputStream(reportFile, true);
 			ps = new PrintStream(fos);
 			if (reportFile.length() == 0) {
 				ps.println("========================");
-				ps.println(cls + "班: " + members);
+				ps.printf("%s班(共%d人): %s\n" , cls, members.size(), members);
 				ps.println("========================");
 			}
-			for (Question q : qList) {
-				ps.println("\n========================");
-				q.logs(false, ps);
-				ps.println("========================");
-			}
-			qList.clear();
-			return ret;
+			ps.println("\n========================");
+			question.logs(false, ps);
+			ps.println("========================");
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		} finally {

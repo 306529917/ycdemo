@@ -14,8 +14,6 @@ import java.awt.event.WindowEvent;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
@@ -258,10 +256,9 @@ public class ZhumuWin {
 	}
 
 	public void commit() {
-		Question q = null;
 		try {
 			if (Utils.confirm(frame, "请确认是否已经提交瞩目聊天记录?")) {
-				q = zb.saveData();
+				zb.saveData();
 			}
 		} catch (ZhumuException e1) {
 			Utils.alert(frame, e1.getMessage());

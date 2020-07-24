@@ -19,8 +19,8 @@ public class Question {
 	public final static SimpleDateFormat HMS = new SimpleDateFormat("[HH:mm:ss]");
 	public final static SimpleDateFormat YMDHMS = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	private static Pattern p = Pattern.compile("(\\S+)\\s+(.+) : (.+)");
-	private Date date = new Date();
-	private String sToday = YMD.format(date);
+	private Date beginTime = new Date();
+	private String sToday = YMD.format(beginTime);
 	private String content;
 	private String answerValue;
 	private List<String> answers = new ArrayList<>();
@@ -44,7 +44,7 @@ public class Question {
 			String time = m.group(1);
 			time = sToday + time;
 			try {
-				if (YMDHMS.parse(time).getTime() > date.getTime()) {
+				if (YMDHMS.parse(time).getTime() > beginTime.getTime()) {
 					String name = m.group(2);
 					String value = m.group(3);
 					name = name.replaceAll("[^\\u4E00-\\u9FA5]", "");
@@ -92,7 +92,7 @@ public class Question {
 	}
 
 	public Date getDate() {
-		return date;
+		return beginTime;
 	}
 
 	public String getsToday() {
@@ -139,9 +139,9 @@ public class Question {
 		return ret;
 	}
 
-	public void setDate(String sDate) {
+	public void setBeginTime(String sDate) {
 		try {
-			date = YMDHMS.parse(sDate);
+			beginTime = YMDHMS.parse(sDate);
 		} catch (ParseException e) {
 			throw new RuntimeException(e);
 		}
