@@ -18,7 +18,7 @@ public class Question {
 	public final static SimpleDateFormat YMD = new SimpleDateFormat("yyyy-MM-dd ");
 	public final static SimpleDateFormat HMS = new SimpleDateFormat("[HH:mm:ss]");
 	public final static SimpleDateFormat YMDHMS = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-	private static Pattern p = Pattern.compile("(\\S+)\\s+(.+) : (.+)");
+	private static Pattern pLine = Pattern.compile("(\\S+)\\s+(.+) : (.+)");
 	private Date beginTime = new Date();
 	private String sToday = YMD.format(beginTime);
 	private String content;
@@ -39,7 +39,7 @@ public class Question {
 	}
 
 	public void add(String line) {
-		Matcher m = p.matcher(line);
+		Matcher m = pLine.matcher(line);
 		if (m.find()) {
 			String time = m.group(1);
 			time = sToday + time;
@@ -59,10 +59,10 @@ public class Question {
 
 	public void add(String name, String value) {
 		answers.add(name + " : " + value);
-		if (answerValue.equalsIgnoreCase(value)) {
+		if (value.matches(answerValue + "+.?")) {
 			corrects.add(name);
 			errors.remove(name);
-		} else if ("0".equals(value)) {
+		} else if (value.matches("0+.?")) {
 			errors.add(name);
 			corrects.remove(name);
 		}

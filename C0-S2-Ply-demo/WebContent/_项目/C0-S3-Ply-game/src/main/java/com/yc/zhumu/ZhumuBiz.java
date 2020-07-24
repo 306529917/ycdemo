@@ -43,6 +43,7 @@ public class ZhumuBiz {
 	private File meetingDir;
 	private Random rand = new Random();
 	private String cls;
+	private long skipSize;
 
 	static {
 		loadConf();
@@ -87,25 +88,31 @@ public class ZhumuBiz {
 		}
 	}
 
+	/**
+	 * 	使用当天最新的一个会议目录
+	 */
 	public void init(String cls) throws ZhumuException {
-		init(cls, Question.YMD.format(new Date()));
-	}
-
-	public void init(String cls, String date) throws ZhumuException {
-		meetingDir = new File(zhumuHome);
-		File[] files = meetingDir.listFiles(new FileFilter() {
-
+		String sDate = Question.YMD.format(new Date());
+		File homeDir = new File(zhumuHome);
+		File[] files = homeDir.listFiles(new FileFilter() {
 			@Override
 			public boolean accept(File pathname) {
-				return pathname.isDirectory() && pathname.getName().startsWith(date);
+				return pathname.isDirectory() && pathname.getName().startsWith(sDate);
 			}
-
 		});
 		if (files.length == 0) {
 			throw new ZhumuException("会议还没开始!");
 		}
-		meetingDir = files[files.length - 1];
+		init(cls, files[files.length - 1]);
+	}
+
+	public void init(String cls, File file) throws ZhumuException {
+		if (file == null || file.exists() == false) {
+			throw new ZhumuException("会议还没开始!");
+		}
+		meetingDir = file;
 		meetingFile = new File(meetingDir, "meeting_saved_chat.txt");
+		skipSize = meetingFile.length();
 		reportFile = new File(zhumuHome, meetingFile.getParentFile().getName() + ".txt");
 		setCls(cls);
 	}
@@ -118,9 +125,6 @@ public class ZhumuBiz {
 
 	public Question start(String content, String value) throws ZhumuException {
 		ready();
-		if (question != null) {
-			commit();
-		}
 		content = Question.HMS.format(new Date()) + " " + content;
 		content += "\n已完成的请回复：" + value + "\n未完成的请回复：0";
 		question = new Question(content, value, members);
@@ -133,25 +137,30 @@ public class ZhumuBiz {
 		return question;
 	}
 
-	public void cancel() {
-		question = null;
+	public void lookup(boolean isShowLog, PrintStream out) {
+		if (question == null)
+			return;
+		question.logs(isShowLog, out);
 	}
 
 	public void commit() throws ZhumuException {
-		ready();
-		if (question == null) {
+		if (question == null)
 			return;
-		}
+		ready();
 		FileInputStream fis = null;
 		try {
 			fis = new FileInputStream(meetingFile);
+			fis.skip(skipSize);
 			InputStreamReader isr = new InputStreamReader(fis, "utf-8");
 			BufferedReader br = new BufferedReader(isr);
+
 			String line = null;
 			while ((line = br.readLine()) != null) {
+				System.out.println("=====" + line);
 				question.add(line);
 			}
 			fis.close();
+			skipSize = meetingFile.length();
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		} finally {
@@ -279,7 +288,7 @@ public class ZhumuBiz {
 	public static void saveConf() {
 		FileOutputStream fos = null;
 		try {
-			
+
 			if (configFile.exists() == false) {
 				configFile.createNewFile();
 			}
@@ -299,6 +308,8 @@ public class ZhumuBiz {
 	}
 
 	public void saveData() throws ZhumuException {
+		if (question == null)
+			return;
 		commit();
 		PrintStream ps = null;
 		FileOutputStream fos = null;
@@ -307,7 +318,7 @@ public class ZhumuBiz {
 			ps = new PrintStream(fos);
 			if (reportFile.length() == 0) {
 				ps.println("========================");
-				ps.printf("%s班(共%d人): %s\n" , cls, members.size(), members);
+				ps.printf("%s班(共%d人): %s\n", cls, members.size(), members);
 				ps.println("========================");
 			}
 			ps.println("\n========================");

@@ -29,6 +29,7 @@ public class AddClassWin extends JDialog {
 
 	public AddClassWin(Frame onner, ZhumuBiz zb) {
 		super(onner);
+		setModal(true);
 		setTitle("选择班级");
 		setBounds(100, 100, 388, 300);
 		getContentPane().setLayout(new BorderLayout());
@@ -93,7 +94,7 @@ public class AddClassWin extends JDialog {
 					ZhumuBiz.addClass(zb.getCls(), textArea.getText());
 					AddClassWin.this.dispose();
 				} catch (ZhumuException e1) {
-					Utils.alert(onner, e1.getMessage());
+					Utils.alert(e1.getMessage());
 				}
 			}
 		});

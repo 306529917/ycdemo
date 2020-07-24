@@ -11,9 +11,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.PrintStream;
 
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
@@ -30,19 +27,18 @@ public class ZhumuWin {
 
 	private JFrame frame;
 	private ZhumuBiz zb = new ZhumuBiz();
-	private JButton btnCommit = new JButton("提交");
+	private JButton btnLookup = new JButton("查看");
 	private JButton btnCancel = new JButton("取消");
 	private JButton btnClass = new JButton("上课");
 	private JComboBox<String> cbbTitle = new JComboBox<String>();
 	private String _oldTitle;
 	private String[] titleItems = new String[] { "刚才讲解的内容", "刚才的这段代码", "作业完成情况", "在线的童鞋们!!!" };
-
-	private final JButton btnLookup = new JButton("查看");
 	private final JPopupMenu popupMenu = new JPopupMenu();
 	private final JMenuItem menuItem = new JMenuItem("回复统计");
 	private final JMenuItem menuItem_1 = new JMenuItem("回复记录文件");
 	private final JMenuItem menuItem_2 = new JMenuItem("瞩目聊天文件");
 	private final JMenuItem menuItem_3 = new JMenuItem("配置信息文件");
+	private final JButton btnSave = new JButton("提交");
 
 	/**
 	 * Launch the application.
@@ -121,7 +117,7 @@ public class ZhumuWin {
 				if (zb.getReportFile() != null) {
 					new ResultWin(frame, zb.getReportFile());
 				} else {
-					Utils.alert(frame, "至少要有一次提问记录!");
+					Utils.alert("至少要有一次提问记录!");
 				}
 			}
 		});
@@ -130,7 +126,7 @@ public class ZhumuWin {
 				if (zb.getReportFile() != null) {
 					new ResultWin(zb.export(), frame);
 				} else {
-					Utils.alert(frame, "至少要有一次提问记录!");
+					Utils.alert("至少要有一次提问记录!");
 				}
 			}
 		});
@@ -141,9 +137,9 @@ public class ZhumuWin {
 		menuItem_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (zb.getMeetingFile() != null) {
-					new ResultWin(frame,zb.getMeetingFile());
+					new ResultWin(frame, zb.getMeetingFile());
 				} else {
-					Utils.alert(frame, "请先开启瞩目保存聊天记录!");
+					Utils.alert("请先开启瞩目保存聊天记录!");
 				}
 			}
 		});
@@ -151,35 +147,44 @@ public class ZhumuWin {
 		popupMenu.add(menuItem_2);
 		menuItem_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new ResultWin(frame,ZhumuBiz.configFile)
-				.addWindowListener(new WindowAdapter() {
+				new ResultWin(frame, ZhumuBiz.configFile).addWindowListener(new WindowAdapter() {
 					@Override
 					public void windowClosed(WindowEvent e) {
 						ZhumuBiz.loadConf();
 					}
-				});;
+				});
+				;
 			}
 		});
 
 		popupMenu.add(menuItem_3);
 		panel.add(btnClass);
 
-		panel.add(btnCommit);
-		btnCommit.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				commit();
-			}
-		});
-
-		btnCommit.setEnabled(false);
-		btnLookup.setEnabled(false);
+		panel.add(btnLookup);
 		btnLookup.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				lookup();
 			}
 		});
 
-		panel.add(btnLookup);
+		btnLookup.setEnabled(false);
+		btnSave.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					if (Utils.confirm("请确认是否已经保存了瞩目聊天文件?")) {
+						zb.commit();
+						zb.saveData();
+						new ResultWin(zb, frame);
+						ready();
+					}
+				} catch (ZhumuException e1) {
+					Utils.alert(e1.getMessage());
+				}
+			}
+		});
+		btnSave.setEnabled(false);
+
+		panel.add(btnSave);
 
 		panel.add(btnCancel);
 		btnCancel.addActionListener(new ActionListener() {
@@ -246,29 +251,17 @@ public class ZhumuWin {
 			try {
 				zb.start(title, "1");
 			} catch (ZhumuException e) {
-				Utils.alert(frame, e.getMessage());
+				Utils.alert(e.getMessage());
 			}
 			cbbTitle.setEnabled(false);
-			btnCommit.setEnabled(true);
-			btnCancel.setEnabled(true);
 			btnLookup.setEnabled(true);
+			btnCancel.setEnabled(true);
+			btnSave.setEnabled(true);
+			btnClass.setEnabled(false);
 		}
-	}
-
-	public void commit() {
-		try {
-			if (Utils.confirm(frame, "请确认是否已经提交瞩目聊天记录?")) {
-				zb.saveData();
-			}
-		} catch (ZhumuException e1) {
-			Utils.alert(frame, e1.getMessage());
-		}
-		ready();
-		lookup();
 	}
 
 	public void cancel() {
-		zb.cancel();
 		ready();
 	}
 
@@ -277,22 +270,23 @@ public class ZhumuWin {
 		cbbTitle.setEnabled(true);
 		cbbTitle.getEditor().setItem("");
 		cbbTitle.setSelectedIndex(0);
-		btnCommit.setText("提交");
-		btnCommit.setEnabled(false);
-		btnLookup.setEnabled(false);
+		btnLookup.setText("查看");
+		btnLookup.setEnabled(zb.getQuestion() != null);
 		btnCancel.setEnabled(false);
+		btnSave.setEnabled(false);
+		btnClass.setEnabled(true);
 	}
 
 	public void lookup() {
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		PrintStream ps = new PrintStream(baos);
-		zb.getQuestion().logs(false, ps);
-		new ResultWin(baos.toString(), frame);
-		try {
-			baos.close();
-		} catch (IOException e) {
-			throw new RuntimeException(e);
+		if (btnSave.isEnabled() && Utils.confirm("请确认是否已经保存了瞩目聊天文件?")) {
+			try {
+				zb.commit();
+			} catch (ZhumuException e) {
+				Utils.alert(e.getMessage());
+				return;
+			}
 		}
+		new ResultWin(zb, frame);
 	}
 
 	private static void addPopup(Component component, final JPopupMenu popup) {

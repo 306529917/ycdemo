@@ -1,6 +1,5 @@
 package com.yc.zhumu;
 
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.Window;
@@ -43,12 +42,12 @@ public class Utils {
 		return s.toArray(ts);
 	}
 
-	public static void alert(Component frame, String msg) {
-		JOptionPane.showConfirmDialog(frame, msg, "系统提示", JOptionPane.CLOSED_OPTION);
+	public static void alert(String msg) {
+		JOptionPane.showConfirmDialog(null, msg, "系统提示", JOptionPane.CLOSED_OPTION);
 	}
 
-	public static boolean confirm(Component frame, String msg) {
-		int ret = JOptionPane.showConfirmDialog(frame, msg, "系统提示", JOptionPane.YES_NO_OPTION);
+	public static boolean confirm(String msg) {
+		int ret = JOptionPane.showConfirmDialog(null, msg, "系统提示", JOptionPane.YES_NO_OPTION);
 		return ret == 0;
 	}
 
