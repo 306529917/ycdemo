@@ -15,10 +15,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Question {
+	public final static SimpleDateFormat ZMD = new SimpleDateFormat("d号aHH时会议");
 	public final static SimpleDateFormat YMD = new SimpleDateFormat("yyyy-MM-dd ");
 	public final static SimpleDateFormat MS = new SimpleDateFormat("mm:ss");
 	public final static SimpleDateFormat HMS = new SimpleDateFormat("[HH:mm:ss]");
 	public final static SimpleDateFormat YMDHMS = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	public final static SimpleDateFormat YMDHMS1 = new SimpleDateFormat("yyyy-MM-dd HH.mm.ss");
 	private static Pattern pLine = Pattern.compile("(\\S+)\\s+(.+) : (.+)");
 	private Date beginTime = new Date();
 	private String sToday = YMD.format(beginTime);

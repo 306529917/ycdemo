@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 
@@ -15,16 +16,22 @@ import java.awt.event.WindowEvent;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.awt.event.WindowFocusListener;
+import java.io.File;
+import java.io.IOException;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.JPopupMenu;
+import javax.swing.JRootPane;
+
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JMenuItem;
+import javax.swing.JMenu;
 
 public class ZhumuWin {
 
@@ -39,11 +46,15 @@ public class ZhumuWin {
 	private Date _date = new Date();
 	private String[] titleItems = new String[] { "刚才讲解的内容", "刚才的这段代码", "作业完成情况", "在线的童鞋们!!!" };
 	private final JPopupMenu popupMenu = new JPopupMenu();
-	private final JMenuItem menuItem = new JMenuItem("回复统计");
+	private final JMenuItem menuItem = new JMenuItem("聊天统计");
 	private final JMenuItem menuItem_1 = new JMenuItem("回复记录文件");
 	private final JMenuItem menuItem_2 = new JMenuItem("瞩目聊天文件");
 	private final JMenuItem menuItem_3 = new JMenuItem("配置信息文件");
 	private final JButton btnSave = new JButton("提交");
+	private final JMenu menu = new JMenu("查看文件");
+	private final JMenu menu_1 = new JMenu("瞩目配置");
+	private final JMenuItem menuItem_4 = new JMenuItem("打开瞩目目录");
+	private final JMenuItem menuItem_5 = new JMenuItem("设置瞩目目录");
 
 	/**
 	 * Launch the application.
@@ -73,6 +84,8 @@ public class ZhumuWin {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setUndecorated(true);
+		frame.getRootPane().setWindowDecorationStyle(JRootPane.PLAIN_DIALOG);
 		frame.addWindowFocusListener(new WindowFocusListener() {
 			public void windowGainedFocus(WindowEvent e) {
 			}
@@ -96,7 +109,7 @@ public class ZhumuWin {
 			}
 		});
 		frame.setTitle("瞩目助手");
-		frame.setBounds(100, 100, 284, 103);
+		frame.setBounds(100, 100, 284, 97);
 		frame.setPreferredSize(frame.getSize());
 		frame.setMinimumSize(frame.getSize());
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -114,18 +127,41 @@ public class ZhumuWin {
 		JPanel panel = new JPanel();
 		panel.setAlignmentY(0.0f);
 		panel.setAlignmentX(0.0f);
-		frame.getContentPane().add(panel, BorderLayout.SOUTH);
+		frame.getContentPane().add(panel, BorderLayout.CENTER);
 
 		addPopup(panel, popupMenu);
-		menuItem_1.addActionListener(new ActionListener() {
+
+		popupMenu.add(menu_1);
+		menuItem_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (zb.getReportFile() != null) {
-					new ResultWin(frame, zb.getReportFile());
-				} else {
-					Utils.alert("至少要有一次提问记录!");
+				try {
+					Runtime.getRuntime().exec("explorer.exe /root," + ZhumuBiz.zhumuHome);
+				} catch (IOException e1) {
+					e1.printStackTrace();
+					Utils.alert(e1.getMessage());
 				}
 			}
 		});
+
+		menu_1.add(menuItem_4);
+		menuItem_5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFileChooser fd = new JFileChooser();
+				fd.setFileSelectionMode(JFileChooser.OPEN_DIALOG);
+				fd.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+				fd.showOpenDialog(null);
+				File f = fd.getSelectedFile();
+				ZhumuBiz.zhumuHome = f.getAbsolutePath();
+				System.out.println("目录重置为: " + ZhumuBiz.zhumuHome);
+			}
+		});
+
+		menu_1.add(menuItem_5);
+
+		popupMenu.add(menu);
+		menu.add(menuItem_1);
+		menu.add(menuItem_2);
+		menu.add(menuItem_3);
 		menuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (zb.getReportFile() != null) {
@@ -137,19 +173,6 @@ public class ZhumuWin {
 		});
 
 		popupMenu.add(menuItem);
-
-		popupMenu.add(menuItem_1);
-		menuItem_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (zb.getMeetingFile() != null) {
-					new ResultWin(frame, zb.getMeetingFile());
-				} else {
-					Utils.alert("请先开启瞩目保存聊天记录!");
-				}
-			}
-		});
-
-		popupMenu.add(menuItem_2);
 		menuItem_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new ResultWin(frame, ZhumuBiz.configFile).addWindowListener(new WindowAdapter() {
@@ -161,8 +184,24 @@ public class ZhumuWin {
 				;
 			}
 		});
-
-		popupMenu.add(menuItem_3);
+		menuItem_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (zb.getMeetingFile() != null) {
+					new ResultWin(frame, zb.getMeetingFile());
+				} else {
+					Utils.alert("请先开启瞩目保存聊天记录!");
+				}
+			}
+		});
+		menuItem_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (zb.getReportFile() != null) {
+					new ResultWin(frame, zb.getReportFile());
+				} else {
+					Utils.alert("至少要有一次提问记录!");
+				}
+			}
+		});
 		panel.add(btnClass);
 
 		panel.add(btnLookup);
@@ -210,6 +249,7 @@ public class ZhumuWin {
 			}
 		});
 		cbbTitle.setEnabled(false);
+		cbbTitle.setPreferredSize(new Dimension(0, 30));
 		String[] items = ZhumuBiz.getValues("titles", null);
 		if (items == null) {
 			ZhumuBiz.setValues("titles", titleItems);
@@ -223,7 +263,7 @@ public class ZhumuWin {
 		});
 
 		cbbTitle.setEditable(true);
-		frame.getContentPane().add(cbbTitle, BorderLayout.CENTER);
+		frame.getContentPane().add(cbbTitle, BorderLayout.NORTH);
 
 		btnClass.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -282,8 +322,7 @@ public class ZhumuWin {
 		_time = -1;
 		_oldTitle = null;
 		btnClass.setText(zb.getCls() + "班");
-		frame.setTitle(zb.getCls() + "班["
-				+ zb.getMeetingDir().getName().replaceAll(".+(\\d{2}\\.\\d{2})\\.\\d{2}.+", "$1") + "]");
+		frame.setTitle(zb.getMeetingName());
 		cbbTitle.setEnabled(true);
 		cbbTitle.getEditor().setItem("");
 		cbbTitle.setSelectedIndex(0);

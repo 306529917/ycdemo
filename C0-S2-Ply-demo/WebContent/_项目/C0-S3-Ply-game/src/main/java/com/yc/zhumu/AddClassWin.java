@@ -15,6 +15,9 @@ import java.awt.Dimension;
 
 import javax.swing.JLabel;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.util.Date;
+import java.util.stream.Stream;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 import javax.swing.JScrollPane;
@@ -60,12 +63,12 @@ public class AddClassWin extends JDialog {
 		FlowLayout flowLayout = (FlowLayout) panel.getLayout();
 		flowLayout.setAlignment(FlowLayout.LEFT);
 		getContentPane().add(panel, BorderLayout.NORTH);
-		
+
 		JLabel label_1 = new JLabel("选择会议:");
 		panel.add(label_1);
-		
-		JComboBox cbbZhumu = new JComboBox();
-		cbbZhumu.setModel(new DefaultComboBoxModel(new String[] {"1", "2"}));
+
+		JComboBox<Object> cbbZhumu = new JComboBox<>();
+		cbbZhumu.setModel(new DefaultComboBoxModel<>(buildZhumuItem()));
 		cbbZhumu.setPreferredSize(new Dimension(260, 21));
 		panel.add(cbbZhumu);
 
@@ -100,7 +103,12 @@ public class AddClassWin extends JDialog {
 				try {
 					String cls = (String) comboBox.getSelectedItem();
 					ZhumuBiz.addClass(cls, textArea.getText());
-					zb.init(cls);
+					ZhumuItem zi = (ZhumuItem) cbbZhumu.getSelectedItem();
+					if (zi.getFile() == null) {
+						zb.init(cls);
+					} else {
+						zb.init(cls, zi.getFile());
+					}
 				} catch (ZhumuException e1) {
 					Utils.alert(e1.getMessage());
 				}
@@ -118,6 +126,40 @@ public class AddClassWin extends JDialog {
 
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setVisible(true);
+	}
+
+	public Object[] buildZhumuItem() {
+		Date now = new Date();
+		long day3 = 1000 * 60 * 60 * 24 * 3;
+		File[] fs = new File(ZhumuBiz.zhumuHome).listFiles((file) -> {
+			return file.isDirectory() && file.getName().matches("\\d{4}-\\d{2}-\\d{2}\\s.+")
+					&& now.getTime() - file.lastModified() < day3;
+		});
+		Stream<File> sf = Stream.of(fs);
+		sf = sf.sorted((a, b) -> {
+			return (int) (b.lastModified() - a.lastModified());
+		});
+		Stream<ZhumuItem> sz = sf.map(f -> {
+			return new ZhumuItem(f);
+		});
+		return sz.toArray();
+	}
+
+	class ZhumuItem {
+		private File f;
+
+		public ZhumuItem(File f) {
+			this.f = f;
+		}
+
+		public String toString() {
+			return Question.ZMD.format(new Date(f.lastModified()));
+		}
+
+		public File getFile() {
+			return f;
+		}
+
 	}
 
 }

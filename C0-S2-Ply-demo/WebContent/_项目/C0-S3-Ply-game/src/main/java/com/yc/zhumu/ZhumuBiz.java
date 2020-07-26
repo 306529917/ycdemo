@@ -33,7 +33,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ZhumuBiz {
-	public static String zhumuHome = "C:/Users/Administrator/Documents/zhumu";
+	public static String zhumuHome = "C:\\Users\\Administrator\\Documents\\zhumu";
 	public static File configFile = new File(zhumuHome, "zhumu.ini");
 	private static Properties conf = new Properties();
 	private Set<String> members = new LinkedHashSet<>();
@@ -352,6 +352,10 @@ public class ZhumuBiz {
 
 	public File getReportFile() {
 		return reportFile;
+	}
+
+	public String getMeetingName() {
+		return cls + "班" + Question.ZMD.format(new Date(meetingDir.lastModified()));
 	}
 
 }
