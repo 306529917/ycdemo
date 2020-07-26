@@ -126,7 +126,7 @@ public class ZhumuBiz {
 	public Question start(String content, String value) throws ZhumuException {
 		ready();
 		content = Question.HMS.format(new Date()) + " " + content;
-		content += "\n已完成的请回复：" + value + "\n未完成的请回复：0";
+		content += "\n已完成的请回复：" + value + "\n未完成的请回复：0\n不回复的算挂机：)";
 		question = new Question(content, value, members);
 		// 获取系统剪贴板
 		Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
@@ -153,10 +153,8 @@ public class ZhumuBiz {
 			fis.skip(skipSize);
 			InputStreamReader isr = new InputStreamReader(fis, "utf-8");
 			BufferedReader br = new BufferedReader(isr);
-
 			String line = null;
 			while ((line = br.readLine()) != null) {
-				System.out.println("=====" + line);
 				question.add(line);
 			}
 			fis.close();

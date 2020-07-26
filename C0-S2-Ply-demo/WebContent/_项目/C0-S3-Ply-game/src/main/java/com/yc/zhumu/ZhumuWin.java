@@ -15,6 +15,9 @@ import java.awt.event.WindowEvent;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.awt.event.WindowFocusListener;
+import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.JPopupMenu;
@@ -32,6 +35,8 @@ public class ZhumuWin {
 	private JButton btnClass = new JButton("上课");
 	private JComboBox<String> cbbTitle = new JComboBox<String>();
 	private String _oldTitle;
+	private int _time = -1;
+	private Date _date = new Date();
 	private String[] titleItems = new String[] { "刚才讲解的内容", "刚才的这段代码", "作业完成情况", "在线的童鞋们!!!" };
 	private final JPopupMenu popupMenu = new JPopupMenu();
 	private final JMenuItem menuItem = new JMenuItem("回复统计");
@@ -226,10 +231,6 @@ public class ZhumuWin {
 					@Override
 					public void windowClosed(WindowEvent e) {
 						if (zb.getCls() != null) {
-							btnClass.setText(zb.getCls() + "班");
-							frame.setTitle(zb.getCls() + "班["
-									+ zb.getMeetingDir().getName().replaceAll(".+(\\d{2}\\.\\d{2})\\.\\d{2}.+", "$1")
-									+ "]");
 							ready();
 						}
 					}
@@ -237,6 +238,17 @@ public class ZhumuWin {
 				;
 			}
 		});
+		Timer timer = new Timer();
+		timer.schedule(new TimerTask() {
+			@Override
+			public void run() {
+				if (_time >= 0) {
+					_time += 1000;
+					_date.setTime(_time);
+					frame.setTitle(Question.MS.format(_date));
+				}
+			}
+		}, 0, 1000);
 	}
 
 	public void start() {
@@ -253,6 +265,7 @@ public class ZhumuWin {
 			} catch (ZhumuException e) {
 				Utils.alert(e.getMessage());
 			}
+			_time = 0;
 			cbbTitle.setEnabled(false);
 			btnLookup.setEnabled(true);
 			btnCancel.setEnabled(true);
@@ -266,7 +279,11 @@ public class ZhumuWin {
 	}
 
 	public void ready() {
+		_time = -1;
 		_oldTitle = null;
+		btnClass.setText(zb.getCls() + "班");
+		frame.setTitle(zb.getCls() + "班["
+				+ zb.getMeetingDir().getName().replaceAll(".+(\\d{2}\\.\\d{2})\\.\\d{2}.+", "$1") + "]");
 		cbbTitle.setEnabled(true);
 		cbbTitle.getEditor().setItem("");
 		cbbTitle.setSelectedIndex(0);

@@ -60,6 +60,14 @@ public class AddClassWin extends JDialog {
 		FlowLayout flowLayout = (FlowLayout) panel.getLayout();
 		flowLayout.setAlignment(FlowLayout.LEFT);
 		getContentPane().add(panel, BorderLayout.NORTH);
+		
+		JLabel label_1 = new JLabel("选择会议:");
+		panel.add(label_1);
+		
+		JComboBox cbbZhumu = new JComboBox();
+		cbbZhumu.setModel(new DefaultComboBoxModel(new String[] {"1", "2"}));
+		cbbZhumu.setPreferredSize(new Dimension(260, 21));
+		panel.add(cbbZhumu);
 
 		JLabel lblNewLabel = new JLabel("切换班级:");
 		panel.add(lblNewLabel);
@@ -73,7 +81,7 @@ public class AddClassWin extends JDialog {
 		});
 		comboBox.setModel(new DefaultComboBoxModel<>(ZhumuBiz.getValues("clss", null)));
 		comboBox.setEditable(true);
-		comboBox.setPreferredSize(new Dimension(240, 21));
+		comboBox.setPreferredSize(new Dimension(260, 21));
 		if (comboBox.getModel().getSize() > 0) {
 			if (zb.getCls() != null) {
 				comboBox.setSelectedItem(zb.getCls());
@@ -85,17 +93,18 @@ public class AddClassWin extends JDialog {
 
 		JLabel label = new JLabel("学生姓名用逗号或换行符隔开");
 		panel.add(label);
-		panel.setPreferredSize(new Dimension(100, 50));
+		panel.setPreferredSize(new Dimension(100, 80));
 
 		okButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					zb.init((String) comboBox.getSelectedItem());
-					ZhumuBiz.addClass(zb.getCls(), textArea.getText());
-					AddClassWin.this.dispose();
+					String cls = (String) comboBox.getSelectedItem();
+					ZhumuBiz.addClass(cls, textArea.getText());
+					zb.init(cls);
 				} catch (ZhumuException e1) {
 					Utils.alert(e1.getMessage());
 				}
+				AddClassWin.this.dispose();
 			}
 		});
 

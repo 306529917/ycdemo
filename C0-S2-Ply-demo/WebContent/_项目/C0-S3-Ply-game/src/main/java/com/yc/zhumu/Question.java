@@ -16,6 +16,7 @@ import java.util.regex.Pattern;
 
 public class Question {
 	public final static SimpleDateFormat YMD = new SimpleDateFormat("yyyy-MM-dd ");
+	public final static SimpleDateFormat MS = new SimpleDateFormat("mm:ss");
 	public final static SimpleDateFormat HMS = new SimpleDateFormat("[HH:mm:ss]");
 	public final static SimpleDateFormat YMDHMS = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	private static Pattern pLine = Pattern.compile("(\\S+)\\s+(.+) : (.+)");
@@ -52,6 +53,7 @@ public class Question {
 					add(name, value);
 				}
 			} catch (ParseException e) {
+				System.out.println("解析错误:" + line);
 				throw new RuntimeException(e);
 			}
 		}
@@ -65,6 +67,8 @@ public class Question {
 		} else if (value.matches("0+.?")) {
 			errors.add(name);
 			corrects.remove(name);
+		} else if (corrects.contains(name) == false){
+			errors.add(name);
 		}
 	}
 
