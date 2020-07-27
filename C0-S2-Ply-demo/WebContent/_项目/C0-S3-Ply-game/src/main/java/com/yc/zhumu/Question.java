@@ -15,7 +15,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Question {
-	public final static SimpleDateFormat ZMD = new SimpleDateFormat("d号aHH时会议");
+	public final static SimpleDateFormat ZMD = new SimpleDateFormat("dd号aHH时会议");
 	public final static SimpleDateFormat YMD = new SimpleDateFormat("yyyy-MM-dd ");
 	public final static SimpleDateFormat MS = new SimpleDateFormat("mm:ss");
 	public final static SimpleDateFormat HMS = new SimpleDateFormat("[HH:mm:ss]");

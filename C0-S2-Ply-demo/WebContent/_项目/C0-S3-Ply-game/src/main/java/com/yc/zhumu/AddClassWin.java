@@ -132,8 +132,19 @@ public class AddClassWin extends JDialog {
 		Date now = new Date();
 		long day3 = 1000 * 60 * 60 * 24 * 3;
 		File[] fs = new File(ZhumuBiz.zhumuHome).listFiles((file) -> {
-			return file.isDirectory() && file.getName().matches("\\d{4}-\\d{2}-\\d{2}\\s.+")
-					&& now.getTime() - file.lastModified() < day3;
+			if (file.isFile() || !file.getName().matches("\\d{4}-\\d{2}-\\d{2}\\s.+")
+					|| now.getTime() - file.lastModified() > day3) {
+				return false;
+			} else {
+				Date date = new Date(file.lastModified());
+				String s = Question.ZMD.format(date);
+				String sh = s.replaceAll("\\d{2}.{3}(\\d{2}).{3}", "$1");
+				int h = Integer.valueOf(sh);
+				if (h >= 21) {
+					return false;
+				}
+			}
+			return true;
 		});
 		Stream<File> sf = Stream.of(fs);
 		sf = sf.sorted((a, b) -> {
@@ -153,7 +164,14 @@ public class AddClassWin extends JDialog {
 		}
 
 		public String toString() {
-			return Question.ZMD.format(new Date(f.lastModified()));
+			Date date = new Date(f.lastModified());
+			String ret = Question.ZMD.format(date);
+			String sh = ret.replaceAll("\\d{2}.{3}(\\d{2}).{3}", "$1");
+			int h = Integer.valueOf(sh);
+			if (h >= 18) {
+				ret = ret.replaceAll("下午", "晚上");
+			}
+			return ret;
 		}
 
 		public File getFile() {

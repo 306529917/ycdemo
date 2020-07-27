@@ -285,7 +285,7 @@ public class ZhumuWin {
 				if (_time >= 0) {
 					_time += 1000;
 					_date.setTime(_time);
-					frame.setTitle(Question.MS.format(_date));
+					frame.setTitle("计时: "+Question.MS.format(_date));
 				}
 			}
 		}, 0, 1000);
