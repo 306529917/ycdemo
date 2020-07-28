@@ -189,7 +189,7 @@ public class ZhumuWin {
 		});
 		menuItem_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new ResultWin(frame, ZhumuBiz.configFile).addWindowListener(new WindowAdapter() {
+				new ResultWin("查看配置文件", frame, ZhumuBiz.configFile).addWindowListener(new WindowAdapter() {
 					@Override
 					public void windowClosed(WindowEvent e) {
 						ZhumuBiz.loadConf();
@@ -201,7 +201,7 @@ public class ZhumuWin {
 		menuItem_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (zb.getMeetingFile() != null) {
-					new ResultWin(frame, zb.getMeetingFile());
+					new ResultWin("查看瞩目聊天文件", frame, zb.getMeetingFile());
 				} else {
 					Utils.alert("请先开启瞩目，然后保存聊天记录!");
 				}
@@ -210,7 +210,7 @@ public class ZhumuWin {
 		menuItem_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (zb.getReportFile() != null) {
-					new ResultWin(frame, zb.getReportFile());
+					new ResultWin("查看回复记录文件", frame, zb.getReportFile());
 				} else {
 					Utils.alert("还没开始上课!");
 				}
@@ -232,7 +232,7 @@ public class ZhumuWin {
 					if (Utils.confirm("请确认是否已经保存了瞩目聊天文件?")) {
 						zb.commit();
 						zb.saveData();
-						new ResultWin(zb, frame);
+						new ResultWin("查看回复统计", zb, frame);
 						ready();
 					}
 				} catch (ZhumuException e1) {
@@ -354,7 +354,7 @@ public class ZhumuWin {
 			Utils.alert(e.getMessage());
 			return;
 		}
-		new ResultWin(zb, frame);
+		new ResultWin("查看回复结果", zb, frame);
 	}
 
 	private static void addPopup(Component component, final JPopupMenu popup) {
@@ -380,7 +380,18 @@ public class ZhumuWin {
 	public void report(int num) {
 		if (zb.getReportFile() != null) {
 			try {
-				new ResultWin(zb.export(num), frame);
+				String title;
+				switch (num) {
+				case 3:
+					title = "查看前三次课回复统计";
+					break;
+				case 10:
+					title = "查看前十次课回复统计";
+					break;
+				default:
+					title = "查看本次课回复统计";
+				}
+				new ResultWin(title, zb.export(num), frame);
 			} catch (ZhumuException e1) {
 				Utils.alert(e1.getMessage());
 			}

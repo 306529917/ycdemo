@@ -32,18 +32,18 @@ public class ResultWin extends JDialog {
 	private File file;
 	private ZhumuBiz zb;
 
-	public ResultWin(ZhumuBiz zb, Frame onner) {
-		this(readLogs(zb), onner);
+	public ResultWin(String title, ZhumuBiz zb, Frame onner) {
+		this(title, readLogs(zb), onner);
 		this.zb = zb;
 	}
 
 	/**
 	 * @wbp.parser.constructor
 	 */
-	public ResultWin(String result, Frame onner) {
+	public ResultWin(String title, String result, Frame onner) {
 		super(onner);
 		setModal(true);
-		setTitle("查看");
+		setTitle(title);
 		setBounds(100, 100, 388, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -117,12 +117,12 @@ public class ResultWin extends JDialog {
 		});
 	}
 
-	public ResultWin(Frame onner, String filepath) {
-		this(onner, new File(filepath));
+	public ResultWin(String titile, Frame onner, String filepath) {
+		this(titile, onner, new File(filepath));
 	}
 
-	public ResultWin(Frame onner, File file) {
-		this(readfile(file), onner);
+	public ResultWin(String titile, Frame onner, File file) {
+		this(titile, readfile(file), onner);
 		this.setTitle("查看: " + file.getName());
 		this.file = file;
 		this.button.setEnabled(true);
