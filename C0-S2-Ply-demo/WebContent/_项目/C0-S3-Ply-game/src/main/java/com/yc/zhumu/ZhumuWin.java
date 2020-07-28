@@ -212,7 +212,7 @@ public class ZhumuWin {
 				if (zb.getReportFile() != null) {
 					new ResultWin(frame, zb.getReportFile());
 				} else {
-					Utils.alert("还没有提交过提问!");
+					Utils.alert("还没开始上课!");
 				}
 			}
 		});
