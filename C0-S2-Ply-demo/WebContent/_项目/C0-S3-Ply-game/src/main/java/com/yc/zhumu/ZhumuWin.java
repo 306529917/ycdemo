@@ -334,13 +334,11 @@ public class ZhumuWin {
 	}
 
 	public void lookup() {
-		if (btnSave.isEnabled() && Utils.confirm("请确认是否已经保存了瞩目聊天文件?")) {
-			try {
-				zb.commit();
-			} catch (ZhumuException e) {
-				Utils.alert(e.getMessage());
-				return;
-			}
+		try {
+			zb.commit();
+		} catch (ZhumuException e) {
+			Utils.alert(e.getMessage());
+			return;
 		}
 		new ResultWin(zb, frame);
 	}

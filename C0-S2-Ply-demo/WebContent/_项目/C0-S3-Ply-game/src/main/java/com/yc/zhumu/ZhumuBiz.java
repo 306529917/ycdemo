@@ -34,6 +34,7 @@ import java.util.regex.Pattern;
 
 public class ZhumuBiz {
 	public static String zhumuHome = "C:\\Users\\Administrator\\Documents\\zhumu";
+	public static String classHome = "D:\\文件柜";
 	public static File configFile = new File(zhumuHome, "zhumu.ini");
 	private static Properties conf = new Properties();
 	private Set<String> members = new LinkedHashSet<>();
@@ -115,6 +116,14 @@ public class ZhumuBiz {
 		skipSize = meetingFile.length();
 		reportFile = new File(zhumuHome, meetingFile.getParentFile().getName() + ".txt");
 		setCls(cls);
+		// 创建班级上课目录
+		File clsDir = new File(classHome, cls);
+		if (clsDir.exists()) {
+			clsDir = new File(clsDir, Question.MD.format(new Date()));
+			if (clsDir.exists() == false) {
+				clsDir.mkdir();
+			}
+		}
 	}
 
 	public Question start(String content) throws ZhumuException {

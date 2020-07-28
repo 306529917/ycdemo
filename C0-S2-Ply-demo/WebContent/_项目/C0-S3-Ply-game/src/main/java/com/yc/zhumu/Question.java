@@ -21,6 +21,7 @@ public class Question {
 	public final static SimpleDateFormat HMS = new SimpleDateFormat("[HH:mm:ss]");
 	public final static SimpleDateFormat YMDHMS = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	public final static SimpleDateFormat YMDHMS1 = new SimpleDateFormat("yyyy-MM-dd HH.mm.ss");
+	public static final SimpleDateFormat MD = new SimpleDateFormat("MMdd");
 	private static Pattern pLine = Pattern.compile("(\\S+)\\s+(.+) : (.+)");
 	private Date beginTime = new Date();
 	private String sToday = YMD.format(beginTime);
