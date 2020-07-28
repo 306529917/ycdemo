@@ -46,7 +46,7 @@ public class ZhumuWin {
 	private Date _date = new Date();
 	private String[] titleItems = new String[] { "刚才讲解的内容", "刚才的这段代码", "作业完成情况", "在线的童鞋们!!!" };
 	private final JPopupMenu popupMenu = new JPopupMenu();
-	private final JMenuItem menuItem = new JMenuItem("聊天统计");
+	private final JMenuItem menuItem = new JMenuItem("本次课统计");
 	private final JMenuItem menuItem_1 = new JMenuItem("回复记录文件");
 	private final JMenuItem menuItem_2 = new JMenuItem("瞩目聊天文件");
 	private final JMenuItem menuItem_3 = new JMenuItem("配置信息文件");
@@ -55,6 +55,9 @@ public class ZhumuWin {
 	private final JMenu menu_1 = new JMenu("瞩目配置");
 	private final JMenuItem menuItem_4 = new JMenuItem("打开瞩目目录");
 	private final JMenuItem menuItem_5 = new JMenuItem("设置瞩目目录");
+	private final JMenu menu_2 = new JMenu("回复统计");
+	private final JMenuItem menuItem_6 = new JMenuItem("前三次课统计");
+	private final JMenuItem menuItem_7 = new JMenuItem("前十次课统计");
 
 	/**
 	 * Launch the application.
@@ -162,17 +165,28 @@ public class ZhumuWin {
 		menu.add(menuItem_1);
 		menu.add(menuItem_2);
 		menu.add(menuItem_3);
-		menuItem.addActionListener(new ActionListener() {
+
+		popupMenu.add(menu_2);
+		menu_2.add(menuItem);
+		menuItem_6.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (zb.getReportFile() != null) {
-					new ResultWin(zb.export(), frame);
-				} else {
-					Utils.alert("至少要有一次提问记录!");
-				}
+				report(3);
 			}
 		});
 
-		popupMenu.add(menuItem);
+		menu_2.add(menuItem_6);
+		menuItem_7.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				report(10);
+			}
+		});
+
+		menu_2.add(menuItem_7);
+		menuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				report(0);
+			}
+		});
 		menuItem_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new ResultWin(frame, ZhumuBiz.configFile).addWindowListener(new WindowAdapter() {
@@ -189,7 +203,7 @@ public class ZhumuWin {
 				if (zb.getMeetingFile() != null) {
 					new ResultWin(frame, zb.getMeetingFile());
 				} else {
-					Utils.alert("请先开启瞩目保存聊天记录!");
+					Utils.alert("请先开启瞩目，然后保存聊天记录!");
 				}
 			}
 		});
@@ -198,7 +212,7 @@ public class ZhumuWin {
 				if (zb.getReportFile() != null) {
 					new ResultWin(frame, zb.getReportFile());
 				} else {
-					Utils.alert("至少要有一次提问记录!");
+					Utils.alert("还没有提交过提问!");
 				}
 			}
 		});
@@ -285,7 +299,7 @@ public class ZhumuWin {
 				if (_time >= 0) {
 					_time += 1000;
 					_date.setTime(_time);
-					frame.setTitle("计时: "+Question.MS.format(_date));
+					frame.setTitle("计时: " + Question.MS.format(_date));
 				}
 			}
 		}, 0, 1000);
@@ -361,5 +375,17 @@ public class ZhumuWin {
 				popup.show(e.getComponent(), e.getX(), e.getY());
 			}
 		});
+	}
+
+	public void report(int num) {
+		if (zb.getReportFile() != null) {
+			try {
+				new ResultWin(zb.export(num), frame);
+			} catch (ZhumuException e1) {
+				Utils.alert(e1.getMessage());
+			}
+		} else {
+			Utils.alert("至少要有一次提问记录!");
+		}
 	}
 }

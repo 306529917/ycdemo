@@ -3,6 +3,10 @@ package com.yc.zhumu;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.Window;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -49,6 +53,28 @@ public class Utils {
 	public static boolean confirm(String msg) {
 		int ret = JOptionPane.showConfirmDialog(null, msg, "系统提示", JOptionPane.YES_NO_OPTION);
 		return ret == 0;
+	}
+
+	public static String readLine(File file, int lineNumber) {
+		BufferedReader br = null;
+		try {
+			br = new BufferedReader(new FileReader(file));
+			String line = null;
+			int i = 0;
+			while ((line = br.readLine()) != null && i++ < lineNumber) {
+			}
+			return line;
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		} finally {
+			try {
+				if (br != null) {
+					br.close();
+				}
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
+		}
 	}
 
 }
