@@ -216,7 +216,7 @@ public class ZhumuBiz {
 		TreeMap<String, Integer>[] tms = new TreeMap[] { new TreeMap<>(), new TreeMap<>(), new TreeMap<>(),
 				new TreeMap<>() };
 
-		for (int j = 0; j < reportFiles.length && j < num; j++) {
+		for (int j = 0; j < reportFiles.length && (num < 1 || j < num); j++) {
 			System.out.println("分析文件: " + reportFiles[j].getName());
 			BufferedReader br = null;
 			try {
@@ -229,7 +229,7 @@ public class ZhumuBiz {
 							String members[] = sMember.split("[\\s,;，；|]+");
 							TreeMap<String, Integer> tm = tms[i];
 							for (String member : members) {
-								if(this.members.contains(member)) {
+								if (this.members.contains(member)) {
 									Integer cnt = tm.get(member);
 									cnt = cnt == null ? 1 : (cnt + 1);
 									tm.put(member, cnt);
@@ -388,7 +388,18 @@ public class ZhumuBiz {
 	}
 
 	public String getMeetingName() {
-		return cls + "班" + Question.ZMD.format(new Date(meetingDir.lastModified()));
+		return cls + "班" + buildMeetingName(meetingDir.lastModified());
+	}
+
+	public static String buildMeetingName(long time) {
+		Date date = new Date(time);
+		String ret = Question.ZMD.format(date);
+		String sh = ret.replaceAll("\\d{2}.{3}(\\d{2}).{3}", "$1");
+		int h = Integer.valueOf(sh);
+		if (h >= 18) {
+			ret = ret.replaceAll("下午", "晚上");
+		}
+		return ret;
 	}
 
 }

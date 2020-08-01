@@ -164,14 +164,7 @@ public class AddClassWin extends JDialog {
 		}
 
 		public String toString() {
-			Date date = new Date(f.lastModified());
-			String ret = Question.ZMD.format(date);
-			String sh = ret.replaceAll("\\d{2}.{3}(\\d{2}).{3}", "$1");
-			int h = Integer.valueOf(sh);
-			if (h >= 18) {
-				ret = ret.replaceAll("下午", "晚上");
-			}
-			return ret;
+			return ZhumuBiz.buildMeetingName(f.lastModified());
 		}
 
 		public File getFile() {
