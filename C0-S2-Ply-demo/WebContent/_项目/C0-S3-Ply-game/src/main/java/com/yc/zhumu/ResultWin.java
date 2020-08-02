@@ -31,6 +31,7 @@ public class ResultWin extends JDialog {
 	private JButton button = new JButton("保存");
 	private File file;
 	private ZhumuBiz zb;
+	private JTextArea textArea;
 
 	public ResultWin(String title, ZhumuBiz zb, Frame onner) {
 		this(title, readLogs(zb), onner);
@@ -53,7 +54,7 @@ public class ResultWin extends JDialog {
 		JScrollPane scrollPane = new JScrollPane();
 		contentPanel.add(scrollPane, "name_12632113040062");
 
-		JTextArea textArea = new JTextArea(result);
+		textArea = new JTextArea(result);
 		scrollPane.setViewportView(textArea);
 
 		JPanel buttonPane = new JPanel();
@@ -94,10 +95,15 @@ public class ResultWin extends JDialog {
 		});
 
 		Utils.center(this);
-
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		setVisible(true);
-		
+	}
+
+	public ResultWin(String titile, Frame onner, String filepath) {
+		this(titile, onner, new File(filepath));
+	}
+
+	public ResultWin(String titile, Frame onner, File file) {
+		this(titile, readfile(file), onner);
 		textArea.getDocument().addDocumentListener(new DocumentListener() {
 
 			@Override
@@ -115,17 +121,8 @@ public class ResultWin extends JDialog {
 				button.setEnabled(file != null);
 			}
 		});
-	}
-
-	public ResultWin(String titile, Frame onner, String filepath) {
-		this(titile, onner, new File(filepath));
-	}
-
-	public ResultWin(String titile, Frame onner, File file) {
-		this(titile, readfile(file), onner);
 		this.setTitle("查看: " + file.getName());
 		this.file = file;
-		this.button.setEnabled(true);
 	}
 
 	private static String readLogs(ZhumuBiz zb) {
