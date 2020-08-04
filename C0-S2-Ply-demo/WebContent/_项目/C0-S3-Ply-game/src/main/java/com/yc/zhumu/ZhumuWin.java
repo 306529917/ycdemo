@@ -30,6 +30,7 @@ import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JMenu;
 
 public class ZhumuWin {
@@ -57,6 +58,7 @@ public class ZhumuWin {
 	private final JMenu menu_2 = new JMenu("回复统计");
 	private final JMenuItem menuItem_6 = new JMenuItem("前三次课统计");
 	private final JMenuItem menuItem_7 = new JMenuItem("前十次课统计");
+	private final JMenuItem menuItem_8 = new JMenuItem("自定义统计");
 
 	/**
 	 * Launch the application.
@@ -181,6 +183,18 @@ public class ZhumuWin {
 		});
 
 		menu_2.add(menuItem_7);
+		menuItem_8.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String s = JOptionPane.showInputDialog(null, "请输入统计的课程数量");
+				try {
+					report(Integer.valueOf(s));
+				} catch (Exception e1) {
+					Utils.alert("请输入正确的数字!");
+				}
+			}
+		});
+
+		menu_2.add(menuItem_8);
 		menuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				report(0);
@@ -381,15 +395,10 @@ public class ZhumuWin {
 		if (zb.getReportFile() != null) {
 			try {
 				String title;
-				switch (num) {
-				case 3:
-					title = "查看前三次课回复统计";
-					break;
-				case 10:
-					title = "查看前十次课回复统计";
-					break;
-				default:
+				if (num < 1) {
 					title = "查看本次课回复统计";
+				} else {
+					title = "查看前 " + num + " 次课回复统计";
 				}
 				new ResultWin(title, zb.export(num), frame).setVisible(true);
 			} catch (ZhumuException e1) {
