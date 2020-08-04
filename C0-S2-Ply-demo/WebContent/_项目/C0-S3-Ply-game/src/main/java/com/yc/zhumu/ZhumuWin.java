@@ -405,7 +405,7 @@ public class ZhumuWin {
 				Utils.alert(e1.getMessage());
 			}
 		} else {
-			Utils.alert("至少要有一次提问记录!");
+			Utils.alert("未保存统计文件!");
 		}
 	}
 }
