@@ -185,7 +185,8 @@ public class ZhumuWin {
 		menu_2.add(menuItem_7);
 		menuItem_8.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String s = JOptionPane.showInputDialog(null, "请输入统计的课程数量");
+				String s = JOptionPane.showInputDialog(null, 
+						"请输入统计的前几次课程的次数:");
 				try {
 					report(Integer.valueOf(s));
 				} catch (Exception e1) {

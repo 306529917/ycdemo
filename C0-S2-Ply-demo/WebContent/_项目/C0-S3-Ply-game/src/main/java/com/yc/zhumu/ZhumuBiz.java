@@ -27,6 +27,8 @@ import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.Random;
 import java.util.Set;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.TreeMap;
 import java.util.function.Predicate;
 import java.util.regex.Matcher;
@@ -35,6 +37,9 @@ import java.util.regex.Pattern;
 public class ZhumuBiz {
 	public static String zhumuHome = "C:\\Users\\Administrator\\Documents\\zhumu";
 	public static String classHome = "D:\\文件柜";
+	private static String cls;
+	private static File clsDir;
+	public static Timer classHomeTimer;
 	public static File configFile = new File(zhumuHome, "zhumu.ini");
 	private static Properties conf = new Properties();
 	private Set<String> members = new LinkedHashSet<>();
@@ -43,7 +48,6 @@ public class ZhumuBiz {
 	private File meetingFile;
 	private File meetingDir;
 	private Random rand = new Random();
-	private String cls;
 	private long skipSize;
 
 	static {
@@ -72,7 +76,7 @@ public class ZhumuBiz {
 	}
 
 	private void setCls(String cls) {
-		this.cls = cls;
+		ZhumuBiz.cls = cls;
 		String sMember = conf.getProperty(cls);
 		if (sMember != null) {
 			members.clear();
@@ -118,13 +122,15 @@ public class ZhumuBiz {
 		reportFile = new File(zhumuHome, meetingFile.getParentFile().getName() + ".txt");
 		setCls(cls);
 		// 创建班级上课目录
-		File clsDir = new File(classHome, cls);
+		clsDir = new File(classHome, cls);
 		if (clsDir.exists()) {
 			clsDir = new File(clsDir, Question.MD.format(new Date()));
 			if (clsDir.exists() == false) {
 				clsDir.mkdir();
 			}
 		}
+		// 监听班级目录, 复制新文件名到剪贴板
+		checkClassHome();
 	}
 
 	public Question start(String content) throws ZhumuException {
@@ -138,12 +144,7 @@ public class ZhumuBiz {
 		content = Question.HMS.format(new Date()) + " " + content;
 		content += "\n已完成的请回复：" + value + "\n未完成的请回复：0\n不回复的算挂机：)";
 		question = new Question(content, value, members);
-		// 获取系统剪贴板
-		Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-		// 封装文本内容
-		Transferable trans = new StringSelection("========================\n" + content + "\n========================");
-		// 把文本内容设置到系统剪贴板
-		clipboard.setContents(trans, null);
+		toClipboard("========================\n" + content + "\n========================");
 		return question;
 	}
 
@@ -400,6 +401,31 @@ public class ZhumuBiz {
 			ret = ret.replaceAll("下午", "晚上");
 		}
 		return ret;
+	}
+
+	public static void checkClassHome() {
+		if (classHomeTimer == null) {
+			classHomeTimer = new Timer();
+			classHomeTimer.schedule(new TimerTask() {
+				File lastFile;
+				@Override
+				public void run() {
+					File[] fs = ZhumuBiz.clsDir.listFiles();
+					if (fs != null && fs.length > 0 && fs[fs.length - 1].equals(lastFile) == false) {
+						lastFile = fs[fs.length - 1];
+						toClipboard(lastFile.getName().replaceAll("(.+?)\\d*\\..+", "$1"));
+					}
+				}
+			}, 0, 2000);
+		}
+	}
+
+	public static void toClipboard(String content) {
+		Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+		// 封装文本内容
+		Transferable trans = new StringSelection(content);
+		// 把文本内容设置到系统剪贴板
+		clipboard.setContents(trans, null);
 	}
 
 }
