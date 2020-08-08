@@ -408,9 +408,13 @@ public class ZhumuBiz {
 			classHomeTimer = new Timer();
 			classHomeTimer.schedule(new TimerTask() {
 				File lastFile;
+
 				@Override
 				public void run() {
 					File[] fs = ZhumuBiz.clsDir.listFiles();
+					Arrays.sort(fs, (o1, o2) -> {
+						return (int) (o1.lastModified() - o2.lastModified());
+					});
 					if (fs != null && fs.length > 0 && fs[fs.length - 1].equals(lastFile) == false) {
 						lastFile = fs[fs.length - 1];
 						toClipboard(lastFile.getName().replaceAll("(.+?)\\d*\\..+", "$1"));
