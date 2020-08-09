@@ -28,7 +28,6 @@ import java.util.Properties;
 import java.util.Random;
 import java.util.Set;
 import java.util.Timer;
-import java.util.TimerTask;
 import java.util.TreeMap;
 import java.util.function.Predicate;
 import java.util.regex.Matcher;
@@ -129,8 +128,6 @@ public class ZhumuBiz {
 				clsDir.mkdir();
 			}
 		}
-		// 监听班级目录, 复制新文件名到剪贴板
-		checkClassHome();
 	}
 
 	public Question start(String content) throws ZhumuException {
@@ -403,25 +400,15 @@ public class ZhumuBiz {
 		return ret;
 	}
 
-	public static void checkClassHome() {
-		if (classHomeTimer == null) {
-			classHomeTimer = new Timer();
-			classHomeTimer.schedule(new TimerTask() {
-				File lastFile;
-
-				@Override
-				public void run() {
-					File[] fs = ZhumuBiz.clsDir.listFiles();
-					Arrays.sort(fs, (o1, o2) -> {
-						return (int) (o1.lastModified() - o2.lastModified());
-					});
-					if (fs != null && fs.length > 0 && fs[fs.length - 1].equals(lastFile) == false) {
-						lastFile = fs[fs.length - 1];
-						toClipboard(lastFile.getName().replaceAll("(.+?)\\d*\\..+", "$1"));
-					}
-				}
-			}, 0, 2000);
+	public static String getLastFilename() {
+		File[] fs = ZhumuBiz.clsDir.listFiles();
+		if (fs != null && fs.length > 0) {
+			Arrays.sort(fs, (o1, o2) -> {
+				return (int) (o1.lastModified() - o2.lastModified());
+			});
+			return fs[fs.length - 1].getName().replaceAll("(.+?)\\d*\\..+", "$1");
 		}
+		return null;
 	}
 
 	public static void toClipboard(String content) {

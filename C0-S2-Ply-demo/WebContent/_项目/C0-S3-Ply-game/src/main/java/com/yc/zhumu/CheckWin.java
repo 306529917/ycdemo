@@ -43,6 +43,7 @@ public class CheckWin extends JDialog {
 	 * Create the dialog.
 	 */
 	public CheckWin() {
+		setAlwaysOnTop(true);
 		setModal(true);
 		setTitle("作业检查助手");
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);

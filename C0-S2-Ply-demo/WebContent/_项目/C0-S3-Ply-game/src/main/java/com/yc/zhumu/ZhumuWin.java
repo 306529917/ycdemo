@@ -32,6 +32,8 @@ import java.awt.event.MouseEvent;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JMenu;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 public class ZhumuWin {
 
@@ -281,6 +283,16 @@ public class ZhumuWin {
 					if (index < cbbTitle.getItemCount()) {
 						cbbTitle.setSelectedIndex(index);
 					}
+				}
+			}
+		});
+		cbbTitle.getEditor().getEditorComponent().addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				String s = ZhumuBiz.getLastFilename();
+				if (s != null) {
+					cbbTitle.getEditor().setItem(s);
+					cbbTitle.getEditor().selectAll();
 				}
 			}
 		});
