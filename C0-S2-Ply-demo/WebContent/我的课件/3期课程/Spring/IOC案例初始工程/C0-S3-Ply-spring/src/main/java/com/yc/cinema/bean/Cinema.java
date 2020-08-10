@@ -1,4 +1,4 @@
-package com.yc.mybatis.bean;
+package com.yc.cinema.bean;
 
 import java.util.List;
 

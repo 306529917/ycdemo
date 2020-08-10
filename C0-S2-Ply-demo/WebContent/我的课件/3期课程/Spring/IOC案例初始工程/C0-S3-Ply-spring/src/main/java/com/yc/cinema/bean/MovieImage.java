@@ -1,4 +1,4 @@
-package com.yc.mybatis.bean;
+package com.yc.cinema.bean;
 
 public class MovieImage {
     private Integer id;
