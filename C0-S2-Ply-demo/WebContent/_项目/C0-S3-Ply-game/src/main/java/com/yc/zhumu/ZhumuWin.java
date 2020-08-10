@@ -276,6 +276,16 @@ public class ZhumuWin {
 		});
 		btnCancel.setEnabled(false);
 		cbbTitle.getEditor().getEditorComponent().addKeyListener(new KeyAdapter() {
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if (e.getKeyCode() == 10 || e.getKeyCode() == 16 || e.getKeyCode() == 17)
+					start();
+				else if (e.getKeyCode() == 27) {
+					cbbTitle.getEditor().setItem(null);
+				}
+			}
+
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if (e.isShiftDown() && e.getKeyCode() > 111 && e.getKeyCode() < 125) {
@@ -304,12 +314,6 @@ public class ZhumuWin {
 			items = titleItems;
 		}
 		cbbTitle.setModel(new DefaultComboBoxModel<>(Utils.add(items, "", 0)));
-		cbbTitle.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				start();
-			}
-		});
-
 		cbbTitle.setEditable(true);
 		frame.getContentPane().add(cbbTitle, BorderLayout.NORTH);
 
@@ -371,14 +375,15 @@ public class ZhumuWin {
 		_oldTitle = null;
 		btnClass.setText(zb.getCls() + "班");
 		frame.setTitle(zb.getMeetingName());
+		btnClass.setEnabled(true);
+		btnClass.requestFocus();
 		cbbTitle.setEnabled(true);
-		cbbTitle.getEditor().setItem("");
 		cbbTitle.setSelectedIndex(0);
+		cbbTitle.getEditor().setItem(null);
 		btnLookup.setText("查看");
 		btnLookup.setEnabled(zb.getQuestion() != null);
 		btnCancel.setEnabled(false);
 		btnSave.setEnabled(false);
-		btnClass.setEnabled(true);
 	}
 
 	public void lookup() {
