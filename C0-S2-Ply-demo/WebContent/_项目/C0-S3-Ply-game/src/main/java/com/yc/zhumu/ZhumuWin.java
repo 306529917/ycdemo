@@ -279,7 +279,7 @@ public class ZhumuWin {
 
 			@Override
 			public void keyReleased(KeyEvent e) {
-				if (e.getKeyCode() == 10 || e.getKeyCode() == 16 || e.getKeyCode() == 17)
+				if (e.getKeyCode() == 10)
 					start();
 				else if (e.getKeyCode() == 27) {
 					cbbTitle.getEditor().setItem(null);
@@ -299,10 +299,13 @@ public class ZhumuWin {
 		cbbTitle.getEditor().getEditorComponent().addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
-				String s = ZhumuBiz.getLastFilename();
-				if (s != null) {
-					cbbTitle.getEditor().setItem(s);
-					cbbTitle.getEditor().selectAll();
+				Object i = cbbTitle.getEditor().getItem();
+				if(i==null || i.toString().isEmpty()) {
+					String s = ZhumuBiz.getLastFilename();
+					if (s != null) {
+						cbbTitle.getEditor().setItem(s);
+						cbbTitle.getEditor().selectAll();
+					}
 				}
 			}
 		});
