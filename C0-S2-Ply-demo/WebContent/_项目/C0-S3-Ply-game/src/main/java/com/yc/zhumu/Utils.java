@@ -82,14 +82,15 @@ public class Utils {
 
 	public static String[] check(String a, String b) {
 		String[] as = a.split("\\n");
-		String[] bs = b.split("\\s*[,;；，]\\s*");
-		Stream<String> s = Stream.of(as);
-		s = s.filter(p -> {
+		String[] bs = b.split("\\s*[,;；，\n]\\s*");
+		as = Stream.of(as).filter(p -> {
 			return p.matches("\\d+\\s+(.+?)\\s.+");
 		}).map((line) -> {
 			return line.replaceAll("\\d+\\s+(.+?)\\s.+", "$1");
-		});
-		as = s.toArray(String[]::new);
+		}).toArray(String[]::new);
+		bs = Stream.of(bs).filter(p -> {
+			return !p.trim().isEmpty();
+		}).toArray(String[]::new);
 		return check(as, bs);
 	}
 
