@@ -56,8 +56,7 @@ public class Question {
 					add(name, value);
 				}
 			} catch (ParseException e) {
-				System.out.println("解析错误:" + line);
-				throw new RuntimeException(e);
+				System.out.println("解析错误:" + line + "\n" + e.getMessage());
 			}
 		}
 	}
@@ -70,7 +69,7 @@ public class Question {
 		} else if (value.matches("0+.?")) {
 			errors.add(name);
 			corrects.remove(name);
-		} else if (corrects.contains(name) == false){
+		} else if (corrects.contains(name) == false) {
 			errors.add(name);
 		}
 	}
