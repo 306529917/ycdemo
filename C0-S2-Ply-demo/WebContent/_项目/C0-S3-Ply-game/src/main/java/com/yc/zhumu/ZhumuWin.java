@@ -90,31 +90,30 @@ public class ZhumuWin {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setUndecorated(true);
-		frame.getRootPane().setWindowDecorationStyle(JRootPane.PLAIN_DIALOG);
-		/*frame.addWindowFocusListener(new WindowFocusListener() {
-			public void windowGainedFocus(WindowEvent e) {
-			}
-		
-			public void windowLostFocus(WindowEvent e) {
-				start();
-			}
-		});*/
-		frame.addWindowListener(new WindowAdapter() {
+		frame = new JFrame() {
+			private static final long serialVersionUID = 1L;
+
 			@Override
-			public void windowClosing(WindowEvent e) {
-				ZhumuBiz.setValues("xy", frame.getLocation().x + "", frame.getLocation().y + "");
-				ZhumuBiz.saveConf();
-				if (zb != null) {
-					try {
-						zb.saveData();
-					} catch (ZhumuException e1) {
-						e1.printStackTrace();
+			protected void processWindowEvent(WindowEvent e) {
+				if (e.getID() == WindowEvent.WINDOW_CLOSING) {
+					if (Utils.confirm("请确认要关闭瞩目助手吗?") == false) {
+						return;
+					}
+					ZhumuBiz.setValues("xy", frame.getLocation().x + "", frame.getLocation().y + "");
+					ZhumuBiz.saveConf();
+					if (zb != null) {
+						try {
+							zb.saveData();
+						} catch (ZhumuException e1) {
+							e1.printStackTrace();
+						}
 					}
 				}
+				super.processWindowEvent(e); // 该语句会执行窗口事件的默认动作(如：隐藏)
 			}
-		});
+		};
+		frame.setUndecorated(true);
+		frame.getRootPane().setWindowDecorationStyle(JRootPane.PLAIN_DIALOG);
 		frame.setTitle("瞩目助手");
 		frame.setBounds(100, 100, 284, 97);
 		frame.setPreferredSize(frame.getSize());
@@ -300,7 +299,7 @@ public class ZhumuWin {
 			@Override
 			public void focusGained(FocusEvent e) {
 				Object i = cbbTitle.getEditor().getItem();
-				if(i==null || i.toString().isEmpty()) {
+				if (i == null || i.toString().isEmpty()) {
 					String s = ZhumuBiz.getLastFilename();
 					if (s != null) {
 						cbbTitle.getEditor().setItem(s);
@@ -436,4 +435,5 @@ public class ZhumuWin {
 			Utils.alert("未保存统计文件!");
 		}
 	}
+
 }
