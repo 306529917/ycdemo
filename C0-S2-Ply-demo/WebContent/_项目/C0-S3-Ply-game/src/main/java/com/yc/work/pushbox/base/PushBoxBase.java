@@ -175,6 +175,7 @@ public abstract class PushBoxBase implements java.io.Serializable {
 	public void next() {
 		level++;
 		loadMap();
+		save();
 	}
 
 	/**
