@@ -21,7 +21,7 @@ public class PbGame extends PushBoxBase {
 	 * @return 
 	 */
 	public boolean moveUp() {
-		return move(0, -1, '8');
+		return move(0, -1);
 	}
 
 	/**
@@ -29,7 +29,7 @@ public class PbGame extends PushBoxBase {
 	 * @return 
 	 */
 	public boolean moveDown() {
-		return move(0, 1, '5');
+		return move(0, 1);
 	}
 
 	/**
@@ -37,7 +37,7 @@ public class PbGame extends PushBoxBase {
 	 * @return 
 	 */
 	public boolean moveLeft() {
-		return move(-1, 0, '6');
+		return move(-1, 0);
 	}
 
 	/**
@@ -45,7 +45,7 @@ public class PbGame extends PushBoxBase {
 	 * @return 
 	 */
 	public boolean moveRight() {
-		return move(1, 0, '7');
+		return move(1, 0);
 	}
 
 	/**

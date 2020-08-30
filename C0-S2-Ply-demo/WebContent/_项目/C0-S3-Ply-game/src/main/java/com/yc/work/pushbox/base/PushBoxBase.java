@@ -93,11 +93,13 @@ public abstract class PushBoxBase implements java.io.Serializable {
 	 * @param man 小人的方向, 5下, 6左, 7右, 8上
 	 * @return 
 	 */
-	public boolean move(int ox, int oy, char man) {
+	public boolean move(int ox, int oy) {
 		int[] xy = findMan();
 		// x ==> xy[0], y ==> xy[1] ===> 原因 { x, y }
 		int x = xy[0];
 		int y = xy[1];
+		// 根据 x,y 判断行进方向
+		char man = udlr(ox, oy);
 		// 判断是否可以推动
 		if (map[y + oy][x + ox] == '1') {
 			// 前面是房子, 则退出
@@ -139,6 +141,24 @@ public abstract class PushBoxBase implements java.io.Serializable {
 			}
 		}
 		return true;
+	}
+
+	/**
+	 * 判断行进方向
+	 * @param x
+	 * @param y
+	 * @return
+	 */
+	protected char udlr(int x, int y) {
+		if (x == 1 && y == 0) {
+			return '7';
+		} else if (x == -1 && y == 0) {
+			return '6';
+		} else if (x == 0 && y == 1) {
+			return '5';
+		} else {
+			return '8';
+		}
 	}
 
 	/**
