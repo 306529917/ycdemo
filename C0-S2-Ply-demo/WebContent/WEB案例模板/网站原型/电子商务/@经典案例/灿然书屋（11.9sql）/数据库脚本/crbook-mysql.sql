@@ -2,15 +2,15 @@
 Navicat MySQL Data Transfer
 
 Source Server         : localhost_3306
-Source Server Version : 50018
+Source Server Version : 50528
 Source Host           : localhost:3306
-Source Database       : crbook
+Source Database       : bank
 
 Target Server Type    : MYSQL
-Target Server Version : 50018
+Target Server Version : 50528
 File Encoding         : 65001
 
-Date: 2020-08-31 00:02:04
+Date: 2020-09-10 15:57:31
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -20,13 +20,13 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 DROP TABLE IF EXISTS `cr_article`;
 CREATE TABLE `cr_article` (
-  `id` int(11) NOT NULL auto_increment,
-  `title` varchar(100) default NULL,
-  `author` varchar(50) default NULL,
-  `create_time` varchar(50) default NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(100) DEFAULT NULL,
+  `author` varchar(50) DEFAULT NULL,
+  `create_time` varchar(50) DEFAULT NULL,
   `content` text,
-  PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=71543 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of cr_article
@@ -97,31 +97,31 @@ INSERT INTO `cr_article` VALUES ('71542', '语文信箱：“你冷么”宜写�
 -- ----------------------------
 DROP TABLE IF EXISTS `cr_book`;
 CREATE TABLE `cr_book` (
-  `id` int(11) NOT NULL auto_increment COMMENT '主键',
-  `name` varchar(255) default NULL COMMENT '书名',
-  `categroy1` varchar(50) default NULL COMMENT '分类',
-  `categroy2` varchar(50) default NULL,
-  `pic` varchar(255) default NULL,
-  `price` varchar(50) default NULL COMMENT '价格',
-  `author` varchar(255) default NULL COMMENT '作者',
-  `publisher` varchar(255) default NULL COMMENT '出版社',
-  `press_date` varchar(50) default NULL COMMENT '出版时间',
-  `isbn` varchar(50) default NULL COMMENT '发行编号',
-  `press_sn` varchar(50) default NULL COMMENT '版次',
-  `pages` varchar(50) default NULL COMMENT '页数',
-  `words` varchar(50) default NULL COMMENT '字数',
-  `print_time` varchar(50) default NULL COMMENT '印刷时间',
-  `book_size` varchar(50) default NULL COMMENT '开本',
-  `print_sn` varchar(50) default NULL COMMENT '印次',
-  `packing` varchar(50) default NULL COMMENT '包装',
-  `format` varchar(50) default NULL COMMENT '版式',
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `name` varchar(255) DEFAULT NULL COMMENT '书名',
+  `categroy1` varchar(50) DEFAULT NULL COMMENT '分类',
+  `categroy2` varchar(50) DEFAULT NULL,
+  `pic` varchar(255) DEFAULT NULL,
+  `price` varchar(50) DEFAULT NULL COMMENT '价格',
+  `author` varchar(255) DEFAULT NULL COMMENT '作者',
+  `publisher` varchar(255) DEFAULT NULL COMMENT '出版社',
+  `press_date` varchar(50) DEFAULT NULL COMMENT '出版时间',
+  `isbn` varchar(50) DEFAULT NULL COMMENT '发行编号',
+  `press_sn` varchar(50) DEFAULT NULL COMMENT '版次',
+  `pages` varchar(50) DEFAULT NULL COMMENT '页数',
+  `words` varchar(50) DEFAULT NULL COMMENT '字数',
+  `print_time` varchar(50) DEFAULT NULL COMMENT '印刷时间',
+  `book_size` varchar(50) DEFAULT NULL COMMENT '开本',
+  `print_sn` varchar(50) DEFAULT NULL COMMENT '印次',
+  `packing` varchar(50) DEFAULT NULL COMMENT '包装',
+  `format` varchar(50) DEFAULT NULL COMMENT '版式',
   `abst` text COMMENT '编辑推荐',
   `content_intro` text COMMENT '内容简介',
   `author_intro` text COMMENT '作者简介',
   `catalog` text COMMENT '目录',
   `extract` text COMMENT '书摘',
-  PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=47027 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of cr_book
@@ -256,12 +256,12 @@ INSERT INTO `cr_book` VALUES ('47026', '脂砚斋重评石头记：庚辰本（�
 -- ----------------------------
 DROP TABLE IF EXISTS `cr_cart`;
 CREATE TABLE `cr_cart` (
-  `id` int(11) NOT NULL auto_increment,
-  `uid` int(11) default NULL,
-  `bid` int(11) default NULL,
-  `cnt` int(11) default NULL COMMENT '数量',
-  `create_time` datetime default NULL,
-  PRIMARY KEY  (`id`)
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uid` int(11) DEFAULT NULL,
+  `bid` int(11) DEFAULT NULL,
+  `cnt` int(11) DEFAULT NULL COMMENT '数量',
+  `create_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -274,9 +274,9 @@ CREATE TABLE `cr_cart` (
 DROP TABLE IF EXISTS `cr_categroy`;
 CREATE TABLE `cr_categroy` (
   `id` int(11) NOT NULL,
-  `name` varchar(100) default NULL,
-  `pid` int(11) default NULL,
-  PRIMARY KEY  (`id`)
+  `name` varchar(100) DEFAULT NULL,
+  `pid` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -540,25 +540,192 @@ INSERT INTO `cr_categroy` VALUES ('2107', '李宗侗著作集', '33');
 INSERT INTO `cr_categroy` VALUES ('2108', '中华经典精粹解读', '40');
 
 -- ----------------------------
+-- Table structure for cr_link
+-- ----------------------------
+DROP TABLE IF EXISTS `cr_link`;
+CREATE TABLE `cr_link` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `url` varchar(200) DEFAULT NULL,
+  `name` varchar(50) DEFAULT NULL,
+  `sort` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of cr_link
+-- ----------------------------
+INSERT INTO `cr_link` VALUES ('1', 'http://www.zhbc.com.cn', '中华书局', '1');
+INSERT INTO `cr_link` VALUES ('2', 'http://www.guji.cn', '中华古籍网', '2');
+INSERT INTO `cr_link` VALUES ('3', 'http://www.nlcpress.com', '国家图书馆出版社', '3');
+INSERT INTO `cr_link` VALUES ('4', 'http://www.guji.com.cn/gj', '上海古籍出版社', '4');
+INSERT INTO `cr_link` VALUES ('5', 'http://www.wenwu.com', '文物出版社', '5');
+INSERT INTO `cr_link` VALUES ('6', 'http://www.cihai.com.cn', '上海辞书出版社', '6');
+INSERT INTO `cr_link` VALUES ('7', 'http://www.yzglpub.com', '广陵书社', '7');
+INSERT INTO `cr_link` VALUES ('8', 'http://www.qlss.com.cn', '齐鲁书社', '8');
+INSERT INTO `cr_link` VALUES ('9', 'http://www.zzgjcbs.com', '中州古籍出版社', '9');
+INSERT INTO `cr_link` VALUES ('10', 'http://www.zhbc.com.cn', '中医古籍出版社', '10');
+INSERT INTO `cr_link` VALUES ('11', 'http://www.yueluhistory.com', '岳麓书社', '11');
+INSERT INTO `cr_link` VALUES ('12', 'http://www.bsbook.com', '巴蜀书社', '12');
+INSERT INTO `cr_link` VALUES ('13', 'http://www.zjguji.com', '浙江古籍出版社', '13');
+INSERT INTO `cr_link` VALUES ('14', 'http://www.tjabc.net', '天津古籍出版社', '14');
+INSERT INTO `cr_link` VALUES ('15', 'http://www.sqcbs.com', '三秦出版社', '15');
+INSERT INTO `cr_link` VALUES ('16', 'http://www.ppm.cn', '凤凰出版社', '16');
+INSERT INTO `cr_link` VALUES ('17', 'http://www.hsbook.cn', '黄山书社', '17');
+INSERT INTO `cr_link` VALUES ('18', 'http://www.jlws.com.cn', '吉林文史出版社', '18');
+INSERT INTO `cr_link` VALUES ('19', 'http://www.zgsd.net', '中国书店出版社', '19');
+INSERT INTO `cr_link` VALUES ('20', 'http://www.shsd.com.cn', '上海书店出版社', '20');
+INSERT INTO `cr_link` VALUES ('21', 'http://www.sxpmg.com', '三晋出版社', '21');
+INSERT INTO `cr_link` VALUES ('22', 'http://www.xzhbc.com', '线装书局', '22');
+INSERT INTO `cr_link` VALUES ('23', 'http://www.rw-cn.com', '人民文学出版社', '23');
+INSERT INTO `cr_link` VALUES ('24', 'http://www.guoxue.com', '国学网', '24');
+INSERT INTO `cr_link` VALUES ('25', 'http://zhsjqjd.taobao.com', '中华书局淘宝店', '25');
+INSERT INTO `cr_link` VALUES ('26', 'http://m.kuaidi100.com', '快递查询', '26');
+
+-- ----------------------------
+-- Table structure for cr_show
+-- ----------------------------
+DROP TABLE IF EXISTS `cr_show`;
+CREATE TABLE `cr_show` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `page` varchar(50) DEFAULT NULL COMMENT '网页名',
+  `board` varchar(50) DEFAULT NULL COMMENT '板块名',
+  `relatb` varchar(50) DEFAULT NULL COMMENT '关联表',
+  `relaid` int(11) DEFAULT NULL COMMENT '关联外键值',
+  `sort` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=125 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of cr_show
+-- ----------------------------
+INSERT INTO `cr_show` VALUES ('1', 'index', '编辑推荐', 'cr_book', '118', '1');
+INSERT INTO `cr_show` VALUES ('2', 'index', '编辑推荐', 'cr_book', '121', '2');
+INSERT INTO `cr_show` VALUES ('3', 'index', '编辑推荐', 'cr_book', '124', '3');
+INSERT INTO `cr_show` VALUES ('4', 'index', '编辑推荐', 'cr_book', '791', '4');
+INSERT INTO `cr_show` VALUES ('5', 'index', '编辑推荐', 'cr_book', '1062', '5');
+INSERT INTO `cr_show` VALUES ('6', 'index', '编辑推荐', 'cr_book', '1730', '6');
+INSERT INTO `cr_show` VALUES ('7', 'index', '编辑推荐', 'cr_book', '1772', '7');
+INSERT INTO `cr_show` VALUES ('8', 'index', '编辑推荐', 'cr_book', '2154', '8');
+INSERT INTO `cr_show` VALUES ('13', 'index', '古籍整理-编辑推荐', 'cr_book', '3601', '13');
+INSERT INTO `cr_show` VALUES ('14', 'index', '古籍整理-编辑推荐', 'cr_book', '4033', '14');
+INSERT INTO `cr_show` VALUES ('15', 'index', '古籍整理-编辑推荐', 'cr_book', '5370', '15');
+INSERT INTO `cr_show` VALUES ('16', 'index', '古籍整理-编辑推荐', 'cr_book', '5413', '16');
+INSERT INTO `cr_show` VALUES ('17', 'index', '古籍整理-编辑推荐', 'cr_book', '5481', '17');
+INSERT INTO `cr_show` VALUES ('18', 'index', '古籍整理-编辑推荐', 'cr_book', '6085', '18');
+INSERT INTO `cr_show` VALUES ('19', 'index', '古籍整理-编辑推荐', 'cr_book', '6122', '19');
+INSERT INTO `cr_show` VALUES ('20', 'index', '古籍整理-编辑推荐', 'cr_book', '6274', '20');
+INSERT INTO `cr_show` VALUES ('21', 'index', '古籍整理-编辑推荐', 'cr_book', '6397', '21');
+INSERT INTO `cr_show` VALUES ('22', 'index', '古籍整理-编辑推荐', 'cr_book', '6587', '22');
+INSERT INTO `cr_show` VALUES ('23', 'index', '古籍整理-编辑推荐', 'cr_book', '7259', '23');
+INSERT INTO `cr_show` VALUES ('24', 'index', '古籍整理-编辑推荐', 'cr_book', '7559', '24');
+INSERT INTO `cr_show` VALUES ('25', 'index', '古籍整理-编辑推荐', 'cr_book', '7627', '25');
+INSERT INTO `cr_show` VALUES ('26', 'index', '学术著作-编辑推荐', 'cr_book', '7710', '26');
+INSERT INTO `cr_show` VALUES ('27', 'index', '学术著作-编辑推荐', 'cr_book', '7749', '27');
+INSERT INTO `cr_show` VALUES ('28', 'index', '学术著作-编辑推荐', 'cr_book', '8084', '28');
+INSERT INTO `cr_show` VALUES ('29', 'index', '学术著作-编辑推荐', 'cr_book', '8133', '29');
+INSERT INTO `cr_show` VALUES ('30', 'index', '学术著作-编辑推荐', 'cr_book', '8146', '30');
+INSERT INTO `cr_show` VALUES ('31', 'index', '学术著作-编辑推荐', 'cr_book', '8202', '31');
+INSERT INTO `cr_show` VALUES ('32', 'index', '学术著作-编辑推荐', 'cr_book', '8636', '32');
+INSERT INTO `cr_show` VALUES ('33', 'index', '学术著作-编辑推荐', 'cr_book', '8684', '33');
+INSERT INTO `cr_show` VALUES ('34', 'index', '学术著作-编辑推荐', 'cr_book', '8994', '34');
+INSERT INTO `cr_show` VALUES ('35', 'index', '学术著作-编辑推荐', 'cr_book', '9111', '35');
+INSERT INTO `cr_show` VALUES ('36', 'index', '学术著作-编辑推荐', 'cr_book', '9116', '36');
+INSERT INTO `cr_show` VALUES ('37', 'index', '学术著作-编辑推荐', 'cr_book', '10231', '37');
+INSERT INTO `cr_show` VALUES ('38', 'index', '学术著作-编辑推荐', 'cr_book', '10760', '38');
+INSERT INTO `cr_show` VALUES ('39', 'index', '大众读物-编辑推荐', 'cr_book', '16883', '39');
+INSERT INTO `cr_show` VALUES ('40', 'index', '大众读物-编辑推荐', 'cr_book', '16904', '40');
+INSERT INTO `cr_show` VALUES ('41', 'index', '大众读物-编辑推荐', 'cr_book', '17604', '41');
+INSERT INTO `cr_show` VALUES ('42', 'index', '大众读物-编辑推荐', 'cr_book', '17605', '42');
+INSERT INTO `cr_show` VALUES ('43', 'index', '大众读物-编辑推荐', 'cr_book', '17606', '43');
+INSERT INTO `cr_show` VALUES ('44', 'index', '大众读物-编辑推荐', 'cr_book', '17607', '44');
+INSERT INTO `cr_show` VALUES ('45', 'index', '大众读物-编辑推荐', 'cr_book', '19526', '45');
+INSERT INTO `cr_show` VALUES ('46', 'index', '大众读物-编辑推荐', 'cr_book', '25627', '46');
+INSERT INTO `cr_show` VALUES ('47', 'index', '大众读物-编辑推荐', 'cr_book', '25721', '47');
+INSERT INTO `cr_show` VALUES ('48', 'index', '大众读物-编辑推荐', 'cr_book', '26857', '48');
+INSERT INTO `cr_show` VALUES ('49', 'index', '大众读物-编辑推荐', 'cr_book', '26865', '49');
+INSERT INTO `cr_show` VALUES ('50', 'index', '大众读物-编辑推荐', 'cr_book', '27236', '50');
+INSERT INTO `cr_show` VALUES ('51', 'index', '大众读物-编辑推荐', 'cr_book', '27237', '51');
+INSERT INTO `cr_show` VALUES ('65', 'index', '工具书-编辑推荐', 'cr_book', '27525', '65');
+INSERT INTO `cr_show` VALUES ('66', 'index', '工具书-编辑推荐', 'cr_book', '27547', '66');
+INSERT INTO `cr_show` VALUES ('67', 'index', '工具书-编辑推荐', 'cr_book', '27924', '67');
+INSERT INTO `cr_show` VALUES ('68', 'index', '工具书-编辑推荐', 'cr_book', '29191', '68');
+INSERT INTO `cr_show` VALUES ('69', 'index', '工具书-编辑推荐', 'cr_book', '29365', '69');
+INSERT INTO `cr_show` VALUES ('70', 'index', '工具书-编辑推荐', 'cr_book', '30105', '70');
+INSERT INTO `cr_show` VALUES ('71', 'index', '工具书-编辑推荐', 'cr_book', '30109', '71');
+INSERT INTO `cr_show` VALUES ('72', 'index', '工具书-编辑推荐', 'cr_book', '31116', '72');
+INSERT INTO `cr_show` VALUES ('73', 'index', '工具书-编辑推荐', 'cr_book', '31364', '73');
+INSERT INTO `cr_show` VALUES ('74', 'index', '工具书-编辑推荐', 'cr_book', '31704', '74');
+INSERT INTO `cr_show` VALUES ('75', 'index', '工具书-编辑推荐', 'cr_book', '31705', '75');
+INSERT INTO `cr_show` VALUES ('76', 'index', '工具书-编辑推荐', 'cr_book', '31797', '76');
+INSERT INTO `cr_show` VALUES ('77', 'index', '工具书-编辑推荐', 'cr_book', '31906', '77');
+INSERT INTO `cr_show` VALUES ('78', 'index', '教程学生读物-编辑推荐', 'cr_book', '31910', '78');
+INSERT INTO `cr_show` VALUES ('79', 'index', '教程学生读物-编辑推荐', 'cr_book', '32069', '79');
+INSERT INTO `cr_show` VALUES ('80', 'index', '教程学生读物-编辑推荐', 'cr_book', '34539', '80');
+INSERT INTO `cr_show` VALUES ('81', 'index', '教程学生读物-编辑推荐', 'cr_book', '34604', '81');
+INSERT INTO `cr_show` VALUES ('82', 'index', '教程学生读物-编辑推荐', 'cr_book', '34606', '82');
+INSERT INTO `cr_show` VALUES ('83', 'index', '教程学生读物-编辑推荐', 'cr_book', '34807', '83');
+INSERT INTO `cr_show` VALUES ('84', 'index', '教程学生读物-编辑推荐', 'cr_book', '34808', '84');
+INSERT INTO `cr_show` VALUES ('85', 'index', '教程学生读物-编辑推荐', 'cr_book', '44453', '85');
+INSERT INTO `cr_show` VALUES ('86', 'index', '教程学生读物-编辑推荐', 'cr_book', '44474', '86');
+INSERT INTO `cr_show` VALUES ('87', 'index', '教程学生读物-编辑推荐', 'cr_book', '44613', '87');
+INSERT INTO `cr_show` VALUES ('88', 'index', '教程学生读物-编辑推荐', 'cr_book', '44626', '88');
+INSERT INTO `cr_show` VALUES ('89', 'index', '教程学生读物-编辑推荐', 'cr_book', '44718', '89');
+INSERT INTO `cr_show` VALUES ('90', 'index', '教程学生读物-编辑推荐', 'cr_book', '44867', '90');
+INSERT INTO `cr_show` VALUES ('91', 'index', '综合类-编辑推荐', 'cr_book', '44924', '91');
+INSERT INTO `cr_show` VALUES ('92', 'index', '综合类-编辑推荐', 'cr_book', '44995', '92');
+INSERT INTO `cr_show` VALUES ('93', 'index', '综合类-编辑推荐', 'cr_book', '45111', '93');
+INSERT INTO `cr_show` VALUES ('94', 'index', '综合类-编辑推荐', 'cr_book', '45216', '94');
+INSERT INTO `cr_show` VALUES ('95', 'index', '综合类-编辑推荐', 'cr_book', '45218', '95');
+INSERT INTO `cr_show` VALUES ('96', 'index', '综合类-编辑推荐', 'cr_book', '45470', '96');
+INSERT INTO `cr_show` VALUES ('97', 'index', '综合类-编辑推荐', 'cr_book', '45473', '97');
+INSERT INTO `cr_show` VALUES ('98', 'index', '综合类-编辑推荐', 'cr_book', '45896', '98');
+INSERT INTO `cr_show` VALUES ('99', 'index', '综合类-编辑推荐', 'cr_book', '45897', '99');
+INSERT INTO `cr_show` VALUES ('100', 'index', '综合类-编辑推荐', 'cr_book', '45914', '100');
+INSERT INTO `cr_show` VALUES ('101', 'index', '综合类-编辑推荐', 'cr_book', '45939', '101');
+INSERT INTO `cr_show` VALUES ('102', 'index', '综合类-编辑推荐', 'cr_book', '46194', '102');
+INSERT INTO `cr_show` VALUES ('103', 'index', '综合类-编辑推荐', 'cr_book', '46201', '103');
+INSERT INTO `cr_show` VALUES ('104', 'index', '专题推荐', 'cr_article', '71483', '104');
+INSERT INTO `cr_show` VALUES ('105', 'index', '专题推荐', 'cr_article', '71484', '105');
+INSERT INTO `cr_show` VALUES ('106', 'index', '专题推荐', 'cr_article', '71485', '106');
+INSERT INTO `cr_show` VALUES ('107', 'index', '专题推荐', 'cr_article', '71486', '107');
+INSERT INTO `cr_show` VALUES ('108', 'index', '专题推荐', 'cr_article', '71487', '108');
+INSERT INTO `cr_show` VALUES ('109', 'index', '专题推荐', 'cr_article', '71488', '109');
+INSERT INTO `cr_show` VALUES ('110', 'index', '专题推荐', 'cr_article', '71489', '110');
+INSERT INTO `cr_show` VALUES ('111', 'index', '专题推荐', 'cr_article', '71490', '111');
+INSERT INTO `cr_show` VALUES ('112', 'index', '专题推荐', 'cr_article', '71491', '112');
+INSERT INTO `cr_show` VALUES ('113', 'index', '专题推荐', 'cr_article', '71492', '113');
+INSERT INTO `cr_show` VALUES ('114', 'index', '专题推荐', 'cr_article', '71493', '114');
+INSERT INTO `cr_show` VALUES ('115', 'index', '站内公告', 'cr_article', '71494', '115');
+INSERT INTO `cr_show` VALUES ('116', 'index', '站内公告', 'cr_article', '71495', '116');
+INSERT INTO `cr_show` VALUES ('117', 'index', '站内公告', 'cr_article', '71496', '117');
+INSERT INTO `cr_show` VALUES ('118', 'index', '站内公告', 'cr_article', '71497', '118');
+INSERT INTO `cr_show` VALUES ('119', 'index', '站内公告', 'cr_article', '71498', '119');
+INSERT INTO `cr_show` VALUES ('120', 'index', '站内公告', 'cr_article', '71499', '120');
+INSERT INTO `cr_show` VALUES ('121', 'index', '站内公告', 'cr_article', '71500', '121');
+INSERT INTO `cr_show` VALUES ('122', 'index', '站内公告', 'cr_article', '71501', '122');
+INSERT INTO `cr_show` VALUES ('123', 'index', '站内公告', 'cr_article', '71502', '123');
+INSERT INTO `cr_show` VALUES ('124', 'index', '站内公告', 'cr_article', '71503', '124');
+
+-- ----------------------------
 -- Table structure for cr_user
 -- ----------------------------
 DROP TABLE IF EXISTS `cr_user`;
 CREATE TABLE `cr_user` (
-  `id` int(11) NOT NULL auto_increment,
-  `account` varchar(50) default NULL,
-  `name` varchar(50) default NULL,
-  `pwd` varchar(50) default NULL,
-  `gender` varchar(1) default NULL,
-  `birthday` date default NULL,
-  `address` varchar(255) default NULL,
-  `phone` varchar(50) default NULL,
-  `email` varchar(100) default NULL COMMENT '毕业院校',
-  `school` varchar(100) default NULL,
-  `education` varchar(50) default NULL COMMENT '学历',
-  `profession` varchar(100) default NULL COMMENT '专业',
-  `job` varchar(50) default NULL COMMENT '职位',
-  PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `account` varchar(50) DEFAULT NULL,
+  `name` varchar(50) DEFAULT NULL,
+  `pwd` varchar(50) DEFAULT NULL,
+  `gender` varchar(1) DEFAULT NULL,
+  `birthday` date DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `phone` varchar(50) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL COMMENT '毕业院校',
+  `school` varchar(100) DEFAULT NULL,
+  `education` varchar(50) DEFAULT NULL COMMENT '学历',
+  `profession` varchar(100) DEFAULT NULL COMMENT '专业',
+  `job` varchar(50) DEFAULT NULL COMMENT '职位',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of cr_user
