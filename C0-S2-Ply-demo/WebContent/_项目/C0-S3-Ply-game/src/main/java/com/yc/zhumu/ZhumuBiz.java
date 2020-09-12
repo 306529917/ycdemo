@@ -34,7 +34,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ZhumuBiz {
-	public static String zhumuHome = "C:\\Users\\Administrator\\Documents\\zhumu";
+	public static String zhumuHome = System.getProperty("user.home") + "/Documents/zhumu";
 	public static String classHome = "D:\\文件柜";
 	private static String cls;
 	private static File clsDir;
@@ -60,6 +60,7 @@ public class ZhumuBiz {
 			if (datafile.exists() == false) {
 				datafile.createNewFile();
 			}
+			System.out.println("配置文件：" + datafile);
 			fis = new FileInputStream(datafile);
 			conf.load(new InputStreamReader(fis, "UTF-8"));
 		} catch (IOException e) {
