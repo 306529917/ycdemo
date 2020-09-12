@@ -307,12 +307,22 @@ public class ZhumuBiz {
 
 	public static String getValue(String key, String defaultValue) {
 		String value = conf.getProperty(key);
-		return value == null ? defaultValue : value;
+		if (value == null) {
+			conf.setProperty(key, defaultValue);
+			return defaultValue;
+		} else {
+			return value;
+		}
 	}
 
 	public static String[] getValues(String key, String[] defaultValues) {
 		String value = conf.getProperty(key);
-		return value == null ? defaultValues : value.split("[\\s,;，；|]+");
+		if (value == null) {
+			conf.setProperty(key, String.join(",", defaultValues));
+			return defaultValues;
+		} else {
+			return value.split("[\\s,;，；|]+");
+		}
 	}
 
 	public static void saveConf() {
