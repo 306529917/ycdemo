@@ -397,7 +397,7 @@ public class ZhumuBiz {
 	}
 
 	public String getMeetingName() {
-		return cls + "班" + buildMeetingName(meetingDir.lastModified());
+		return cls + "班" + buildMeetingName(meetingDir.lastModified()) + "（" + getMembers().size() + "人）";
 	}
 
 	public static String buildMeetingName(long time) {
