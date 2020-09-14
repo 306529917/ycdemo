@@ -2,27 +2,15 @@ package com.yc.C81S3Plyblog.bean;
 
 import java.sql.Timestamp;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
-
-import org.hibernate.validator.constraints.Length;
-
 public class User implements java.io.Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
 	private Integer id;
-	@NotEmpty(message="昵称不能为空!")
-	@Length(min=4,max=20,message="昵称必须是4~20位")
 	private String name;
-	@NotEmpty(message="账号不能为空!")
-	@Length(min=4,max=20,message="账号必须是4~20位")
 	private String account;
-	@NotEmpty(message="密码不能为空!")
-	@Length(min=4,max=20,message="密码必须是4~20位")
 	private String pwd;
 	private String phone;
-	@Email(message="邮箱格式错误")
 	private String email;
 	private String head;
 	private Timestamp createtime;
