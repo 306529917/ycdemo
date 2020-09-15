@@ -118,7 +118,7 @@ $('[data-toggle="tooltip"]').tooltip();
  
  
 //无限滚动翻页
-var page = 1;
+var page = 2;
 $(function(){
 	var ias = jQuery.ias({
 		// 动态加载内容的容器标签, 放置 article 的容器
