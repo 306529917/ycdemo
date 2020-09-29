@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost_3306
-Source Server Version : 50528
-Source Host           : localhost:3306
-Source Database       : bank
+Source Server         : 127.0.0.1_3306
+Source Server Version : 50561
+Source Host           : 127.0.0.1:3306
+Source Database       : c0-s2-ply-demo
 
 Target Server Type    : MYSQL
-Target Server Version : 50528
+Target Server Version : 50561
 File Encoding         : 65001
 
-Date: 2020-09-10 15:57:31
+Date: 2020-09-29 08:38:05
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -274,7 +274,7 @@ CREATE TABLE `cr_cart` (
 DROP TABLE IF EXISTS `cr_categroy`;
 CREATE TABLE `cr_categroy` (
   `id` int(11) NOT NULL,
-  `name` varchar(100) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
   `pid` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -289,31 +289,31 @@ INSERT INTO `cr_categroy` VALUES ('24', '工具书', null);
 INSERT INTO `cr_categroy` VALUES ('25', '综合类', null);
 INSERT INTO `cr_categroy` VALUES ('26', '教材·学生读物', null);
 INSERT INTO `cr_categroy` VALUES ('27', '历史', '21');
-INSERT INTO `cr_categroy` VALUES ('28', '文学', '27');
-INSERT INTO `cr_categroy` VALUES ('29', '哲学', '28');
-INSERT INTO `cr_categroy` VALUES ('30', '语言文字', '29');
-INSERT INTO `cr_categroy` VALUES ('31', '类书', '1819');
-INSERT INTO `cr_categroy` VALUES ('32', '大型文献', '31');
+INSERT INTO `cr_categroy` VALUES ('28', '文学', '21');
+INSERT INTO `cr_categroy` VALUES ('29', '哲学', '21');
+INSERT INTO `cr_categroy` VALUES ('30', '语言文字', '21');
+INSERT INTO `cr_categroy` VALUES ('31', '类书', '21');
+INSERT INTO `cr_categroy` VALUES ('32', '大型文献', '21');
 INSERT INTO `cr_categroy` VALUES ('33', '历史', '22');
-INSERT INTO `cr_categroy` VALUES ('34', '文学', '33');
-INSERT INTO `cr_categroy` VALUES ('35', '哲学', '34');
-INSERT INTO `cr_categroy` VALUES ('36', '综合', '37');
-INSERT INTO `cr_categroy` VALUES ('37', '语言文字', '35');
+INSERT INTO `cr_categroy` VALUES ('34', '文学', '22');
+INSERT INTO `cr_categroy` VALUES ('35', '哲学', '22');
+INSERT INTO `cr_categroy` VALUES ('36', '综合', '22');
+INSERT INTO `cr_categroy` VALUES ('37', '语言文字', '22');
 INSERT INTO `cr_categroy` VALUES ('38', '历史', '23');
-INSERT INTO `cr_categroy` VALUES ('39', '文学', '38');
-INSERT INTO `cr_categroy` VALUES ('40', '哲学', '39');
-INSERT INTO `cr_categroy` VALUES ('41', '综合', '40');
-INSERT INTO `cr_categroy` VALUES ('42', '传记', '41');
-INSERT INTO `cr_categroy` VALUES ('1581', '生活', '42');
+INSERT INTO `cr_categroy` VALUES ('39', '文学', '23');
+INSERT INTO `cr_categroy` VALUES ('40', '哲学', '23');
+INSERT INTO `cr_categroy` VALUES ('41', '综合', '23');
+INSERT INTO `cr_categroy` VALUES ('42', '传记', '23');
+INSERT INTO `cr_categroy` VALUES ('1581', '生活', '23');
 INSERT INTO `cr_categroy` VALUES ('1582', '汉语工具书', '24');
-INSERT INTO `cr_categroy` VALUES ('1583', '学生工具书', '1582');
-INSERT INTO `cr_categroy` VALUES ('1584', '综合类', '1583');
+INSERT INTO `cr_categroy` VALUES ('1583', '学生工具书', '24');
+INSERT INTO `cr_categroy` VALUES ('1584', '综合类', '24');
 INSERT INTO `cr_categroy` VALUES ('1585', '书目题跋丛刊', '25');
-INSERT INTO `cr_categroy` VALUES ('1586', '版本·目录·校勘', '1585');
-INSERT INTO `cr_categroy` VALUES ('1587', '钱币系列', '1586');
-INSERT INTO `cr_categroy` VALUES ('1588', '期刊·连续出版物', '1856');
+INSERT INTO `cr_categroy` VALUES ('1586', '版本·目录·校勘', '25');
+INSERT INTO `cr_categroy` VALUES ('1587', '钱币系列', '25');
+INSERT INTO `cr_categroy` VALUES ('1588', '期刊·连续出版物', '25');
 INSERT INTO `cr_categroy` VALUES ('1589', '大中专教材', '26');
-INSERT INTO `cr_categroy` VALUES ('1590', '诵读中国', '1589');
+INSERT INTO `cr_categroy` VALUES ('1590', '诵读中国', '26');
 INSERT INTO `cr_categroy` VALUES ('1591', '二十四史/清史稿系列', '27');
 INSERT INTO `cr_categroy` VALUES ('1592', '前四史', '27');
 INSERT INTO `cr_categroy` VALUES ('1593', '线装大字珍藏本系列', '27');
@@ -516,15 +516,15 @@ INSERT INTO `cr_categroy` VALUES ('1789', '学林漫录', '1588');
 INSERT INTO `cr_categroy` VALUES ('1790', '华林', '1588');
 INSERT INTO `cr_categroy` VALUES ('1791', '中国禅学', '1588');
 INSERT INTO `cr_categroy` VALUES ('1792', '其他', '1588');
-INSERT INTO `cr_categroy` VALUES ('1819', '综合', '30');
-INSERT INTO `cr_categroy` VALUES ('1838', '其他', '1587');
-INSERT INTO `cr_categroy` VALUES ('1842', '综合', '1838');
+INSERT INTO `cr_categroy` VALUES ('1819', '综合', '21');
+INSERT INTO `cr_categroy` VALUES ('1838', '其他', '25');
+INSERT INTO `cr_categroy` VALUES ('1842', '综合', '25');
 INSERT INTO `cr_categroy` VALUES ('1850', '浙江大学中国古典文献学研究丛书', '36');
 INSERT INTO `cr_categroy` VALUES ('1851', '浙江大学汉语史研究丛书', '36');
 INSERT INTO `cr_categroy` VALUES ('1852', '南京师范大学汉语言文学专题研究系列', '36');
 INSERT INTO `cr_categroy` VALUES ('1853', '华东师范大学中文系学术丛书', '36');
 INSERT INTO `cr_categroy` VALUES ('1854', '中华生活经典', '1581');
-INSERT INTO `cr_categroy` VALUES ('1856', '综合一', '1842');
+INSERT INTO `cr_categroy` VALUES ('1856', '综合一', '25');
 INSERT INTO `cr_categroy` VALUES ('2095', '“一本书读懂”系列丛书', '41');
 INSERT INTO `cr_categroy` VALUES ('2096', '中国史学的基本问题', '33');
 INSERT INTO `cr_categroy` VALUES ('2097', '古典名著 名家点评', '39');
@@ -532,7 +532,7 @@ INSERT INTO `cr_categroy` VALUES ('2098', '韦政通文集', '36');
 INSERT INTO `cr_categroy` VALUES ('2099', '全汉昇经济史著作集', '36');
 INSERT INTO `cr_categroy` VALUES ('2100', '华林博士文库', '36');
 INSERT INTO `cr_categroy` VALUES ('2102', '中华国学文库', '28');
-INSERT INTO `cr_categroy` VALUES ('2103', '助学读物', '1590');
+INSERT INTO `cr_categroy` VALUES ('2103', '助学读物', '26');
 INSERT INTO `cr_categroy` VALUES ('2104', '中华思想经典', '40');
 INSERT INTO `cr_categroy` VALUES ('2105', '佛教十三经', '40');
 INSERT INTO `cr_categroy` VALUES ('2106', '迷悟之间', '40');
