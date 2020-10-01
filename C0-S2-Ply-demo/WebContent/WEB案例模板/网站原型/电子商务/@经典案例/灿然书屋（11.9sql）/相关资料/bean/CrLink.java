@@ -1,4 +1,4 @@
-package com.yc.crbook.bean;
+package com.yc.demo.example.cr.bean;
 
 public class CrLink {
     private Integer id;

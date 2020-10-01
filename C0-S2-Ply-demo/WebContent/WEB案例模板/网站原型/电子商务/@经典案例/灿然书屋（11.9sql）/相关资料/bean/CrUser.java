@@ -1,6 +1,6 @@
-package com.yc.crbook.bean;
+package com.yc.demo.example.cr.bean;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class CrUser {
     private Integer id;

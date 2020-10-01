@@ -1,6 +1,6 @@
-package com.yc.crbook.bean;
+package com.yc.demo.example.cr.bean;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 public class CrCart {
     private Integer id;
@@ -11,7 +11,7 @@ public class CrCart {
 
     private Integer cnt;
 
-    private Date createTime;
+    private Timestamp createTime;
 
     public Integer getId() {
         return id;
@@ -45,11 +45,11 @@ public class CrCart {
         this.cnt = cnt;
     }
 
-    public Date getCreateTime() {
+    public Timestamp getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(Timestamp createTime) {
         this.createTime = createTime;
     }
 }
