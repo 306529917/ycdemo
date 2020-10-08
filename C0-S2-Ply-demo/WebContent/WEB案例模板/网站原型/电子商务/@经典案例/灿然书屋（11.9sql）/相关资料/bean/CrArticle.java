@@ -1,4 +1,6 @@
-package com.yc.crbook.bean;
+package com.yc.demo.example.cr.bean;
+
+import java.sql.Timestamp;
 
 public class CrArticle {
     private Integer id;
@@ -7,7 +9,7 @@ public class CrArticle {
 
     private String author;
 
-    private String createTime;
+    private Timestamp createTime;
 
     private String content;
 
@@ -35,12 +37,12 @@ public class CrArticle {
         this.author = author == null ? null : author.trim();
     }
 
-    public String getCreateTime() {
+    public Timestamp getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(String createTime) {
-        this.createTime = createTime == null ? null : createTime.trim();
+    public void setCreateTime(Timestamp createTime) {
+        this.createTime = createTime;
     }
 
     public String getContent() {
