@@ -29,8 +29,6 @@ public class SqShare {
 
     private String status;
 
-    private String url;
-
     public Integer getId() {
         return id;
     }
@@ -133,13 +131,5 @@ public class SqShare {
 
     public void setStatus(String status) {
         this.status = status == null ? null : status.trim();
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url == null ? null : url.trim();
     }
 }

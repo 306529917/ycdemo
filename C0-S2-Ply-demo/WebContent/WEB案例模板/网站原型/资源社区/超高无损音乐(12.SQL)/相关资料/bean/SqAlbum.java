@@ -7,8 +7,6 @@ public class SqAlbum {
 
     private Integer songId;
 
-    private String url;
-
     public Integer getId() {
         return id;
     }
@@ -31,13 +29,5 @@ public class SqAlbum {
 
     public void setSongId(Integer songId) {
         this.songId = songId;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url == null ? null : url.trim();
     }
 }

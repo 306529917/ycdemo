@@ -17,8 +17,6 @@ public class SqSong {
 
     private String downUrl;
 
-    private String url;
-
     public Integer getId() {
         return id;
     }
@@ -81,13 +79,5 @@ public class SqSong {
 
     public void setDownUrl(String downUrl) {
         this.downUrl = downUrl == null ? null : downUrl.trim();
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url == null ? null : url.trim();
     }
 }

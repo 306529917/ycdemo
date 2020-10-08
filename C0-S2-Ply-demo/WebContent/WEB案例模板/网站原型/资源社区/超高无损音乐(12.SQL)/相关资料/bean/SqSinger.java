@@ -21,8 +21,6 @@ public class SqSinger {
 
     private Integer likes;
 
-    private String url;
-
     public Integer getId() {
         return id;
     }
@@ -93,13 +91,5 @@ public class SqSinger {
 
     public void setLikes(Integer likes) {
         this.likes = likes;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url == null ? null : url.trim();
     }
 }
