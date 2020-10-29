@@ -1,7 +1,7 @@
---°¸Àý1:  Ñ§Éú³É¼¨²éÑ¯£¬½¨Á¢3¸ö±í:
---student(sid,sname,deptname,sage)   sid,sname,deptname,sage ·Ö±ð´ú±íÑ§ºÅ¡¢Ñ§Ô±ÐÕÃû¡¢ËùÊôµ¥Î»¡¢Ñ§Ô±ÄêÁä
---course(cid,cname )        cid,cname      ·Ö±ð´ú±í¿Î³Ì±àºÅ¡¢¿Î³ÌÃû³Æ
---score(sid,cid,grade)    sid,cid,grade     ·Ö±ð´ú±íÑ§ºÅ¡¢ËùÑ¡ÐÞµÄ¿Î³Ì±àºÅ¡¢Ñ§Ï°³É¼¨ 
+--æ¡ˆä¾‹1:  å­¦ç”Ÿæˆç»©æŸ¥è¯¢ï¼Œå»ºç«‹3ä¸ªè¡¨:
+--student(sid,sname,deptname,sage)   sid,sname,deptname,sage åˆ†åˆ«ä»£è¡¨å­¦å·ã€å­¦å‘˜å§“åã€æ‰€å±žå•ä½ã€å­¦å‘˜å¹´é¾„
+--course(cid,cname )        cid,cname      åˆ†åˆ«ä»£è¡¨è¯¾ç¨‹ç¼–å·ã€è¯¾ç¨‹åç§°
+--score(sid,cid,grade)    sid,cid,grade     åˆ†åˆ«ä»£è¡¨å­¦å·ã€æ‰€é€‰ä¿®çš„è¯¾ç¨‹ç¼–å·ã€å­¦ä¹ æˆç»© 
 create table student(
     sid number(4) primary key,
     sname varchar2(50),
@@ -22,19 +22,19 @@ create table score(
     grade number(4)
 );
 
-insert into student values(1,'ÕÅÈý','¹ãµç×Ü¾Ö',33);
-insert into student values(2,'ÕÅËÄ','CCTV',33);
-insert into student values(3,'ÕÅÎå','SINA',39);
-insert into student values(4,'ÕÅÁù','QQ',36);
-insert into student values(5,'ÕÅÆß','yahoo',34);
-insert into student values(6,'ÕÅ°Ë','google',24);
-insert into student values(7,'ÕÅ¾Å','facebook',22);
-insert into student values(8,'ÕÅÊ®','¹ãµç×Ü¾Ö',33);
-insert into student values(9,'ÕÅÒ»','¹ãµç×Ü¾Ö',33);
+insert into student values(1,'å¼ ä¸‰','å¹¿ç”µæ€»å±€',33);
+insert into student values(2,'å¼ å››','CCTV',33);
+insert into student values(3,'å¼ äº”','SINA',39);
+insert into student values(4,'å¼ å…­','QQ',36);
+insert into student values(5,'å¼ ä¸ƒ','yahoo',34);
+insert into student values(6,'å¼ å…«','google',24);
+insert into student values(7,'å¼ ä¹','facebook',22);
+insert into student values(8,'å¼ å','å¹¿ç”µæ€»å±€',33);
+insert into student values(9,'å¼ ä¸€','å¹¿ç”µæ€»å±€',33);
 
-insert into course values(1,'Ë°ÊÕ»ù´¡');
-insert into course values(2,'Ãñ·¨Í¨Ôò');
-insert into course values(3,'ÂÛÈý¸ö´ú±í');
+insert into course values(1,'ç¨Žæ”¶åŸºç¡€');
+insert into course values(2,'æ°‘æ³•é€šåˆ™');
+insert into course values(3,'è®ºä¸‰ä¸ªä»£è¡¨');
 
 
 insert into score values(1,1,44);
@@ -47,24 +47,24 @@ insert into score values(7,2,94);
 insert into score values(8,2,64);
 insert into score values(1,2,44);
 insert into score values(3,2,84);
-insert into score values(1,3,88);    --×¢ÒâÖ»ÓÐ1ºÅÑ§Ô±Ñ¡ÐÞÁËËùÓÐ¿Î³Ì
+insert into score values(1,3,88);    --æ³¨æ„åªæœ‰1å·å­¦å‘˜é€‰ä¿®äº†æ‰€æœ‰è¯¾ç¨‹
 
 
---ÎÊÌâ1:  Ê¹ÓÃ±ê×¼SQL×Ó²éÑ¯Ñ¡ÐÞ¿Î³ÌÃû³ÆÎª¡¯Ë°ÊÕ»ù´¡¡¯µÄÑ§Ô±Ñ§ºÅºÍÐÕÃû 
+--é—®é¢˜1:  ä½¿ç”¨æ ‡å‡†SQLå­æŸ¥è¯¢é€‰ä¿®è¯¾ç¨‹åç§°ä¸ºâ€™ç¨Žæ”¶åŸºç¡€â€™çš„å­¦å‘˜å­¦å·å’Œå§“å 
 select b.sno, b.sname
   from score a
   join student b
     on a.sno = b.sno
- where cno = (select cno from course where cname = 'Ë°ÊÕ»ù´¡');
+ where cno = (select cno from course where cname = 'ç¨Žæ”¶åŸºç¡€');
 
---ÎÊÌâ2:  ²éÑ¯Ñ¡ÐÞ¿Î³Ì±àºÅÎª¡¯2¡¯µÄÑ§Ô±ÐÕÃûºÍËùÊôµ¥Î» 
+--é—®é¢˜2:  æŸ¥è¯¢é€‰ä¿®è¯¾ç¨‹ç¼–å·ä¸ºâ€™2â€™çš„å­¦å‘˜å§“åå’Œæ‰€å±žå•ä½ 
 select b.sname, b.class
   from score a
   join student b
     on a.sno = b.sno
  where cno = '2';
 
---ÎÊÌâ3: ²éÑ¯Ã»ÓÐÑ¡ÐÞ¿Î³Ì±àºÅÎª¡¯3¡¯µÄÑ§Ô±ÐÕÃûºÍËùÊôµ¥Î»
+--é—®é¢˜3: æŸ¥è¯¢æ²¡æœ‰é€‰ä¿®è¯¾ç¨‹ç¼–å·ä¸ºâ€™3â€™çš„å­¦å‘˜å§“åå’Œæ‰€å±žå•ä½
 select a.sname, a.class
   from student a
  where not exists (select *
@@ -72,7 +72,7 @@ select a.sname, a.class
          where a.sno = b.sno
            and b.cno != '3');
 
---ÎÊÌâ4: ²éÑ¯Ñ¡ÐÞÈ«²¿¿Î³ÌµÄÑ§Ô±ÐÕÃûºÍËùÊôµ¥Î»
+--é—®é¢˜4: æŸ¥è¯¢é€‰ä¿®å…¨éƒ¨è¯¾ç¨‹çš„å­¦å‘˜å§“åå’Œæ‰€å±žå•ä½
 select a.sname, a.class
   from student a
  where sno in (select sno
@@ -80,23 +80,10 @@ select a.sname, a.class
                 group by sno
                having count(*) = (select count(*) from course));
 
---ÎÊÌâ5:   ²éÑ¯Ñ¡ÐÞÁËÖÁÉÙÒ»ÃÅ¿Î³ÌµÄÑ§Ô±ÈËÊý
+--é—®é¢˜5:   æŸ¥è¯¢é€‰ä¿®äº†è‡³å°‘ä¸€é—¨è¯¾ç¨‹çš„å­¦å‘˜äººæ•°
 select count(distinct sno) from score b;
 
---ÎÊÌâ6:  ²éÑ¯Ñ¡ÐÞ¿Î³Ì³¬¹ý2ÃÅµÄÑ§Ô±Ñ§ºÅºÍËùÊôµ¥Î»
+--é—®é¢˜6:  æŸ¥è¯¢é€‰ä¿®è¯¾ç¨‹è¶…è¿‡2é—¨çš„å­¦å‘˜å­¦å·å’Œæ‰€å±žå•ä½
 select sno, class
   from student
  where sno in (select sno from score group by sno having count(*) > 2);
-
-
-
-
-
-
-
-
-
-
-
-
-
