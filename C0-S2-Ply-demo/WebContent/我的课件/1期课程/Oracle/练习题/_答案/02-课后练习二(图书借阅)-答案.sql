@@ -52,47 +52,85 @@ insert into borrow values(6,6,to_date('2012-6-6','yyyy-mm-dd'));
 insert into borrow values(1,5,to_date('2012-6-5','yyyy-mm-dd'));
 insert into borrow values(1,6,to_date('2012-6-5','yyyy-mm-dd'));
 
-select * from borrow;
 --备注：限定每人每种书只能借一本；库存册数随借书、还书而改变。
---1.写出建立BORROW表的SQL语句，要求定义主码完整性约束和引用完整性约束。
 
+--1.写出建立BORROW表的SQL语句，要求定义主码完整性约束和引用完整性约束。
+	-- 主码完整性约束 就是主键, 建表语句题目已经提供了, 不加字段的情况下,只能在原字段上加复合主键
+	alter table borrow add constraint pk_borrow_id primary key(bno,cno);
+	-- 引用完整性约束 就是外键, 燃鹅 ... borrow 表的外键已经在上面的建表语句中建好了, ...
+  
 --2.找出借书超过5本的读者,输出借书卡号及所借图书册数。
+    select a.cno,count(*) from borrow a group by a.cno having count(*)>5;
 
 --3.查询借阅了"水浒"一书的读者，输出姓名及班级。
-
+    select b.name,b.classes
+    from borrow a 
+    join card b on a.cno=b.cno
+    join books c on a.bno=c.bno
+    where c.bname = '水浒'
+    ;
 --4.查询过期未还图书，输出借阅者（卡号）、书号及还书日期。
-select * from borrow where rdate < sysdate
-
+    select b.cno, a.bno, a.rdate
+      from borrow a
+      join card b
+        on a.cno = b.cno
+     where sysdate > a.rdate;
+    
 --5.查询书名包括"网络"关键词的图书，输出书号、书名、作者。
+    select a.bno, a.bname, a.author
+      from books a
+     where a.bname like '%网络%';
 
 --6.查询现有图书中价格最高的图书，输出书名及作者。
+    select bname, author, price
+      from books
+     where price = (select max(price) from books);
 
+    
 --7.查询当前借了"计算方法"但没有借"计算习题集"的读者，输出其借书卡号，并按卡号降序排序输出。
--- 联合查询(计算习题集) 的排序语法必须写在子查询外面
-select *
-  from (select a.cno
-          from borrow a
-          join books b
-            on a.bno = b.bno
-         where b.bname = '计算方法'
-        MINUS
-        select a.cno
-          from borrow a
-          join books b
-            on a.bno = b.bno
-         where b.bname = '计算习题集') a
- order by a.cno desc
-
+-- 提示: 使用子查询 + 集合查询(又名:联合查询) , 排序语法必须写在集合查询(子查询)外面
+   select *
+     from (select a.cno
+             from card a
+             join borrow b
+               on a.cno = b.cno
+             join books c
+               on b.bno = c.bno
+              and c.bname = '计算方法'
+           minus
+           select a.cno
+             from card a
+             join borrow b
+               on a.cno = b.cno
+             join books c
+               on b.bno = c.bno
+              and c.bname = '计算习题集')
+    order by cno desc;
+   
 --8.将"C01"班同学所借图书的还期都延长一周。
-update borrow
-   set rdate = rdate + 7
- where (cno, bno) in (select a.cno, a.bno
-                        from borrow a
-                        join card b
-                          on a.cno = b.cno
-                       where b.classes = 'C01')
-
+   update borrow
+      set rdate = rdate + 7
+    where cno in (select cno from card where classes = 'C01')
 
 --9.从BOOKS表中删除当前无人借阅的图书记录。
+    -- 方法一
+    select * from books a
+     where a.bno != all (select distinct b.bno from borrow b);
+    -- 方法二
+    select * from books a
+     where not exists( select * from borrow b where a.bno=b.bno);
+      
 
 --10.查询当前同时借有"计算方法"和"组合数学"两本书的读者，输出其借书卡号，并按卡号升序排序输出。
+     select cno
+       from borrow a
+       join books b
+         on a.bno = b.bno
+      where b.bname = '计算方法'
+     intersect
+     select cno
+       from borrow a
+       join books b
+         on a.bno = b.bno
+      where b.bname = '组合数学'
+     
