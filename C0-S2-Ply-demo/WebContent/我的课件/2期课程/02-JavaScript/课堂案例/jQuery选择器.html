@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+<head>
+<meta charset="UTF-8">
+<title>jQuery选择器</title>
+<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+<style type="text/css">
+body, div {
+	margin: 0px;
+	padding: 0px;
+}
+
+.left {
+	width: 30%;
+	float: left;
+}
+
+.right {
+	width: 70%;
+	float: right;
+}
+button{
+	width:350px;
+	margin: 3px
+}
+</style>
+<script type="text/javascript">
+// 页面加载完成事件
+$(function(){
+	// 将li元素的 id 展示出来，方便观察结果
+	$("li").each(function(i){
+		this.innerHTML = "<input type='checkbox' id='c" + i + "'>" + this.innerHTML;
+		// 在 each 函数中 this 指代是当前循环的到 DOM 对象，也就是 li 元素（标签）对象
+		this.innerHTML += " &nbsp;&nbsp; id=" + this.id;
+	});
+	$("button").each(function(i){
+		this.onclick = function(){
+			eval($("#code").val());
+		}
+	});
+});
+
+function reset(){
+	// 清除所有元素的底色
+	$("*").css("background-color","");
+}
+
+</script>
+</head>
+<body style="height: 100%;">
+	<div class="right">
+		<div style="text-align: center; margin: 10px">
+			<textarea id="code" rows="5" style="width: 80%;font: 1.5em 微软雅黑;" placeholder="请填写下面的按钮点击时执行的JavaScript代码"></textarea>
+		</div>
+		<div style="text-align: center; margin: 10px">
+			<button onclick=''>所有的h3标题（h3）</button>
+			
+			<button onclick=''>除了h3标题（not h3）</button>
+			
+			<button onclick=''>所有使用了 head 类的元素（each() + hasClass()函数）</button>
+
+			<button onclick=''>所有的列表（ul）</button>
+			
+			<button onclick=''>所有的选项（li）</button>
+			
+			<button onclick=''>所有的第偶数个选项（li）</button>
+			
+			<button onclick=''>所有选项中的第3个、第7个、第11个（eq()函数）</button>
+			
+			<button onclick=''>所有选项中的第3个到第11个（slice()函数）</button>
+
+			<button onclick=''>第二段所有的第奇数个选项（li）</button>
+			
+			<button onclick=''>第三段的第一个选项（li）</button>
+			
+			<button onclick=''>第三段的最后一个选项（li）</button>
+			
+			<button onclick=''>第一个列表的所有选项（children()函数）</button>
+			
+			<button onclick=''>第一段第三个选项的父元素（parent()函数）</button>
+			
+			<button onclick=''>第一段第三个选项的祖先元素（parents()函数）</button>
+			
+			<button onclick=''>第一段第三个选项的前一个兄弟元素（prev()函数）</button>
+
+			<button onclick=''>第一段第三个选项前面所有的兄弟元素（prevAll()函数）</button>
+			
+			<button onclick=''>第一段第三个选项后面所有的兄弟元素（nextAll()函数）</button>
+			
+			<button onclick=''>第一段第三个选项所有的兄弟元素（siblings()函数）</button>
+			
+			<button onclick=''>第二段第一个选项到第四个兄弟元素（nextUntil()函数）</button>
+			
+			<button onclick=''>所有勾选的选项（input:checked + parent()函数）</button>
+			
+			<button onclick=''>所有未勾选的选项（input:checkbox + each()函数）</button>
+
+		</div>
+	</div>
+	<div class="left">
+		<div style="margin: 0px auto;padding: 0px 30px">
+			<h3 id="h1" class="head">第一段</h3>
+			<ul id="u1">
+				<li id="l1">第1项</li>
+				<li id="l2">第2项</li>
+				<li id="l3">第3项</li>
+				<li id="l4">第4项</li>
+				<li id="l5" class="head">第5项</li>
+			</ul>
+			<h3 id="h2">第二段</h3>
+			<ul id="u2">
+				<li id="l6">第1项</li>
+				<li id="l7" class="head">第2项</li>
+				<li id="l8">第3项</li>
+				<li id="l9">第4项</li>
+				<li id="l10">第5项</li>
+			</ul>
+			<h2 id="h3" class="head">第三段</h2>
+			<ul id="u3">
+				<li id="l11">第1项</li>
+				<li id="l12">第2项</li>
+				<li id="l13" class="head">第3项</li>
+				<li id="l14">第4项</li>
+				<li id="l15">第5项</li>
+				<li id="l16">第6项</li>
+				<li id="l17">第7项</li>
+				<li id="l18">第8项</li>
+			</ul>
+		</div>
+	</div>
+</body>
+</html>

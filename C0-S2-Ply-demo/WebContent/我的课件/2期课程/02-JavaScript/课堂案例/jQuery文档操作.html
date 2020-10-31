@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+<head>
+<meta charset="UTF-8">
+<title>jQuery选择器</title>
+<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+<style type="text/css">
+body, div {
+	margin: 0px;
+	padding: 0px;
+}
+
+.left {
+	width: 30%;
+	float: left;
+}
+
+.right {
+	width: 70%;
+	float: right;
+}
+button{
+	width:350px;
+	margin: 3px
+}
+</style>
+<script type="text/javascript">
+// 页面加载完成事件
+$(function(){
+	// 将li元素的 id 展示出来，方便观察结果
+	$("li").each(function(i){
+		this.innerHTML = "<input type='checkbox' id='c" + i + "'>" + this.innerHTML;
+		// 在 each 函数中 this 指代是当前循环的到 DOM 对象，也就是 li 元素（标签）对象
+		this.innerHTML += " &nbsp;&nbsp; id=" + this.id;
+	});
+	$("button").each(function(i){
+		this.onclick = function(){
+			eval($("#code").val());
+		}
+	});
+});
+
+function reset(){
+	// 清除所有元素的底色
+	$("*").css("background-color","");
+}
+
+</script>
+</head>
+<body style="height: 100%;">
+	<div class="right">
+		<div style="text-align: center; margin: 10px">
+			<textarea id="code" rows="5" style="width: 80%;font: 1.5em 微软雅黑;" placeholder="请填写下面的按钮点击时执行的JavaScript代码"></textarea>
+		</div>
+		<div style="text-align: center; margin: 10px">
+			<button onclick=''>所有的h3标题内部追加一个单选框（append()）</button>
+			
+			<button onclick=''>所有的h3标题内部前面添加一个单选框（prepend()）</button>
+			
+			<button onclick=''>所有的标题内部追加一个单选框（appendTo()）</button>
+			
+			<button onclick=''>所有的标题内部前面添加一个单选框（prependTo()）</button>
+			
+			<button onclick=''>所有的h3标题外部追加一个单选框（after()）</button>
+			
+			<button onclick=''>所有的h3标题外部前面添加一个单选框（before()）</button>
+			
+			<button onclick=''>所有的标题外部追加一个单选框（insertAfter()）</button>
+			
+			<button onclick=''>所有的标题外部前面添加一个单选框（insertBefore()）</button>
+			
+			<button onclick=''>所有的标题替换成“新的标题”（h1）（replaceWith()）</button>
+			
+			<button onclick=''>所有的标题替换成h1标题，保留原标题（each() + replaceWith()）</button>
+			
+			<button onclick=''>所有的标题替换成“新的标题”（h1）（replaceAll()）</button>
+			
+			<button onclick=''>删除第二段下的所有选项（remove()）</button>
+			
+			<button onclick=''>清除第二段下的所有选项的内容（empty()）</button>
+			
+			<button onclick=''>删除第二段下的首尾两个选项（remove()）</button>
+			
+			<button onclick=''>将第三段以及其下的选项，复制一份生成第四段选项（clone()）</button>
+
+		</div>
+	</div>
+	<div class="left">
+		<div style="margin: 0px auto;padding: 0px 30px">
+			<h3 id="h1" class="head">第一段</h3>
+			<ul id="u1">
+				<li id="l1">第1项</li>
+				<li id="l2">第2项</li>
+				<li id="l3">第3项</li>
+				<li id="l4">第4项</li>
+				<li id="l5" class="head">第5项</li>
+			</ul>
+			<h3 id="h2">第二段</h3>
+			<ul id="u2">
+				<li id="l6">第1项</li>
+				<li id="l7" class="head">第2项</li>
+				<li id="l8">第3项</li>
+				<li id="l9">第4项</li>
+				<li id="l10">第5项</li>
+			</ul>
+			<h2 id="h3" class="head">第三段</h2>
+			<ul id="u3">
+				<li id="l11">第1项</li>
+				<li id="l12">第2项</li>
+				<li id="l13" class="head">第3项</li>
+				<li id="l14">第4项</li>
+				<li id="l15">第5项</li>
+				<li id="l16">第6项</li>
+				<li id="l17">第7项</li>
+				<li id="l18">第8项</li>
+			</ul>
+		</div>
+	</div>
+</body>
+</html>
