@@ -1,4 +1,4 @@
---CARD ½èÊé¿¨¡£ CNO ¿¨ºÅ£¬NAME  ĞÕÃû£¬CLASS °à¼¶
+--CARD å€Ÿä¹¦å¡ã€‚ CNO å¡å·ï¼ŒNAME  å§“åï¼ŒCLASS ç­çº§
 create table card(
    cno number(4) primary key,
    name varchar2(50),
@@ -6,7 +6,7 @@ create table card(
 );
 create sequence seq_card_cno start with 1 increment by 1;
 
---BOOKS Í¼Êé¡£ BNO ÊéºÅ£¬BNAME ÊéÃû,AUTHOR ×÷Õß£¬PRICE µ¥¼Û£¬QUANTITY ¿â´æ²áÊı 
+--BOOKS å›¾ä¹¦ã€‚ BNO ä¹¦å·ï¼ŒBNAME ä¹¦å,AUTHOR ä½œè€…ï¼ŒPRICE å•ä»·ï¼ŒQUANTITY åº“å­˜å†Œæ•° 
 create table books(
     bno number(4) primary key,
     bname varchar2(50),
@@ -16,7 +16,7 @@ create table books(
 );
 create sequence seq_books_bno start with 1 increment by 1;
 
---BORROW ½èÊé¼ÇÂ¼¡£ CNO ½èÊé¿¨ºÅ£¬BNO ÊéºÅ£¬RDATE »¹ÊéÈÕÆÚ
+--BORROW å€Ÿä¹¦è®°å½•ã€‚ CNO å€Ÿä¹¦å¡å·ï¼ŒBNO ä¹¦å·ï¼ŒRDATE è¿˜ä¹¦æ—¥æœŸ
 create table borrow(
     cno number(4)
 		constraint FK_cn references card(cno),
@@ -25,20 +25,20 @@ create table borrow(
     rdate date
 );
 
-insert into card values(seq_card_cno.nextval,'ÕÅÈı','C01');
-insert into card values(seq_card_cno.nextval,'ÕÅÎå','C02');
-insert into card values(seq_card_cno.nextval,'ÕÅËÄ','C02');
-insert into card values(seq_card_cno.nextval,'ÕÅÁù','C01');
-insert into card values(seq_card_cno.nextval,'ÕÅÆß','C01');
-insert into card values(seq_card_cno.nextval,'ÕÅ°Ë','C01');
+insert into card values(seq_card_cno.nextval,'å¼ ä¸‰','C01');
+insert into card values(seq_card_cno.nextval,'å¼ äº”','C02');
+insert into card values(seq_card_cno.nextval,'å¼ å››','C02');
+insert into card values(seq_card_cno.nextval,'å¼ å…­','C01');
+insert into card values(seq_card_cno.nextval,'å¼ ä¸ƒ','C01');
+insert into card values(seq_card_cno.nextval,'å¼ å…«','C01');
 
-insert into books values(seq_books_bno.nextval,'ÍøÂç»ù´¡','smith',30,5);
-insert into books values(seq_books_bno.nextval,'ÉîÈëÍøÂç»ù´¡','smith',38,5);
-insert into books values(seq_books_bno.nextval,'Ë®ä°','Ê©ÄÍ°³',30,5);
-insert into books values(seq_books_bno.nextval,'¼ÆËã·½·¨','TOM',30,5);
-insert into books values(seq_books_bno.nextval,'¼ÆËãÏ°Ìâ¼¯','John',22,5);
-insert into books values(seq_books_bno.nextval,'×éºÏÊıÑ§','smith',39,5);
-insert into books values(seq_books_bno.nextval,'ÌìÎÄÑ§','Jerry',100,2);
+insert into books values(seq_books_bno.nextval,'ç½‘ç»œåŸºç¡€','smith',30,5);
+insert into books values(seq_books_bno.nextval,'æ·±å…¥ç½‘ç»œåŸºç¡€','smith',38,5);
+insert into books values(seq_books_bno.nextval,'æ°´æµ’','æ–½è€ä¿º',30,5);
+insert into books values(seq_books_bno.nextval,'è®¡ç®—æ–¹æ³•','TOM',30,5);
+insert into books values(seq_books_bno.nextval,'è®¡ç®—ä¹ é¢˜é›†','John',22,5);
+insert into books values(seq_books_bno.nextval,'ç»„åˆæ•°å­¦','smith',39,5);
+insert into books values(seq_books_bno.nextval,'å¤©æ–‡å­¦','Jerry',100,2);
 
 insert into borrow values(1,1,to_date('2012-6-5','yyyy-mm-dd'));
 insert into borrow values(1,2,to_date('2012-6-5','yyyy-mm-dd'));
@@ -53,25 +53,25 @@ insert into borrow values(1,5,to_date('2012-6-5','yyyy-mm-dd'));
 insert into borrow values(1,6,to_date('2012-6-5','yyyy-mm-dd'));
 
 select * from borrow;
---±¸×¢£ºÏŞ¶¨Ã¿ÈËÃ¿ÖÖÊéÖ»ÄÜ½èÒ»±¾£»¿â´æ²áÊıËæ½èÊé¡¢»¹Êé¶ø¸Ä±ä¡£
+--å¤‡æ³¨ï¼šé™å®šæ¯äººæ¯ç§ä¹¦åªèƒ½å€Ÿä¸€æœ¬ï¼›åº“å­˜å†Œæ•°éšå€Ÿä¹¦ã€è¿˜ä¹¦è€Œæ”¹å˜ã€‚
 
---1.Ğ´³ö½¨Á¢BORROW±íµÄSQLÓï¾ä£¬ÒªÇó¶¨ÒåÖ÷ÂëÍêÕûĞÔÔ¼ÊøºÍÒıÓÃÍêÕûĞÔÔ¼Êø¡£
+--1.å†™å‡ºå»ºç«‹BORROWè¡¨çš„SQLè¯­å¥ï¼Œè¦æ±‚å®šä¹‰ä¸»ç å®Œæ•´æ€§çº¦æŸå’Œå¼•ç”¨å®Œæ•´æ€§çº¦æŸã€‚
 
---2.ÕÒ³ö½èÊé³¬¹ı5±¾µÄ¶ÁÕß,Êä³ö½èÊé¿¨ºÅ¼°Ëù½èÍ¼Êé²áÊı¡£
+--2.æ‰¾å‡ºå€Ÿä¹¦è¶…è¿‡5æœ¬çš„è¯»è€…,è¾“å‡ºå€Ÿä¹¦å¡å·åŠæ‰€å€Ÿå›¾ä¹¦å†Œæ•°ã€‚
 
---3.²éÑ¯½èÔÄÁË"Ë®ä°"Ò»ÊéµÄ¶ÁÕß£¬Êä³öĞÕÃû¼°°à¼¶¡£
+--3.æŸ¥è¯¢å€Ÿé˜…äº†"æ°´æµ’"ä¸€ä¹¦çš„è¯»è€…ï¼Œè¾“å‡ºå§“ååŠç­çº§ã€‚
 
---4.²éÑ¯¹ıÆÚÎ´»¹Í¼Êé£¬Êä³ö½èÔÄÕß£¨¿¨ºÅ£©¡¢ÊéºÅ¼°»¹ÊéÈÕÆÚ¡£
+--4.æŸ¥è¯¢è¿‡æœŸæœªè¿˜å›¾ä¹¦ï¼Œè¾“å‡ºå€Ÿé˜…è€…ï¼ˆå¡å·ï¼‰ã€ä¹¦å·åŠè¿˜ä¹¦æ—¥æœŸã€‚
 
---5.²éÑ¯ÊéÃû°üÀ¨"ÍøÂç"¹Ø¼ü´ÊµÄÍ¼Êé£¬Êä³öÊéºÅ¡¢ÊéÃû¡¢×÷Õß¡£
+--5.æŸ¥è¯¢ä¹¦ååŒ…æ‹¬"ç½‘ç»œ"å…³é”®è¯çš„å›¾ä¹¦ï¼Œè¾“å‡ºä¹¦å·ã€ä¹¦åã€ä½œè€…ã€‚
 
---6.²éÑ¯ÏÖÓĞÍ¼ÊéÖĞ¼Û¸ñ×î¸ßµÄÍ¼Êé£¬Êä³öÊéÃû¼°×÷Õß¡£
+--6.æŸ¥è¯¢ç°æœ‰å›¾ä¹¦ä¸­ä»·æ ¼æœ€é«˜çš„å›¾ä¹¦ï¼Œè¾“å‡ºä¹¦ååŠä½œè€…ã€‚
 
---7.²éÑ¯µ±Ç°½èÁË"¼ÆËã·½·¨"µ«Ã»ÓĞ½è"¼ÆËãÏ°Ìâ¼¯"µÄ¶ÁÕß£¬Êä³öÆä½èÊé¿¨ºÅ£¬²¢°´¿¨ºÅ½µĞòÅÅĞòÊä³ö¡£
--- ÌáÊ¾: ÁªºÏ²éÑ¯(¼ÆËãÏ°Ìâ¼¯) µÄÅÅĞòÓï·¨±ØĞëĞ´ÔÚ×Ó²éÑ¯ÍâÃæ
+--7.æŸ¥è¯¢å½“å‰å€Ÿäº†"è®¡ç®—æ–¹æ³•"ä½†æ²¡æœ‰å€Ÿ"è®¡ç®—ä¹ é¢˜é›†"çš„è¯»è€…ï¼Œè¾“å‡ºå…¶å€Ÿä¹¦å¡å·ï¼Œå¹¶æŒ‰å¡å·é™åºæ’åºè¾“å‡ºã€‚
+-- æç¤º: è”åˆæŸ¥è¯¢(è®¡ç®—ä¹ é¢˜é›†) çš„æ’åºè¯­æ³•å¿…é¡»å†™åœ¨å­æŸ¥è¯¢å¤–é¢
 
---8.½«"C01"°àÍ¬Ñ§Ëù½èÍ¼ÊéµÄ»¹ÆÚ¶¼ÑÓ³¤Ò»ÖÜ¡£
+--8.å°†"C01"ç­åŒå­¦æ‰€å€Ÿå›¾ä¹¦çš„è¿˜æœŸéƒ½å»¶é•¿ä¸€å‘¨ã€‚
 
---9.´ÓBOOKS±íÖĞÉ¾³ıµ±Ç°ÎŞÈË½èÔÄµÄÍ¼Êé¼ÇÂ¼¡£
+--9.ä»BOOKSè¡¨ä¸­åˆ é™¤å½“å‰æ— äººå€Ÿé˜…çš„å›¾ä¹¦è®°å½•ã€‚
 
---10.²éÑ¯µ±Ç°Í¬Ê±½èÓĞ"¼ÆËã·½·¨"ºÍ"×éºÏÊıÑ§"Á½±¾ÊéµÄ¶ÁÕß£¬Êä³öÆä½èÊé¿¨ºÅ£¬²¢°´¿¨ºÅÉıĞòÅÅĞòÊä³ö¡£
+--10.æŸ¥è¯¢å½“å‰åŒæ—¶å€Ÿæœ‰"è®¡ç®—æ–¹æ³•"å’Œ"ç»„åˆæ•°å­¦"ä¸¤æœ¬ä¹¦çš„è¯»è€…ï¼Œè¾“å‡ºå…¶å€Ÿä¹¦å¡å·ï¼Œå¹¶æŒ‰å¡å·å‡åºæ’åºè¾“å‡ºã€‚

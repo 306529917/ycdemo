@@ -1,4 +1,4 @@
---CARD ½èÊé¿¨¡£ CNO ¿¨ºÅ£¬NAME  ÐÕÃû£¬CLASS °à¼¶
+--CARD å€Ÿä¹¦å¡ã€‚ CNO å¡å·ï¼ŒNAME  å§“åï¼ŒCLASS ç­çº§
 create table card(
    cno number(4) primary key,
    name varchar2(50),
@@ -6,7 +6,7 @@ create table card(
 );
 create sequence seq_card_cno start with 1 increment by 1;
 
---BOOKS Í¼Êé¡£ BNO ÊéºÅ£¬BNAME ÊéÃû,AUTHOR ×÷Õß£¬PRICE µ¥¼Û£¬QUANTITY ¿â´æ²áÊý 
+--BOOKS å›¾ä¹¦ã€‚ BNO ä¹¦å·ï¼ŒBNAME ä¹¦å,AUTHOR ä½œè€…ï¼ŒPRICE å•ä»·ï¼ŒQUANTITY åº“å­˜å†Œæ•° 
 create table books(
     bno number(4) primary key,
     bname varchar2(50),
@@ -16,7 +16,7 @@ create table books(
 );
 create sequence seq_books_bno start with 1 increment by 1;
 
---BORROW ½èÊé¼ÇÂ¼¡£ CNO ½èÊé¿¨ºÅ£¬BNO ÊéºÅ£¬RDATE »¹ÊéÈÕÆÚ
+--BORROW å€Ÿä¹¦è®°å½•ã€‚ CNO å€Ÿä¹¦å¡å·ï¼ŒBNO ä¹¦å·ï¼ŒRDATE è¿˜ä¹¦æ—¥æœŸ
 create table borrow(
     cno number(4)
 		constraint FK_cn references card(cno),
@@ -25,20 +25,20 @@ create table borrow(
     rdate date
 );
 
-insert into card values(seq_card_cno.nextval,'ÕÅÈý','C01');
-insert into card values(seq_card_cno.nextval,'ÕÅÎå','C02');
-insert into card values(seq_card_cno.nextval,'ÕÅËÄ','C02');
-insert into card values(seq_card_cno.nextval,'ÕÅÁù','C01');
-insert into card values(seq_card_cno.nextval,'ÕÅÆß','C01');
-insert into card values(seq_card_cno.nextval,'ÕÅ°Ë','C01');
+insert into card values(seq_card_cno.nextval,'å¼ ä¸‰','C01');
+insert into card values(seq_card_cno.nextval,'å¼ äº”','C02');
+insert into card values(seq_card_cno.nextval,'å¼ å››','C02');
+insert into card values(seq_card_cno.nextval,'å¼ å…­','C01');
+insert into card values(seq_card_cno.nextval,'å¼ ä¸ƒ','C01');
+insert into card values(seq_card_cno.nextval,'å¼ å…«','C01');
 
-insert into books values(seq_books_bno.nextval,'ÍøÂç»ù´¡','smith',30,5);
-insert into books values(seq_books_bno.nextval,'ÉîÈëÍøÂç»ù´¡','smith',38,5);
-insert into books values(seq_books_bno.nextval,'Ë®ä°','Ê©ÄÍ°³',30,5);
-insert into books values(seq_books_bno.nextval,'¼ÆËã·½·¨','TOM',30,5);
-insert into books values(seq_books_bno.nextval,'¼ÆËãÏ°Ìâ¼¯','John',22,5);
-insert into books values(seq_books_bno.nextval,'×éºÏÊýÑ§','smith',39,5);
-insert into books values(seq_books_bno.nextval,'ÌìÎÄÑ§','Jerry',100,2);
+insert into books values(seq_books_bno.nextval,'ç½‘ç»œåŸºç¡€','smith',30,5);
+insert into books values(seq_books_bno.nextval,'æ·±å…¥ç½‘ç»œåŸºç¡€','smith',38,5);
+insert into books values(seq_books_bno.nextval,'æ°´æµ’','æ–½è€ä¿º',30,5);
+insert into books values(seq_books_bno.nextval,'è®¡ç®—æ–¹æ³•','TOM',30,5);
+insert into books values(seq_books_bno.nextval,'è®¡ç®—ä¹ é¢˜é›†','John',22,5);
+insert into books values(seq_books_bno.nextval,'ç»„åˆæ•°å­¦','smith',39,5);
+insert into books values(seq_books_bno.nextval,'å¤©æ–‡å­¦','Jerry',100,2);
 
 insert into borrow values(1,1,to_date('2012-6-5','yyyy-mm-dd'));
 insert into borrow values(1,2,to_date('2012-6-5','yyyy-mm-dd'));
@@ -52,85 +52,47 @@ insert into borrow values(6,6,to_date('2012-6-6','yyyy-mm-dd'));
 insert into borrow values(1,5,to_date('2012-6-5','yyyy-mm-dd'));
 insert into borrow values(1,6,to_date('2012-6-5','yyyy-mm-dd'));
 
---±¸×¢£ºÏÞ¶¨Ã¿ÈËÃ¿ÖÖÊéÖ»ÄÜ½èÒ»±¾£»¿â´æ²áÊýËæ½èÊé¡¢»¹Êé¶ø¸Ä±ä¡£
+select * from borrow;
+--å¤‡æ³¨ï¼šé™å®šæ¯äººæ¯ç§ä¹¦åªèƒ½å€Ÿä¸€æœ¬ï¼›åº“å­˜å†Œæ•°éšå€Ÿä¹¦ã€è¿˜ä¹¦è€Œæ”¹å˜ã€‚
+--1.å†™å‡ºå»ºç«‹BORROWè¡¨çš„SQLè¯­å¥ï¼Œè¦æ±‚å®šä¹‰ä¸»ç å®Œæ•´æ€§çº¦æŸå’Œå¼•ç”¨å®Œæ•´æ€§çº¦æŸã€‚
 
---1.Ð´³ö½¨Á¢BORROW±íµÄSQLÓï¾ä£¬ÒªÇó¶¨ÒåÖ÷ÂëÍêÕûÐÔÔ¼ÊøºÍÒýÓÃÍêÕûÐÔÔ¼Êø¡£
-	-- Ö÷ÂëÍêÕûÐÔÔ¼Êø ¾ÍÊÇÖ÷¼ü, ½¨±íÓï¾äÌâÄ¿ÒÑ¾­Ìá¹©ÁË, ²»¼Ó×Ö¶ÎµÄÇé¿öÏÂ,Ö»ÄÜÔÚÔ­×Ö¶ÎÉÏ¼Ó¸´ºÏÖ÷¼ü
-	alter table borrow add constraint pk_borrow_id primary key(bno,cno);
-	-- ÒýÓÃÍêÕûÐÔÔ¼Êø ¾ÍÊÇÍâ¼ü, È¼¶ì ... borrow ±íµÄÍâ¼üÒÑ¾­ÔÚÉÏÃæµÄ½¨±íÓï¾äÖÐ½¨ºÃÁË, ...
-  
---2.ÕÒ³ö½èÊé³¬¹ý5±¾µÄ¶ÁÕß,Êä³ö½èÊé¿¨ºÅ¼°Ëù½èÍ¼Êé²áÊý¡£
-    select a.cno,count(*) from borrow a group by a.cno having count(*)>5;
+--2.æ‰¾å‡ºå€Ÿä¹¦è¶…è¿‡5æœ¬çš„è¯»è€…,è¾“å‡ºå€Ÿä¹¦å¡å·åŠæ‰€å€Ÿå›¾ä¹¦å†Œæ•°ã€‚
 
---3.²éÑ¯½èÔÄÁË"Ë®ä°"Ò»ÊéµÄ¶ÁÕß£¬Êä³öÐÕÃû¼°°à¼¶¡£
-    select b.name,b.classes
-    from borrow a 
-    join card b on a.cno=b.cno
-    join books c on a.bno=c.bno
-    where c.bname = 'Ë®ä°'
-    ;
---4.²éÑ¯¹ýÆÚÎ´»¹Í¼Êé£¬Êä³ö½èÔÄÕß£¨¿¨ºÅ£©¡¢ÊéºÅ¼°»¹ÊéÈÕÆÚ¡£
-    select b.cno, a.bno, a.rdate
-      from borrow a
-      join card b
-        on a.cno = b.cno
-     where sysdate > a.rdate;
-    
---5.²éÑ¯ÊéÃû°üÀ¨"ÍøÂç"¹Ø¼ü´ÊµÄÍ¼Êé£¬Êä³öÊéºÅ¡¢ÊéÃû¡¢×÷Õß¡£
-    select a.bno, a.bname, a.author
-      from books a
-     where a.bname like '%ÍøÂç%';
+--3.æŸ¥è¯¢å€Ÿé˜…äº†"æ°´æµ’"ä¸€ä¹¦çš„è¯»è€…ï¼Œè¾“å‡ºå§“ååŠç­çº§ã€‚
 
---6.²éÑ¯ÏÖÓÐÍ¼ÊéÖÐ¼Û¸ñ×î¸ßµÄÍ¼Êé£¬Êä³öÊéÃû¼°×÷Õß¡£
-    select bname, author, price
-      from books
-     where price = (select max(price) from books);
+--4.æŸ¥è¯¢è¿‡æœŸæœªè¿˜å›¾ä¹¦ï¼Œè¾“å‡ºå€Ÿé˜…è€…ï¼ˆå¡å·ï¼‰ã€ä¹¦å·åŠè¿˜ä¹¦æ—¥æœŸã€‚
+select * from borrow where rdate < sysdate
 
-    
---7.²éÑ¯µ±Ç°½èÁË"¼ÆËã·½·¨"µ«Ã»ÓÐ½è"¼ÆËãÏ°Ìâ¼¯"µÄ¶ÁÕß£¬Êä³öÆä½èÊé¿¨ºÅ£¬²¢°´¿¨ºÅ½µÐòÅÅÐòÊä³ö¡£
--- ÌáÊ¾: Ê¹ÓÃ×Ó²éÑ¯ + ¼¯ºÏ²éÑ¯(ÓÖÃû:ÁªºÏ²éÑ¯) , ÅÅÐòÓï·¨±ØÐëÐ´ÔÚ¼¯ºÏ²éÑ¯(×Ó²éÑ¯)ÍâÃæ
-   select *
-     from (select a.cno
-             from card a
-             join borrow b
-               on a.cno = b.cno
-             join books c
-               on b.bno = c.bno
-              and c.bname = '¼ÆËã·½·¨'
-           minus
-           select a.cno
-             from card a
-             join borrow b
-               on a.cno = b.cno
-             join books c
-               on b.bno = c.bno
-              and c.bname = '¼ÆËãÏ°Ìâ¼¯')
-    order by cno desc;
-   
---8.½«"C01"°àÍ¬Ñ§Ëù½èÍ¼ÊéµÄ»¹ÆÚ¶¼ÑÓ³¤Ò»ÖÜ¡£
-   update borrow
-      set rdate = rdate + 7
-    where cno in (select cno from card where classes = 'C01')
+--5.æŸ¥è¯¢ä¹¦ååŒ…æ‹¬"ç½‘ç»œ"å…³é”®è¯çš„å›¾ä¹¦ï¼Œè¾“å‡ºä¹¦å·ã€ä¹¦åã€ä½œè€…ã€‚
 
---9.´ÓBOOKS±íÖÐÉ¾³ýµ±Ç°ÎÞÈË½èÔÄµÄÍ¼Êé¼ÇÂ¼¡£
-    -- ·½·¨Ò»
-    select * from books a
-     where a.bno != all (select distinct b.bno from borrow b);
-    -- ·½·¨¶þ
-    select * from books a
-     where not exists( select * from borrow b where a.bno=b.bno);
-      
+--6.æŸ¥è¯¢çŽ°æœ‰å›¾ä¹¦ä¸­ä»·æ ¼æœ€é«˜çš„å›¾ä¹¦ï¼Œè¾“å‡ºä¹¦ååŠä½œè€…ã€‚
 
---10.²éÑ¯µ±Ç°Í¬Ê±½èÓÐ"¼ÆËã·½·¨"ºÍ"×éºÏÊýÑ§"Á½±¾ÊéµÄ¶ÁÕß£¬Êä³öÆä½èÊé¿¨ºÅ£¬²¢°´¿¨ºÅÉýÐòÅÅÐòÊä³ö¡£
-     select cno
-       from borrow a
-       join books b
-         on a.bno = b.bno
-      where b.bname = '¼ÆËã·½·¨'
-     intersect
-     select cno
-       from borrow a
-       join books b
-         on a.bno = b.bno
-      where b.bname = '×éºÏÊýÑ§'
-     
+--7.æŸ¥è¯¢å½“å‰å€Ÿäº†"è®¡ç®—æ–¹æ³•"ä½†æ²¡æœ‰å€Ÿ"è®¡ç®—ä¹ é¢˜é›†"çš„è¯»è€…ï¼Œè¾“å‡ºå…¶å€Ÿä¹¦å¡å·ï¼Œå¹¶æŒ‰å¡å·é™åºæŽ’åºè¾“å‡ºã€‚
+-- è”åˆæŸ¥è¯¢(è®¡ç®—ä¹ é¢˜é›†) çš„æŽ’åºè¯­æ³•å¿…é¡»å†™åœ¨å­æŸ¥è¯¢å¤–é¢
+select *
+  from (select a.cno
+          from borrow a
+          join books b
+            on a.bno = b.bno
+         where b.bname = 'è®¡ç®—æ–¹æ³•'
+        MINUS
+        select a.cno
+          from borrow a
+          join books b
+            on a.bno = b.bno
+         where b.bname = 'è®¡ç®—ä¹ é¢˜é›†') a
+ order by a.cno desc
+
+--8.å°†"C01"ç­åŒå­¦æ‰€å€Ÿå›¾ä¹¦çš„è¿˜æœŸéƒ½å»¶é•¿ä¸€å‘¨ã€‚
+update borrow
+   set rdate = rdate + 7
+ where (cno, bno) in (select a.cno, a.bno
+                        from borrow a
+                        join card b
+                          on a.cno = b.cno
+                       where b.classes = 'C01')
+
+
+--9.ä»ŽBOOKSè¡¨ä¸­åˆ é™¤å½“å‰æ— äººå€Ÿé˜…çš„å›¾ä¹¦è®°å½•ã€‚
+
+--10.æŸ¥è¯¢å½“å‰åŒæ—¶å€Ÿæœ‰"è®¡ç®—æ–¹æ³•"å’Œ"ç»„åˆæ•°å­¦"ä¸¤æœ¬ä¹¦çš„è¯»è€…ï¼Œè¾“å‡ºå…¶å€Ÿä¹¦å¡å·ï¼Œå¹¶æŒ‰å¡å·å‡åºæŽ’åºè¾“å‡ºã€‚

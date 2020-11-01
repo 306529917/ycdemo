@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>jQuery练习</title>
+<style type="text/css">
+div{ font: 3em blod; color:white; display: inline-block; width: 100px;height: 100px;text-align: center;line-height: 100px;background-color: #666;margin: 10px}
+</style>
+<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+</head>
+<body>
+</body>
+<script>
+	for(var i=0; i<20; i++){
+		$(document.body).append("<div id='d"+(i+1)+"'>"+(i+1)+"</div>");
+	}
+</script>
+</html>
