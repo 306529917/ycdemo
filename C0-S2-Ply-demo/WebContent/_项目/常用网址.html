@@ -21,8 +21,6 @@ legend{ font-weight: bold; color: #666}
 		<a href="https://note.youdao.com/web" rel='306529917'>有道云笔记</a>
 		<a href="https://www.processon.com/diagrams" rel='306529917'>ProcessOn文档</a>
 		<a href=""></a>
-		<a href=""></a>
-		<a href=""></a>
 	</fieldset>
 
 	<fieldset>
@@ -43,14 +41,14 @@ legend{ font-weight: bold; color: #666}
 	
 	<fieldset>
 		<legend id="cdn"> CDN </legend>
-		<a rel="http://libs.baidu.com/jquery/2.0.0/jquery.min.js" href="javascript:void" target="_self">jQuery</a>
-		<a rel="https://lib.baomitu.com/vue/2.6.12/vue.min.js" href="javascript:void" target="_self">VUE</a>
-		<a rel="https://cdn.bootcdn.net/ajax/libs/axios/0.21.0/axios.min.js" href="javascript:void" target="_self">AXIOS</a>
-		<a rel="" href="javascript:void" target="_self"></a>
-		<a rel="" href="javascript:void" target="_self"></a>
-		<a rel="" href="javascript:void" target="_self"></a>
-		<a rel="" href="javascript:void" target="_self"></a>
-		<a rel="" href="javascript:void" target="_self"></a>
+		<a rel="http://libs.baidu.com/jquery/2.0.0/jquery.min.js" href="javascript:;" target="_self">jQuery</a>
+		<a rel="https://lib.baomitu.com/vue/2.6.12/vue.min.js" href="javascript:;" target="_self">VUE</a>
+		<a rel="https://cdn.bootcdn.net/ajax/libs/axios/0.21.0/axios.min.js" href="javascript:;" target="_self">AXIOS</a>
+		<a rel="" href="javascript:;" target="_self"></a>
+		<a rel="" href="javascript:;" target="_self"></a>
+		<a rel="" href="javascript:;" target="_self"></a>
+		<a rel="" href="javascript:;" target="_self"></a>
+		<a rel="" href="javascript:;" target="_self"></a>
 	</fieldset>
 
 	<fieldset>
@@ -85,7 +83,9 @@ legend{ font-weight: bold; color: #666}
 		<a href="https://www.sanfengyun.com/login/" rel="18073404071">三丰云平台(ASQQ)</a>
 		<a href="http://ftp6413916.host118.sanfengyun.cn" rel="1234Qwer">三丰云主机</a>
 		<a href="ftp://218.196.14.164:2121/">源辰FTP</a>
-		<a rel="mstsc 218.196.14.3" href="javascript:void" target="_self">远程2505</a>
+		<a rel="mstsc 218.196.14.3" href="javascript:" target="_self">远程2505</a>
+		<a href="https://www.zhumu.com/download" rel="18073404071">瞩目下载</a>
+		<a href="https://office.qq.com/download.html">TIM下载</a>
 		<a href=""></a>
 		<a href=""></a>
 		<a href=""></a>
@@ -97,15 +97,17 @@ legend{ font-weight: bold; color: #666}
 </body>
 <script type="text/javascript">
 var as = document.querySelectorAll("a[rel]");
-for(let a of as){
-	a.onclick=new Function('copy("'+a.rel+'")');
+for(var a in as){
+	as[a].onclick=new Function('copy("'+as[a].rel+'")');
 }
 
 function copy(content) {
 	var aux = document.getElementById("$aux$");
 	if(!aux){
 	    aux = document.createElement("input"); 
-	    aux.setAttribute("id", "$aux$"); 
+	    aux.setAttribute("id", "$aux$");
+		aux.style.position='fixed';
+		aux.style.left='-1000px'
 	    document.body.appendChild(aux);
 	}
     aux.setAttribute("value", content); 

@@ -39,7 +39,6 @@ function Q(content, expect){
 			script = script.replace(/<input.+?>/, val);
 			
 			let answer = input.getAttribute('answer');
-			let regex = input.getAttribute("regex");
 			// 内容判断 + 正则判断
 			let ok;
 			if(answer){
@@ -50,7 +49,7 @@ function Q(content, expect){
 					answer = answer.toLowerCase();
 					v = v.toLowerCase();
 				}
-				ok = v== answer || regex && eval(regex).test(val);
+				ok = v== answer || new RegExp("^"+answer+"$").test(val);
 			} else {
 				ok = val == "";
 			}

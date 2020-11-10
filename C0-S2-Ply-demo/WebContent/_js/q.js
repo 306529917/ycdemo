@@ -39,7 +39,6 @@ function Q(content, expect){
 			script = script.replace(/<input.+?>/, val);
 			
 			let answer = input.getAttribute('answer');
-			let regex = input.getAttribute("regex");
 			// 内容判断 + 正则判断
 			let ok;
 			if(answer){
@@ -50,7 +49,11 @@ function Q(content, expect){
 					answer = answer.toLowerCase();
 					v = v.toLowerCase();
 				}
-				ok = v== answer || regex && eval(regex).test(val);
+				console.info(answer);
+				console.info(val);
+				console.info(new RegExp(answer));
+				console.info(new RegExp(answer).test(val));
+				ok = v== answer || new RegExp("^"+answer+"$").test(val);
 			} else {
 				ok = val == "";
 			}
@@ -204,7 +207,7 @@ var vue = new Vue({
 				ipt.setAttribute("preIndex",pindex);
 				var answer = ipt.getAttribute("answer");
 				// 20 是默认值
-				if(ipt.size == undefined || ipt.size == 20 && answer){
+				if(answer && (ipt.width == undefined || ipt.width == 0) && (ipt.size == undefined || ipt.size == 20) ){
 					ipt.size = answer.length * 1.7;
 				}
 				if(ipt.type=="checkbox" || ipt.type=="radio"){
