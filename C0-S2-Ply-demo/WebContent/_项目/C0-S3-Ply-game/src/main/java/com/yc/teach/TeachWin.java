@@ -6,11 +6,15 @@ import javax.swing.JFrame;
 import javax.swing.JComboBox;
 import javax.swing.JScrollPane;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class TeachWin {
 
 	private JFrame frame;
+	private TeachBiz tbiz = new TeachBiz();
 
 	/**
 	 * Launch the application.
@@ -40,7 +44,7 @@ public class TeachWin {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 305, 321);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 
@@ -56,22 +60,40 @@ public class TeachWin {
 		scrollPane.setViewportView(list);
 
 		JButton btnNewButton = new JButton(">>");
-		btnNewButton.setBounds(152, 80, 49, 27);
+		btnNewButton.setBounds(155, 248, 49, 27);
 		frame.getContentPane().add(btnNewButton);
 
-		JButton btnNewButton_1 = new JButton("<<");
-		btnNewButton_1.setBounds(152, 120, 49, 27);
-		frame.getContentPane().add(btnNewButton_1);
-
 		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(215, 50, 124, 190);
+		scrollPane_1.setBounds(155, 50, 124, 190);
 		frame.getContentPane().add(scrollPane_1);
-
-		JList<String> list_1 = new JList<>();
-		scrollPane_1.setViewportView(list_1);
+		
+				JList<String> list_1 = new JList<>();
+				scrollPane_1.setViewportView(list_1);
 
 		JButton btnNewButton_2 = new JButton("启动");
-		btnNewButton_2.setBounds(215, 12, 124, 27);
+		btnNewButton_2.setBounds(209, 11, 70, 27);
 		frame.getContentPane().add(btnNewButton_2);
+		
+		JButton btnNewButton_1 = new JButton("+");
+		btnNewButton_1.setBounds(14, 248, 49, 27);
+		frame.getContentPane().add(btnNewButton_1);
+		
+		JButton btnNewButton_3 = new JButton("-");
+		btnNewButton_3.setBounds(89, 248, 49, 27);
+		frame.getContentPane().add(btnNewButton_3);
+		
+		JButton btnNewButton_3_1 = new JButton("-");
+		btnNewButton_3_1.setBounds(230, 248, 49, 27);
+		frame.getContentPane().add(btnNewButton_3_1);
+		
+		JButton btnNewButton_1_1 = new JButton("+");
+		btnNewButton_1_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String name = JOptionPane.showInputDialog("请输入班级!");
+				tbiz.addCls(name);
+			}
+		});
+		btnNewButton_1_1.setBounds(155, 11, 49, 27);
+		frame.getContentPane().add(btnNewButton_1_1);
 	}
 }
