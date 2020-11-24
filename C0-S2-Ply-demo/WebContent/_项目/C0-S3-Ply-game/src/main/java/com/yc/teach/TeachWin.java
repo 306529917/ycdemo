@@ -10,6 +10,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class TeachWin {
 
@@ -44,7 +46,13 @@ public class TeachWin {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 305, 321);
+		frame.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				tbiz.save();
+			}
+		});
+		frame.setBounds(100, 100, 311, 333);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 
@@ -66,26 +74,26 @@ public class TeachWin {
 		JScrollPane scrollPane_1 = new JScrollPane();
 		scrollPane_1.setBounds(155, 50, 124, 190);
 		frame.getContentPane().add(scrollPane_1);
-		
-				JList<String> list_1 = new JList<>();
-				scrollPane_1.setViewportView(list_1);
+
+		JList<String> list_1 = new JList<>();
+		scrollPane_1.setViewportView(list_1);
 
 		JButton btnNewButton_2 = new JButton("启动");
 		btnNewButton_2.setBounds(209, 11, 70, 27);
 		frame.getContentPane().add(btnNewButton_2);
-		
+
 		JButton btnNewButton_1 = new JButton("+");
 		btnNewButton_1.setBounds(14, 248, 49, 27);
 		frame.getContentPane().add(btnNewButton_1);
-		
+
 		JButton btnNewButton_3 = new JButton("-");
 		btnNewButton_3.setBounds(89, 248, 49, 27);
 		frame.getContentPane().add(btnNewButton_3);
-		
+
 		JButton btnNewButton_3_1 = new JButton("-");
 		btnNewButton_3_1.setBounds(230, 248, 49, 27);
 		frame.getContentPane().add(btnNewButton_3_1);
-		
+
 		JButton btnNewButton_1_1 = new JButton("+");
 		btnNewButton_1_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

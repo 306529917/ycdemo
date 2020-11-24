@@ -29,11 +29,11 @@ public class TeachBiz {
 		info.getClsMap().values().stream().forEach(set -> set.remove(name));
 	}
 
-	public void addClassApp(String cls, String name) {
+	public void addClsApp(String cls, String name) {
 		info.getClsMap().get(cls).add(name);
 	}
 
-	public void delClassApp(String cls, String name) {
+	public void delClsApp(String cls, String name) {
 		info.getClsMap().get(cls).remove(name);
 	}
 
