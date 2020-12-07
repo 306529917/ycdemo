@@ -1,6 +1,6 @@
-package com.yc.你的项目名.util;
+package com.yc.common.util;
 
-import com.yc.你的项目名.biz.BizException;
+import com.yc.common.biz.BizException;
 
 public class Utils {
 

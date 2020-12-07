@@ -1,4 +1,4 @@
-package com.yc.你的项目名.web;
+package com.yc.common.web;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;

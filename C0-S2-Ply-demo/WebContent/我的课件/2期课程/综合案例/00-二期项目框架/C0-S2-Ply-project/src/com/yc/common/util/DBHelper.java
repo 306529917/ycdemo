@@ -1,4 +1,4 @@
-package com.yc.你的项目名.util;
+package com.yc.common.util;
 
 import java.io.InputStream;
 import java.lang.reflect.Field;

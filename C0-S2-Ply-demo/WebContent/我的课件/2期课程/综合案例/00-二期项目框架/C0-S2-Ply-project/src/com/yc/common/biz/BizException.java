@@ -1,4 +1,4 @@
-package com.yc.你的项目名.biz;
+package com.yc.common.biz;
 
 /**
  * 	自定义业务异常
