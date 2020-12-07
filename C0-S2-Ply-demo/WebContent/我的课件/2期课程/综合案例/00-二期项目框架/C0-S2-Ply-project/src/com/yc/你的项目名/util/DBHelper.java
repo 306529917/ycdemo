@@ -119,6 +119,7 @@ public class DBHelper {
 	};
 
 	public static class RsBeanMapper<T> implements ResultSetMapper<T> {
+		// 要转换的实体类的类型
 		private Class<T> beanClass;
 
 		public RsBeanMapper(Class<T> beanClass) {
@@ -135,7 +136,12 @@ public class DBHelper {
 					// 获取当前列的列名
 					String columnName = toDBName(fields[i].getName());
 					// 获取当前列的列值
-					Object columnValue = getValue(rs, columnName, fields[i].getType());
+					Object columnValue = null;
+					try {
+						columnValue = getValue(rs, columnName, fields[i].getType());
+					} catch (SQLException e) {
+						System.out.printf("结果集中无法获取“属性名：%s => 列名：%s”的值，原因：%s\n", fields[i].getName(), columnName, e.getMessage());
+					}
 					// 强制访问私有属性
 					fields[i].setAccessible(true);
 					fields[i].set(bean, columnValue);
