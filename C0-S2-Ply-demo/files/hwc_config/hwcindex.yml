@@ -1,0 +1,25 @@
+server:
+   # 随机端口
+   port: 0
+   host: 127.0.0.1
+spring:
+  application:
+    name: hwcindex
+  jackson:
+    date-format: yy-MM-dd HH:mm
+    time-zone: GMT+8
+  resources:
+      staticLocations:
+         - classpath:/META-INF/resources/
+         - classpath:/resources/
+         - classpath:/static/
+         - classpath:/public/
+         - file:/${upload-dir}
+    
+logging:
+   level:
+      #root: debug
+      com:
+         yc: debug
+         
+upload-dir: d:/hwc_upload/
