@@ -3,8 +3,6 @@ server:
    port: 0
    host: 127.0.0.1
 spring:
-  application:
-    name: hwcindex
   jackson:
     date-format: yy-MM-dd HH:mm
     time-zone: GMT+8

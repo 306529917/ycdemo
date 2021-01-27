@@ -2,8 +2,6 @@ server:
    # 随机端口
    port: 0
 spring:
-  application:
-    name: hwcuser
   datasource:
     driverClassName: com.mysql.jdbc.Driver
     url: jdbc:mysql://127.0.0.1/C0-S3-Py-hwc?useSSL=false

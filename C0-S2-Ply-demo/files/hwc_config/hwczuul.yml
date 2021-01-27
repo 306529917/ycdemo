@@ -1,0 +1,10 @@
+server:
+   port: 80
+
+zuul:
+   # 全局忽略敏感头
+   sensitive-headers: 
+   routes:
+      hwcbook: task/**
+      hwcuser: user/**
+      hwcindex: /**
