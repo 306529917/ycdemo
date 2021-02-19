@@ -1,0 +1,301 @@
+
+<!-- 导入 JSTL 核心标签库 -->
+
+<!-- 导入页头 -->
+
+
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<TITLE>论坛</TITLE>
+<Link rel="stylesheet" type="text/css" href="style/style.css" />
+<link rel="stylesheet" type="text/css" href="easyui/themes/default/easyui.css" />
+<link rel="stylesheet" type="text/css" href="easyui/themes/icon.css" />
+<script type="text/javascript" src="easyui/jquery.min.js"></script>
+<script type="text/javascript" src="easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="easyui/locale/easyui-lang-zh_CN.js"></script>
+<style>
+form *{
+	margin: 5px
+}
+.label{
+	text-align:right;
+	display:inline-block;
+	width:100px
+}
+</style>
+</HEAD>
+
+<BODY>
+
+	<DIV>
+		<IMG src="image/logo.gif">
+	</DIV>
+	<!--      用户信息、登录、注册        -->
+
+	<DIV class="h">
+		
+			您尚未
+			<a href="login.html">登录</a>
+			&nbsp;| &nbsp;
+			<A href="reg.html">注册</A>
+			|
+		
+		
+		
+	</DIV>
+
+<!-- 如果不是从 board.s 跳转过来的，就不会有数据（ list 属性为空），则跳转到 board.s  -->
+
+
+<!-- 主体  注意：我把 div 标签折叠起来了！！！ 里面是N行静态页面代码     -->
+<DIV class="t">
+	<TABLE cellSpacing="0" cellPadding="0" width="100%">
+		<TR class="tr2" align="center">
+			<TD colSpan="2">论坛</TD>
+			<TD style="WIDTH: 10%;">主题</TD>
+			<TD style="WIDTH: 30%">最后发表</TD>
+		</TR>
+	<!--       主版块       -->
+	<!--       子版块       -->
+
+	
+	
+	
+	
+		
+			<TR class="tr3">
+				<TD colspan="4">.net版块</TD>
+			</TR> 
+		
+		
+		<TR class="tr3">
+			<TD width="5%">&nbsp;</TD>
+			<TH align="left">
+				<IMG src="image/board.gif">
+				<A href="list.html?boardid=5&boardname=ado.net">ado.net</A>
+			</TH>
+			<TD align="center">13</TD>
+			<TH>
+				<SPAN>
+					<A href="detail.html">的点点滴滴</A>
+				</SPAN>
+				<BR/>
+				<SPAN></SPAN>
+				<SPAN class="gray">2018-07-06 16:54:09.0</SPAN>
+			</TH>
+		</TR>
+		
+	
+	
+		
+		
+		<TR class="tr3">
+			<TD width="5%">&nbsp;</TD>
+			<TH align="left">
+				<IMG src="image/board.gif">
+				<A href="list.html?boardid=6&boardname=asp.net">asp.net</A>
+			</TH>
+			<TD align="center"></TD>
+			<TH>
+				<SPAN>
+					<A href="detail.html"></A>
+				</SPAN>
+				<BR/>
+				<SPAN></SPAN>
+				<SPAN class="gray"></SPAN>
+			</TH>
+		</TR>
+		
+	
+	
+		
+		
+		<TR class="tr3">
+			<TD width="5%">&nbsp;</TD>
+			<TH align="left">
+				<IMG src="image/board.gif">
+				<A href="list.html?boardid=7&boardname=vb.net">vb.net</A>
+			</TH>
+			<TD align="center"></TD>
+			<TH>
+				<SPAN>
+					<A href="detail.html"></A>
+				</SPAN>
+				<BR/>
+				<SPAN></SPAN>
+				<SPAN class="gray"></SPAN>
+			</TH>
+		</TR>
+		
+	
+	
+		
+			<TR class="tr3">
+				<TD colspan="4">java版块</TD>
+			</TR> 
+		
+		
+		<TR class="tr3">
+			<TD width="5%">&nbsp;</TD>
+			<TH align="left">
+				<IMG src="image/board.gif">
+				<A href="list.html?boardid=8&boardname=jsp">jsp</A>
+			</TH>
+			<TD align="center">1</TD>
+			<TH>
+				<SPAN>
+					<A href="detail.html">累了</A>
+				</SPAN>
+				<BR/>
+				<SPAN>qqq</SPAN>
+				<SPAN class="gray">2018-06-25 21:10:44.0</SPAN>
+			</TH>
+		</TR>
+		
+	
+	
+		
+		
+		<TR class="tr3">
+			<TD width="5%">&nbsp;</TD>
+			<TH align="left">
+				<IMG src="image/board.gif">
+				<A href="list.html?boardid=9&boardname=struts">struts</A>
+			</TH>
+			<TD align="center"></TD>
+			<TH>
+				<SPAN>
+					<A href="detail.html"></A>
+				</SPAN>
+				<BR/>
+				<SPAN></SPAN>
+				<SPAN class="gray"></SPAN>
+			</TH>
+		</TR>
+		
+	
+	
+		
+		
+		<TR class="tr3">
+			<TD width="5%">&nbsp;</TD>
+			<TH align="left">
+				<IMG src="image/board.gif">
+				<A href="list.html?boardid=10&boardname=hibernate">hibernate</A>
+			</TH>
+			<TD align="center"></TD>
+			<TH>
+				<SPAN>
+					<A href="detail.html"></A>
+				</SPAN>
+				<BR/>
+				<SPAN></SPAN>
+				<SPAN class="gray"></SPAN>
+			</TH>
+		</TR>
+		
+	
+	
+		
+			<TR class="tr3">
+				<TD colspan="4">数据库版块</TD>
+			</TR> 
+		
+		
+		<TR class="tr3">
+			<TD width="5%">&nbsp;</TD>
+			<TH align="left">
+				<IMG src="image/board.gif">
+				<A href="list.html?boardid=11&boardname=sql">sql</A>
+			</TH>
+			<TD align="center"></TD>
+			<TH>
+				<SPAN>
+					<A href="detail.html"></A>
+				</SPAN>
+				<BR/>
+				<SPAN></SPAN>
+				<SPAN class="gray"></SPAN>
+			</TH>
+		</TR>
+		
+	
+	
+		
+		
+		<TR class="tr3">
+			<TD width="5%">&nbsp;</TD>
+			<TH align="left">
+				<IMG src="image/board.gif">
+				<A href="list.html?boardid=12&boardname=oracle">oracle</A>
+			</TH>
+			<TD align="center"></TD>
+			<TH>
+				<SPAN>
+					<A href="detail.html"></A>
+				</SPAN>
+				<BR/>
+				<SPAN></SPAN>
+				<SPAN class="gray"></SPAN>
+			</TH>
+		</TR>
+		
+	
+	
+		
+		
+		<TR class="tr3">
+			<TD width="5%">&nbsp;</TD>
+			<TH align="left">
+				<IMG src="image/board.gif">
+				<A href="list.html?boardid=13&boardname=mysql">mysql</A>
+			</TH>
+			<TD align="center"></TD>
+			<TH>
+				<SPAN>
+					<A href="detail.html"></A>
+				</SPAN>
+				<BR/>
+				<SPAN></SPAN>
+				<SPAN class="gray"></SPAN>
+			</TH>
+		</TR>
+		
+	
+	
+		
+			<TR class="tr3">
+				<TD colspan="4">软件工程版块</TD>
+			</TR> 
+		
+		
+		<TR class="tr3">
+			<TD width="5%">&nbsp;</TD>
+			<TH align="left">
+				<IMG src="image/board.gif">
+				<A href="list.html?boardid=&boardname="></A>
+			</TH>
+			<TD align="center"></TD>
+			<TH>
+				<SPAN>
+					<A href="detail.html"></A>
+				</SPAN>
+				<BR/>
+				<SPAN></SPAN>
+				<SPAN class="gray"></SPAN>
+			</TH>
+		</TR>
+		
+	
+		
+	</TABLE>
+</DIV>
+
+<!-- 导入页脚 -->
+
+<BR/>
+<CENTER class="gray">源辰信息</CENTER>
+</BODY>
+</HTML>

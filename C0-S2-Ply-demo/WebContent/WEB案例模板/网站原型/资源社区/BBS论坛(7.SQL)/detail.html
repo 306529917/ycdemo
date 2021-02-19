@@ -1,0 +1,175 @@
+
+
+<script type="text/javascript">
+	function queryPage(page,size){
+		// list.html?  boardid=5   &   boardname=ado.net  & page=1  & size=10
+		location.href = "detail.html?topicid=1&boardname=&page=" + page + "&size=" + size;
+	}
+</script>
+
+<!-- 导入页头 -->
+
+
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<TITLE>论坛</TITLE>
+<Link rel="stylesheet" type="text/css" href="style/style.css" />
+<link rel="stylesheet" type="text/css" href="easyui/themes/default/easyui.css" />
+<link rel="stylesheet" type="text/css" href="easyui/themes/icon.css" />
+<script type="text/javascript" src="easyui/jquery.min.js"></script>
+<script type="text/javascript" src="easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="easyui/locale/easyui-lang-zh_CN.js"></script>
+<style>
+form *{
+	margin: 5px
+}
+.label{
+	text-align:right;
+	display:inline-block;
+	width:100px
+}
+</style>
+</HEAD>
+
+<BODY>
+
+	<DIV>
+		<IMG src="image/logo.gif">
+	</DIV>
+	<!--      用户信息、登录、注册        -->
+
+	<DIV class="h">
+		
+			您尚未
+			<a href="login.html">登录</a>
+			&nbsp;| &nbsp;
+			<A href="reg.html">注册</A>
+			|
+		
+		
+		
+	</DIV>
+
+<!-- 如果不是从 topic.s 跳转过来的，就不会有数据（ list 属性为空），则跳转到 topic.s  -->
+
+
+<!--      主体        -->
+<DIV><br/>
+	<!--      导航        -->
+<DIV>
+	&gt;&gt;<B><a href="index.html">论坛首页</a></B>&gt;&gt;
+	<B></B>
+</DIV>
+	<br/>
+	<!--      回复、新帖        -->
+	<DIV>
+		<A href="reply.html?topicid=1"><IMG src="image/reply.gif"  border="0" id=td_post></A> 
+		<A href="post.html"><IMG src="image/post.gif"   border="0" id=td_post></A>
+	</DIV>
+	
+	<!--         翻 页         -->
+	<div id="pp" class="easyui-pagination" style="background:#efefef;border:1px solid #ccc;"
+	    data-options="
+	    	total:3,
+	    	pageSize:10,
+	    	pageNumber:1,
+	    	onSelectPage:queryPage">
+	</div>
+	
+	<!--      本页主题的标题        -->
+	<DIV>
+		<TABLE cellSpacing="0" cellPadding="0" width="100%">
+			<TR>
+				<TH class="h">本页主题: 1111</TH>
+			</TR>
+			<TR class="tr2">
+				<TD>&nbsp;</TD>
+			</TR>
+		</TABLE>
+	</DIV>
+	
+	<!--      主题        -->
+	
+	<DIV class="t">
+		<TABLE style="BORDER-TOP-WIDTH: 0px; TABLE-LAYOUT: fixed" cellSpacing="0" cellPadding="0" width="100%">
+			<TR class="tr1">
+				<TH style="WIDTH: 20%">
+					<B>发帖人：qqq</B><BR/>
+					<image src="image/head/1.gif"/><BR/>
+					注册:2018-06-25 15:40:46.0<BR/>
+				</TH>
+				<TH>
+					<H4>1111</H4>
+					<DIV><p>111111222222</p>
+</DIV>
+					<DIV class="tipad gray">
+						发表：[2018-06-25 15:56:49.0] &nbsp;
+						最后修改:[2018-06-25 15:56:49.0]
+					</DIV>
+				</TH>
+			</TR>
+		</TABLE>
+	</DIV>
+	
+	<DIV class="t">
+		<TABLE style="BORDER-TOP-WIDTH: 0px; TABLE-LAYOUT: fixed" cellSpacing="0" cellPadding="0" width="100%">
+			<TR class="tr1">
+				<TH style="WIDTH: 20%">
+					<B>发帖人：qqq</B><BR/>
+					<image src="image/head/1.gif"/><BR/>
+					注册:2018-06-25 15:40:46.0<BR/>
+				</TH>
+				<TH>
+					<H4>2222</H4>
+					<DIV><p>222233333</p>
+</DIV>
+					<DIV class="tipad gray">
+						发表：[2018-06-25 15:57:40.0] &nbsp;
+						最后修改:[2018-06-25 15:57:40.0]
+					</DIV>
+				</TH>
+			</TR>
+		</TABLE>
+	</DIV>
+	
+	<DIV class="t">
+		<TABLE style="BORDER-TOP-WIDTH: 0px; TABLE-LAYOUT: fixed" cellSpacing="0" cellPadding="0" width="100%">
+			<TR class="tr1">
+				<TH style="WIDTH: 20%">
+					<B>发帖人：qqq</B><BR/>
+					<image src="image/head/1.gif"/><BR/>
+					注册:2018-06-25 15:40:46.0<BR/>
+				</TH>
+				<TH>
+					<H4>qqqq</H4>
+					<DIV><p style="text-align:center"><strong>qqqq</strong></p>
+
+<p>这是我<s>的饿作为</s></p>
+</DIV>
+					<DIV class="tipad gray">
+						发表：[2018-06-25 16:42:54.0] &nbsp;
+						最后修改:[2018-06-25 16:42:54.0]
+					</DIV>
+				</TH>
+			</TR>
+		</TABLE>
+	</DIV>
+	
+	
+	<div id="pp" class="easyui-pagination" style="background:#efefef;border:1px solid #ccc;"
+	    data-options="
+	    	total:3,
+	    	pageSize:10,
+	    	pageNumber:1,
+	    	onSelectPage:queryPage">
+	</div>
+</DIV>
+
+<!-- 导入页脚 -->
+
+<BR/>
+<CENTER class="gray">源辰信息</CENTER>
+</BODY>
+</HTML>

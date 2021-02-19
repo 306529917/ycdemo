@@ -1,0 +1,242 @@
+
+<!-- 导入 JSTL 核心标签库 -->
+
+
+<!-- 导入页头 -->
+
+
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<TITLE>论坛</TITLE>
+<Link rel="stylesheet" type="text/css" href="style/style.css" />
+<link rel="stylesheet" type="text/css" href="easyui/themes/default/easyui.css" />
+<link rel="stylesheet" type="text/css" href="easyui/themes/icon.css" />
+<script type="text/javascript" src="easyui/jquery.min.js"></script>
+<script type="text/javascript" src="easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="easyui/locale/easyui-lang-zh_CN.js"></script>
+<style>
+form *{
+	margin: 5px
+}
+.label{
+	text-align:right;
+	display:inline-block;
+	width:100px
+}
+</style>
+</HEAD>
+
+<BODY>
+
+	<DIV>
+		<IMG src="image/logo.gif">
+	</DIV>
+	<!--      用户信息、登录、注册        -->
+
+	<DIV class="h">
+		
+			您尚未
+			<a href="login.html">登录</a>
+			&nbsp;| &nbsp;
+			<A href="reg.html">注册</A>
+			|
+		
+		
+		
+	</DIV>
+<script type="text/javascript">
+	function queryPage(page,size){
+		// list.html?  boardid=5   &   boardname=ado.net  & page=1  & size=10
+		location.href = "list.html?boardid=5&boardname=ado.net&page=" + page + "&size=" + size;
+	}
+</script>
+
+<!-- 如果不是从 topic.s 跳转过来的，就不会有数据（ list 属性为空），则跳转到 topic.s  -->
+
+
+<!--      主体        -->
+<DIV>
+<!--      导航        -->
+<br/>
+<DIV>
+	&gt;&gt;<B><a href="index.html">论坛首页</a></B>&gt;&gt;
+	<B>ado.net</B>
+</DIV>
+<br/>
+<!--      新帖        -->
+	<DIV>
+		<A href="post.html?boardid=5"><IMG src="image/post.gif" name="td_post" border="0" id=td_post></A>
+	</DIV>
+<!--         翻 页         -->
+	<div id="pp" class="easyui-pagination" style="background:#efefef;border:1px solid #ccc;"
+	    data-options="
+	    	total:13,
+	    	pageSize:10,
+	    	pageNumber:1,
+	    	onSelectPage:queryPage">
+	</div>
+
+	<DIV class="t">
+		<TABLE cellSpacing="0" cellPadding="0" width="100%">		
+			<TR>
+				<TH class="h" style="WIDTH: 100%" colSpan="4"><SPAN>&nbsp;</SPAN></TH>
+			</TR>
+<!--       表 头           -->
+			<TR class="tr2">
+				<TD>&nbsp;</TD>
+				<TD style="WIDTH: 80%" align="center">文章</TD>
+				<TD style="WIDTH: 10%" align="center">作者</TD>
+				<TD style="WIDTH: 10%" align="center">回复</TD>
+			</TR>
+<!--         主 题 列 表        -->
+			
+				<TR class="tr3">
+					<TD><IMG src="image/topic.gif" border=0></TD>
+					<TD style="FONT-SIZE: 15px">
+						<!-- 
+						http://localhost:8000/bbs/detail.html?topicid=
+						注意： t.topicid 没有值，这是个bug，请大家改正
+						-->
+						<A href="detail.html?topicid=1">1111</A>
+					</TD>
+					<TD align="center">qqq</TD>
+					<TD align="center">2</TD>
+				</TR>
+			
+				<TR class="tr3">
+					<TD><IMG src="image/topic.gif" border=0></TD>
+					<TD style="FONT-SIZE: 15px">
+						<!-- 
+						http://localhost:8000/bbs/detail.html?topicid=
+						注意： t.topicid 没有值，这是个bug，请大家改正
+						-->
+						<A href="detail.html?topicid=2">11111</A>
+					</TD>
+					<TD align="center">qqq</TD>
+					<TD align="center"></TD>
+				</TR>
+			
+				<TR class="tr3">
+					<TD><IMG src="image/topic.gif" border=0></TD>
+					<TD style="FONT-SIZE: 15px">
+						<!-- 
+						http://localhost:8000/bbs/detail.html?topicid=
+						注意： t.topicid 没有值，这是个bug，请大家改正
+						-->
+						<A href="detail.html?topicid=5">123</A>
+					</TD>
+					<TD align="center">qqq</TD>
+					<TD align="center"></TD>
+				</TR>
+			
+				<TR class="tr3">
+					<TD><IMG src="image/topic.gif" border=0></TD>
+					<TD style="FONT-SIZE: 15px">
+						<!-- 
+						http://localhost:8000/bbs/detail.html?topicid=
+						注意： t.topicid 没有值，这是个bug，请大家改正
+						-->
+						<A href="detail.html?topicid=6">123</A>
+					</TD>
+					<TD align="center">qqq</TD>
+					<TD align="center"></TD>
+				</TR>
+			
+				<TR class="tr3">
+					<TD><IMG src="image/topic.gif" border=0></TD>
+					<TD style="FONT-SIZE: 15px">
+						<!-- 
+						http://localhost:8000/bbs/detail.html?topicid=
+						注意： t.topicid 没有值，这是个bug，请大家改正
+						-->
+						<A href="detail.html?topicid=7">123</A>
+					</TD>
+					<TD align="center">qqq</TD>
+					<TD align="center"></TD>
+				</TR>
+			
+				<TR class="tr3">
+					<TD><IMG src="image/topic.gif" border=0></TD>
+					<TD style="FONT-SIZE: 15px">
+						<!-- 
+						http://localhost:8000/bbs/detail.html?topicid=
+						注意： t.topicid 没有值，这是个bug，请大家改正
+						-->
+						<A href="detail.html?topicid=8">123</A>
+					</TD>
+					<TD align="center">qqq</TD>
+					<TD align="center"></TD>
+				</TR>
+			
+				<TR class="tr3">
+					<TD><IMG src="image/topic.gif" border=0></TD>
+					<TD style="FONT-SIZE: 15px">
+						<!-- 
+						http://localhost:8000/bbs/detail.html?topicid=
+						注意： t.topicid 没有值，这是个bug，请大家改正
+						-->
+						<A href="detail.html?topicid=9">123</A>
+					</TD>
+					<TD align="center">qqq</TD>
+					<TD align="center"></TD>
+				</TR>
+			
+				<TR class="tr3">
+					<TD><IMG src="image/topic.gif" border=0></TD>
+					<TD style="FONT-SIZE: 15px">
+						<!-- 
+						http://localhost:8000/bbs/detail.html?topicid=
+						注意： t.topicid 没有值，这是个bug，请大家改正
+						-->
+						<A href="detail.html?topicid=10">dfdfd</A>
+					</TD>
+					<TD align="center">qqq</TD>
+					<TD align="center"></TD>
+				</TR>
+			
+				<TR class="tr3">
+					<TD><IMG src="image/topic.gif" border=0></TD>
+					<TD style="FONT-SIZE: 15px">
+						<!-- 
+						http://localhost:8000/bbs/detail.html?topicid=
+						注意： t.topicid 没有值，这是个bug，请大家改正
+						-->
+						<A href="detail.html?topicid=11">avasdfa</A>
+					</TD>
+					<TD align="center">qqq</TD>
+					<TD align="center"></TD>
+				</TR>
+			
+				<TR class="tr3">
+					<TD><IMG src="image/topic.gif" border=0></TD>
+					<TD style="FONT-SIZE: 15px">
+						<!-- 
+						http://localhost:8000/bbs/detail.html?topicid=
+						注意： t.topicid 没有值，这是个bug，请大家改正
+						-->
+						<A href="detail.html?topicid=12">vvvvv</A>
+					</TD>
+					<TD align="center">qqq</TD>
+					<TD align="center"></TD>
+				</TR>
+			
+		</TABLE>
+	</DIV>
+<!--            翻 页          -->
+	<div id="pp" class="easyui-pagination" style="background:#efefef;border:1px solid #ccc;"
+	    data-options="
+	    	total:13,
+	    	pageSize:10,
+	    	pageNumber:1,
+	    	onSelectPage:queryPage">
+</div>
+</DIV>
+
+<!-- 导入页脚 -->
+
+<BR/>
+<CENTER class="gray">源辰信息</CENTER>
+</BODY>
+</HTML>
